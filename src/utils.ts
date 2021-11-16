@@ -1,11 +1,5 @@
 import { MapSettings } from './types';
 
-declare global {
-  interface Window {
-    ymaps: any;
-  }
-}
-
 class EventEmitter {
   events: {
     [Key: string]: (() => void)[];
@@ -19,7 +13,7 @@ class EventEmitter {
     this.scriptIsNotAttached = true;
   }
 
-  $on(eventName: string, fn: () => void) {
+  $on(eventName: string, fn: (value?: unknown) => void) {
     if (!this.events[eventName]) {
       this.events[eventName] = [];
     }
@@ -42,8 +36,21 @@ class EventEmitter {
 export const emitter = new EventEmitter();
 
 export function ymapLoader(settings: MapSettings) {
+  const readyCallback = (res: (value?: unknown) => void) => () => {
+    ymaps.ready(() => {
+      emitter.ymapReady = true;
+      emitter.$emit('scriptIsLoaded');
+      res(true);
+    });
+  };
+
   return new Promise((res, rej) => {
-    if (window.ymaps) return res(true);
+    if (ymaps) return res(true);
+
+    if (document.getElementById('vue-yandex-maps-script')) {
+      emitter.$on('scriptIsLoaded', res);
+      return;
+    }
 
     const yandexMapScript = document.createElement('SCRIPT');
     const {
@@ -57,19 +64,15 @@ export function ymapLoader(settings: MapSettings) {
     const mode = debug ? 'debug' : 'release';
     const settingsPart = `lang=${lang}${apiKey && `&apikey=${apiKey}`}&mode=${mode}&coordorder=${coordorder}`;
     const link = `https://${enterprise ? 'enterprise.' : ''}api-maps.yandex.ru/${version}/?${settingsPart}`;
+
     yandexMapScript.setAttribute('src', link);
     yandexMapScript.setAttribute('async', '');
     yandexMapScript.setAttribute('defer', '');
-    yandexMapScript.setAttribute('id', 'vue-yandex-maps');
+    yandexMapScript.setAttribute('id', 'vue-yandex-maps-script');
     document.head.appendChild(yandexMapScript);
     emitter.scriptIsNotAttached = false;
-    yandexMapScript.onload = () => {
-      window.ymaps.ready(() => {
-        emitter.ymapReady = true;
-        emitter.$emit('scriptIsLoaded');
-        res(true);
-      });
-    };
+
+    yandexMapScript.onload = readyCallback(res);
     yandexMapScript.onerror = rej;
   });
 }
