@@ -1,4 +1,4 @@
-import { MapSettings } from './types';
+import { MapSettings, RecursiveArray } from './types';
 
 class EventEmitter {
   events: {
@@ -45,7 +45,7 @@ export function ymapLoader(settings: MapSettings) {
   };
 
   return new Promise((res, rej) => {
-    if (ymaps) return res(true);
+    if (window.ymaps) return res(true);
 
     if (document.getElementById('vue-yandex-maps-script')) {
       emitter.$on('scriptIsLoaded', res);
@@ -76,3 +76,11 @@ export function ymapLoader(settings: MapSettings) {
     yandexMapScript.onerror = rej;
   });
 }
+
+export const convertToNumbers = (item: any): RecursiveArray | number => {
+  if (Array.isArray(item)) {
+    return item.map(convertToNumbers);
+  }
+
+  return +item;
+};

@@ -1,6 +1,6 @@
-import { h, defineComponent, inject } from 'vue';
+import { h, defineComponent, inject, provide, ref } from 'vue';
 import * as utils from './utils';
-import { MapSettings } from './types';
+import { MapSettings, MarkerAction } from './types';
 
 type MapType = 'map' | 'hybrid' | 'satellite';
 
@@ -35,11 +35,41 @@ export default defineComponent({
     debug: Boolean,
   },
   setup(props, { slots }) {
+    const isReady = ref(false);
     const pluginOptions: MapSettings = inject('pluginOptions') || {};
-    let map = null;
+    let map: ymaps.Map | undefined;
     const ymapId = `yandexMap${Math.round(Math.random() * 100000)}`;
 
+    // Prepare marker actions to provide
+    const markersToAdd: ymaps.GeoObject[] = [];
+    const markersToDelete: ymaps.GeoObject[] = [];
+    let addMarkerTimeout: number | undefined;
+    let deleteMarkerTimeout: number | undefined;
+
+    const addMarker: MarkerAction = (marker: ymaps.GeoObject) => {
+      markersToAdd.push(marker);
+      clearTimeout(addMarkerTimeout);
+      addMarkerTimeout = window.setTimeout(() => updateMarkers(markersToAdd, 'add'));
+    };
+
+    const deleteMarker: MarkerAction = (marker: ymaps.GeoObject) => {
+      markersToDelete.push(marker);
+      clearTimeout(deleteMarkerTimeout);
+      deleteMarkerTimeout = window.setTimeout(() => updateMarkers(markersToDelete, 'remove'));
+    };
+
+    const updateMarkers = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {
+      if (!map || !arr.length) return;
+
+      arr.reduce((geoObjects, marker) => geoObjects[action](marker), map.geoObjects);
+      arr = [];
+    };
+
+    provide('markerActions', { addMarker, deleteMarker });
+
+    // Map initialization
     const init = () => {
+      isReady.value = true;
       map = new ymaps.Map(ymapId, {
         center: props.coords,
         zoom: props.zoom,
@@ -63,7 +93,7 @@ export default defineComponent({
     return () =>
       h('section', { class: 'ymap-container' }, [
         h('div', { id: ymapId, style: 'min-height: 100%;' }),
-        h('div', [slots.default?.()]),
+        isReady.value && h('div', [slots.default?.()]),
       ]);
   },
 });
