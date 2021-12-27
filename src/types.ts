@@ -18,3 +18,4 @@ export interface Marker {
   properties: object;
 }
 export type RecursiveArray = Array<RecursiveArray | number>;
+export type MapType = 'yandex#map' | 'yandex#satellite' | 'yandex#hybrid' | undefined;
