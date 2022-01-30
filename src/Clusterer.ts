@@ -2,20 +2,22 @@ import { defineComponent, inject, onMounted, onBeforeUnmount, provide } from 'vu
 import useGeoObjectActions from './use-marker-actions';
 
 export default defineComponent({
-  name: 'YandexGeoObjectCollection',
+  name: 'YandexClusterer',
   props: {
-    feature: Object,
-    properties: Object,
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   setup(props, { slots, emit }) {
-    const collection = new ymaps.GeoObjectCollection(props.feature, props.properties);
+    const clusterer = new ymaps.Clusterer(props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
 
     const updateGeoObjects = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {
-      if (!collection || !arr.length) return;
+      if (!clusterer || !arr.length) return;
 
-      arr.forEach((geoObject) => collection[action](geoObject));
-      emit('geoObjectsUpdated', collection);
+      clusterer[action](arr);
+      emit('geoObjectsUpdated', clusterer);
 
       arr = [];
     };
@@ -24,11 +26,11 @@ export default defineComponent({
     provide('geoObjectActions', { addGeoObject: add, deleteGeoObject: remove });
 
     onMounted(() => {
-      addGeoObject(collection);
+      addGeoObject(clusterer);
     });
 
     onBeforeUnmount(() => {
-      deleteGeoObject(collection);
+      deleteGeoObject(clusterer);
     });
 
     return () => slots.default?.();

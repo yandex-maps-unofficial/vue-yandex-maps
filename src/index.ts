@@ -3,6 +3,7 @@ import { MapSettings } from './types';
 import Map from './Map';
 import Marker from './Marker';
 import Collection from './Collection';
+import Clusterer from './Clusterer';
 
 declare global {
   const ymaps: typeof ymapsNamespace;
@@ -22,5 +23,6 @@ export default {
     app.component('yandex-map', Map);
     app.component('yandex-marker', Marker);
     app.component('yandex-collection', Collection);
+    app.component('yandex-clusterer', Clusterer);
   },
 };
