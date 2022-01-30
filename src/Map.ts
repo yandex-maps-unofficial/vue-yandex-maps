@@ -1,6 +1,7 @@
 import { h, defineComponent, getCurrentInstance, provide, inject, ref } from 'vue';
 import * as utils from './utils';
 import { MapSettings, MarkerAction, MapType } from './types';
+import useGeoObjectActions from './use-marker-actions';
 
 export default defineComponent({
   name: 'YandexMap',
@@ -32,39 +33,25 @@ export default defineComponent({
     },
     debug: Boolean,
   },
-  setup(props, { slots }) {
+  setup(props, { slots, emit }) {
     const isReady = ref(false);
     const pluginOptions: MapSettings | undefined = inject('pluginOptions');
     console.log(pluginOptions);
     let map: ymaps.Map | undefined;
     const ymapId = `yandexMap${Math.round(Math.random() * 100000)}`;
 
-    // Prepare marker actions to provide
-    const markersToAdd: ymaps.GeoObject[] = [];
-    const markersToDelete: ymaps.GeoObject[] = [];
-    let addMarkerTimeout: number | undefined;
-    let deleteMarkerTimeout: number | undefined;
-
-    const addMarker: MarkerAction = (marker: ymaps.GeoObject) => {
-      markersToAdd.push(marker);
-      clearTimeout(addMarkerTimeout);
-      addMarkerTimeout = window.setTimeout(() => updateMarkers(markersToAdd, 'add'));
-    };
-
-    const deleteMarker: MarkerAction = (marker: ymaps.GeoObject) => {
-      markersToDelete.push(marker);
-      clearTimeout(deleteMarkerTimeout);
-      deleteMarkerTimeout = window.setTimeout(() => updateMarkers(markersToDelete, 'remove'));
-    };
-
-    const updateMarkers = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {
+    const updateGeoObjects = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {
       if (!map || !arr.length) return;
 
-      arr.reduce((geoObjects, marker) => geoObjects[action](marker), map.geoObjects);
+      arr.forEach((geoObject) => map?.geoObjects[action](geoObject));
+
+      emit('geoObjectsUpdated', map.geoObjects);
       arr = [];
     };
 
-    provide('markerActions', { addMarker, deleteMarker });
+    const { addGeoObject, deleteGeoObject } = useGeoObjectActions(updateGeoObjects);
+
+    provide('geoObjectActions', { addGeoObject, deleteGeoObject });
 
     // Map initialization
     const init = () => {

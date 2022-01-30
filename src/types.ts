@@ -13,7 +13,7 @@ export interface Geometry extends ymaps.IGeometryJson {
   coordinates: Array<RecursiveArray | number>;
   radius?: number;
 }
-export interface Marker {
+export interface MarkerFeature {
   geometry: Geometry;
   properties: object;
 }

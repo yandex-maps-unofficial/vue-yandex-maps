@@ -1,8 +1,9 @@
 import { defineComponent, onMounted, inject, PropType, onBeforeUnmount, computed } from 'vue';
-import { MarkerType, Marker, RecursiveArray } from './types';
+import { MarkerType, MarkerFeature, RecursiveArray } from './types';
 import { convertToNumbers } from './utils';
 
 export default defineComponent({
+  name: 'YandexMarker',
   props: {
     coords: {
       type: Array as () => Array<RecursiveArray | number>,
@@ -13,8 +14,7 @@ export default defineComponent({
       default: () => ({}),
     },
     options: {
-      type: Object,
-      default: () => ({}),
+      type: Object as () => ymaps.IGeoObjectOptions,
     },
     type: {
       type: String as PropType<MarkerType>,
@@ -26,10 +26,10 @@ export default defineComponent({
     },
   },
   setup(props, { slots }) {
-    const { addMarker, deleteMarker } = inject('markerActions') || {};
+    const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
     const coordinates = computed(() => props.coords.map(convertToNumbers));
 
-    const markerContent: Marker = {
+    const feature: MarkerFeature = {
       geometry: {
         type: props.type,
         coordinates: coordinates.value,
@@ -37,14 +37,14 @@ export default defineComponent({
       },
       properties: props.properties,
     };
-    const marker = new ymaps.GeoObject(markerContent);
+    const marker = new ymaps.GeoObject(feature, props.options);
 
     onMounted(() => {
-      addMarker(marker);
+      addGeoObject(marker);
     });
 
     onBeforeUnmount(() => {
-      deleteMarker(marker);
+      deleteGeoObject(marker);
     });
 
     return () => slots.default?.();

@@ -2,6 +2,7 @@ import ymapsNamespace from 'yandex-maps';
 import { MapSettings } from './types';
 import Map from './Map';
 import Marker from './Marker';
+import Collection from './Collection';
 
 declare global {
   const ymaps: typeof ymapsNamespace;
@@ -20,5 +21,6 @@ export default {
     app.provide('pluginOptions', options);
     app.component('yandex-map', Map);
     app.component('yandex-marker', Marker);
+    app.component('yandex-collection', Collection);
   },
 };
