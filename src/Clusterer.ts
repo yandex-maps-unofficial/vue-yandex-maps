@@ -1,13 +1,10 @@
 import { defineComponent, inject, onMounted, onBeforeUnmount, provide } from 'vue';
-import useGeoObjectActions from './use-marker-actions';
+import useGeoObjectActions from './use/marker-actions';
 
 export default defineComponent({
   name: 'YandexClusterer',
   props: {
-    options: {
-      type: Object,
-      default: () => ({}),
-    },
+    options: Object as () => ymaps.IClustererOptions,
   },
   setup(props, { slots, emit }) {
     const clusterer = new ymaps.Clusterer(props.options);

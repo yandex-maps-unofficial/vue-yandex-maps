@@ -1,7 +1,7 @@
-import { h, defineComponent, getCurrentInstance, provide, inject, ref } from 'vue';
+import { h, defineComponent, provide, inject, ref } from 'vue';
 import * as utils from './utils';
-import { MapSettings, MarkerAction, MapType } from './types';
-import useGeoObjectActions from './use-marker-actions';
+import { MapSettings, MapType } from './types';
+import useGeoObjectActions from './use/marker-actions';
 
 export default defineComponent({
   name: 'YandexMap',
@@ -31,12 +31,10 @@ export default defineComponent({
       type: Object as () => MapSettings,
       default: () => ({}),
     },
-    debug: Boolean,
   },
   setup(props, { slots, emit }) {
     const isReady = ref(false);
     const pluginOptions: MapSettings | undefined = inject('pluginOptions');
-    console.log(pluginOptions);
     let map: ymaps.Map | undefined;
     const ymapId = `yandexMap${Math.round(Math.random() * 100000)}`;
 
@@ -53,7 +51,6 @@ export default defineComponent({
 
     provide('geoObjectActions', { addGeoObject, deleteGeoObject });
 
-    // Map initialization
     const init = () => {
       isReady.value = true;
       map = new ymaps.Map(ymapId, {
@@ -67,11 +64,10 @@ export default defineComponent({
     };
 
     if (utils.emitter.scriptIsNotAttached) {
-      const instance = getCurrentInstance();
-      console.log(instance);
       const settings = { ...pluginOptions, ...props.settings };
       utils.ymapLoader(settings);
     }
+
     if (utils.emitter.ymapReady) {
       ymaps.ready(init);
     } else {
