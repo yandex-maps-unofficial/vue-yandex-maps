@@ -1,7 +1,9 @@
 ---
 home: true
 heroImage: /hero.jpg
-actionText: Документация →
-actionLink: /guide/
+actions:
+  - text: Документация →
+    link: /guide/
+    type: primary
 footer: MIT Licensed
 ---

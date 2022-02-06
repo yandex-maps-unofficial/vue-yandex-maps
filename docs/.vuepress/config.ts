@@ -1,14 +1,28 @@
-module.exports = {
+import { defineUserConfig } from 'vuepress'
+import type { DefaultThemeOptions } from 'vuepress'
+
+export default defineUserConfig<DefaultThemeOptions>({
+  locales: {
+    '/': {
+      lang: 'ru-RU',
+      title: 'Vue-yandex-maps',
+      description: 'Документация на русском'
+    },
+    '/en/': {
+      lang: 'en-US',
+      title: 'Vue-yandex-maps',
+      description: 'Documentation on english'
+    }
+  },
   themeConfig: {
     repo: 'PNKBizz/vue-yandex-map',
-    docsDir: 'docs',
-    editLinks: true,
     locales: {
       '/': {
-        selectText: 'Язык',
+        selectLanguageText: 'Язык',
+        selectLanguageName: 'Русский',
         title: 'Vue-yandex-maps',
         description: 'Я.Карты для Vue JS',
-        nav: [
+        navbar: [
           { text: 'Главная', link: '/' },
           { text: 'Руководство', link: '/guide/' },
           { text: 'Примеры', link: '/examples/' },
@@ -23,10 +37,11 @@ module.exports = {
         }
       },
       '/en/': {
-        selectText: 'Language',
+        selectLanguageText: 'Language',
+        selectLanguageName: 'English',
         title: 'Vue-yandex-maps',
         description: 'Yandex map component for Vue JS',
-        nav: [
+        navbar: [
           { text: 'Main', link: '/en/' },
           { text: 'Guide', link: '/en/guide/' },
           { text: 'Examples', link: '/en/examples/' },
@@ -41,17 +56,5 @@ module.exports = {
         }
       }
     }
-  },
-  locales: {
-    '/': {
-      lang: 'ru-RU',
-      title: 'Vue-yandex-maps',
-      description: 'Документация на русском'
-    },
-    '/en/': {
-      lang: 'en-US',
-      title: 'Vue-yandex-maps',
-      description: 'Documentation on english'
-    }
   }
-}
+})
