@@ -1,5 +1,6 @@
 import ymapsNamespace from 'yandex-maps';
 import { MapSettings } from './types';
+import { ymapLoader } from './utils';
 import Map from './Map';
 import Marker from './Marker';
 import Collection from './Collection';
@@ -14,6 +15,12 @@ declare global {
 }
 
 let isPluginInstalled: boolean;
+
+export const loadYmap = ymapLoader;
+export const yandexMap = Map;
+export const yandexMarker = Marker;
+export const yandexCollection = Collection;
+export const yandexClusterer = Clusterer;
 
 export default {
   install: (app: any, options: MapSettings) => {

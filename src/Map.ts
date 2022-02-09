@@ -6,7 +6,7 @@ import useGeoObjectActions from './use/marker-actions';
 export default defineComponent({
   name: 'YandexMap',
   props: {
-    coords: {
+    coordinates: {
       type: Array as () => number[],
       required: true,
     },
@@ -54,7 +54,7 @@ export default defineComponent({
     const init = () => {
       isReady.value = true;
       map = new ymaps.Map(ymapId, {
-        center: props.coords,
+        center: props.coordinates,
         zoom: props.zoom,
         bounds: props.bounds,
         behaviors: props.behaviors,
