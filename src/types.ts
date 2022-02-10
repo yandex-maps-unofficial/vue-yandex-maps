@@ -21,3 +21,4 @@ export interface MarkerFeature {
 
 export type RecursiveArray = Array<RecursiveArray | number>;
 export type MapType = 'yandex#map' | 'yandex#satellite' | 'yandex#hybrid' | undefined;
+export type DetailedControls = { [name in ymaps.ControlKey]: Object };

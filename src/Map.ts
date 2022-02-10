@@ -1,7 +1,22 @@
 import { h, defineComponent, provide, inject, ref } from 'vue';
 import * as utils from './utils';
-import { MapSettings, MapType } from './types';
+import { MapSettings, MapType, DetailedControls } from './types';
 import useGeoObjectActions from './use/marker-actions';
+
+const defaultMapEvents = [
+  'actionend',
+  'balloonclose',
+  'balloonopen',
+  'click',
+  'contextmenu',
+  'dblclick',
+  'destroy',
+  'hintclose',
+  'hintopen',
+  'optionschange',
+  'sizechange',
+  'typechange',
+];
 
 export default defineComponent({
   name: 'YandexMap',
@@ -23,6 +38,14 @@ export default defineComponent({
     controls: {
       type: Array as () => string[],
     },
+    detailedControls: {
+      type: Object as () => DetailedControls,
+    },
+    events: {
+      type: Array as () => string[],
+      default: () => ['click'],
+      validator: (val: string[]) => val.every(defaultMapEvents.includes),
+    },
     mapType: {
       type: String,
       default: 'map',
@@ -32,6 +55,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
+  emits: [...defaultMapEvents, 'geoObjectsUpdated'],
   setup(props, { slots, emit }) {
     const isReady = ref(false);
     const pluginOptions: MapSettings | undefined = inject('pluginOptions');
@@ -61,6 +85,17 @@ export default defineComponent({
         controls: props.controls,
         type: `yandex#${props.mapType}` as MapType,
       });
+
+      const events = props.events.length ? props.events : defaultMapEvents;
+      events.forEach((event) => map?.events.add(event, (e) => emit(event, e)));
+
+      if (props.detailedControls) {
+        const controls = Object.keys(props.detailedControls) as ymaps.ControlKey[];
+        controls.forEach((controlName) => {
+          map?.controls.remove(controlName);
+          map?.controls.add(controlName, props.detailedControls?.[controlName]);
+        });
+      }
     };
 
     if (utils.emitter.scriptIsNotAttached) {
