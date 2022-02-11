@@ -44,7 +44,7 @@ export default defineComponent({
     events: {
       type: Array as () => string[],
       default: () => ['click'],
-      validator: (val: string[]) => val.every(defaultMapEvents.includes),
+      validator: (val: string[]) => val.every((event) => defaultMapEvents.includes(event)),
     },
     mapType: {
       type: String,
