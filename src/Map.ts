@@ -1,22 +1,8 @@
 import { h, defineComponent, provide, inject, ref } from 'vue';
 import * as utils from './utils';
+import { DEFAULT_MAP_EVENTS } from './constants';
 import { MapSettings, MapType, DetailedControls } from './types';
-import useGeoObjectActions from './use/marker-actions';
-
-const defaultMapEvents = [
-  'actionend',
-  'balloonclose',
-  'balloonopen',
-  'click',
-  'contextmenu',
-  'dblclick',
-  'destroy',
-  'hintclose',
-  'hintopen',
-  'optionschange',
-  'sizechange',
-  'typechange',
-];
+import useGeoObjectActions from './use/actions';
 
 export default defineComponent({
   name: 'YandexMap',
@@ -44,7 +30,7 @@ export default defineComponent({
     events: {
       type: Array as () => string[],
       default: () => ['click'],
-      validator: (val: string[]) => val.every((event) => defaultMapEvents.includes(event)),
+      validator: (val: string[]) => val.every((event) => DEFAULT_MAP_EVENTS.includes(event)),
     },
     mapType: {
       type: String,
@@ -55,7 +41,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  emits: [...defaultMapEvents, 'geoObjectsUpdated'],
+  emits: [...DEFAULT_MAP_EVENTS, 'geoObjectsUpdated'],
   setup(props, { slots, emit }) {
     const isReady = ref(false);
     const pluginOptions: MapSettings | undefined = inject('pluginOptions');
@@ -86,8 +72,7 @@ export default defineComponent({
         type: `yandex#${props.mapType}` as MapType,
       });
 
-      const events = props.events.length ? props.events : defaultMapEvents;
-      events.forEach((event) => map?.events.add(event, (e) => emit(event, e)));
+      props.events.forEach((event) => map?.events.add(event, (e) => emit(event, e)));
 
       if (props.detailedControls) {
         const controls = Object.keys(props.detailedControls) as ymaps.ControlKey[];
@@ -96,6 +81,8 @@ export default defineComponent({
           map?.controls.add(controlName, props.detailedControls?.[controlName]);
         });
       }
+
+      emit('created', map);
     };
 
     if (utils.emitter.scriptIsNotAttached) {

@@ -5,7 +5,7 @@ import { convertToNumbers } from './utils';
 export default defineComponent({
   name: 'YandexMarker',
   props: {
-    coords: {
+    coordinates: {
       type: Array as () => Array<RecursiveArray | number>,
       required: true,
     },
@@ -22,17 +22,17 @@ export default defineComponent({
     },
     radius: {
       type: Number,
-      default: undefined,
+      default: null,
     },
   },
   setup(props, { slots }) {
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
-    const coordinates = computed(() => props.coords.map(convertToNumbers));
+    const coords = computed(() => props.coordinates.map(convertToNumbers));
 
     const feature: MarkerFeature = {
       geometry: {
         type: props.type,
-        coordinates: coordinates.value,
+        coordinates: coords.value,
         radius: props.radius,
       },
       properties: props.properties,
@@ -47,6 +47,9 @@ export default defineComponent({
       deleteGeoObject(marker);
     });
 
-    return () => slots.default?.();
+    return { marker };
+  },
+  render() {
+    return this.$slots.default?.();
   },
 });

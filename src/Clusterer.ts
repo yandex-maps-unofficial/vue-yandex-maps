@@ -1,5 +1,5 @@
 import { defineComponent, inject, onMounted, onBeforeUnmount, provide } from 'vue';
-import useGeoObjectActions from './use/marker-actions';
+import useGeoObjectActions from './use/actions';
 
 export default defineComponent({
   name: 'YandexClusterer',

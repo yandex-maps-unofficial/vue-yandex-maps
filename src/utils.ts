@@ -84,3 +84,18 @@ export const convertToNumbers = (item: any): RecursiveArray | number => {
 
   return +item;
 };
+
+export const defaultMapEvents = [
+  'actionend',
+  'balloonclose',
+  'balloonopen',
+  'click',
+  'contextmenu',
+  'dblclick',
+  'destroy',
+  'hintclose',
+  'hintopen',
+  'optionschange',
+  'sizechange',
+  'typechange',
+];
