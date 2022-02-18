@@ -1,6 +1,7 @@
 import { defineComponent, onMounted, inject, PropType, onBeforeUnmount, computed } from 'vue';
 import { MarkerType, MarkerFeature, RecursiveArray } from './types';
 import { convertToNumbers } from './utils';
+import { DEFAULT_MARKER_EVENTS } from './constants';
 
 export default defineComponent({
   name: 'YandexMarker',
@@ -24,8 +25,13 @@ export default defineComponent({
       type: Number,
       default: null,
     },
+    events: {
+      type: Array as () => string[],
+      default: () => ['click'],
+      validator: (val: string[]) => val.every((event) => DEFAULT_MARKER_EVENTS.includes(event)),
+    },
   },
-  setup(props, { slots }) {
+  setup(props, { emit }) {
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
     const coords = computed(() => props.coordinates.map(convertToNumbers));
 
@@ -38,6 +44,7 @@ export default defineComponent({
       properties: props.properties,
     };
     const marker = new ymaps.GeoObject(feature, props.options);
+    props.events.forEach((event) => marker.events.add(event, (e) => emit(event, e)));
 
     onMounted(() => {
       addGeoObject(marker);

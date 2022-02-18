@@ -4,11 +4,10 @@ import useGeoObjectActions from './use/actions';
 export default defineComponent({
   name: 'YandexGeoObjectCollection',
   props: {
-    feature: Object,
-    properties: Object,
+    options: Object,
   },
   setup(props, { slots, emit }) {
-    const collection = new ymaps.GeoObjectCollection(props.feature, props.properties);
+    const collection = new ymaps.GeoObjectCollection({}, props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
 
     const updateGeoObjects = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {

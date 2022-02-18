@@ -12,3 +12,18 @@ export const DEFAULT_MAP_EVENTS = [
   'sizechange',
   'typechange',
 ];
+
+export const DEFAULT_MARKER_EVENTS = [
+  'balloonclose',
+  'balloonopen',
+  'click',
+  'contextmenu',
+  'dblclick',
+  'drag',
+  'dragend',
+  'dragstart',
+  'hintclose',
+  'hintopen',
+  'mouseenter',
+  'mouseleave',
+];
