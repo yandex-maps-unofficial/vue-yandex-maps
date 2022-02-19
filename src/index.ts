@@ -5,6 +5,7 @@ import Map from './Map';
 import Marker from './Marker';
 import Collection from './Collection';
 import Clusterer from './Clusterer';
+import ObjectManager from './ObjectManager';
 
 declare global {
   const ymaps: typeof ymapsNamespace;
@@ -21,6 +22,7 @@ export const yandexMap = Map;
 export const yandexMarker = Marker;
 export const yandexCollection = Collection;
 export const yandexClusterer = Clusterer;
+export const yandexObjectManager = ObjectManager;
 
 export default {
   install: (app: any, options: MapSettings) => {
@@ -31,5 +33,6 @@ export default {
     app.component('yandex-marker', Marker);
     app.component('yandex-collection', Collection);
     app.component('yandex-clusterer', Clusterer);
+    app.component('yandex-object-manager', ObjectManager);
   },
 };

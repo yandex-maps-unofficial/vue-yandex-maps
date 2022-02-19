@@ -1,16 +1,20 @@
 import { defineComponent, inject, onMounted, onBeforeUnmount, provide } from 'vue';
 import useGeoObjectActions from './use/actions';
+import { UpdateFunction } from './types';
 
 export default defineComponent({
   name: 'YandexClusterer',
   props: {
-    options: Object as () => ymaps.IClustererOptions,
+    options: {
+      type: Object as () => ymaps.IClustererOptions,
+      default: () => ({}),
+    },
   },
-  setup(props, { slots, emit }) {
+  setup(props, { emit }) {
     const clusterer = new ymaps.Clusterer(props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
 
-    const updateGeoObjects = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {
+    const updateGeoObjects: UpdateFunction<ymaps.GeoObject> = (arr, action) => {
       if (!clusterer || !arr.length) return;
 
       clusterer[action](arr);

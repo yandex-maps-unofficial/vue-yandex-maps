@@ -10,6 +10,10 @@ export default defineComponent({
       type: Array as () => Array<RecursiveArray | number>,
       required: true,
     },
+    markerId: {
+      type: [String, Number],
+      required: true,
+    },
     properties: {
       type: Object,
       default: () => ({}),
@@ -41,17 +45,25 @@ export default defineComponent({
         coordinates: coords.value,
         radius: props.radius,
       },
-      properties: props.properties,
+      properties: {
+        ...props.properties,
+        markerId: props.markerId,
+      },
     };
     const marker = new ymaps.GeoObject(feature, props.options);
     props.events.forEach((event) => marker.events.add(event, (e) => emit(event, e)));
 
+    const markerJson = {
+      ...feature,
+      options: props.options,
+    };
+
     onMounted(() => {
-      addGeoObject(marker);
+      addGeoObject(marker, markerJson);
     });
 
     onBeforeUnmount(() => {
-      deleteGeoObject(marker);
+      deleteGeoObject(marker, markerJson);
     });
 
     return { marker };

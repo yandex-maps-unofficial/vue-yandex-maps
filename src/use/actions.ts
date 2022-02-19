@@ -1,19 +1,22 @@
-import { MarkerAction, UpdateFunction } from '../types';
+import { MarkerAction, UpdateFunction, MarkerJson } from '../types';
 
-export default function useGeoObjectActions(updateFunction: UpdateFunction) {
-  const markersToAdd: ymaps.GeoObject[] = [];
-  const markersToDelete: ymaps.GeoObject[] = [];
+export default function useGeoObjectActions(
+  updateFunction: UpdateFunction<ymaps.GeoObject | MarkerJson>,
+  isObjectManager = false,
+) {
+  const markersToAdd: any[] = [];
+  const markersToDelete: any[] = [];
   let addGeoObjectTimeout: number | undefined;
   let deleteGeoObjectTimeout: number | undefined;
 
-  const addGeoObject: MarkerAction = (marker: ymaps.GeoObject) => {
-    markersToAdd.push(marker);
+  const addGeoObject: MarkerAction = (marker, markerJson) => {
+    markersToAdd.push(isObjectManager ? markerJson : marker);
     clearTimeout(addGeoObjectTimeout);
     addGeoObjectTimeout = window.setTimeout(() => updateFunction(markersToAdd, 'add'));
   };
 
-  const deleteGeoObject: MarkerAction = (marker: ymaps.GeoObject) => {
-    markersToDelete.push(marker);
+  const deleteGeoObject: MarkerAction = (marker, markerJson) => {
+    markersToDelete.push(isObjectManager ? markerJson : marker);
     clearTimeout(deleteGeoObjectTimeout);
     deleteGeoObjectTimeout = window.setTimeout(() => updateFunction(markersToDelete, 'remove'));
   };

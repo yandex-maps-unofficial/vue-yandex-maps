@@ -1,7 +1,7 @@
 import { h, defineComponent, provide, inject, ref } from 'vue';
 import * as utils from './utils';
 import { DEFAULT_MAP_EVENTS } from './constants';
-import { MapSettings, MapType, DetailedControls } from './types';
+import { MapSettings, MapType, DetailedControls, UpdateFunction } from './types';
 import useGeoObjectActions from './use/actions';
 
 export default defineComponent({
@@ -48,7 +48,7 @@ export default defineComponent({
     let map: ymaps.Map | undefined;
     const ymapId = `yandexMap${Math.round(Math.random() * 100000)}`;
 
-    const updateGeoObjects = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {
+    const updateGeoObjects: UpdateFunction<ymaps.GeoObject> = (arr, action) => {
       if (!map || !arr.length) return;
 
       arr.forEach((geoObject) => map?.geoObjects[action](geoObject));

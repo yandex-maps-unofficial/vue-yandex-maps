@@ -1,16 +1,20 @@
 import { defineComponent, inject, onMounted, onBeforeUnmount, provide } from 'vue';
 import useGeoObjectActions from './use/actions';
+import { UpdateFunction } from './types';
 
 export default defineComponent({
   name: 'YandexGeoObjectCollection',
   props: {
-    options: Object,
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
   },
-  setup(props, { slots, emit }) {
+  setup(props, { emit }) {
     const collection = new ymaps.GeoObjectCollection({}, props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
 
-    const updateGeoObjects = (arr: ymaps.GeoObject[], action: 'add' | 'remove') => {
+    const updateGeoObjects: UpdateFunction<ymaps.GeoObject> = (arr, action) => {
       if (!collection || !arr.length) return;
 
       arr.forEach((geoObject) => collection[action](geoObject));
