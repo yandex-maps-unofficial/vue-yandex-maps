@@ -41,8 +41,8 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  emits: [...DEFAULT_MAP_EVENTS, 'geoObjectsUpdated'],
-  setup(props, { slots, emit }) {
+  emits: [...DEFAULT_MAP_EVENTS, 'geoObjectsUpdated', 'created'],
+  setup(props, { emit }) {
     const isReady = ref(false);
     const pluginOptions: MapSettings | undefined = inject('pluginOptions');
     let map: ymaps.Map | undefined;
@@ -96,10 +96,17 @@ export default defineComponent({
       utils.emitter.$on('scriptIsLoaded', init);
     }
 
-    return () =>
-      h('section', { class: 'ymap-container' }, [
-        h('div', { id: ymapId, style: 'min-height: 100%;' }),
-        isReady.value && h('div', [slots.default?.()]),
-      ]);
+    return {
+      ymapId,
+      isReady,
+
+      map,
+    };
+  },
+  render() {
+    return h('section', { class: 'ymap-container' }, [
+      h('div', { id: this.ymapId, style: 'min-height: 100%;' }),
+      this.isReady && h('div', [this.$slots.default?.()]),
+    ]);
   },
 });

@@ -30,6 +30,11 @@ export default defineComponent({
       deleteGeoObject(clusterer);
     });
 
-    return () => slots.default?.();
+    return {
+      clusterer,
+    };
+  },
+  render() {
+    return this.$slots.default?.();
   },
 });

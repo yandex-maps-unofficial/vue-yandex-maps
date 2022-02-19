@@ -30,6 +30,11 @@ export default defineComponent({
       deleteGeoObject(collection);
     });
 
-    return () => slots.default?.();
+    return {
+      collection,
+    };
+  },
+  render() {
+    return this.$slots.default?.();
   },
 });
