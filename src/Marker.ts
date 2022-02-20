@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, inject, PropType, onBeforeUnmount, computed } from 'vue';
+import { defineComponent, onMounted, inject, PropType, onBeforeUnmount, computed, h, ref, Teleport } from 'vue';
 import { MarkerType, MarkerFeature, RecursiveArray } from './types';
 import { convertToNumbers } from './utils';
 import { DEFAULT_MARKER_EVENTS } from './constants';
@@ -35,9 +35,10 @@ export default defineComponent({
       validator: (val: string[]) => val.every((event) => DEFAULT_MARKER_EVENTS.includes(event)),
     },
   },
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
     const coords = computed(() => props.coordinates.map(convertToNumbers));
+    const isBalloonOpen = ref(false);
 
     const feature: MarkerFeature = {
       geometry: {
@@ -50,12 +51,29 @@ export default defineComponent({
         markerId: props.markerId,
       },
     };
-    const marker = new ymaps.GeoObject(feature, props.options);
-    props.events.forEach((event) => marker.events.add(event, (e) => emit(event, e)));
+    const balloonContentLayout: any = slots.default?.().length
+      ? ymaps.templateLayoutFactory.createClass(`<div id="balloon-${props.markerId}" class="yandex-balloon"><div>`, {
+          build() {
+            balloonContentLayout.superclass.build.call(this);
+            isBalloonOpen.value = true;
+          },
+          clear() {
+            isBalloonOpen.value = false;
+            balloonContentLayout.superclass.clear.call(this);
+          },
+        })
+      : null;
+
+    const options = {
+      ...props.options,
+      balloonContentLayout,
+    };
+    const marker = new ymaps.GeoObject(feature, options);
+    props.events.forEach((event: any) => marker.events.add(event, (e) => emit(event, e)));
 
     const markerJson = {
       ...feature,
-      options: props.options,
+      options,
     };
 
     onMounted(() => {
@@ -66,9 +84,12 @@ export default defineComponent({
       deleteGeoObject(marker, markerJson);
     });
 
-    return { marker };
+    return {
+      marker,
+      isBalloonOpen,
+    };
   },
   render() {
-    return this.$slots.default?.();
+    return this.isBalloonOpen && h(Teleport, { to: `#balloon-${this.markerId}` }, [this.$slots.default?.()]);
   },
 });
