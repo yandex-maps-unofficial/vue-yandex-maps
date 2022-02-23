@@ -1,4 +1,15 @@
-import { defineComponent, onMounted, inject, PropType, onBeforeUnmount, computed, h, ref, Teleport } from 'vue';
+import {
+  defineComponent,
+  onMounted,
+  provide,
+  inject,
+  PropType,
+  onBeforeUnmount,
+  computed,
+  h,
+  ref,
+  Teleport,
+} from 'vue';
 import { MarkerType, MarkerFeature, RecursiveArray } from './types';
 import { convertToNumbers } from './utils';
 import { DEFAULT_MARKER_EVENTS } from './constants';
@@ -51,7 +62,7 @@ export default defineComponent({
         markerId: props.markerId,
       },
     };
-    const balloonContentLayout: any = slots.default?.().length
+    const balloonContentLayout: any = slots.component?.().length
       ? ymaps.templateLayoutFactory.createClass(`<div id="balloon-${props.markerId}" class="yandex-balloon"><div>`, {
           build() {
             balloonContentLayout.superclass.build.call(this);
@@ -65,11 +76,13 @@ export default defineComponent({
       : null;
 
     const options = {
-      ...props.options,
       balloonContentLayout,
+      ...props.options,
     };
     const marker = new ymaps.GeoObject(feature, options);
     props.events.forEach((event: any) => marker.events.add(event, (e) => emit(event, e)));
+
+    provide('changeBalloonLayout', marker.balloon.setOptions);
 
     const markerJson = {
       ...feature,
@@ -90,6 +103,9 @@ export default defineComponent({
     };
   },
   render() {
-    return this.isBalloonOpen && h(Teleport, { to: `#balloon-${this.markerId}` }, [this.$slots.default?.()]);
+    if (this.$slots.component?.().length) {
+      return this.isBalloonOpen && h(Teleport, { to: `#balloon-${this.markerId}` }, [this.$slots.component?.()]);
+    }
+    return this.$slots.default?.();
   },
 });

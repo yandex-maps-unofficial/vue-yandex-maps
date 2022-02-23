@@ -104,7 +104,7 @@ export default defineComponent({
     };
   },
   render() {
-    return h('section', { class: 'ymap-container' }, [
+    return h('section', { class: 'yandex-container' }, [
       h('div', { id: this.ymapId, style: 'min-height: 100%;' }),
       this.isReady && h('div', [this.$slots.default?.()]),
     ]);
