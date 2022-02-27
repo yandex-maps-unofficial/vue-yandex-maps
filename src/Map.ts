@@ -42,7 +42,7 @@ export default defineComponent({
     },
   },
   emits: [...DEFAULT_MAP_EVENTS, 'geo-objects-updated', 'created'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots, expose }) {
     const isReady = ref(false);
     const pluginOptions: MapSettings | object = (utils.emitter.pluginInstalledGlobal && inject('pluginOptions')) || {};
     let map: ymaps.Map | undefined;
@@ -96,17 +96,12 @@ export default defineComponent({
       utils.emitter.$on('scriptIsLoaded', init);
     }
 
-    return {
-      ymapId,
-      isReady,
+    expose(map);
 
-      map,
-    };
-  },
-  render() {
-    return h('section', { class: 'yandex-container' }, [
-      h('div', { id: this.ymapId, style: 'min-height: 100%;' }),
-      this.isReady && h('div', { style: 'display: none;' }, [this.$slots.default?.()]),
-    ]);
+    return () =>
+      h('section', { class: 'yandex-container' }, [
+        h('div', { id: ymapId, style: 'min-height: 100%;' }),
+        isReady.value && h('div', { style: 'display: none;' }, [slots.default?.()]),
+      ]);
   },
 });

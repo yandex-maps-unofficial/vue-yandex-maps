@@ -11,7 +11,7 @@ export default defineComponent({
     },
   },
   emits: ['geo-objects-updated'],
-  setup(props, { emit }) {
+  setup(props, { emit, expose, slots }) {
     const objectManager = new ymaps.ObjectManager(props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
 
@@ -43,11 +43,8 @@ export default defineComponent({
       deleteGeoObject(objectManager);
     });
 
-    return {
-      objectManager,
-    };
-  },
-  render() {
-    return this.$slots.default?.();
+    expose(objectManager);
+
+    return () => slots.default?.();
   },
 });
