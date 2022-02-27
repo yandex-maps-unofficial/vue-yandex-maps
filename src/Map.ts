@@ -41,7 +41,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  emits: [...DEFAULT_MAP_EVENTS, 'geoObjectsUpdated', 'created'],
+  emits: [...DEFAULT_MAP_EVENTS, 'geo-objects-updated', 'created'],
   setup(props, { emit }) {
     const isReady = ref(false);
     const pluginOptions: MapSettings | undefined = inject('pluginOptions');
@@ -53,7 +53,7 @@ export default defineComponent({
 
       arr.forEach((geoObject) => map?.geoObjects[action](geoObject));
 
-      emit('geoObjectsUpdated', map.geoObjects);
+      emit('geo-objects-updated', map.geoObjects);
       arr = [];
     };
 
@@ -106,7 +106,7 @@ export default defineComponent({
   render() {
     return h('section', { class: 'yandex-container' }, [
       h('div', { id: this.ymapId, style: 'min-height: 100%;' }),
-      this.isReady && h('div', [this.$slots.default?.()]),
+      this.isReady && h('div', { style: 'display: none;' }, [this.$slots.default?.()]),
     ]);
   },
 });

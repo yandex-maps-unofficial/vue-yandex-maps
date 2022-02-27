@@ -10,6 +10,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
+  emits: ['geo-objects-updated'],
   setup(props, { emit }) {
     const objectManager = new ymaps.ObjectManager(props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
@@ -26,7 +27,7 @@ export default defineComponent({
       }));
 
       objectManager[action](featureArray);
-      emit('geoObjectsUpdated', objectManager);
+      emit('geo-objects-updated', objectManager);
 
       arr = [];
     };

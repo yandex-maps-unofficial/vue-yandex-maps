@@ -46,6 +46,7 @@ export default defineComponent({
       validator: (val: string[]) => val.every((event) => DEFAULT_MARKER_EVENTS.includes(event)),
     },
   },
+  emits: [...DEFAULT_MARKER_EVENTS],
   setup(props, { emit, slots }) {
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
     const coords = computed(() => props.coordinates.map(convertToNumbers));
@@ -82,7 +83,7 @@ export default defineComponent({
     const marker = new ymaps.GeoObject(feature, options);
     props.events.forEach((event: any) => marker.events.add(event, (e) => emit(event, e)));
 
-    provide('changeBalloonLayout', marker.balloon.setOptions);
+    provide('marker', marker);
 
     const markerJson = {
       ...feature,

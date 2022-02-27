@@ -10,6 +10,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
+  emits: ['geo-objects-updated'],
   setup(props, { emit }) {
     const collection = new ymaps.GeoObjectCollection({}, props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
@@ -18,7 +19,7 @@ export default defineComponent({
       if (!collection || !arr.length) return;
 
       arr.forEach((geoObject) => collection[action](geoObject));
-      emit('geoObjectsUpdated', collection);
+      emit('geo-objects-updated', collection);
 
       arr = [];
     };

@@ -10,6 +10,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
+  emits: ['geo-objects-updated'],
   setup(props, { emit }) {
     const clusterer = new ymaps.Clusterer(props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
@@ -18,7 +19,7 @@ export default defineComponent({
       if (!clusterer || !arr.length) return;
 
       clusterer[action](arr);
-      emit('geoObjectsUpdated', clusterer);
+      emit('geo-objects-updated', clusterer);
 
       arr = [];
     };
