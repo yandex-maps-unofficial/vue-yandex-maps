@@ -47,7 +47,7 @@ export default defineComponent({
     },
   },
   emits: [...DEFAULT_MARKER_EVENTS],
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, expose }) {
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
     const coords = computed(() => props.coordinates.map(convertToNumbers));
     const isBalloonOpen = ref(false);
@@ -98,15 +98,11 @@ export default defineComponent({
       deleteGeoObject(marker, markerJson);
     });
 
-    return {
-      marker,
-      isBalloonOpen,
-    };
-  },
-  render() {
-    if (this.$slots.component?.().length) {
-      return this.isBalloonOpen && h(Teleport, { to: `#balloon-${this.markerId}` }, [this.$slots.component?.()]);
+    expose(marker);
+
+    if (slots.component?.().length) {
+      return isBalloonOpen.value && h(Teleport, { to: `#balloon-${props.markerId}` }, [slots.component?.()]);
     }
-    return this.$slots.default?.();
+    return slots.default?.();
   },
 });

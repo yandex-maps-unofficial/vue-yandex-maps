@@ -11,7 +11,7 @@ export default defineComponent({
     },
   },
   emits: ['geo-objects-updated'],
-  setup(props, { emit }) {
+  setup(props, { emit, expose, slots }) {
     const clusterer = new ymaps.Clusterer(props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
 
@@ -35,11 +35,8 @@ export default defineComponent({
       deleteGeoObject(clusterer);
     });
 
-    return {
-      clusterer,
-    };
-  },
-  render() {
-    return this.$slots.default?.();
+    expose(clusterer);
+
+    return slots.default?.();
   },
 });

@@ -11,7 +11,7 @@ export default defineComponent({
     },
   },
   emits: ['geo-objects-updated'],
-  setup(props, { emit }) {
+  setup(props, { emit, expose, slots }) {
     const collection = new ymaps.GeoObjectCollection({}, props.options);
     const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
 
@@ -35,11 +35,8 @@ export default defineComponent({
       deleteGeoObject(collection);
     });
 
-    return {
-      collection,
-    };
-  },
-  render() {
-    return this.$slots.default?.();
+    expose(collection);
+
+    return slots.default?.();
   },
 });
