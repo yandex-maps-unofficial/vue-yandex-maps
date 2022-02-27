@@ -44,7 +44,7 @@ export default defineComponent({
   emits: [...DEFAULT_MAP_EVENTS, 'geo-objects-updated', 'created'],
   setup(props, { emit }) {
     const isReady = ref(false);
-    const pluginOptions: MapSettings | undefined = inject('pluginOptions');
+    const pluginOptions: MapSettings | object = (utils.emitter.pluginInstalledGlobal && inject('pluginOptions')) || {};
     let map: ymaps.Map | undefined;
     const ymapId = `yandexMap${Math.round(Math.random() * 100000)}`;
 

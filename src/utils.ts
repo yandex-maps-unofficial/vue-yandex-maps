@@ -6,11 +6,13 @@ class EventEmitter {
   };
   ymapReady: boolean;
   scriptIsNotAttached: boolean;
+  pluginInstalledGlobal: boolean;
 
   constructor() {
     this.events = {};
     this.ymapReady = false;
     this.scriptIsNotAttached = true;
+    this.pluginInstalledGlobal = false;
   }
 
   $on(eventName: string, fn: (value?: unknown) => void) {

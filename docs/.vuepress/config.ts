@@ -1,7 +1,18 @@
 import { defineUserConfig } from 'vuepress'
+import { path } from '@vuepress/utils'
 import type { DefaultThemeOptions } from 'vuepress'
 
 export default defineUserConfig<DefaultThemeOptions>({
+  plugins: [
+    [
+      '@vuepress/register-components',
+      {
+        components: {
+          YandexMap: path.resolve(__dirname, '../components/Map.vue'),
+        },
+      },
+    ],
+  ],
   locales: {
     '/': {
       lang: 'ru-RU',
@@ -28,7 +39,10 @@ export default defineUserConfig<DefaultThemeOptions>({
           { text: 'Примеры', link: '/examples/' },
           { text: 'API Я.Карт', link: 'https://tech.yandex.ru/maps/doc/jsapi/2.1/quick-start/index-docpage/' },
         ],
-        sidebar: [ '/guide/README.md', '/guide/Map.md', '/guide/Marker.md', '/guide/Collection.md', '/guide/Clusterer.md']
+        sidebar: {
+          '/guide/': [ '/guide/README.md', '/guide/Map.md', '/guide/Marker.md', '/guide/Collection.md', '/guide/Clusterer.md'],
+          '/examples/': ['/examples/README.md']
+        }
       },
       '/en/': {
         selectLanguageText: 'Language',

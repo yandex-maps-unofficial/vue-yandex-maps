@@ -1,6 +1,6 @@
 import ymapsNamespace from 'yandex-maps';
 import { MapSettings } from './types';
-import { ymapLoader } from './utils';
+import { ymapLoader, emitter } from './utils';
 import Map from './Map';
 import Marker from './Marker';
 import Collection from './Collection';
@@ -28,6 +28,8 @@ export default {
   install: (app: any, options: MapSettings) => {
     if (isPluginInstalled) return;
     isPluginInstalled = true;
+    emitter.pluginInstalledGlobal = true;
+
     app.provide('pluginOptions', options);
     app.component('yandex-map', Map);
     app.component('yandex-marker', Marker);
