@@ -103,6 +103,6 @@ export default defineComponent({
     if (slots.component?.().length) {
       return isBalloonOpen.value && h(Teleport, { to: `#balloon-${props.markerId}` }, [slots.component?.()]);
     }
-    return slots.default?.();
+    return () => slots.default?.();
   },
 });

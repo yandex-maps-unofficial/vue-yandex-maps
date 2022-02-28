@@ -37,6 +37,6 @@ export default defineComponent({
 
     expose(clusterer);
 
-    return slots.default?.();
+    return () => slots.default?.();
   },
 });

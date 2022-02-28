@@ -45,6 +45,6 @@ export default defineComponent({
 
     expose(objectManager);
 
-    return slots.default?.();
+    return () => slots.default?.();
   },
 });

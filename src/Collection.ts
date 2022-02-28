@@ -37,6 +37,6 @@ export default defineComponent({
 
     expose(collection);
 
-    return slots.default?.();
+    return () => slots.default?.();
   },
 });
