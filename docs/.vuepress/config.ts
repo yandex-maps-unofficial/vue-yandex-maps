@@ -9,6 +9,7 @@ export default defineUserConfig<DefaultThemeOptions>({
       {
         components: {
           YandexMap: path.resolve(__dirname, '../components/Map.vue'),
+          YandexMarkers: path.resolve(__dirname, '../components/Markers.vue'),
         },
       },
     ],
@@ -36,12 +37,12 @@ export default defineUserConfig<DefaultThemeOptions>({
         navbar: [
           { text: 'v1.x-beta', children: [{ text: 'v0.x', link: 'https://vue-yandex-maps.github.io/' }] },
           { text: 'Руководство', link: '/guide/' },
-          { text: 'Примеры', link: '/examples/' },
+          { text: 'Примеры', link: '/examples/map-create' },
           { text: 'API Я.Карт', link: 'https://tech.yandex.ru/maps/doc/jsapi/2.1/quick-start/index-docpage/' },
         ],
         sidebar: {
-          '/guide/': [ '/guide/README.md', '/guide/Map.md', '/guide/Marker.md', '/guide/Collection.md', '/guide/Clusterer.md'],
-          '/examples/': ['/examples/README.md']
+          '/guide/': [ '/guide/README.md', '/guide/map.md', '/guide/marker.md', '/guide/collection.md', '/guide/clusterer.md'],
+          '/examples/': ['/examples/map-create.md', '/examples/markers.md']
         }
       },
       '/en/': {
