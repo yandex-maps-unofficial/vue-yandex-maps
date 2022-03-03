@@ -99,7 +99,7 @@ export default defineComponent({
     expose(map);
 
     return () =>
-      h('section', { class: 'yandex-container' }, [
+      h('section', { class: 'yandex-container', 'data-test': 'map' }, [
         h('div', { id: ymapId, style: 'min-height: 100%;' }),
         isReady.value && h('div', { style: 'display: none;' }, [slots.default?.()]),
       ]);
