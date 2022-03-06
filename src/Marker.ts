@@ -81,7 +81,7 @@ export default defineComponent({
       ...props.options,
     };
     const marker = new ymaps.GeoObject(feature, options);
-    props.events.forEach((event: any) => marker.events.add(event, (e) => emit(event, e)));
+    props.events.forEach((event: any) => marker.events?.add(event, (e) => emit(event, e)));
 
     provide('marker', marker);
 

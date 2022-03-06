@@ -72,7 +72,7 @@ export default defineComponent({
         type: `yandex#${props.mapType}` as MapType,
       });
 
-      props.events.forEach((event) => map?.events.add(event, (e) => emit(event, e)));
+      props.events.forEach((event) => map?.events?.add(event, (e) => emit(event, e)));
 
       if (props.detailedControls) {
         const controls = Object.keys(props.detailedControls) as ymaps.ControlKey[];
