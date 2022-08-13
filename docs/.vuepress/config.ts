@@ -16,12 +16,12 @@ export default defineUserConfig({
     '/': {
       lang: 'ru-RU',
       title: 'Vue-yandex-maps',
-      description: 'Документация на русском для vue-yandex-maps'
+      description: 'Документация на русском'
     },
     '/en/': {
       lang: 'en-US',
       title: 'Vue-yandex-maps',
-      description: 'Documentation on english for vue-yandex-maps'
+      description: 'Documentation on english'
     }
   },
   theme: defaultTheme({
