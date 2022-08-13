@@ -7,15 +7,12 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node ${{ matrix.node-version }}
+      - name: install node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.x
       - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: install

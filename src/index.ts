@@ -18,11 +18,11 @@ declare global {
 let isPluginInstalled: boolean;
 
 export const loadYmap = ymapLoader;
-export const yandexMap = Map;
-export const yandexMarker = Marker;
-export const yandexCollection = Collection;
-export const yandexClusterer = Clusterer;
-export const yandexObjectManager = ObjectManager;
+export const YandexMap = Map;
+export const YandexMarker = Marker;
+export const YandexCollection = Collection;
+export const YandexClusterer = Clusterer;
+export const YandexObjectManager = ObjectManager;
 
 export default {
   install: (app: any, options: MapSettings) => {

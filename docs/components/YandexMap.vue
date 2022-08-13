@@ -1,5 +1,5 @@
 <template>
-  <yandex-map :coordinates="coordinates" :detailed-controls="detailedControls" :controls="controls" map-type="hybrid" />
+  <YandexMap :coordinates="coordinates" :detailed-controls="detailedControls" :controls="controls" map-type="hybrid" />
 </template>
 
 <script setup>
