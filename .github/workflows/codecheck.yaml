@@ -1,0 +1,23 @@
+name: Code checks
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+      - run: npm run lint
+      - run: npm test

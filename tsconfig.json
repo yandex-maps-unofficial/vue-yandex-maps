@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "declaration": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "types": [
+    "yandex-maps"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "docs/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "temp"
+  ]
+}
