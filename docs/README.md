@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /hero.jpg
+heroImage: /hero.png
 actions:
   - text: Документация →
     link: /guide/
