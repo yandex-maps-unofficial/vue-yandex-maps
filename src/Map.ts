@@ -17,15 +17,19 @@ export default defineComponent({
     },
     bounds: {
       type: Array as () => number[][],
+      default: null,
     },
     behaviors: {
       type: Array as () => string[],
+      default: null,
     },
     controls: {
       type: Array as () => string[],
+      default: null,
     },
     detailedControls: {
       type: Object as () => DetailedControls,
+      default: null,
     },
     events: {
       type: Array as () => string[],

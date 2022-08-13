@@ -31,10 +31,10 @@ export default {
     emitter.pluginInstalledGlobal = true;
 
     app.provide('pluginOptions', options);
-    app.component('yandex-map', Map);
-    app.component('yandex-marker', Marker);
-    app.component('yandex-collection', Collection);
-    app.component('yandex-clusterer', Clusterer);
-    app.component('yandex-object-manager', ObjectManager);
+    app.component('YandexMap', Map);
+    app.component('YandexMarker', Marker);
+    app.component('YandexCollection', Collection);
+    app.component('YandexClusterer', Clusterer);
+    app.component('YandexObjectManager', ObjectManager);
   },
 };

@@ -1,15 +1,17 @@
 <template>
-  <div class="component">
+  <div>
     {{ modelValue }} component with props and emits
     <button @click="$emit('update:modelValue', 'Awesome')">Click!</button>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    modelValue: String,
+<script setup>
+defineProps({
+  modelValue: {
+    type: String,
+    default: '',
   },
-  setup() {},
-};
+});
+
+defineEmits(['update:modelValue']);
 </script>

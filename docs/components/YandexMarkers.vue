@@ -8,25 +8,14 @@
   </yandex-map>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 import YandexMap from '../../src/Map';
 import YandexMarker from '../../src/Marker';
 import CustomBalloon from './CustomBalloon.vue';
 
-export default {
-  name: 'YandexMapWrapper',
-  components: { YandexMap, YandexMarker, CustomBalloon },
-  setup() {
-    const coordinates = [55, 33];
-    const name = ref('Custom');
-
-    return {
-      coordinates,
-      name,
-    };
-  },
-};
+const coordinates = [55, 33];
+const name = ref('Custom');
 </script>
 
 <style>

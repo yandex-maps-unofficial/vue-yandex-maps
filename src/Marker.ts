@@ -31,6 +31,7 @@ export default defineComponent({
     },
     options: {
       type: Object as () => ymaps.IGeoObjectOptions,
+      default: null,
     },
     type: {
       type: String as PropType<MarkerType>,
