@@ -50,7 +50,7 @@ Vue.use(YmapPlugin, settings)
 ### Локальная
 
 ```js
-import { yandexMap, yandexMarker } from 'vue-yandex-maps'
+import { YandexMap, YandexMarker } from 'vue-yandex-maps'
 
 export default {
   components: { yandexMap, yandexMarker }
@@ -59,9 +59,9 @@ export default {
 
 ```
 ```html
-<yandex-map :settings="settings" :coordinates="[32, 50]">
+<YandexMap :settings="settings" :coordinates="[32, 50]">
     <!--Markers-->
-</yandex-map>
+</YandexMap>
 ```
 
 ### Ymaps Loader

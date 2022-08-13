@@ -1,11 +1,11 @@
 <template>
-  <yandex-map :coordinates="coordinates">
-    <yandex-marker :coordinates="coordinates" :marker-id="123">
+  <YandexMap :coordinates="coordinates">
+    <YandexMarker :coordinates="coordinates" :marker-id="123">
       <template #component>
         <CustomBalloon v-model="name" />
       </template>
-    </yandex-marker>
-  </yandex-map>
+    </YandexMarker>
+  </YandexMap>
 </template>
 
 <script setup>
