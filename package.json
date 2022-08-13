@@ -8,7 +8,8 @@
     "test": "yarn jest",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
-    "lint": "npx eslint --ext .ts,.vue ."
+    "lint": "npx eslint --ext .ts,.vue .",
+    "build": "npx rollup -c"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +33,7 @@
     "jest": "^27.5.1",
     "prettier": "^2.4.1",
     "rollup": "^2.66.1",
+    "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.5",
     "vue": "^3.2.20",
