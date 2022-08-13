@@ -4,6 +4,7 @@ const { registerComponentsPlugin } = require('@vuepress/plugin-register-componen
 
 export default defineUserConfig({
   base: '/new-docs/',
+  head: [['link', { rel: 'icon', href: '/new-docs/favicon.ico' }]],
   plugins: [
     registerComponentsPlugin({
         components: {
@@ -25,7 +26,7 @@ export default defineUserConfig({
     }
   },
   theme: defaultTheme({
-    repo: 'PNKBizz/vue-yandex-map',
+    repo: 'PNKBizz/vue-yandex-maps',
     locales: {
       '/': {
         selectLanguageText: 'Язык',
