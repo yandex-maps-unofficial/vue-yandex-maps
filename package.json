@@ -2,7 +2,8 @@
   "name": "vue-yandex-maps",
   "version": "1.0.3",
   "description": "Yandex Maps component for Vue 3",
-  "main": "dist/index.js",
+  "main": "dist/vue-yandex-maps.umd.js",
+  "module": "dist/vue-yandex-maps.esm.js",
   "scripts": {
     "dev": "tsc --watch",
     "test": "yarn jest",
