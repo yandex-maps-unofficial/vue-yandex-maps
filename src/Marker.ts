@@ -11,7 +11,7 @@ import {
   Teleport,
 } from 'vue';
 import { MarkerType, MarkerFeature, RecursiveArray } from './types';
-import { convertToNumbers } from './utils';
+import { convertToNumbers, actionsKey } from './utils';
 import { DEFAULT_MARKER_EVENTS } from './constants';
 
 export default defineComponent({
@@ -49,7 +49,7 @@ export default defineComponent({
   },
   emits: [...DEFAULT_MARKER_EVENTS],
   setup(props, { emit, slots, expose }) {
-    const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
+    const { addGeoObject, deleteGeoObject } = inject(actionsKey) || {};
     const coords = computed(() => props.coordinates.map(convertToNumbers));
     const isBalloonOpen = ref(false);
 

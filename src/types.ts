@@ -23,7 +23,7 @@ export type MarkerJson = MarkerFeature & {
   options: ymaps.IGeoObjectOptions;
 };
 
-export type MarkerAction = (marker: ymaps.GeoObject, markerJson: MarkerJson) => void;
+export type MarkerAction = (marker: unknown, markerJson?: MarkerJson) => void;
 
 export type UpdateFunction<T> = (
   arr: T extends ymaps.GeoObject ? ymaps.GeoObject[] : MarkerJson[],

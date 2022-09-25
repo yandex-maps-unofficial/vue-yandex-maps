@@ -63,7 +63,7 @@ export default defineComponent({
 
     const { addGeoObject, deleteGeoObject } = useGeoObjectActions(updateGeoObjects);
 
-    provide('geoObjectActions', { addGeoObject, deleteGeoObject });
+    provide(utils.actionsKey, { addGeoObject, deleteGeoObject });
 
     const init = () => {
       isReady.value = true;

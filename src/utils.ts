@@ -1,5 +1,7 @@
-import { MapSettings, RecursiveArray } from './types';
+import { MapSettings, RecursiveArray, MarkerAction } from './types';
+import type { InjectionKey } from 'vue';
 
+export const actionsKey = Symbol() as InjectionKey<{ [key: string]: MarkerAction }>;
 class EventEmitter {
   events: {
     [Key: string]: (() => void)[];

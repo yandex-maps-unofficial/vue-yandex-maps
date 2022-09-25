@@ -1,6 +1,7 @@
 import { defineComponent, inject, onMounted, onBeforeUnmount, provide } from 'vue';
 import useGeoObjectActions from './use/actions';
 import { UpdateFunction, MarkerJson } from './types';
+import { actionsKey } from './utils';
 
 export default defineComponent({
   name: 'YandexObjectManager',
@@ -13,7 +14,7 @@ export default defineComponent({
   emits: ['geo-objects-updated'],
   setup(props, { emit, expose, slots }) {
     const objectManager = new ymaps.ObjectManager(props.options);
-    const { addGeoObject, deleteGeoObject } = inject('geoObjectActions') || {};
+    const { addGeoObject, deleteGeoObject } = inject(actionsKey) || {};
 
     const updateGeoObjects: UpdateFunction<MarkerJson> = (arr, action) => {
       if (!objectManager || !arr.length) return;
