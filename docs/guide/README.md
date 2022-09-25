@@ -78,3 +78,23 @@ export default {
   }
 }
 ```
+
+### Nuxt
+
+При использовании с `Nuxt` нужно учитывать, что компонент является полностью клиентским. Пример плагина для глобального подключения Я.Карт.
+
+```js
+// plugins/yandex-map.client.js
+
+import plugin from 'vue-yandex-maps'
+import { defineNuxtPlugin } from 'nuxt/app'
+
+const settings = {
+  // здесь ваши настройки
+}
+
+export default defineNuxtPlugin((nuxtApp) => {
+    nuxtApp.vueApp.use(plugin, settings)
+})
+```
+При использовании компонента необходимо оборачивать его в тег `<client-only>` или каким-то еще образом избегать отрисовки на стороне сервера.
