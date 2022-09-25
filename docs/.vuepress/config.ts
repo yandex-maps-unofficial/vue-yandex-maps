@@ -38,7 +38,7 @@ export default defineUserConfig({
           { text: 'API Я.Карт', link: 'https://tech.yandex.ru/maps/doc/jsapi/2.1/quick-start/index-docpage/' },
         ],
         sidebar: {
-          '/guide/': [ '/guide/README.md', '/guide/map.md', '/guide/marker.md', '/guide/collection.md', '/guide/clusterer.md'],
+          '/guide/': [ '/guide/README.md', '/guide/map.md', '/guide/marker.md', '/guide/collection.md', '/guide/clusterer.md', '/guide/object-manager.md'],
           '/examples/': ['/examples/map-create.md', '/examples/markers.md']
         }
       },
