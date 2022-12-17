@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import Marker from '../src/Marker';
+import { actionsKey } from '../src/utils';
 
 describe('Marker tests', () => {
   let wrapper: any;
@@ -14,7 +15,7 @@ describe('Marker tests', () => {
       },
       global: {
         provide: {
-          geoObjectActions: {
+          [actionsKey as symbol]: {
             addGeoObject: jest.fn(() => (isAdded = true)),
             deleteGeoObject: jest.fn(() => (isRemoved = true)),
           },
