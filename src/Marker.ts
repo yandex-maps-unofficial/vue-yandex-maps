@@ -9,6 +9,7 @@ import {
   h,
   ref,
   Teleport,
+  watch,
 } from 'vue';
 import { MarkerType, MarkerFeature, RecursiveArray } from './types';
 import { convertToNumbers } from './utils';
@@ -90,7 +91,10 @@ export default defineComponent({
       ...feature,
       options,
     };
-
+    watch(coords, (coordinates) => {
+      // @ts-ignore
+      marker.geometry?.setCoordinates(coordinates);
+    })
     onMounted(() => {
       addGeoObject(marker, markerJson);
     });
