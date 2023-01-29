@@ -18,7 +18,7 @@ export default defineComponent({
   name: 'YandexMarker',
   props: {
     coordinates: {
-      type: Array as () => Array<RecursiveArray | number>,
+      type: Array as PropType<Array<RecursiveArray | number>>,
       required: true,
     },
     markerId: {
@@ -30,7 +30,7 @@ export default defineComponent({
       default: () => ({}),
     },
     options: {
-      type: Object as () => ymaps.IGeoObjectOptions,
+      type: Object as PropType<ymaps.IGeoObjectOptions>,
       default: null,
     },
     type: {
@@ -42,7 +42,7 @@ export default defineComponent({
       default: null,
     },
     events: {
-      type: Array as () => string[],
+      type: Array as PropType<string[]>,
       default: () => ['click'],
       validator: (val: string[]) => val.every((event) => DEFAULT_MARKER_EVENTS.includes(event)),
     },
