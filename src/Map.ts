@@ -1,4 +1,4 @@
-import { h, defineComponent, provide, inject, ref } from 'vue';
+import { h, defineComponent, provide, inject, ref, PropType, watch } from 'vue';
 import * as utils from './utils';
 import { DEFAULT_MAP_EVENTS } from './constants';
 import { MapSettings, MapType, DetailedControls, UpdateFunction } from './types';
@@ -8,7 +8,7 @@ export default defineComponent({
   name: 'YandexMap',
   props: {
     coordinates: {
-      type: Array as () => number[],
+      type: Array as PropType<number[]>,
       required: true,
     },
     zoom: {
@@ -16,23 +16,23 @@ export default defineComponent({
       default: 10,
     },
     bounds: {
-      type: Array as () => number[][],
+      type: Array as PropType<number[][]>,
       default: null,
     },
     behaviors: {
-      type: Array as () => string[],
+      type: Array as PropType<string[]>,
       default: null,
     },
     controls: {
-      type: Array as () => string[],
+      type: Array as PropType<string[]>,
       default: null,
     },
     detailedControls: {
-      type: Object as () => DetailedControls,
+      type: Object as PropType<DetailedControls>,
       default: null,
     },
     events: {
-      type: Array as () => string[],
+      type: Array as PropType<string[]>,
       default: () => ['click'],
       validator: (val: string[]) => val.every((event) => DEFAULT_MAP_EVENTS.includes(event)),
     },
@@ -41,7 +41,7 @@ export default defineComponent({
       default: 'map',
     },
     settings: {
-      type: Object as () => MapSettings,
+      type: Object as PropType<MapSettings>,
       default: () => ({}),
     },
   },
@@ -101,6 +101,26 @@ export default defineComponent({
     }
 
     expose(map);
+
+    watch(
+      () => props.coordinates,
+      (value) => map?.setCenter(value),
+    );
+
+    watch(
+      () => props.zoom,
+      (value) => map?.setZoom(value),
+    );
+
+    watch(
+      () => props.bounds,
+      (value) => map?.setBounds(value),
+    );
+
+    watch(
+      () => props.mapType,
+      (value) => map?.setType(value),
+    );
 
     return () =>
       h('section', { class: 'yandex-container', 'data-test': 'map' }, [

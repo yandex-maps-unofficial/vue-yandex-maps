@@ -1,4 +1,4 @@
-import { defineComponent, inject, onMounted, onBeforeUnmount, provide } from 'vue';
+import { defineComponent, inject, onMounted, onBeforeUnmount, provide, PropType } from 'vue';
 import useGeoObjectActions from './use/actions';
 import { UpdateFunction, MarkerJson } from './types';
 import { actionsKey } from './utils';
@@ -7,7 +7,7 @@ export default defineComponent({
   name: 'YandexObjectManager',
   props: {
     options: {
-      type: Object as () => ymaps.IObjectManagerOptions,
+      type: Object as PropType<ymaps.IObjectManagerOptions>,
       default: () => ({}),
     },
   },
