@@ -36,6 +36,10 @@ export type MarkerType = 'Point' | 'LineString' | 'Rectangle' | 'Polygon' | 'Cir
 
 export type RecursiveArray = Array<RecursiveArray | number>;
 
-export type MapType = 'yandex#map' | 'yandex#satellite' | 'yandex#hybrid' | undefined;
+export type MapType = 'yandex#map' | 'yandex#satellite' | 'yandex#hybrid';
 
 export type DetailedControls = { [name in ymaps.ControlKey]: Object };
+
+export interface MarkerGeometry extends ymaps.IGeometry {
+  setCoordinates: (value: unknown) => void;
+}

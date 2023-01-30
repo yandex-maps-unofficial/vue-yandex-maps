@@ -9,8 +9,9 @@ import {
   h,
   ref,
   Teleport,
+  watch,
 } from 'vue';
-import { MarkerType, MarkerFeature, RecursiveArray } from './types';
+import { MarkerType, MarkerFeature, RecursiveArray, MarkerGeometry } from './types';
 import { convertToNumbers, actionsKey } from './utils';
 import { DEFAULT_MARKER_EVENTS } from './constants';
 
@@ -98,6 +99,13 @@ export default defineComponent({
     onBeforeUnmount(() => {
       deleteGeoObject(marker, markerJson);
     });
+
+    watch(
+      () => props.coordinates,
+      (coordinates) => {
+        (marker.geometry as MarkerGeometry)?.setCoordinates?.(coordinates);
+      },
+    );
 
     expose(marker);
 

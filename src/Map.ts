@@ -1,4 +1,4 @@
-import { h, defineComponent, provide, inject, ref, PropType } from 'vue';
+import { h, defineComponent, provide, inject, ref, PropType, watch } from 'vue';
 import * as utils from './utils';
 import { DEFAULT_MAP_EVENTS } from './constants';
 import { MapSettings, MapType, DetailedControls, UpdateFunction } from './types';
@@ -101,6 +101,26 @@ export default defineComponent({
     }
 
     expose(map);
+
+    watch(
+      () => props.coordinates,
+      (value) => map?.setCenter(value),
+    );
+
+    watch(
+      () => props.zoom,
+      (value) => map?.setZoom(value),
+    );
+
+    watch(
+      () => props.bounds,
+      (value) => map?.setBounds(value),
+    );
+
+    watch(
+      () => props.mapType,
+      (value) => map?.setType(value),
+    );
 
     return () =>
       h('section', { class: 'yandex-container', 'data-test': 'map' }, [
