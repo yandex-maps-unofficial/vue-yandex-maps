@@ -44,6 +44,10 @@ export default defineComponent({
       type: Object as PropType<MapSettings>,
       default: () => ({}),
     },
+    panOptions: {
+      type: Object as PropType<ymaps.IMapPositionOptions>,
+      default: undefined,
+    },
   },
   emits: [...DEFAULT_MAP_EVENTS, 'geo-objects-updated', 'created'],
   setup(props, { emit, slots, expose }) {
@@ -104,7 +108,7 @@ export default defineComponent({
 
     watch(
       () => props.coordinates,
-      (value) => map?.setCenter(value),
+      (value) => map?.panTo(value, props.panOptions),
     );
 
     watch(

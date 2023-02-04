@@ -26,7 +26,7 @@ export default defineComponent({
     };
 
     const { addGeoObject: add, deleteGeoObject: remove } = useGeoObjectActions(updateGeoObjects);
-    provide('geoObjectActions', { addGeoObject: add, deleteGeoObject: remove });
+    provide(actionsKey, { addGeoObject: add, deleteGeoObject: remove });
 
     onMounted(() => {
       addGeoObject(clusterer);

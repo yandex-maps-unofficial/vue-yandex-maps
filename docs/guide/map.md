@@ -15,6 +15,7 @@
 | detailed-controls | Объект, где ключами являются элементы управления картой, а значениями - объекты настроект элемента. Предназначен для тонкой настройки элементов управления. | object |
 | events | [Нативные события карты](https://yandex.ru/dev/maps/jsapi/doc/2.1/ref/reference/Map.html#Map__events-summary), которые можно слушать на компоненте. <br> *По умолчанию - [ 'click' ]* | string[] |
 | map-type | Тип карты. Допустимые значения: `map, satellite, hybrid`. *Default: map*. | string |
+| pan-options | [Опции перемещения](https://yandex.ru/dev/maps/jsapi/doc/2.1/ref/reference/Map.html#method_detail__panTo-param-options) карты при смене координат центра | Object |
 
 ## События
 
