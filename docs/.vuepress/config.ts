@@ -9,7 +9,10 @@ export default defineUserConfig({
     registerComponentsPlugin({
         components: {
           YandexMap: path.resolve(__dirname, '../components/YandexMap.vue'),
-          YandexMarkers: path.resolve(__dirname, '../components/YandexMarkers.vue'),
+          MarkerWithCastomBalloon: path.resolve(__dirname, '../components/MarkerWithCastomBalloon.vue'),
+          MapWithMarker: path.resolve(__dirname, '../components/MapWithMarker.vue'),
+          YandexClusterer: path.resolve(__dirname, '../components/YandexClusterer.vue'),
+          YandexCollection: path.resolve(__dirname, '../components/YandexCollection.vue'),
         },
       })
   ],
@@ -39,7 +42,7 @@ export default defineUserConfig({
         ],
         sidebar: {
           '/guide/': [ '/guide/README.md', '/guide/map.md', '/guide/marker.md', '/guide/collection.md', '/guide/clusterer.md', '/guide/object-manager.md'],
-          '/examples/': ['/examples/map-create.md', '/examples/markers.md']
+          '/examples/': ['/examples/map-create.md', '/examples/custom-balloon.md', '/examples/move-marker.md', '/examples/clusterer.md', '/examples/collection.md']
         }
       },
       '/en/': {

@@ -1,9 +1,10 @@
-# Маркеры
+# Маркер с кастомным балуном
 
 <client-only>
-  <YandexMarkers />
+  <MarkerWithCastomBalloon />
 </client-only>
 
+### Map
 ```vue
 <template>
   <YandexMap :coordinates="coordinates">
