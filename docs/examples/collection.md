@@ -18,9 +18,9 @@
     <YandexCollection :options="{ preset: 'islands#blueAutoIcon' }">
       <YandexMarker
         v-for="i in 10"
-        :key="`1-marker-${i}`"
+        :key="`2-marker-${i}`"
         :coordinates="getCoordinates()"
-        :marker-id="`1-marker-${i}`"
+        :marker-id="`2-marker-${i}`"
       />
     </YandexCollection>
   </YandexMap>

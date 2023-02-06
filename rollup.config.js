@@ -15,7 +15,4 @@ const getBuildSectionConfig = (format, file) => ({
   external: ['vue'],
 });
 
-export default [
-  getBuildSectionConfig('esm', pkg.main),
-  getBuildSectionConfig('cjs', pkg.module),
-];
+export default [getBuildSectionConfig('esm', pkg.main), getBuildSectionConfig('cjs', pkg.module)];

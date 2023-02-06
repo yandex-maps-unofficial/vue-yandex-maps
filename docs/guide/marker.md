@@ -18,6 +18,12 @@
 
 [Нативные события маркера](https://yandex.ru/dev/maps/jsapi/doc/2.1/ref/reference/GeoObject.html#GeoObject__events-summary)
 
+## Слоты
+
+| Имя | Описание |
+|---|---|
+| component | Слот для компонента балуна |
+
 ## Классы
 
 | Имя | Описание |
