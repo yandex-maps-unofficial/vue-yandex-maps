@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "test": "vitest",
+    "cov": "vitest --coverage",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
     "lint": "eslint .",
@@ -25,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vitest/coverage-c8": "^0.28.5",
     "@vue/eslint-config-typescript": "^9.1.0",
     "@vue/test-utils": "^2.3.0",
     "@vuepress/plugin-register-components": "2.0.0-beta.50-pre.1",
