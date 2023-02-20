@@ -16,8 +16,8 @@ describe('Marker tests', () => {
       global: {
         provide: {
           [actionsKey as symbol]: {
-            addGeoObject: jest.fn(() => (isAdded = true)),
-            deleteGeoObject: jest.fn(() => (isRemoved = true)),
+            addGeoObject: vi.fn(() => (isAdded = true)),
+            deleteGeoObject: vi.fn(() => (isRemoved = true)),
           },
         },
       },
@@ -26,7 +26,7 @@ describe('Marker tests', () => {
 
   beforeEach(() => {
     window.ymaps = {
-      GeoObject: jest.fn(),
+      GeoObject: vi.fn(),
     } as any;
   });
 

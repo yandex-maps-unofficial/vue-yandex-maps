@@ -15,8 +15,8 @@ describe('Map tests', () => {
 
   beforeEach(() => {
     window.ymaps = {
-      ready: jest.fn((cb) => cb()),
-      Map: jest.fn(),
+      ready: vi.fn((cb) => cb()),
+      Map: vi.fn(),
     } as any;
   });
 
@@ -45,7 +45,7 @@ describe('Map tests', () => {
     utils.emitter.scriptIsNotAttached = true;
     utils.emitter.ymapReady = false;
 
-    jest.spyOn(utils, 'ymapLoader').mockImplementation((settings) => Promise.resolve());
+    vi.spyOn(utils, 'ymapLoader').mockImplementation((settings) => Promise.resolve());
 
     createComponent();
 
