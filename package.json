@@ -1,17 +1,17 @@
 {
   "name": "vue-yandex-maps",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Yandex Maps component for Vue 3",
   "main": "dist/vue-yandex-maps.umd.js",
   "module": "dist/vue-yandex-maps.esm.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "dev": "tsc --watch",
-    "test": "yarn jest",
+    "dev": "vite",
+    "test": "vitest",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
-    "lint": "npx eslint --ext .ts,.vue .",
-    "build": "npx rollup -c"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -20,32 +20,25 @@
   "author": "bizz.gc@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.3.0",
-    "@types/jest": "^27.4.1",
-    "@types/node": "^16.11.0",
-    "@types/yandex-maps": "^2.1.20",
-    "@typescript-eslint/eslint-plugin": "^5.3.1",
-    "@typescript-eslint/parser": "^5.3.1",
-    "@vue/eslint-config-typescript": "^9.0.1",
-    "@vue/test-utils": "^2.0.0-rc.18",
-    "@vuepress/plugin-register-components": "^2.0.0-beta.35",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^8.2.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "from": "^0.1.7",
-    "import": "^0.0.6",
-    "jest": "^27.5.1",
-    "prettier": "^2.4.1",
-    "rollup": "^2.66.1",
-    "rollup-plugin-terser": "^7.0.2",
-    "ts-jest": "^27.1.3",
-    "typescript": "^4.5.5",
-    "vue": "^3.2.20",
-    "vue-eslint-parser": "^9.0.3",
-    "vue-jest": "^5.0.0-alpha.10",
-    "vuepress": "^2.0.0-beta.30"
+    "@types/node": "^16.18.12",
+    "@types/yandex-maps": "^2.1.29",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "@vue/test-utils": "^2.3.0",
+    "@vuepress/plugin-register-components": "2.0.0-beta.50-pre.1",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^8.7.1",
+    "happy-dom": "^8.6.0",
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.3",
+    "vitest": "^0.28.5",
+    "vue-eslint-parser": "^9.1.0",
+    "vuepress": "^1.9.8"
   },
   "eslintConfig": {
     "root": true,
@@ -68,5 +61,8 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "dependencies": {
+    "vue": "^3.2.47"
+  }
 }
