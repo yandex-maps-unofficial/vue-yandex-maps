@@ -49,7 +49,13 @@ export function ymapLoader(settings: MapSettings) {
   };
 
   return new Promise((res, rej) => {
-    if (window.ymaps) return res(true);
+    if (window.ymaps) {
+      if (!emitter.ymapReady) {
+        emitter.ymapReady = true;
+        emitter.$emit('scriptIsLoaded');
+      }
+      return res(true);
+    }
 
     if (document.getElementById('vue-yandex-maps-script')) {
       emitter.$on('scriptIsLoaded', res);
