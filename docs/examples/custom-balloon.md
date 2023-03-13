@@ -18,7 +18,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { yandexMap, yandexMarker } from 'vue-yandex-maps'
+import { YandexMap, YandexMarker } from 'vue-yandex-maps'
 import CustomBalloon from './CustomBalloon.vue';
 
 const coordinates = [55, 33];

@@ -57,7 +57,7 @@ Vue.use(YmapPlugin, settings)
 import { YandexMap, YandexMarker } from 'vue-yandex-maps'
 
 export default {
-  components: { yandexMap, yandexMarker }
+  components: { YandexMap, YandexMarker }
   // other options
 }
 
