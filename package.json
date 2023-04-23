@@ -10,7 +10,7 @@
         "test": "yarn jest",
         "docs:build": "vuepress build docs",
         "docs:dev": "vuepress dev docs",
-        "lint": "npx eslint --ext .ts,.vue .",
+        "lint:fix": "npx eslint --ext .ts,.vue . --fix",
         "build": "npx rollup -c"
     },
     "repository": {

@@ -75,14 +75,18 @@ export default defineComponent({
 
     const init = () => {
       isReady.value = true;
-      map = new ymaps.Map(ymapId, {
-        center: props.coordinates,
-        zoom: props.zoom,
-        bounds: props.bounds,
-        behaviors: props.behaviors,
-        controls: props.controls,
-        type: `yandex#${props.mapType}` as MapType,
-      }, props.options);
+      map = new ymaps.Map(
+        ymapId,
+        {
+          center: props.coordinates,
+          zoom: props.zoom,
+          bounds: props.bounds,
+          behaviors: props.behaviors,
+          controls: props.controls,
+          type: `yandex#${props.mapType}` as MapType,
+        },
+        props.options,
+      );
 
       props.events.forEach((event) => map?.events?.add(event, (e) => emit(event, e)));
 
