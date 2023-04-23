@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { yandexMap } from 'vue-yandex-maps'
+import { YandexMap } from 'vue-yandex-maps'
 const coordinates = [55, 33];
 const controls = ['fullscreenControl'];
 const detailedControls = { zoomControl: { position: { right: 10, top: 50 } } };

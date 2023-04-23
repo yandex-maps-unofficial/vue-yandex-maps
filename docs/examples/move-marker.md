@@ -13,7 +13,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { yandexMap, yandexMarker } from 'vue-yandex-maps'
+import { YandexMap, YandexMarker } from 'vue-yandex-maps'
 
 const coordinates = ref([55, 33]);
 const onClick = (e) => (coordinates.value = e.get('coords'));

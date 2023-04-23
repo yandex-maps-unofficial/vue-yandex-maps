@@ -28,7 +28,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { yandexMap, yandexMarker, yandexCollection } from 'vue-yandex-maps'
+import { YandexMap, YandexMarker, YandexCollection } from 'vue-yandex-maps'
 
 const coordinates = ref([55, 33]);
 const getCoordinates = () => [55 + Math.random(), 33 + Math.random()];

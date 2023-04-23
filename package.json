@@ -1,6 +1,6 @@
 {
   "name": "vue-yandex-maps",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Yandex Maps component for Vue 3",
   "main": "dist/vue-yandex-maps.umd.js",
   "module": "dist/vue-yandex-maps.esm.js",
@@ -11,6 +11,7 @@
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
     "lint": "npx eslint --ext .ts,.vue .",
+    "lint:fix": "npx eslint --ext .ts,.vue . --fix",
     "build": "npx rollup -c"
   },
   "repository": {
