@@ -48,6 +48,10 @@ export default defineComponent({
       type: Object as PropType<ymaps.IMapPositionOptions>,
       default: undefined,
     },
+    options: {
+      type: Object as PropType<ymaps.IMapOptions>,
+      default: () => ({}),
+    },
   },
   emits: [...DEFAULT_MAP_EVENTS, 'geo-objects-updated', 'created'],
   setup(props, { emit, slots, expose }) {
@@ -71,14 +75,18 @@ export default defineComponent({
 
     const init = () => {
       isReady.value = true;
-      map = new ymaps.Map(ymapId, {
-        center: props.coordinates,
-        zoom: props.zoom,
-        bounds: props.bounds,
-        behaviors: props.behaviors,
-        controls: props.controls,
-        type: `yandex#${props.mapType}` as MapType,
-      });
+      map = new ymaps.Map(
+        ymapId,
+        {
+          center: props.coordinates,
+          zoom: props.zoom,
+          bounds: props.bounds,
+          behaviors: props.behaviors,
+          controls: props.controls,
+          type: `yandex#${props.mapType}` as MapType,
+        },
+        props.options,
+      );
 
       props.events.forEach((event) => map?.events?.add(event, (e) => emit(event, e)));
 
