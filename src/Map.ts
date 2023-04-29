@@ -66,7 +66,6 @@ export default defineComponent({
       arr.forEach((geoObject) => map?.geoObjects[action](geoObject));
 
       emit('geo-objects-updated', map.geoObjects);
-      arr = [];
     };
 
     const { addGeoObject, deleteGeoObject } = useGeoObjectActions(updateGeoObjects);
