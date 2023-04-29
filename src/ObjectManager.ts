@@ -29,8 +29,6 @@ export default defineComponent({
 
       objectManager[action](featureArray);
       emit('geo-objects-updated', objectManager);
-
-      arr = [];
     };
 
     const { addGeoObject: add, deleteGeoObject: remove } = useGeoObjectActions(updateGeoObjects, true);

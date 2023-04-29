@@ -21,8 +21,6 @@ export default defineComponent({
 
       clusterer[action](arr);
       emit('geo-objects-updated', clusterer);
-
-      arr = [];
     };
 
     const { addGeoObject: add, deleteGeoObject: remove } = useGeoObjectActions(updateGeoObjects);
