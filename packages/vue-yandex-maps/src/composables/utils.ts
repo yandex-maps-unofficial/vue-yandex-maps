@@ -83,6 +83,7 @@ export function injectControl(): Ref<YMapControls | null> {
 }
 
 export function waitTillYmapInit() {
+  //TODO: перевести на ивенты
   return new Promise<void>((resolve, reject) => {
     let retries = 0;
 
@@ -106,6 +107,7 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
   if (!_map && !getCurrentInstance()) throw new Error('onMapInit must be only called on runtime. This is likely Vue Yandex Map internal bug.');
   const map = _map || injectMap();
 
+  //TODO: перевести на ивенты
   return new Promise<void>((resolve, reject) => {
     const timeout = setTimeout(() => {
       if (!map.value) reject(new Error('Was not able to wait for map initialization in waitTillMapInit. Ensure that map was initialized.'));

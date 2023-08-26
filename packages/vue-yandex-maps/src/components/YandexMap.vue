@@ -1,10 +1,9 @@
 <script lang="ts">
-import {
-  defineComponent, h, nextTick, onBeforeUnmount, onMounted, PropType, provide, ref, shallowRef,
-} from 'vue';
+import { defineComponent, h, nextTick, onBeforeUnmount, onMounted, PropType, provide, ref, shallowRef } from 'vue';
 import type { YMap, YMapEntity, YMapProps } from '@yandex/ymaps3-types';
 import { initYmaps } from '../composables/maps';
 import { VueYandexMaps } from '../types/settings';
+import { Projection } from '@yandex/ymaps3-types/common/types';
 
 export default defineComponent({
   name: 'YandexMap',
@@ -72,11 +71,13 @@ export default defineComponent({
   }) {
     const map = shallowRef<YMap | null>(null);
     const layers = shallowRef([]);
+    const projection = shallowRef<null | Projection>(null);
     const ymapContainer = ref<HTMLDivElement | null>(null);
     const mounted = shallowRef(false);
 
     provide('map', map);
     provide('layers', layers);
+    provide('projection', projection);
     emit('update:map', map.value);
 
     const init = async () => {
@@ -85,7 +86,10 @@ export default defineComponent({
 
       if (map.value) map.value.destroy();
 
-      const createdMap = new ymaps3.YMap(container, props.settings, [
+      const settings = { ...props.settings };
+      if (projection.value && !settings.projection) settings.projection = projection.value;
+
+      const createdMap = new ymaps3.YMap(container, settings, [
         ...layers.value,
         ...props.layers,
       ]);

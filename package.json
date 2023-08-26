@@ -3,7 +3,7 @@
     "private": true,
     "scripts": {
         "build": "yarn workspace vue-yandex-maps build",
-        "nuxt:build": "yarn workspace vue-yandex-maps nuxt:prepare",
+        "nuxt:build": "yarn workspace nuxt prepack",
         "test:vue2": "yarn workspace vue-yandex-maps build:package-only && yarn workspace example-vue2 serve",
         "test:nuxt2": "yarn workspace vue-yandex-maps build:package-only && yarn workspace example-nuxt2 dev",
         "test:nuxt2-bridge": "yarn workspace vue-yandex-maps build && yarn workspace example-nuxt2-bridge dev",
@@ -14,19 +14,19 @@
         "publish": "yarn lint && yarn build && yarn workspace vue-yandex-maps npm:publish"
     },
     "devDependencies": {
-        "@babel/eslint-parser": "^7.22.9",
-        "@types/node": "^20.4.7",
-        "@typescript-eslint/eslint-plugin": "^6.2.1",
-        "@typescript-eslint/parser": "^6.2.1",
+        "@babel/eslint-parser": "^7.22.11",
+        "@types/node": "^20.5.6",
+        "@typescript-eslint/eslint-plugin": "^6.4.1",
+        "@typescript-eslint/parser": "^6.4.1",
         "@vue/eslint-config-airbnb": "^7.0.0",
-        "eslint": "^8.46.0",
+        "eslint": "^8.48.0",
         "eslint-plugin-jest": "^27.2.3",
-        "eslint-plugin-vue": "^9.16.1",
-        "typescript": "^5.1.6"
+        "eslint-plugin-vue": "^9.17.0",
+        "typescript": "^5.2.2"
     },
     "workspaces": [
         "packages/*",
         "packages/examples/*"
     ],
-    "packageManager": "yarn@3.6.1"
+    "packageManager": "yarn@3.6.3"
 }

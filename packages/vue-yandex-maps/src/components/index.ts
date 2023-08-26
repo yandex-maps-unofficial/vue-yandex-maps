@@ -12,6 +12,8 @@ import YandexMapControl from './controls/YandexMapControl.vue';
 import YandexMapControlButton from './controls/YandexMapControlButton.vue';
 import YandexMapGeolocationControl from './controls/YandexMapGeolocationControl.vue';
 import YandexMapZoomControl from './controls/YandexMapZoomControl.vue';
+import YandexMapCartesianProjection from './projections/YandexMapCartesianProjection.vue';
+import YandexMapSphericalMercatorProjection from './projections/YandexMapSphericalMercatorProjection.vue';
 
 export {
   YandexMap,
@@ -34,4 +36,8 @@ export {
   YandexMapZoomControl,
   YandexMapControl,
   YandexMapControlButton,
+
+  //Projections
+  YandexMapCartesianProjection,
+  YandexMapSphericalMercatorProjection,
 };
