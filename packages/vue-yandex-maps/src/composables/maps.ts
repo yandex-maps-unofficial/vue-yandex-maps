@@ -1,5 +1,6 @@
 import { watch } from 'vue';
-import { VueYandexMaps } from '../types/settings';
+import { VueYandexMaps } from '../namespace.ts';
+import { throwException } from './utils.ts';
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   apikey: true,
@@ -16,17 +17,21 @@ export function initYmaps() {
     if (typeof window === 'undefined') return rej(new Error('You must call initYmaps on Client Side only'));
 
     if (document.getElementById('vue-yandex-maps')) {
-      const watcher = watch(VueYandexMaps.loaded, (val) => {
-        if (val) {
-          // Stopping watcher
-          watcher();
-          res();
-        }
+      const watcher = watch(VueYandexMaps.loadStatus, (val) => {
+        if (!VueYandexMaps.isLoaded()) return;
+
+        // Stopping watcher
+        watcher();
+
+        if (val === 'error') rej(VueYandexMaps.loadError);
+        if (val === 'loaded') res();
       }, {
         immediate: true,
       });
       return;
     }
+
+    VueYandexMaps.loadStatus.value = 'loading';
 
     const settings = VueYandexMaps.settings.value;
 
@@ -51,18 +56,24 @@ export function initYmaps() {
         if (settings.importModules) {
           await Promise.all(
             settings.importModules.map(
-              (module) => VueYandexMaps.ymaps().import(module as any),
+              (module) => VueYandexMaps.ymaps()
+                .import(module as any),
             ),
           );
         }
 
-        VueYandexMaps.loaded.value = true;
+        VueYandexMaps.loadStatus.value = 'loaded';
         res();
       } catch (e) {
+        VueYandexMaps.loadStatus.value = 'error';
+        VueYandexMaps.loadError.value = e as Error;
         rej(e);
       }
     };
-    yandexMapScript.onerror = rej;
+    yandexMapScript.onerror = (e) => {
+      VueYandexMaps.loadError.value = e;
+      rej(e);
+    };
   });
 }
 
@@ -76,10 +87,20 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings): VueYa
     strictMode: false,
     ...options,
   };
-  if (!optionsShallowClone.apikey) throw new Error('You must specify apikey for createYmapsOptions');
+  if (!optionsShallowClone.apikey) {
+    throwException({
+      text: 'You must specify apikey for createYmapsOptions',
+    });
+  }
 
-  const notAllowedKeys = Object.keys(optionsShallowClone).filter((key) => !(key in allowedOptionsKeys));
-  if (notAllowedKeys.length) throw new Error(`You have passed unknown keys to createYmapsOptions: ${notAllowedKeys.join(', ')}. Only ${Object.keys(allowedOptionsKeys).join(', ')} are allowed.`);
+  const notAllowedKeys = Object.keys(optionsShallowClone)
+    .filter((key) => !(key in allowedOptionsKeys));
+  if (notAllowedKeys.length) {
+    throwException({
+      text: `You have passed unknown keys to createYmapsOptions: ${notAllowedKeys.join(', ')}. Only ${Object.keys(allowedOptionsKeys)
+        .join(', ')} are allowed.`,
+    });
+  }
 
   VueYandexMaps.settings.value = optionsShallowClone;
 

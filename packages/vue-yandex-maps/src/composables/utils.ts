@@ -14,6 +14,7 @@ import {
   WatchStopHandle,
 } from 'vue';
 import { YMap, YMapControls, YMapEntity } from '@yandex/ymaps3-types';
+import { VueYandexMaps } from '../namespace.ts';
 
 /**
  * @description Prevents memory leak on SSR when ref is called outside setup
@@ -56,34 +57,70 @@ export function sleep(ms: number) {
 }
 
 export function injectMap(): Ref<YMap | null> {
-  if (!getCurrentInstance()) throw new Error('injectMap must be only called on runtime. This is likely Vue Yandex Map internal bug.');
+  if (!getCurrentInstance()) {
+    throwException({
+      text: 'injectMap must be only called on runtime.',
+      isInternal: true,
+    });
+  }
   const map = inject<Ref<YMap | null>>('map');
 
-  if (!map || !isRef(map)) throw new Error('Was not able to inject valid map in injectMap. This is likely Vue Yandex Map internal bug.');
+  if (!map || !isRef(map)) {
+    throwException({
+      text: 'Was not able to inject valid map in injectMap.',
+      isInternal: true,
+    });
+  }
 
   return map;
 }
 
 export function injectLayers(): Ref<any[]> {
-  if (!getCurrentInstance()) throw new Error('injectLayers must be only called on runtime. This is likely Vue Yandex Map internal bug.');
+  if (!getCurrentInstance()) {
+    throwException({
+      text: 'injectLayers must be only called on runtime.',
+      isInternal: true,
+    });
+  }
   const layers = inject<Ref<any[]>>('layers');
 
-  if (!layers || !isRef(layers)) throw new Error('Was not able to inject valid layers in injectLayers. This is likely Vue Yandex Map internal bug.');
+  if (!layers || !isRef(layers)) {
+    throwException({
+      text: 'Was not able to inject valid layers in injectLayers.',
+      isInternal: true,
+    });
+  }
 
   return layers;
 }
 
 export function injectControl(): Ref<YMapControls | null> {
-  if (!getCurrentInstance()) throw new Error('injectControl must be only called on runtime. This is likely Vue Yandex Map internal bug.');
+  if (!getCurrentInstance()) {
+    throwException({
+      text: 'injectControl must be only called on runtime.',
+      isInternal: true,
+    });
+  }
   const control = inject<Ref<YMapControls | null>>('control');
 
-  if (!control || !isRef(control)) throw new Error('Was not able to inject valid control in injectControl. This is likely Vue Yandex Map internal bug.');
+  if (!control || !isRef(control)) {
+    throwException({
+      text: 'Was not able to inject valid control in injectControl.',
+      isInternal: true,
+    });
+  }
 
   return control;
 }
 
 export function waitTillYmapInit() {
-  //TODO: перевести на ивенты
+  if (typeof window === 'undefined') {
+    throwException({
+      text: 'waitTillYmapInit cannot be called on SSR.',
+      isInternal: true,
+    });
+  }
+
   return new Promise<void>((resolve, reject) => {
     let retries = 0;
 
@@ -104,7 +141,12 @@ export function waitTillYmapInit() {
 }
 
 export function waitTillMapInit(_map?: Ref<YMap | null>) {
-  if (!_map && !getCurrentInstance()) throw new Error('onMapInit must be only called on runtime. This is likely Vue Yandex Map internal bug.');
+  if (!_map && !getCurrentInstance()) {
+    throwException({
+      text: 'onMapInit must be only called on runtime.',
+      isInternal: true,
+    });
+  }
   const map = _map || injectMap();
 
   //TODO: перевести на ивенты
@@ -130,7 +172,12 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
 }
 
 export async function insertLayerIntoMap<T extends YMapEntity<unknown>>(layerCreateFunction: () => T): Promise<T> {
-  if (!getCurrentInstance()) throw new Error('insertLayerIntoMap must be only called on runtime. This is likely Vue Yandex Map internal bug.');
+  if (!getCurrentInstance()) {
+    throwException({
+      text: 'insertLayerIntoMap must be only called on runtime.',
+      isInternal: true,
+    });
+  }
 
   const map = injectMap();
   const layers = injectLayers();
@@ -158,7 +205,12 @@ export async function insertLayerIntoMap<T extends YMapEntity<unknown>>(layerCre
 export async function insertControlIntoMap<T extends YMapEntity<unknown>>(controlCreateFunction: () => T | Promise<T>): Promise<T>
 export async function insertControlIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(requiredImport: R, controlCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T | Promise<T>): Promise<T>
 export async function insertControlIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(requiredImport: R | (() => T | Promise<T>), controlCreateFunction?: (neededImport: Awaited<ReturnType<R>>) => T | Promise<T>): Promise<T> {
-  if (!getCurrentInstance()) throw new Error('insertControlIntoMap must be only called on runtime. This is likely Vue Yandex Map internal bug.');
+  if (!getCurrentInstance()) {
+    throwException({
+      text: 'insertControlIntoMap must be only called on runtime.',
+      isInternal: true,
+    });
+  }
 
   const control = injectControl();
   const controlInitPromises = inject<Ref<PromiseLike<any>[]>>('controlInitPromises');
@@ -172,7 +224,11 @@ export async function insertControlIntoMap<R extends (() => Promise<unknown>), T
 
   await waitTillYmapInit();
 
-  if (!control.value) throw new Error('control is undefined in insertControlIntoMap. Please ensure you are calling this component inside <y-map-controls> component.');
+  if (!control.value) {
+    throwException({
+      text: 'control is undefined in insertControlIntoMap. Please ensure you are calling this component inside <y-map-controls> component.',
+    });
+  }
 
   if (requiredImport && controlCreateFunction) {
     controlInitPromises?.value.push((requiredImport as R)());
@@ -186,7 +242,12 @@ export async function insertControlIntoMap<R extends (() => Promise<unknown>), T
 }
 
 export async function insertChildrenIntoMap<T extends YMapEntity<unknown>>(childrenCreateFunction: () => T): Promise<T> {
-  if (!getCurrentInstance()) throw new Error('insertChildrenIntoMap must be only called on runtime. This is likely Vue Yandex Map internal bug.');
+  if (!getCurrentInstance()) {
+    throwException({
+      text: 'insertChildrenIntoMap must be only called on runtime.',
+      isInternal: true,
+    });
+  }
 
   const map = injectMap();
   let children: T | undefined;
@@ -198,11 +259,39 @@ export async function insertChildrenIntoMap<T extends YMapEntity<unknown>>(child
   });
 
   await waitTillMapInit();
-  if (!map.value) throw new Error('map is undefined in insertChildrenIntoMap. This is likely Vue Yandex Map internal bug.');
+  if (!map.value) {
+    throwException({
+      text: 'map is undefined in insertChildrenIntoMap.',
+      isInternal: true,
+    });
+  }
 
   children = childrenCreateFunction();
 
   map.value.addChild(children);
 
   return children;
+}
+
+export function isDev() {
+  //@ts-expect-error
+  return (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') || (import.meta?.env?.DEV);
+}
+
+export function throwException({
+  text,
+  isInternal,
+}: {
+  text: string,
+  isInternal?: boolean
+}): never {
+  if (isInternal) {
+    text += ` This is likely Vue Yandex Maps internal bug.`;
+
+    if (isDev()) {
+      text += ` You can report this bug here: https://github.com/PNKBizz/vue-yandex-maps/issues/new/choose`;
+    }
+  }
+
+  throw new VueYandexMaps.YandexMapException(text);
 }

@@ -2,8 +2,9 @@
 import { defineComponent, h, nextTick, onBeforeUnmount, onMounted, PropType, provide, ref, shallowRef } from 'vue';
 import type { YMap, YMapEntity, YMapProps } from '@yandex/ymaps3-types';
 import { initYmaps } from '../composables/maps';
-import { VueYandexMaps } from '../types/settings';
+import { VueYandexMaps } from '../namespace.ts';
 import { Projection } from '@yandex/ymaps3-types/common/types';
+import { throwException } from '../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMap',
@@ -90,7 +91,12 @@ export default defineComponent({
 
     const init = async () => {
       const container = ymapContainer.value;
-      if (!container) throw new Error('<yandex-map> container is undefined after component mount. This is likely Vue Yandex Map internal bug.');
+      if (!container) {
+        throwException({
+          text: '<yandex-map> container is undefined after component mount.',
+          isInternal: true,
+        });
+      }
 
       if (map.value) map.value.destroy();
 
@@ -108,7 +114,7 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      if (!VueYandexMaps.loaded.value) {
+      if (!VueYandexMaps.isLoaded()) {
         if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
           try {
             await initYmaps();
@@ -118,7 +124,9 @@ export default defineComponent({
             return;
           }
         } else {
-          throw new Error('You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.');
+          throwException({
+            text: 'You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.',
+          });
         }
       }
 

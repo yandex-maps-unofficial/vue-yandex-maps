@@ -5,4 +5,4 @@ export * from './nuxt/module';
 export * from './nuxt/types';
 export {
   VueYandexMaps,
-} from './types/settings';
+} from './namespace.ts';
