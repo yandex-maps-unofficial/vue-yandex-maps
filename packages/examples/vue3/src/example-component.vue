@@ -2,7 +2,6 @@
 import { defineComponent } from 'vue';
 import {
   YandexMap,
-  YandexMapCartesianProjection,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultSchemeLayer,
@@ -22,7 +21,6 @@ export default defineComponent({
     YandexMapControls,
     YandexMapGeolocationControl,
     YandexMapZoomControl,
-    YandexMapCartesianProjection,
   },
   data() {
     return {
