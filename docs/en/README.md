@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /hero.png
+heroImage: /hero.jpg
 actionText: Documentation →
 actionLink: /en/guide/
 footer: MIT Licensed

@@ -1,0 +1,27 @@
+{
+  "name": "example-nuxt2-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "nuxi start",
+    "generate": "nuxi generate"
+  },
+  "dependencies": {
+    "core-js": "^3.32.0",
+    "example-vue3": "workspace:*",
+    "nuxt": "^2.17.1",
+    "vue": "^2.7.14",
+    "vue-server-renderer": "^2.7.14",
+    "vue-template-compiler": "^2.7.14",
+    "vue-yandex-maps": "workspace:*"
+  },
+  "devDependencies": {
+    "@nuxt/bridge": "npm:@nuxt/bridge-edge@latest",
+    "@nuxt/types": "^2.17.1",
+    "@nuxt/typescript-build": "^3.0.1",
+    "@nuxtjs/composition-api": "latest",
+    "typescript": "^5.1.6"
+  }
+}

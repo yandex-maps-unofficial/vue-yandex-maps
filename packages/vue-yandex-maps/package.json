@@ -1,0 +1,79 @@
+{
+  "name": "vue-yandex-maps",
+  "version": "2.0.0-alpha.12",
+  "description": "Yandex Maps component for VueJS.",
+  "main": "./dist/vue-yandex-maps.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/vue-yandex-maps.js",
+    "./nuxt": {
+      "types": "./dist/nuxt/types.d.ts",
+      "import": "./dist/nuxt/module.mjs",
+      "require": "./dist/nuxt/module.cjs"
+    },
+    "./nuxt2": "./dist/nuxt2.js"
+  },
+  "scripts": {
+    "build": "yarn workspace nuxt prepack && yarn build:package-only",
+    "build:package-only": "tsc && vite build",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
+    "test": "jest",
+    "npm:publish":"npm publish"
+  },
+  "files": [
+    "package.json",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=16.14"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PNKBizz/vue-yandex-map.git"
+  },
+  "keywords": [
+    "яндекс карты",
+    "яндекс-карты",
+    "yandex maps",
+    "yandex-maps",
+    "maps",
+    "vue"
+  ],
+  "author": "bizz.gc@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@nuxt/kit": "^3.6.5",
+    "@yandex/ymaps3-types": "^0.0.14"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.17.1",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@types/jest": "^29.5.3",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/test-utils": "^2.4.1",
+    "@vue/vue3-jest": "^29.2.4",
+    "babel-jest": "^29.6.2",
+    "jest": "^29.6.2",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.8",
+    "vite-plugin-dts": "^3.5.0",
+    "vite-plugin-static-copy": "^0.17.0",
+    "vue": "^3.3.4",
+    "vue-demi": "^0.14.5"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": ">=1",
+    "nuxt": "2||3",
+    "vue": ">=2.7||3"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    },
+    "nuxt": {
+      "optional": true
+    }
+  }
+}

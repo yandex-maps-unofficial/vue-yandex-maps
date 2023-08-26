@@ -1,0 +1,17 @@
+<template>
+  <yandex-map 
+    :coords="coords"
+    :zoom="10" 
+    @click="onClick"
+  >
+    <ymap-marker 
+      :coords="coords" 
+      marker-id="123"
+      marker-type="placemark"
+      @balloonopen="bindListener"
+      @balloonclose="unbindListener"
+    >
+      <my-component slot="balloon"></my-component>
+    </ymap-marker>
+  </yandex-map>
+</template>

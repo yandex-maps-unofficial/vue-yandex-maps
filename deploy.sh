@@ -8,6 +8,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:vue-yandex-maps/new-docs.git master
+git push -f git@github.com:vue-yandex-maps/vue-yandex-maps.github.io.git master
 
 cd -

@@ -1,37 +1,31 @@
 # Введение
 
-Компонент позволяет без усилий подключить Я.Карты в проект.
-## Установка
+Компонент позволяет без усилий подключить Я.Карты в проект и дает необходимый минимум функционала "из коробки". Однако, вы можете пользоваться всей мощью [API Я.Карт](https://tech.yandex.ru/maps/doc/jsapi/2.1/quick-start/index-docpage/), обращаясь напрямую к [инстансу карты](/guide/Map.html).  
+
+## Подключение
 
 Подключите компонент, используя ваш пакетный менеджер
 
-<CodeGroup>
-  <CodeGroupItem title="YARN">
-
-```bash:no-line-numbers
-yarn add vue-yandex-maps@beta
+```Bash
+npm install vue-yandex-maps
 ```
 
-  </CodeGroupItem>
+После этого вы можете определить настройки подключения компонента:
+* [Индивидуальный ключ API](https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/load-docpage/)
+* [Используемый язык](https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/localization-docpage/)
+* [Порядок задания географических координат](https://tech.yandex.ru/maps/jsapi/doc/2.1/dg/concepts/load-docpage/#load__coordorder)
+* [Использование коммерческой версии Я.Карт](https://yandex.ru/dev/maps/commercial/doc/concepts/about-enterprise.html)
+* Версия Я.Карт
 
-  <CodeGroupItem title="NPM">
+Эти настройки являются опциональными, значения по умолчанию указаны ниже.
 
-```bash:no-line-numbers
-npm install vue-yandex-maps@beta
-```
-
-  </CodeGroupItem>
-</CodeGroup>
-
-После этого вы можете определить [настройки подключения компонента](https://yandex.ru/dev/maps/jsapi/doc/2.1/dg/concepts/load.html#load__param). Эти настройки являются опциональными, значения по умолчанию указаны ниже.
-
-```js
+```JavaScript
 const settings = {
-  apiKey: '', // Индивидуальный ключ API
-  lang: 'ru_RU', // Используемый язык
-  coordorder: 'latlong', // Порядок задания географических координат
-  debug: false, // Режим отладки
-  version: '2.1' // Версия Я.Карт
+  apiKey: '',
+  lang: 'ru_RU',
+  coordorder: 'latlong',
+  enterprise: false,
+  version: '2.1'
 }
 ```
 
@@ -39,13 +33,9 @@ const settings = {
 
 ## Регистрация компонента
 
-::: warning
-Обратите внимание, что весь функционал является полностью клиентским. Если вы используете SSR - убедитесь, что компонент не создается на стороне сервера. Это вызовет ошибку.
-:::
-
 ### Глобальная
 
-```js
+```JavaScript
 import YmapPlugin from 'vue-yandex-maps'
 
 Vue.use(YmapPlugin, settings)
@@ -53,52 +43,59 @@ Vue.use(YmapPlugin, settings)
 
 ### Локальная
 
-```js
-import { YandexMap, YandexMarker } from 'vue-yandex-maps'
+```JavaScript
+import { yandexMap, ymapMarker } from 'vue-yandex-maps'
 
 export default {
-  components: { YandexMap, YandexMarker }
+  components: { yandexMap, ymapMarker }
   // other options
 }
 
 ```
-```html
-<YandexMap :settings="settings" :coordinates="[32, 50]">
+```HTML
+<yandex-map :settings="settings">
     <!--Markers-->
-</YandexMap>
+</yandex-map>
+```
+
+### Nuxt module
+
+Добавьте в директорию `plugins` файл `ymapPlugin.js` со следующим содержанием
+
+```JavaScript
+import Vue from 'vue'
+import YmapPlugin from 'vue-yandex-maps'
+
+const settings = { ... } // настройки плагина
+
+Vue.use(YmapPlugin, settings);
+```
+
+Добавьте созданный плагин в секцию плагинов файла `nuxt.config.js`
+
+```JavaScript
+{
+  plugins: [
+    { src: '~/plugins/ymapPlugin.js',  mode: 'client' }
+  ]
+}
 ```
 
 ### Ymaps Loader
 
-Если вам нужно использовать глобальную переменную `ymaps` отдельно от компонента карт (геокодер и др.), просто импортируйте лоадер с настройками, описанными выше. Учтите, что функция загрузчика асинхронная.
+Если вам нужно использовать глобальную переменную `ymaps` отдельно от компонента карт (геокодер и др.), просто импортируйте лоадер. Вы можете задать настройки, описанные выше, а также указать параметр `debug` (по умолчанию - `false`). Учтите, что функция загрузчика асинхронная. 
 
-```js
+```JavaScript
 import { loadYmap } from 'vue-yandex-maps'
 
 export default {
   async mounted() {
-    await loadYmap(settings);
+    await loadYmap({ ...settings, debug: true });
     // здесь доступна переменная ymaps
   }
 }
 ```
 
-### Nuxt
+### CDN
 
-При использовании с `Nuxt` нужно учитывать, что компонент является полностью клиентским. Пример плагина для глобального подключения Я.Карт.
-
-```js
-// plugins/yandex-map.client.js
-
-import plugin from 'vue-yandex-maps'
-import { defineNuxtPlugin } from 'nuxt/app'
-
-const settings = {
-  // здесь ваши настройки
-}
-
-export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.use(plugin, settings)
-})
-```
-При использовании компонента необходимо оборачивать его в тег `<client-only>` или каким-то еще образом избегать отрисовки на стороне сервера.
+Вы можете подключить плагин напрямую, используя ссылку [https://unpkg.com/vue-yandex-maps](https://unpkg.com/vue-yandex-maps). Установка будет произведена автоматически при обнаружении Vue JS. Это может быть полезно при использовании [Code Pen](https://codepen.io/PNKBizz/pen/WMRwyM)
