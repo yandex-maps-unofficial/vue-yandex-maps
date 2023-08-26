@@ -1,19 +1,36 @@
 <script lang="ts">
 import { YMapFeatureDataSource } from '@yandex/ymaps3-types';
-import {
-  defineComponent, h, onMounted, PropType, watch,
-} from 'vue';
+import { defineComponent, h, onMounted, PropType, watch } from 'vue';
 import { insertLayerIntoMap } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapFeatureDataSource',
   props: {
+    value: {
+      type: Object as PropType<YMapFeatureDataSource>,
+      default: null,
+    },
+    modelValue: {
+      type: Object as PropType<YMapFeatureDataSource>,
+      default: null,
+    },
     settings: {
       type: Object as PropType<ConstructorParameters<typeof YMapFeatureDataSource>[0]>,
       default: () => ({}),
     },
   },
-  setup(props, { slots }) {
+  emits: {
+    'input'(item: YMapFeatureDataSource): boolean {
+      return true;
+    },
+    'update:modelValue'(item: YMapFeatureDataSource): boolean {
+      return true;
+    },
+  },
+  setup(props, {
+    slots,
+    emit,
+  }) {
     let mapChildren: YMapFeatureDataSource | undefined;
 
     watch(() => props, () => {
@@ -24,6 +41,8 @@ export default defineComponent({
 
     onMounted(async () => {
       mapChildren = await insertLayerIntoMap(() => new ymaps3.YMapFeatureDataSource(props.settings));
+      emit('input', mapChildren);
+      emit('update:modelValue', mapChildren);
     });
 
     return () => h('div', slots.default?.());

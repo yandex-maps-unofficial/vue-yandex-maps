@@ -8,7 +8,11 @@ import { Projection } from '@yandex/ymaps3-types/common/types';
 export default defineComponent({
   name: 'YandexMap',
   props: {
-    map: {
+    modelValue: {
+      type: Object as PropType<YMap | null>,
+      default: null,
+    },
+    value: {
       type: Object as PropType<YMap | null>,
       default: null,
     },
@@ -61,7 +65,10 @@ export default defineComponent({
    * @see https://yandex.com/dev/maps/jsapi/doc/3.0/dg/concepts/events.html
    */
   emits: {
-    'update:map'(map: YMap | null): boolean {
+    'input'(map: YMap | null): boolean {
+      return !map || typeof ymaps3 === 'undefined' || map instanceof ymaps3.YMap;
+    },
+    'update:modelValue'(map: YMap | null): boolean {
       return !map || typeof ymaps3 === 'undefined' || map instanceof ymaps3.YMap;
     },
   },
@@ -78,7 +85,8 @@ export default defineComponent({
     provide('map', map);
     provide('layers', layers);
     provide('projection', projection);
-    emit('update:map', map.value);
+    emit('input', map.value);
+    emit('update:modelValue', map.value);
 
     const init = async () => {
       const container = ymapContainer.value;
@@ -95,7 +103,8 @@ export default defineComponent({
       ]);
 
       map.value = createdMap;
-      emit('update:map', map.value);
+      emit('input', map.value);
+      emit('update:modelValue', map.value);
     };
 
     onMounted(async () => {
@@ -122,7 +131,8 @@ export default defineComponent({
 
     onBeforeUnmount(() => {
       map.value = null;
-      emit('update:map', map.value);
+      emit('input', map.value);
+      emit('update:modelValue', map.value);
     });
 
     return () => {

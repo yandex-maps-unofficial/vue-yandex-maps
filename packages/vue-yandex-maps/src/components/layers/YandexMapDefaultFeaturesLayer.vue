@@ -11,12 +11,28 @@ import {
 export default defineComponent({
   name: 'YandexMapDefaultFeaturesLayer',
   props: {
+    value: {
+      type: Object as PropType<YMapDefaultFeaturesLayer>,
+      default: null,
+    },
+    modelValue: {
+      type: Object as PropType<YMapDefaultFeaturesLayer>,
+      default: null,
+    },
     settings: {
       type: Object as PropType<ConstructorParameters<typeof YMapDefaultFeaturesLayer>[0]>,
       default: () => ({}),
     },
   },
-  setup(props, { slots }) {
+  emits: {
+    'input'(item: YMapDefaultFeaturesLayer): boolean {
+      return true;
+    },
+    'update:modelValue'(item: YMapDefaultFeaturesLayer): boolean {
+      return true;
+    },
+  },
+  setup(props, { slots, emit }) {
     let mapLayer: YMapDefaultFeaturesLayer | undefined;
 
     watch(() => props, () => {
@@ -27,6 +43,8 @@ export default defineComponent({
 
     onMounted(async () => {
       mapLayer = await insertLayerIntoMap(() => new ymaps3.YMapDefaultFeaturesLayer(props.settings || {}));
+      emit('input', mapLayer);
+      emit('update:modelValue', mapLayer);
     });
 
     return () => h('div', slots.default?.());

@@ -7,6 +7,14 @@ import { Projection } from '@yandex/ymaps3-types/common/types';
 export default defineComponent({
   name: 'YandexMapCartesianProjection',
   props: {
+    value: {
+      type: Object as PropType<Cartesian>,
+      default: null,
+    },
+    modelValue: {
+      type: Object as PropType<Cartesian>,
+      default: null,
+    },
     bounds: {
       type: Array as unknown as PropType<ConstructorParameters<typeof Cartesian>[0]>,
       required: true,
@@ -15,7 +23,18 @@ export default defineComponent({
       type: Array as unknown as PropType<ConstructorParameters<typeof Cartesian>[1]>,
     },
   },
-  setup(props, { slots }) {
+  emits: {
+    'input'(item: Cartesian): boolean {
+      return true;
+    },
+    'update:modelValue'(item: Cartesian): boolean {
+      return true;
+    },
+  },
+  setup(props, {
+    slots,
+    emit,
+  }) {
     const projection = inject<Ref<null | Projection>>('projection');
 
     onMounted(async () => {
@@ -23,7 +42,10 @@ export default defineComponent({
       const { Cartesian } = await ymaps3.import('@yandex/ymaps3-cartesian-projection@0.0.1');
 
       if (projection) {
-        projection.value = new Cartesian(props.bounds, props.cycled);
+        const cartesian = new Cartesian(props.bounds, props.cycled);
+        projection.value = cartesian;
+        emit('input', cartesian);
+        emit('update:modelValue', cartesian);
       }
     });
 
