@@ -14,12 +14,14 @@ import YandexMapGeolocationControl from './controls/YandexMapGeolocationControl.
 import YandexMapZoomControl from './controls/YandexMapZoomControl.vue';
 import YandexMapCartesianProjection from './projections/YandexMapCartesianProjection.vue';
 import YandexMapSphericalMercatorProjection from './projections/YandexMapSphericalMercatorProjection.vue';
+import YandexMapHint from './YandexMapHint.vue';
 
 export {
   YandexMap,
   YandexMapListener,
   YandexMapMarker,
   YandexMapFeature,
+  YandexMapHint,
 
   // Data Sources
   YandexMapTileDataSource,

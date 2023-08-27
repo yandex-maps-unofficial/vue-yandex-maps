@@ -251,7 +251,9 @@ export async function insertControlIntoMap<R extends (() => Promise<unknown>), T
   return newControl;
 }
 
-export async function insertChildrenIntoMap<T extends YMapEntity<unknown>>(childrenCreateFunction: () => T): Promise<T> {
+export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T, requiredImport?: R | (() => T | Promise<T>)): Promise<T>
+export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: () => T): Promise<T>
+export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T, requiredImport?: R | (() => T | Promise<T>)): Promise<T> {
   if (!getCurrentInstance()) {
     throwException({
       text: 'insertChildrenIntoMap must be only called on runtime.',
@@ -276,7 +278,10 @@ export async function insertChildrenIntoMap<T extends YMapEntity<unknown>>(child
     });
   }
 
-  children = childrenCreateFunction();
+  let importData;
+  if (requiredImport) importData = await requiredImport();
+
+  children = childrenCreateFunction(importData as Awaited<ReturnType<R>>);
 
   map.value.addChild(children);
 

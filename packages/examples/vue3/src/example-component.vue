@@ -9,6 +9,7 @@ import {
   YandexMapListener,
   YandexMapMarker,
   YandexMapZoomControl,
+  YandexMapHint,
 } from 'vue-yandex-maps';
 
 export default defineComponent({
@@ -21,6 +22,7 @@ export default defineComponent({
     YandexMapControls,
     YandexMapGeolocationControl,
     YandexMapZoomControl,
+    YandexMapHint,
   },
   data() {
     return {
@@ -41,7 +43,7 @@ export default defineComponent({
       <yandex-map-listener :settings="{ onClick: test }"/>
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }"/>
       <yandex-map-default-features-layer/>
-      <yandex-map-marker :settings="{ coordinates: [37.588144, 55.733842] }">
+      <yandex-map-marker :settings="{ coordinates: [37.588144, 55.733842], properties: { hint: markerValue } }">
         <span style="color: #fff">
           {{ markerValue }}
         </span>
@@ -54,6 +56,13 @@ export default defineComponent({
         <yandex-map-geolocation-control/>
         <yandex-map-zoom-control/>
       </yandex-map-controls>
+      <yandex-map-hint hint-property="hint">
+        <template #default="{ content }">
+          <div class="hint">
+            {{ content }}
+          </div>
+        </template>
+      </yandex-map-hint>
     </yandex-map>
   </div>
 </template>
@@ -70,5 +79,12 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.hint {
+  background: #fff;
+  border-radius: 10px;
+  color: #000;
+  padding: 10px;
 }
 </style>
