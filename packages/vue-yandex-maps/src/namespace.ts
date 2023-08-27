@@ -1,6 +1,6 @@
 import { Ref } from 'vue';
 import { OverloadParameters } from './types/overload-extract.ts';
-import { safeRef } from './composables/utils.ts';
+import { safeComputed, safeRef } from './composables/utils.ts';
 
 export namespace VueYandexMaps {
   export const settings: Ref<VueYandexMaps.PluginSettings> = safeRef({
@@ -20,7 +20,7 @@ export namespace VueYandexMaps {
 
   export type LoadStatus = 'pending' | 'loading' | 'loaded' | 'error'
 
-  export const isLoaded = () => loadStatus.value === 'loaded' || loadStatus.value === 'error';
+  export const isLoaded = safeComputed(() => loadStatus.value === 'loaded' || loadStatus.value === 'error');
   export const loadStatus = safeRef<LoadStatus>('pending');
   export const loadError = safeRef<null | Error | Parameters<OnErrorEventHandlerNonNull>[0]>(null);
 

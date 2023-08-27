@@ -1,5 +1,16 @@
 <script lang="ts">
-import { defineComponent, h, nextTick, onBeforeUnmount, onMounted, PropType, provide, ref, shallowRef } from 'vue';
+import {
+  defineComponent,
+  h,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  PropType,
+  provide,
+  ref,
+  shallowRef,
+  watch,
+} from 'vue';
 import type { YMap, YMapEntity, YMapProps } from '@yandex/ymaps3-types';
 import { initYmaps } from '../composables/maps';
 import { VueYandexMaps } from '../namespace.ts';
@@ -82,6 +93,8 @@ export default defineComponent({
     const projection = shallowRef<null | Projection>(null);
     const ymapContainer = ref<HTMLDivElement | null>(null);
     const mounted = shallowRef(false);
+    //Count of components which initialization we need to wait for
+    const needsToHold = ref(0);
 
     provide('map', map);
     provide('layers', layers);
@@ -114,7 +127,7 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      if (!VueYandexMaps.isLoaded()) {
+      if (!VueYandexMaps.isLoaded.value) {
         if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
           try {
             await initYmaps();
@@ -133,8 +146,15 @@ export default defineComponent({
       mounted.value = true;
       await nextTick();
 
-      // TODO: подумать можно ли сократить или убрать
-      setTimeout(init, 300);
+      if (needsToHold.value) {
+        await new Promise<void>((resolve) => watch(needsToHold, () => {
+          if (!needsToHold.value) resolve();
+        }, {
+          immediate: true,
+        }));
+      }
+
+      await init();
     });
 
     onBeforeUnmount(() => {
@@ -163,10 +183,21 @@ export default defineComponent({
         },
       }, [
         container,
-        h('div', {
-          class: '__ymap_slots',
-          style: { display: 'none' },
-        }, slots.default?.()),
+        h('div',
+            {
+              class: '__ymap_slots',
+              style: { display: 'none' },
+            }
+            , slots.default?.()
+                .map(slot => h(slot, {
+                  onHold(needToHold: boolean) {
+                    if (needToHold) {
+                      needsToHold.value++;
+                    } else {
+                      needsToHold.value--;
+                    }
+                  },
+                }))),
       ]);
 
       return result;

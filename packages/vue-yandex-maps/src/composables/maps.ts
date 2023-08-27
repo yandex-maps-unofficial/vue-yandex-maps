@@ -1,6 +1,7 @@
 import { watch } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import { throwException } from './utils.ts';
+import YandexMapException = VueYandexMaps.YandexMapException;
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   apikey: true,
@@ -14,11 +15,11 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
 export function initYmaps() {
   return new Promise<void>((res, rej) => {
     if (typeof ymaps3 !== 'undefined') return res();
-    if (typeof window === 'undefined') return rej(new Error('You must call initYmaps on Client Side only'));
+    if (typeof window === 'undefined') return rej(new YandexMapException('You must call initYmaps on Client Side only'));
 
     if (document.getElementById('vue-yandex-maps')) {
       const watcher = watch(VueYandexMaps.loadStatus, (val) => {
-        if (!VueYandexMaps.isLoaded()) return;
+        if (!VueYandexMaps.isLoaded.value) return;
 
         // Stopping watcher
         watcher();

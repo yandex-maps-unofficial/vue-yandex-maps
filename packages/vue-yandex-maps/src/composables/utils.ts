@@ -122,21 +122,24 @@ export function waitTillYmapInit() {
   }
 
   return new Promise<void>((resolve, reject) => {
-    let retries = 0;
+    if (typeof ymaps3 !== 'undefined') {
+      const timeout = setTimeout(() => {
+        reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized.'));
+      }, 5000);
 
-    const interval = setInterval(() => {
-      if (typeof ymaps3 !== 'undefined') {
-        clearInterval(interval);
-        return resolve();
-      }
-
-      retries++;
-      // 5s
-      if (retries === 20) {
-        clearInterval(interval);
-        reject(new Error('Was not able to wait for Yandex Maps initialization in waitTillYmapInit. Ensure that maps were initialized.'));
-      }
-    }, 250);
+      watch(VueYandexMaps.isLoaded, () => {
+        clearTimeout(timeout);
+        if (VueYandexMaps.loadStatus.value === 'loaded') {
+          resolve();
+        } else {
+          reject(VueYandexMaps.loadError);
+        }
+      }, {
+        immediate: true,
+      });
+    } else {
+      resolve();
+    }
   });
 }
 
@@ -147,12 +150,19 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
       isInternal: true,
     });
   }
+
+  if (typeof window === 'undefined') {
+    throwException({
+      text: 'waitTillMapInit cannot be called on SSR.',
+      isInternal: true,
+    });
+  }
+
   const map = _map || injectMap();
 
-  //TODO: перевести на ивенты
   return new Promise<void>((resolve, reject) => {
     const timeout = setTimeout(() => {
-      if (!map.value) reject(new Error('Was not able to wait for map initialization in waitTillMapInit. Ensure that map was initialized.'));
+      if (!map.value) reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillMapInit.'));
     }, 5000);
 
     // Breaks without this

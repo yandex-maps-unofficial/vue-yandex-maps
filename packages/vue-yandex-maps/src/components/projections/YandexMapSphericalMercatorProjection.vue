@@ -23,11 +23,15 @@ export default defineComponent({
     'update:modelValue'(item: SphericalMercator): boolean {
       return true;
     },
+    hold(status: boolean) {
+      return true;
+    },
   },
   setup(props, {
     slots,
     emit,
   }) {
+    emit('hold', true);
     const projection = inject<Ref<null | Projection>>('projection');
 
     onMounted(async () => {
@@ -40,6 +44,8 @@ export default defineComponent({
         emit('input', mercator);
         emit('update:modelValue', mercator);
       }
+
+      emit('hold', false);
     });
 
     return () => h('div', slots.default?.());

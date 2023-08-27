@@ -26,11 +26,15 @@ export default defineComponent({
     'update:modelValue'(item: YMapTileDataSource): boolean {
       return true;
     },
+    hold(status: boolean) {
+      return true;
+    },
   },
   setup(props, {
     slots,
     emit,
   }) {
+    emit('hold', false);
     let mapChildren: YMapTileDataSource | undefined;
 
     watch(() => props, () => {
@@ -43,6 +47,7 @@ export default defineComponent({
       mapChildren = await insertLayerIntoMap(() => new ymaps3.YMapTileDataSource(props.settings));
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
+      emit('hold', false);
     });
 
     return () => h('div', slots.default?.());

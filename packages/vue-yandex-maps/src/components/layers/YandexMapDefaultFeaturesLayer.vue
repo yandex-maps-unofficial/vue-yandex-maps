@@ -31,8 +31,12 @@ export default defineComponent({
     'update:modelValue'(item: YMapDefaultFeaturesLayer): boolean {
       return true;
     },
+    hold(status: boolean) {
+      return true;
+    },
   },
   setup(props, { slots, emit }) {
+    emit('hold', true);
     let mapLayer: YMapDefaultFeaturesLayer | undefined;
 
     watch(() => props, () => {
@@ -45,6 +49,7 @@ export default defineComponent({
       mapLayer = await insertLayerIntoMap(() => new ymaps3.YMapDefaultFeaturesLayer(props.settings || {}));
       emit('input', mapLayer);
       emit('update:modelValue', mapLayer);
+      emit('hold', false);
     });
 
     return () => h('div', slots.default?.());

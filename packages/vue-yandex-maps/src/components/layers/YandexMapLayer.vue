@@ -26,11 +26,15 @@ export default defineComponent({
     'update:modelValue'(item: YMapLayer): boolean {
       return true;
     },
+    hold(status: boolean) {
+      return true;
+    },
   },
   setup(props, {
     slots,
     emit,
   }) {
+    emit('hold', true);
     let mapLayer: YMapLayer | undefined;
 
     watch(() => props, () => {
@@ -43,6 +47,7 @@ export default defineComponent({
       mapLayer = await insertLayerIntoMap(() => new ymaps3.YMapLayer(props.settings || {}));
       emit('input', mapLayer);
       emit('update:modelValue', mapLayer);
+      emit('hold', false);
     });
 
     return () => h('div', slots.default?.());
