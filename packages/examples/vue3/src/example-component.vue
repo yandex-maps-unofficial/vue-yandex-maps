@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue';
 import {
   YandexMap,
+  YandexMapClusterer,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultMarker,
@@ -10,8 +11,22 @@ import {
   YandexMapHint,
   YandexMapListener,
   YandexMapMarker,
+  YandexMapOpenMapsButton,
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
+
+const clusterCoordinates = [
+  [37.64, 55.76],
+  [37.63, 55.7],
+  [37.43, 55.69],
+  [37.47, 55.68],
+  [38.53, 58.6],
+  [37.59, 55.71],
+  [37.5, 55.63],
+  [37.52, 55.57],
+  [37.52, 58.57],
+  [40.52, 58.57],
+];
 
 export default defineComponent({
   components: {
@@ -25,10 +40,13 @@ export default defineComponent({
     YandexMapGeolocationControl,
     YandexMapZoomControl,
     YandexMapHint,
+    YandexMapOpenMapsButton,
+    YandexMapClusterer,
   },
   data() {
     return {
       markerValue: 'Click me to change',
+      clusterCoordinates,
     };
   },
   methods: {
@@ -85,6 +103,7 @@ export default defineComponent({
       <yandex-map-controls :settings="{ position: 'top left', orientation: 'vertical' }">
         <yandex-map-geolocation-control/>
         <yandex-map-zoom-control/>
+        <yandex-map-open-maps-button :settings="{ title: 'This button will open Yandex Maps' }"/>
       </yandex-map-controls>
       <yandex-map-controls :settings="{ position: 'top right', orientation: 'horizontal' }">
         <yandex-map-geolocation-control/>
@@ -97,6 +116,20 @@ export default defineComponent({
           </div>
         </template>
       </yandex-map-hint>
+      <yandex-map-clusterer>
+        <yandex-map-marker v-for="(coordinates, index) in clusterCoordinates" :key="coordinates"
+                           :settings="{ coordinates, properties: { hint: `Cluster Marker` } }"
+        >
+          <div class="hint">
+            Cluster Marker #{{ index }}
+          </div>
+        </yandex-map-marker>
+        <template #cluster="{length}">
+          <div class="cluster">
+            {{ length }}
+          </div>
+        </template>
+      </yandex-map-clusterer>
     </yandex-map>
   </div>
 </template>
@@ -120,5 +153,13 @@ html, body {
   border-radius: 10px;
   color: #000;
   padding: 10px;
+}
+
+.cluster {
+  background: black;
+  padding: 20px;
+  aspect-ratio: 1/1;
+  color: #fff;
+  border-radius: 100%;
 }
 </style>

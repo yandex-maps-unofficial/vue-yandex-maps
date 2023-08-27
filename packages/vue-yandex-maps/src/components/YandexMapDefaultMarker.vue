@@ -64,7 +64,7 @@ export default defineComponent({
       mapChildren = await insertChildrenIntoMap(
           ({ YMapDefaultMarker }) => new YMapDefaultMarker(getSettings.value),
           () => ymaps3.import('@yandex/ymaps3-markers@0.0.1'),
-      ) as YMapDefaultMarker;
+      );
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
     });

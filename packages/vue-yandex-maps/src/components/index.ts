@@ -16,6 +16,8 @@ import YandexMapZoomControl from './controls/YandexMapZoomControl.vue';
 import YandexMapCartesianProjection from './projections/YandexMapCartesianProjection.vue';
 import YandexMapSphericalMercatorProjection from './projections/YandexMapSphericalMercatorProjection.vue';
 import YandexMapHint from './YandexMapHint.vue';
+import YandexMapOpenMapsButton from './controls/YandexMapOpenMapsButton.vue';
+import YandexMapClusterer from './YandexMapClusterer.vue';
 
 export {
   YandexMap,
@@ -24,6 +26,7 @@ export {
   YandexMapDefaultMarker,
   YandexMapFeature,
   YandexMapHint,
+  YandexMapClusterer,
 
   // Data Sources
   YandexMapTileDataSource,
@@ -40,6 +43,7 @@ export {
   YandexMapZoomControl,
   YandexMapControl,
   YandexMapControlButton,
+  YandexMapOpenMapsButton,
 
   //Projections
   YandexMapCartesianProjection,
