@@ -6,6 +6,7 @@ import YandexMapTileDataSource from './data-sources/YandexMapTileDataSource.vue'
 import YandexMapFeatureDataSource from './data-sources/YandexMapFeatureDataSource.vue';
 import YandexMapLayer from './layers/YandexMapLayer.vue';
 import YandexMapMarker from './YandexMapMarker.vue';
+import YandexMapDefaultMarker from './YandexMapDefaultMarker.vue';
 import YandexMapFeature from './YandexMapFeature.vue';
 import YandexMapControls from './controls/YandexMapControls.vue';
 import YandexMapControl from './controls/YandexMapControl.vue';
@@ -20,6 +21,7 @@ export {
   YandexMap,
   YandexMapListener,
   YandexMapMarker,
+  YandexMapDefaultMarker,
   YandexMapFeature,
   YandexMapHint,
 

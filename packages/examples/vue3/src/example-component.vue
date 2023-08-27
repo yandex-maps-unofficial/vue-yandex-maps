@@ -4,17 +4,19 @@ import {
   YandexMap,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
+  YandexMapDefaultMarker,
   YandexMapDefaultSchemeLayer,
   YandexMapGeolocationControl,
+  YandexMapHint,
   YandexMapListener,
   YandexMapMarker,
   YandexMapZoomControl,
-  YandexMapHint,
 } from 'vue-yandex-maps';
 
 export default defineComponent({
   components: {
     YandexMapMarker,
+    YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
     YandexMapDefaultFeaturesLayer,
     YandexMapListener,
@@ -26,12 +28,15 @@ export default defineComponent({
   },
   data() {
     return {
-      markerValue: 'Кликни - и я изменюсь',
+      markerValue: 'Click me to change',
     };
   },
   methods: {
-    test() {
-      this.markerValue = 'Изменился!';
+    changeMarkerText() {
+      this.markerValue = 'I\'ve changed!';
+    },
+    logMapClick(e: any) {
+      console.log(e);
     },
   },
 });
@@ -40,14 +45,43 @@ export default defineComponent({
 <template>
   <div id="__app">
     <yandex-map width="50dvw" height="75dvh" :settings="{ location: { center: [37.588144, 55.733842], zoom: 7 } }">
-      <yandex-map-listener :settings="{ onClick: test }"/>
+      <yandex-map-listener :settings="{ onClick: logMapClick }"/>
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }"/>
       <yandex-map-default-features-layer/>
-      <yandex-map-marker :settings="{ coordinates: [37.588144, 55.733842], properties: { hint: markerValue } }">
+      <yandex-map-marker
+          :settings="{ coordinates: [37.588144, 55.733842], properties: { hint: markerValue }, onClick: changeMarkerText }"
+      >
         <span style="color: #fff">
           {{ markerValue }}
         </span>
       </yandex-map-marker>
+      <yandex-map-default-marker
+          :settings="{
+            coordinates: [38.588144, 56.733842],
+            title: markerValue,
+            subtitle: 'Subtitle',
+            color: 'blue',
+            properties: { hint: 'Default Hint' },
+            onClick: changeMarkerText
+          }"
+      />
+      <yandex-map-default-marker
+          :settings="{
+            coordinates: [36.588144, 54.733842],
+            title: 'I have reactive popup!',
+            color: 'red',
+            popup: {
+              content: 'fromSlot',
+              position: 'top',
+            },
+          }"
+      >
+        <template #popup="{close}">
+          <div class="hint" @click="close()">
+            Click here to close me!
+          </div>
+        </template>
+      </yandex-map-default-marker>
       <yandex-map-controls :settings="{ position: 'top left', orientation: 'vertical' }">
         <yandex-map-geolocation-control/>
         <yandex-map-zoom-control/>
