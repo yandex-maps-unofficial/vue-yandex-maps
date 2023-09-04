@@ -1,6 +1,8 @@
 <script lang="ts">
 import { YMapFeature } from '@yandex/ymaps3-types';
-import { defineComponent, h, onMounted, PropType, watch } from 'vue';
+import {
+  defineComponent, h, onMounted, PropType, watch,
+} from 'vue';
 import { insertChildrenIntoMap } from '../composables/utils';
 
 export default defineComponent({

@@ -1,5 +1,7 @@
 <script lang="ts">
-import { defineComponent, h, onMounted, PropType, watch } from 'vue';
+import {
+  defineComponent, h, onMounted, PropType, watch,
+} from 'vue';
 import { YMapOpenMapsButton } from '@yandex/ymaps3-types/modules/controls-extra';
 import { insertControlIntoMap } from '../../composables/utils.ts';
 
@@ -40,7 +42,7 @@ export default defineComponent({
     });
 
     onMounted(async () => {
-      mapChildren = await insertControlIntoMap(() => ymaps3.import('@yandex/ymaps3-controls-extra'), ({ YMapOpenMapsButton }) => new YMapOpenMapsButton(props.settings));
+      mapChildren = await insertControlIntoMap(() => ymaps3.import('@yandex/ymaps3-controls-extra'), ({ YMapOpenMapsButton: OpenMapsButton }) => new OpenMapsButton(props.settings));
 
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);

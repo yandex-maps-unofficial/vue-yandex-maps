@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   env: {
+    browser: true,
     node: true,
   },
   extends: [
@@ -36,7 +37,14 @@ module.exports = {
     'no-promise-executor-return': 'off',
     'object-shorthand': 'off',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'none',
+        caughtErrorsIgnorePattern: '^ignore',
+        vars: 'local',
+      },
+    ],
     'comma-dangle': [
       'error',
       'always-multiline',
@@ -56,6 +64,11 @@ module.exports = {
       'error',
     ],
     'space-before-function-paren': 'off',
+    'vuejs-accessibility/click-events-have-key-events': 'off',
+    'no-undef': 'off',
+    'no-underscore-dangle': 'off',
+    'no-restricted-syntax': 'off',
+    'no-continue': 'off',
   },
   parser: 'vue-eslint-parser',
   parserOptions: {

@@ -45,7 +45,7 @@ export {
   YandexMapControlButton,
   YandexMapOpenMapsButton,
 
-  //Projections
+  // Projections
   YandexMapCartesianProjection,
   YandexMapSphericalMercatorProjection,
 };

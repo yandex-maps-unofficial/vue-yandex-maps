@@ -1,6 +1,8 @@
 <script lang="ts">
 import { YMapMarker } from '@yandex/ymaps3-types';
-import { defineComponent, h, onMounted, PropType, ref, watch } from 'vue';
+import {
+  defineComponent, h, onMounted, PropType, ref, watch,
+} from 'vue';
 import { insertChildrenIntoMap } from '../composables/utils';
 
 export default defineComponent({
@@ -43,7 +45,7 @@ export default defineComponent({
 
     onMounted(async () => {
       mapChildren = await insertChildrenIntoMap(() => new ymaps3.YMapMarker(
-          props.settings,
+        props.settings,
           element.value!,
       ));
       emit('input', mapChildren);

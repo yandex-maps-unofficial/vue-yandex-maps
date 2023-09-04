@@ -12,9 +12,9 @@ import {
   watch,
 } from 'vue';
 import type { YMap, YMapEntity, YMapProps } from '@yandex/ymaps3-types';
+import { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../composables/maps';
 import { VueYandexMaps } from '../namespace.ts';
-import { Projection } from '@yandex/ymaps3-types/common/types';
 import { throwException } from '../composables/utils.ts';
 
 export default defineComponent({
@@ -93,7 +93,7 @@ export default defineComponent({
     const projection = shallowRef<null | Projection>(null);
     const ymapContainer = ref<HTMLDivElement | null>(null);
     const mounted = shallowRef(false);
-    //Count of components which initialization we need to wait for
+    // Count of components which initialization we need to wait for
     const needsToHold = ref(0);
 
     provide('map', map);
@@ -183,21 +183,23 @@ export default defineComponent({
         },
       }, [
         container,
-        h('div',
-            {
-              class: '__ymap_slots',
-              style: { display: 'none' },
-            }
-            , slots.default?.()
-                .map(slot => h(slot, {
-                  onHold(needToHold: boolean) {
-                    if (needToHold) {
-                      needsToHold.value++;
-                    } else {
-                      needsToHold.value--;
-                    }
-                  },
-                }))),
+        h(
+          'div',
+          {
+            class: '__ymap_slots',
+            style: { display: 'none' },
+          },
+          slots.default?.()
+            .map((slot) => h(slot, {
+              onHold(needToHold: boolean) {
+                if (needToHold) {
+                  needsToHold.value++;
+                } else {
+                  needsToHold.value--;
+                }
+              },
+            })),
+        ),
       ]);
 
       return result;

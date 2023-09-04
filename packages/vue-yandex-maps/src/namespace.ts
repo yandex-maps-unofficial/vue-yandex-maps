@@ -20,8 +20,8 @@ export namespace VueYandexMaps {
 
   export type LoadStatus = 'pending' | 'loading' | 'loaded' | 'error'
 
-  export const isLoaded = safeComputed(() => loadStatus.value === 'loaded' || loadStatus.value === 'error');
   export const loadStatus = safeRef<LoadStatus>('pending');
+  export const isLoaded = safeComputed(() => loadStatus.value === 'loaded' || loadStatus.value === 'error');
   export const loadError = safeRef<null | Error | Parameters<OnErrorEventHandlerNonNull>[0]>(null);
 
   export interface PluginSettings {

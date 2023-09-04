@@ -1,6 +1,10 @@
 <script lang="ts">
-import { defineComponent, h, onMounted, PropType, watch } from 'vue';
-import { BehaviorEvents, DomEvents, MapEvents, YMapListener } from '@yandex/ymaps3-types';
+import {
+  defineComponent, h, onMounted, PropType, watch,
+} from 'vue';
+import {
+  BehaviorEvents, DomEvents, MapEvents, YMapListener,
+} from '@yandex/ymaps3-types';
 import { insertChildrenIntoMap } from '../composables/utils';
 
 export default defineComponent({

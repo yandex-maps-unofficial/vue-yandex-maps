@@ -1,5 +1,7 @@
 <script lang="ts">
-import { defineComponent, h, onMounted, PropType, watch } from 'vue';
+import {
+  defineComponent, h, onMounted, PropType, watch,
+} from 'vue';
 import { YMapControlButton } from '@yandex/ymaps3-types';
 import { insertControlIntoMap } from '../../composables/utils';
 

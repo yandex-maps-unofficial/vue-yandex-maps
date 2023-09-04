@@ -1,5 +1,5 @@
 <script lang="ts">
-import { YMapControls, YMapLayer } from '@yandex/ymaps3-types';
+import { YMapControls } from '@yandex/ymaps3-types';
 import {
   defineComponent, h, onMounted, PropType, provide, Ref, ref, shallowRef, watch, nextTick,
 } from 'vue';

@@ -7,7 +7,6 @@ import { YMapGeolocationControl } from '@yandex/ymaps3-types/packages/controls';
 import {
   insertControlIntoMap,
 } from '../../composables/utils';
-import { YMapLayer } from '@yandex/ymaps3-types';
 
 export default defineComponent({
   name: 'YandexMapGeolocationControl',

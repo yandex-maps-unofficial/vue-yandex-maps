@@ -1,7 +1,9 @@
 <script lang="ts">
-import { defineComponent, h, onMounted, PropType, shallowRef } from 'vue';
-import { insertChildrenIntoMap } from '../composables/utils.ts';
+import {
+  defineComponent, h, onMounted, PropType, shallowRef,
+} from 'vue';
 import { YMapHint } from '@yandex/ymaps3-types/packages/hint';
+import { insertChildrenIntoMap } from '../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapHint',
@@ -14,7 +16,7 @@ export default defineComponent({
       type: Object as PropType<YMapHint>,
       default: null,
     },
-    //Property that you will set on YandexMapMarker or YandexMapFeature to display hint content
+    // Property that you will set on YandexMapMarker or YandexMapFeature to display hint content
     hintProperty: {
       type: String,
       required: true,
@@ -38,10 +40,10 @@ export default defineComponent({
 
     onMounted(async () => {
       await insertChildrenIntoMap(({
-        YMapHint,
+        YMapHint: MapHint,
         YMapHintContext,
       }) => {
-        mapChildren = new YMapHint({
+        mapChildren = new MapHint({
           hint: (object) => object?.properties?.[props.hintProperty],
         });
 
@@ -59,7 +61,7 @@ export default defineComponent({
           }
 
           _onDetach() {
-            //@ts-expect-error
+            // @ts-expect-error
             this._detachDom();
           }
         }

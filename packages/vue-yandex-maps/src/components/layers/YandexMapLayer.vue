@@ -1,6 +1,8 @@
 <script lang="ts">
 import { YMapLayer } from '@yandex/ymaps3-types';
-import { defineComponent, h, onMounted, PropType, watch } from 'vue';
+import {
+  defineComponent, h, onMounted, PropType, watch,
+} from 'vue';
 import { insertLayerIntoMap } from '../../composables/utils';
 
 export default defineComponent({

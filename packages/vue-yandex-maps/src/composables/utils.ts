@@ -252,7 +252,7 @@ export async function insertControlIntoMap<R extends (() => Promise<unknown>), T
 }
 
 export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T, requiredImport?: R): Promise<T>
-export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: () => T): Promise<T>
+export async function insertChildrenIntoMap<T extends YMapEntity<unknown>>(childrenCreateFunction: () => T): Promise<T>
 export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T, requiredImport?: R): Promise<T> {
   if (!getCurrentInstance()) {
     throwException({
@@ -292,7 +292,7 @@ export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), 
 }
 
 export function isDev() {
-  //@ts-expect-error
+  // @ts-expect-error
   return (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') || (import.meta?.env?.DEV);
 }
 
@@ -304,10 +304,10 @@ export function throwException({
   isInternal?: boolean
 }): never {
   if (isInternal) {
-    text += ` This is likely Vue Yandex Maps internal bug.`;
+    text += ' This is likely Vue Yandex Maps internal bug.';
 
     if (isDev()) {
-      text += ` You can report this bug here: https://github.com/PNKBizz/vue-yandex-maps/issues/new/choose`;
+      text += ' You can report this bug here: https://github.com/PNKBizz/vue-yandex-maps/issues/new/choose';
     }
   }
 

@@ -1,8 +1,10 @@
 <script lang="ts">
-import { defineComponent, h, inject, onMounted, PropType, Ref } from 'vue';
-import { waitTillYmapInit } from '../../composables/utils.ts';
+import {
+  defineComponent, h, inject, onMounted, PropType, Ref,
+} from 'vue';
 import { Projection } from '@yandex/ymaps3-types/common/types';
 import { SphericalMercator } from '@yandex/ymaps3-types/packages/spherical-mercator-projection';
+import { waitTillYmapInit } from '../../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapSphericalMercatorProjection',
@@ -36,10 +38,10 @@ export default defineComponent({
 
     onMounted(async () => {
       await waitTillYmapInit();
-      const { SphericalMercator } = await ymaps3.import('@yandex/ymaps3-spherical-mercator-projection@0.0.1');
+      const { SphericalMercator: Mercator } = await ymaps3.import('@yandex/ymaps3-spherical-mercator-projection@0.0.1');
 
       if (projection) {
-        const mercator = new SphericalMercator();
+        const mercator = new Mercator();
         projection.value = mercator;
         emit('input', mercator);
         emit('update:modelValue', mercator);
