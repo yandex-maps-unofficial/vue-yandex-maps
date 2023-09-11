@@ -1,5 +1,3 @@
-import { defineNuxtConfig } from 'nuxt';
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
   // Needed for local testing only
