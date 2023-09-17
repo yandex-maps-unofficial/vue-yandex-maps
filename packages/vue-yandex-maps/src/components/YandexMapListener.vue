@@ -1,11 +1,11 @@
 <script lang="ts">
 import {
-  defineComponent, h, onMounted, PropType, watch,
+  computed, defineComponent, h, onMounted, PropType,
 } from 'vue';
 import {
   BehaviorEvents, DomEvents, MapEvents, YMapListener,
 } from '@yandex/ymaps3-types';
-import { insertChildrenIntoMap } from '../composables/utils';
+import { setupMapChildren } from '../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapListener',
@@ -37,14 +37,11 @@ export default defineComponent({
   }) {
     let mapListener: YMapListener | undefined;
 
-    watch(() => props, () => {
-      mapListener?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
-
     onMounted(async () => {
-      mapListener = await insertChildrenIntoMap(() => new ymaps3.YMapListener(props.settings || {}));
+      mapListener = await setupMapChildren({
+        createFunction: () => new ymaps3.YMapListener(props.settings || {}),
+        settings: computed(() => props.settings),
+      });
       emit('input', mapListener);
       emit('update:modelValue', mapListener);
     });

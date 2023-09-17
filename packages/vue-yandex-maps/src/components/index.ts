@@ -18,6 +18,7 @@ import YandexMapSphericalMercatorProjection from './projections/YandexMapSpheric
 import YandexMapHint from './YandexMapHint.vue';
 import YandexMapOpenMapsButton from './controls/YandexMapOpenMapsButton.vue';
 import YandexMapClusterer from './YandexMapClusterer.vue';
+import YandexMapCollection from './YandexMapCollection.vue';
 
 export {
   YandexMap,
@@ -27,6 +28,7 @@ export {
   YandexMapFeature,
   YandexMapHint,
   YandexMapClusterer,
+  YandexMapCollection,
 
   // Data Sources
   YandexMapTileDataSource,

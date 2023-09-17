@@ -1,9 +1,9 @@
 <script lang="ts">
 import { YMapFeature } from '@yandex/ymaps3-types';
 import {
-  defineComponent, h, onMounted, PropType, watch,
+  computed, defineComponent, h, onMounted, PropType,
 } from 'vue';
-import { insertChildrenIntoMap } from '../composables/utils';
+import { setupMapChildren } from '../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapFeature',
@@ -35,14 +35,11 @@ export default defineComponent({
   }) {
     let mapChildren: YMapFeature | undefined;
 
-    watch(() => props, () => {
-      mapChildren?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
-
     onMounted(async () => {
-      mapChildren = await insertChildrenIntoMap(() => new ymaps3.YMapFeature(props.settings));
+      mapChildren = await setupMapChildren({
+        createFunction: () => new ymaps3.YMapFeature(props.settings),
+        settings: computed(() => props.settings),
+      });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
     });

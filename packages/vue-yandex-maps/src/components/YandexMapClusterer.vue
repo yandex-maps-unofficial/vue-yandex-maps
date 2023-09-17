@@ -1,13 +1,12 @@
 <script lang="ts">
 import {
-  computed, defineComponent, h, nextTick, onMounted, PropType, provide, Ref, ref, watch,
-  VNode,
+  computed, defineComponent, h, nextTick, onMounted, PropType, Ref, ref, shallowRef, VNode, watch,
 } from 'vue';
 import { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import { clusterByGrid, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import { YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { insertChildrenIntoMap, throwException } from '../composables/utils';
+import { setupMapChildren, throwException } from '../composables/utils';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
 export type VueYandexMapClustererOptions = Omit<Settings, 'features' | 'marker' | 'cluster'>
@@ -53,17 +52,20 @@ export default defineComponent({
     emit,
   }) {
     let mapChildrenRenderTick = false;
-    let mapChildren: YMapClusterer | undefined;
-    const entities: Ref<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]> = ref([]);
+    const mapChildren = shallowRef<YMapClusterer | null>(null);
+    // TODO: разобраться с дубликатами в кластере
+    const entities: Ref<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]> = shallowRef([]);
     const clusterFeatures = ref<ClustererObject[]>([]);
     const clusters = ref<HTMLDivElement[]>([]);
-    provide('hasClusterer', true);
 
     let _clusterByGrid: typeof clusterByGrid | undefined;
+
+    const tickTimeout = computed(() => props.settings.tickTimeout ?? 200);
 
     const getSettings = computed<Settings>(() => {
       const settings = { ...props.settings } as Settings;
       if (!settings.method && _clusterByGrid) settings.method = _clusterByGrid?.({ gridSize: props.gridSize });
+      settings.tickTimeout = tickTimeout.value;
 
       const marker: Settings['marker'] = (feature) => {
         // @ts-expect-error
@@ -102,8 +104,11 @@ export default defineComponent({
       const features: Settings['features'] = entities.value.map((entity, i) => ({
         type: 'Feature',
         id: i.toString(),
-        // @ts-expect-error
-        geometry: { type: 'Point', coordinates: entity._props.coordinates },
+        geometry: {
+          type: 'Point',
+          // @ts-expect-error
+          coordinates: entity._props.coordinates,
+        },
         // @ts-expect-error
         properties: 'properties' in entity._props ? entity._props.properties as Record<string, any> : {},
       }));
@@ -114,19 +119,20 @@ export default defineComponent({
         if (!mapChildrenRenderTick) {
           nextTick(() => {
             mapChildrenRenderTick = true;
+
             // @ts-expect-error
-            for (const key of Object.keys(mapChildren?._entitiesCache)) {
+            for (const key of Object.keys(mapChildren.value?._entitiesCache || {})) {
               // Reactivity is lost without this
               if (key.startsWith('cluster')) {
                 // @ts-expect-error
-                delete mapChildren?._entitiesCache[key];
+                delete mapChildren.value?._entitiesCache[key];
                 // @ts-expect-error
-                delete mapChildren?._visibleEntities[key];
+                delete mapChildren.value?._visibleEntities[key];
               }
             }
 
             // @ts-expect-error
-            mapChildren?._render();
+            mapChildren.value?._render();
           });
         } else {
           mapChildrenRenderTick = false;
@@ -143,48 +149,45 @@ export default defineComponent({
       };
     });
 
-    watch(() => props, () => {
-      mapChildren?.update(getSettings.value);
+    watch(() => props.settings, () => {
+      mapChildren.value?.update(getSettings.value);
+      // @ts-expect-error
+      mapChildren.value?._render();
+    }, {
+      deep: true,
+    });
+
+    watch(entities, () => {
+      mapChildren.value?.update(getSettings.value);
+      // @ts-expect-error
+      mapChildren.value?._render();
+
+      console.log(entities.value.length, mapChildren.value);
     }, {
       deep: true,
     });
 
     onMounted(async () => {
-      mapChildren = await insertChildrenIntoMap(
-        ({ YMapClusterer: Clusterer, clusterByGrid: clusterByGrid_ }) => {
+      mapChildren.value = await setupMapChildren({
+        createFunction: ({
+          YMapClusterer: Clusterer,
+          clusterByGrid: clusterByGrid_,
+        }) => {
           _clusterByGrid = clusterByGrid_;
+
           return new Clusterer(getSettings.value);
         },
-        () => ymaps3.import('@yandex/ymaps3-clusterer@0.0.1'),
-      );
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-clusterer@0.0.1'),
+        isMapRoot: true,
+        mapRootRef: entities,
+      });
 
-      emit('input', mapChildren);
-      emit('update:modelValue', mapChildren);
+      emit('input', mapChildren.value);
+      emit('update:modelValue', mapChildren.value);
     });
 
-    function onUpdate(entity: any, key: number) {
-      entities.value[key] = entity;
-    }
-
     return () => {
-      const correctSlots: VNode[] = [];
-
-      for (const slot of slots.default?.() || []) {
-        if (typeof slot.type === 'symbol' && typeof slot.children === 'object' && Array.isArray(slot.children) && slot.children?.length) {
-          for (const slotChildren of slot.children) {
-            let key = 0;
-
-            if (!slotChildren || typeof slotChildren !== 'object' || !('type' in slotChildren) || typeof slotChildren.type !== 'object') continue;
-            key = correctSlots.push(h(slotChildren, { 'onUpdate:modelValue': (entity: any) => onUpdate(entity, key) })) - 1;
-          }
-        } else if (typeof slot.type === 'object') {
-          let key = 0;
-
-          key = correctSlots.push(h(slot, { 'onUpdate:modelValue': (entity: any) => onUpdate(entity, key) })) - 1;
-        }
-      }
-
-      const defaultSlots = correctSlots;
+      if (!mapChildren.value) return h('div');
 
       const clusterSlots: VNode[] = clusterFeatures.value.map((clustererObject, index) => h(
         'div',
@@ -201,7 +204,7 @@ export default defineComponent({
       ));
 
       return h('div', [
-        ...defaultSlots,
+        ...slots.default?.() || [],
         ...clusterSlots,
       ]);
     };

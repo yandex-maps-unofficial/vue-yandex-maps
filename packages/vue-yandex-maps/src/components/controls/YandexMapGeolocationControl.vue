@@ -1,12 +1,9 @@
 <script lang="ts">
 import {
-  onMounted, watch, PropType, h,
-  defineComponent,
+  computed, defineComponent, h, onMounted, PropType,
 } from 'vue';
 import { YMapGeolocationControl } from '@yandex/ymaps3-types/packages/controls';
-import {
-  insertControlIntoMap,
-} from '../../composables/utils';
+import { setupMapChildren } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapGeolocationControl',
@@ -32,19 +29,22 @@ export default defineComponent({
       return true;
     },
   },
-  setup(props, { slots, emit }) {
-    let mapLayer: YMapGeolocationControl | undefined;
-
-    watch(() => props, () => {
-      mapLayer?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
+  setup(props, {
+    slots,
+    emit,
+  }) {
+    let mapChildren: YMapGeolocationControl | undefined;
 
     onMounted(async () => {
-      mapLayer = await insertControlIntoMap(() => ymaps3.import('@yandex/ymaps3-controls@0.0.1'), async (controls) => new controls.YMapGeolocationControl(props.settings));
-      emit('input', mapLayer);
-      emit('update:modelValue', mapLayer);
+      mapChildren = await setupMapChildren({
+        createFunction: (controls) => new controls.YMapGeolocationControl(props.settings),
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-controls@0.0.1'),
+        settings: computed(() => props.settings),
+        strictMapRoot: true,
+      });
+
+      emit('input', mapChildren);
+      emit('update:modelValue', mapChildren);
     });
 
     return () => h('div', slots.default?.());

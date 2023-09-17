@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import {
   YandexMap,
   YandexMapClusterer,
+  YandexMapCollection,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultMarker,
@@ -42,6 +43,7 @@ export default defineComponent({
     YandexMapHint,
     YandexMapOpenMapsButton,
     YandexMapClusterer,
+    YandexMapCollection,
   },
   data() {
     return {
@@ -52,9 +54,13 @@ export default defineComponent({
   methods: {
     changeMarkerText() {
       this.markerValue = 'I\'ve changed!';
+      this.clusterCoordinates.shift();
     },
     logMapClick(e: any) {
       console.log(e);
+    },
+    collection(e: any) {
+      console.log('collection', e);
     },
   },
 });
@@ -101,9 +107,11 @@ export default defineComponent({
         </template>
       </yandex-map-default-marker>
       <yandex-map-controls :settings="{ position: 'top left', orientation: 'vertical' }">
-        <yandex-map-geolocation-control />
-        <yandex-map-zoom-control />
-        <yandex-map-open-maps-button :settings="{ title: 'This button will open Yandex Maps' }" />
+        <yandex-map-collection @input="collection">
+          <yandex-map-geolocation-control />
+          <yandex-map-zoom-control />
+          <yandex-map-open-maps-button :settings="{ title: 'This button will open Yandex Maps' }" />
+        </yandex-map-collection>
       </yandex-map-controls>
       <yandex-map-controls :settings="{ position: 'top right', orientation: 'horizontal' }">
         <yandex-map-geolocation-control />

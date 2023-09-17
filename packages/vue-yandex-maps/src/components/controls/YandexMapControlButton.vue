@@ -1,9 +1,9 @@
 <script lang="ts">
 import {
-  defineComponent, h, onMounted, PropType, watch,
+  computed, defineComponent, h, onMounted, PropType,
 } from 'vue';
 import { YMapControlButton } from '@yandex/ymaps3-types';
-import { insertControlIntoMap } from '../../composables/utils';
+import { setupMapChildren } from '../../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapControlButton',
@@ -33,18 +33,17 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    let mapLayer: YMapControlButton | undefined;
-
-    watch(() => props, () => {
-      mapLayer?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
+    let mapChildren: YMapControlButton | undefined;
 
     onMounted(async () => {
-      mapLayer = await insertControlIntoMap(async () => new ymaps3.YMapControlButton(props.settings));
-      emit('input', mapLayer);
-      emit('update:modelValue', mapLayer);
+      mapChildren = await setupMapChildren({
+        createFunction: () => new ymaps3.YMapControlButton(props.settings),
+        settings: computed(() => props.settings),
+        strictMapRoot: true,
+      });
+
+      emit('input', mapChildren);
+      emit('update:modelValue', mapChildren);
     });
 
     return () => h('div', slots.default?.());

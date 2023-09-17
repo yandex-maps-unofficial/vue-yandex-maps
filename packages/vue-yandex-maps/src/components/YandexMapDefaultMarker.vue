@@ -1,9 +1,9 @@
 <script lang="ts">
 import {
-  computed, defineComponent, h, onMounted, PropType, ref, watch,
+  computed, defineComponent, h, onMounted, PropType, ref,
 } from 'vue';
 import { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
-import { insertChildrenIntoMap } from '../composables/utils';
+import { setupMapChildren } from '../composables/utils';
 
 type Settings = ConstructorParameters<typeof YMapDefaultMarker>[0]
 
@@ -56,17 +56,12 @@ export default defineComponent({
       return settings;
     });
 
-    watch(() => props, () => {
-      mapChildren?.update(getSettings.value);
-    }, {
-      deep: true,
-    });
-
     onMounted(async () => {
-      mapChildren = await insertChildrenIntoMap(
-        ({ YMapDefaultMarker: Marker }) => new Marker(getSettings.value),
-        () => ymaps3.import('@yandex/ymaps3-markers@0.0.1'),
-      );
+      mapChildren = await setupMapChildren({
+        createFunction: ({ YMapDefaultMarker: Marker }) => new Marker(getSettings.value),
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-markers@0.0.1'),
+        settings: getSettings,
+      });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
     });

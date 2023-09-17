@@ -1,9 +1,9 @@
 <script lang="ts">
 import { YMapControls } from '@yandex/ymaps3-types';
 import {
-  defineComponent, h, onMounted, PropType, provide, Ref, ref, shallowRef, watch, nextTick,
+  computed, defineComponent, h, onMounted, PropType, Ref, shallowRef,
 } from 'vue';
-import { waitTillMapInit, injectMap } from '../../composables/utils';
+import { setupMapChildren } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapControls',
@@ -29,26 +29,19 @@ export default defineComponent({
       return true;
     },
   },
-  setup(props, { slots, emit }) {
+  setup(props, {
+    slots,
+    emit,
+  }) {
     const mapChildren: Ref<YMapControls | null> = shallowRef(null);
-    const controlInitPromises = ref<PromiseLike<any>[]>([]);
-    provide('control', mapChildren);
-    provide('controlInitPromises', controlInitPromises);
-
-    watch(() => props, () => {
-      mapChildren.value?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
 
     onMounted(async () => {
-      const map = injectMap();
-      await waitTillMapInit();
-      mapChildren.value = new ymaps3.YMapControls(props.settings);
+      mapChildren.value = await setupMapChildren({
+        createFunction: () => new ymaps3.YMapControls(props.settings),
+        isMapRoot: true,
+        settings: computed(() => props.settings),
+      });
 
-      await nextTick();
-      await Promise.all(controlInitPromises.value);
-      map?.value?.addChild(mapChildren.value);
       emit('input', mapChildren.value);
       emit('update:modelValue', mapChildren.value);
     });

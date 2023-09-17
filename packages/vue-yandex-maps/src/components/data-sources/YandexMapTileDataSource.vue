@@ -1,9 +1,10 @@
 <script lang="ts">
 import { YMapTileDataSource } from '@yandex/ymaps3-types';
 import {
-  defineComponent, h, onMounted, PropType, watch,
+  computed,
+  defineComponent, h, onMounted, PropType,
 } from 'vue';
-import { insertLayerIntoMap } from '../../composables/utils';
+import { setupMapChildren } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapTileDataSource',
@@ -39,14 +40,12 @@ export default defineComponent({
     emit('hold', false);
     let mapChildren: YMapTileDataSource | undefined;
 
-    watch(() => props, () => {
-      mapChildren?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
-
     onMounted(async () => {
-      mapChildren = await insertLayerIntoMap(() => new ymaps3.YMapTileDataSource(props.settings));
+      mapChildren = await setupMapChildren({
+        createFunction: () => new ymaps3.YMapTileDataSource(props.settings),
+        settings: computed(() => props.settings),
+        isLayer: true,
+      });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
       emit('hold', false);

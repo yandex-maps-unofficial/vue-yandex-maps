@@ -1,9 +1,10 @@
 <script lang="ts">
 import { YMapDefaultSchemeLayer } from '@yandex/ymaps3-types';
 import {
-  defineComponent, h, onMounted, PropType, watch,
+  computed,
+  defineComponent, h, onMounted, PropType,
 } from 'vue';
-import { insertLayerIntoMap } from '../../composables/utils';
+import { setupMapChildren } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapDefaultSchemeLayer',
@@ -39,14 +40,12 @@ export default defineComponent({
     emit('hold', true);
     let mapLayer: YMapDefaultSchemeLayer | undefined;
 
-    watch(() => props, () => {
-      mapLayer?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
-
     onMounted(async () => {
-      mapLayer = await insertLayerIntoMap(() => new ymaps3.YMapDefaultSchemeLayer(props.settings || {}));
+      mapLayer = await setupMapChildren({
+        createFunction: () => new ymaps3.YMapDefaultSchemeLayer(props.settings || {}),
+        settings: computed(() => props.settings),
+        isLayer: true,
+      });
       emit('input', mapLayer);
       emit('update:modelValue', mapLayer);
       emit('hold', false);

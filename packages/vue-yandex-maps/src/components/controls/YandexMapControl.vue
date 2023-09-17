@@ -1,9 +1,10 @@
 <script lang="ts">
 import {
-  defineComponent, h, onMounted, PropType, watch,
+  computed,
+  defineComponent, h, onMounted, PropType,
 } from 'vue';
 import { YMapControl } from '@yandex/ymaps3-types';
-import { insertControlIntoMap } from '../../composables/utils';
+import { setupMapChildren } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapControl',
@@ -33,18 +34,16 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    let mapLayer: YMapControl | undefined;
-
-    watch(() => props, () => {
-      mapLayer?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
+    let mapChildren: YMapControl | undefined;
 
     onMounted(async () => {
-      mapLayer = await insertControlIntoMap(async () => new ymaps3.YMapControl(props.settings));
-      emit('input', mapLayer);
-      emit('update:modelValue', mapLayer);
+      mapChildren = await setupMapChildren({
+        createFunction: () => new ymaps3.YMapControl(props.settings),
+        settings: computed(() => props.settings),
+        strictMapRoot: true,
+      });
+      emit('input', mapChildren);
+      emit('update:modelValue', mapChildren);
     });
 
     return () => h('div', slots.default?.());

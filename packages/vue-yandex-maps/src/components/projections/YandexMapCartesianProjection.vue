@@ -4,7 +4,7 @@ import {
 } from 'vue';
 import { Cartesian } from '@yandex/ymaps3-types/packages/cartesian-projection';
 import { Projection } from '@yandex/ymaps3-types/common/types';
-import { waitTillYmapInit } from '../../composables/utils.ts';
+import { setupMapChildren } from '../../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapCartesianProjection',
@@ -44,16 +44,17 @@ export default defineComponent({
     const projection = inject<Ref<null | Projection>>('projection');
 
     onMounted(async () => {
-      await waitTillYmapInit();
-      const { Cartesian: CartesianClass } = await ymaps3.import('@yandex/ymaps3-cartesian-projection@0.0.1');
+      if (!projection) return;
 
-      if (projection) {
-        const cartesian = new CartesianClass(props.bounds, props.cycled);
-        projection.value = cartesian;
-        emit('input', cartesian);
-        emit('update:modelValue', cartesian);
-      }
+      const cartesian = await setupMapChildren({
+        returnOnly: true,
+        createFunction: ({ Cartesian: CartesianClass }) => new CartesianClass(props.bounds, props.cycled),
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-cartesian-projection@0.0.1'),
+      });
 
+      projection.value = cartesian;
+      emit('input', cartesian);
+      emit('update:modelValue', cartesian);
       emit('hold', false);
     });
 

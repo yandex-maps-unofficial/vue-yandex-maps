@@ -3,7 +3,7 @@ import {
   defineComponent, h, onMounted, PropType, shallowRef,
 } from 'vue';
 import { YMapHint } from '@yandex/ymaps3-types/packages/hint';
-import { insertChildrenIntoMap } from '../composables/utils.ts';
+import { setupMapChildren } from '../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapHint',
@@ -39,36 +39,39 @@ export default defineComponent({
     const hintContent = shallowRef('');
 
     onMounted(async () => {
-      await insertChildrenIntoMap(({
-        YMapHint: MapHint,
-        YMapHintContext,
-      }) => {
-        mapChildren = new MapHint({
-          hint: (object) => object?.properties?.[props.hintProperty],
-        });
+      await setupMapChildren({
+        createFunction: ({
+          YMapHint: MapHint,
+          YMapHintContext,
+        }) => {
+          mapChildren = new MapHint({
+            hint: (object) => object?.properties?.[props.hintProperty],
+          });
 
-        class Hint extends ymaps3.YMapEntity<{}> {
-          _onAttach() {
-            const e = this as any;
+          class Hint extends ymaps3.YMapEntity<{}> {
+            _onAttach() {
+              const e = this as any;
 
-            e._element = element.value;
+              e._element = element.value;
 
-            e._detachDom = ymaps3.useDomContext(e, e._element, null);
+              e._detachDom = ymaps3.useDomContext(e, e._element, null);
 
-            e._watchContext(YMapHintContext, () => {
-              hintContent.value = e._consumeContext(YMapHintContext)?.[props.hintProperty];
-            }, { immediate: true });
+              e._watchContext(YMapHintContext, () => {
+                hintContent.value = e._consumeContext(YMapHintContext)?.[props.hintProperty];
+              }, { immediate: true });
+            }
+
+            _onDetach() {
+              // @ts-expect-error
+              this._detachDom();
+            }
           }
 
-          _onDetach() {
-            // @ts-expect-error
-            this._detachDom();
-          }
-        }
-
-        mapChildren.addChild(new Hint({}));
-        return mapChildren;
-      }, () => ymaps3.import('@yandex/ymaps3-hint@0.0.1'));
+          mapChildren.addChild(new Hint({}));
+          return mapChildren;
+        },
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-hint@0.0.1'),
+      });
 
       emit('input', mapChildren!);
       emit('update:modelValue', mapChildren!);

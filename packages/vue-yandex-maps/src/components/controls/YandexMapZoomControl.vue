@@ -1,11 +1,11 @@
 <script lang="ts">
 import {
-  onMounted, watch, PropType, h,
-  defineComponent,
+  onMounted, PropType, h,
+  defineComponent, computed,
 } from 'vue';
 import { YMapZoomControl } from '@yandex/ymaps3-types/packages/controls';
 import {
-  insertControlIntoMap,
+  setupMapChildren,
 } from '../../composables/utils';
 
 export default defineComponent({
@@ -33,18 +33,17 @@ export default defineComponent({
     },
   },
   setup(props, { slots, emit }) {
-    let mapLayer: YMapZoomControl | undefined;
-
-    watch(() => props, () => {
-      mapLayer?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
+    let mapChildren: YMapZoomControl | undefined;
 
     onMounted(async () => {
-      mapLayer = await insertControlIntoMap(() => ymaps3.import('@yandex/ymaps3-controls@0.0.1'), async (controls) => new controls.YMapZoomControl(props.settings));
-      emit('input', mapLayer);
-      emit('update:modelValue', mapLayer);
+      mapChildren = await setupMapChildren({
+        createFunction: (controls) => new controls.YMapZoomControl(props.settings),
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-controls@0.0.1'),
+        settings: computed(() => props.settings),
+        strictMapRoot: true,
+      });
+      emit('input', mapChildren);
+      emit('update:modelValue', mapChildren);
     });
 
     return () => h('div', slots.default?.());

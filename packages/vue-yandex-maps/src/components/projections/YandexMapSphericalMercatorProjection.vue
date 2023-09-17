@@ -4,7 +4,7 @@ import {
 } from 'vue';
 import { Projection } from '@yandex/ymaps3-types/common/types';
 import { SphericalMercator } from '@yandex/ymaps3-types/packages/spherical-mercator-projection';
-import { waitTillYmapInit } from '../../composables/utils.ts';
+import { setupMapChildren } from '../../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapSphericalMercatorProjection',
@@ -37,15 +37,17 @@ export default defineComponent({
     const projection = inject<Ref<null | Projection>>('projection');
 
     onMounted(async () => {
-      await waitTillYmapInit();
-      const { SphericalMercator: Mercator } = await ymaps3.import('@yandex/ymaps3-spherical-mercator-projection@0.0.1');
+      if (!projection) return;
 
-      if (projection) {
-        const mercator = new Mercator();
-        projection.value = mercator;
-        emit('input', mercator);
-        emit('update:modelValue', mercator);
-      }
+      const mercator = await setupMapChildren({
+        returnOnly: true,
+        createFunction: ({ SphericalMercator: Mercator }) => new Mercator(),
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-spherical-mercator-projection@0.0.1'),
+      });
+
+      projection.value = mercator;
+      emit('input', mercator);
+      emit('update:modelValue', mercator);
 
       emit('hold', false);
     });

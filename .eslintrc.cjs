@@ -69,6 +69,9 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'no-restricted-syntax': 'off',
     'no-continue': 'off',
+    'func-call-spacing': 'off',
+    '@typescript-eslint/func-call-spacing': 'error',
+    'no-spaced-func': 'off',
   },
   parser: 'vue-eslint-parser',
   parserOptions: {

@@ -6,14 +6,20 @@ import {
   getCurrentInstance,
   inject,
   isRef,
+  nextTick,
   onBeforeUnmount,
+  provide,
   Ref,
   ref,
+  shallowRef,
   UnwrapRef,
   watch,
   WatchStopHandle,
 } from 'vue';
-import { YMap, YMapControls, YMapEntity } from '@yandex/ymaps3-types';
+import {
+  YMap, YMapEntity, YMapGroupEntity,
+} from '@yandex/ymaps3-types';
+import { Projection } from '@yandex/ymaps3-types/common/types';
 import { VueYandexMaps } from '../namespace.ts';
 
 /**
@@ -94,25 +100,6 @@ export function injectLayers(): Ref<any[]> {
   return layers;
 }
 
-export function injectControl(): Ref<YMapControls | null> {
-  if (!getCurrentInstance()) {
-    throwException({
-      text: 'injectControl must be only called on runtime.',
-      isInternal: true,
-    });
-  }
-  const control = inject<Ref<YMapControls | null>>('control');
-
-  if (!control || !isRef(control)) {
-    throwException({
-      text: 'Was not able to inject valid control in injectControl.',
-      isInternal: true,
-    });
-  }
-
-  return control;
-}
-
 export function waitTillYmapInit() {
   if (typeof window === 'undefined') {
     throwException({
@@ -181,114 +168,115 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
   });
 }
 
-export async function insertLayerIntoMap<T extends YMapEntity<unknown>>(layerCreateFunction: () => T): Promise<T> {
+export async function setupMapChildren<T extends YMapEntity<unknown> | Projection, R extends (() => Promise<unknown>)>({
+  returnOnly,
+  strictMapRoot,
+  requiredImport,
+  createFunction,
+  settings,
+  isLayer,
+  isMapRoot,
+  mapRootRef,
+}: {
+  returnOnly?: boolean
+  strictMapRoot?: boolean
+  isMapRoot?: boolean
+  mapRootRef?: Ref<YMapEntity<any>[]>
+  requiredImport?: R
+  createFunction: (neededImport: Awaited<ReturnType<R>>) => T
+  settings?: ComputedRef<Record<string, any>>
+  isLayer?: boolean
+}) {
   if (!getCurrentInstance()) {
     throwException({
-      text: 'insertLayerIntoMap must be only called on runtime.',
+      text: 'setupMapChildren must be only called on runtime.',
       isInternal: true,
     });
   }
 
+  const children = shallowRef<T | undefined>();
+  const mapRoot = inject<Ref<YMapGroupEntity<any> | any[]> | null>('mapRoot', null);
+  const initPromises = inject<Ref<PromiseLike<any>[]> | null>('mapRootInitPromises', null);
+  let childrenPromises;
   const map = injectMap();
   const layers = injectLayers();
-  let layer: T | undefined;
 
-  onBeforeUnmount(() => {
-    if (layer) {
-      map.value?.removeChild(layer);
+  if (isMapRoot) {
+    provide('mapRoot', mapRootRef || children);
+
+    childrenPromises = shallowRef([]);
+    provide('mapRootInitPromises', childrenPromises);
+  }
+
+  if (!returnOnly) {
+    onBeforeUnmount(() => {
+      if (children.value && !('toWorldCoordinates' in children.value)) {
+        if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
+          mapRoot.value = mapRoot.value.filter((x) => x !== children.value);
+        } else {
+          (mapRoot?.value || map.value)?.removeChild(children.value);
+        }
+      }
+    });
+  }
+
+  if (settings) {
+    watch(settings, (value) => {
+      if (children.value && 'update' in children.value) children.value.update(value ?? {});
+    }, { deep: true });
+  }
+
+  if (!isLayer) {
+    await waitTillMapInit();
+    if (!map.value) {
+      throwException({
+        text: 'map is undefined in setupMapChildren.',
+        isInternal: true,
+      });
     }
-  });
-
-  await waitTillYmapInit();
-  layer = layerCreateFunction();
-
-  // If insertLayerIntoMap is called after map was initialized
-  if (map.value) {
-    map.value.addChild(layer);
   } else {
-    layers.value.push(layer);
+    await waitTillYmapInit();
   }
 
-  return layer;
-}
-
-export async function insertControlIntoMap<T extends YMapEntity<unknown>>(controlCreateFunction: () => T | Promise<T>): Promise<T>
-export async function insertControlIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(requiredImport: R, controlCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T | Promise<T>): Promise<T>
-export async function insertControlIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(requiredImport: R | (() => T | Promise<T>), controlCreateFunction?: (neededImport: Awaited<ReturnType<R>>) => T | Promise<T>): Promise<T> {
-  if (!getCurrentInstance()) {
-    throwException({
-      text: 'insertControlIntoMap must be only called on runtime.',
-      isInternal: true,
-    });
-  }
-
-  const control = injectControl();
-  const controlInitPromises = inject<Ref<PromiseLike<any>[]>>('controlInitPromises');
-  let newControl: T | undefined;
-
-  onBeforeUnmount(() => {
-    if (newControl) {
-      control.value?.removeChild(newControl);
+  if (strictMapRoot) {
+    if (!mapRoot?.value) await nextTick();
+    if (!mapRoot?.value) {
+      throwException({
+        text: 'mapRoot is undefined in setupMapChildren.',
+        isInternal: true,
+      });
     }
-  });
-
-  await waitTillYmapInit();
-
-  if (!control.value) {
-    throwException({
-      text: 'control is undefined in insertControlIntoMap. Please ensure you are calling this component inside <y-map-controls> component.',
-    });
   }
 
-  if (requiredImport && controlCreateFunction) {
-    controlInitPromises?.value.push((requiredImport as R)());
-  }
-
-  controlCreateFunction = controlCreateFunction || requiredImport as (() => T | Promise<T>);
-  newControl = await controlCreateFunction(await requiredImport() as Awaited<ReturnType<R>>);
-
-  control.value.addChild(newControl);
-  return newControl;
-}
-
-export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T, requiredImport?: R): Promise<T>
-export async function insertChildrenIntoMap<T extends YMapEntity<unknown>>(childrenCreateFunction: () => T): Promise<T>
-export async function insertChildrenIntoMap<R extends (() => Promise<unknown>), T extends YMapEntity<unknown>>(childrenCreateFunction: (neededImport: Awaited<ReturnType<R>>) => T, requiredImport?: R): Promise<T> {
-  if (!getCurrentInstance()) {
-    throwException({
-      text: 'insertChildrenIntoMap must be only called on runtime.',
-      isInternal: true,
-    });
-  }
-
-  const hasClusterer = inject<boolean>('hasClusterer', false);
-  const map = injectMap();
-  let children: T | undefined;
-
-  onBeforeUnmount(() => {
-    if (children) {
-      map.value?.removeChild(children);
-    }
-  });
-
-  await waitTillMapInit();
-  if (!map.value) {
-    throwException({
-      text: 'map is undefined in insertChildrenIntoMap.',
-      isInternal: true,
-    });
+  if (isMapRoot) {
+    await nextTick();
+    await Promise.all(childrenPromises?.value || []);
   }
 
   let importData;
-  if (requiredImport) importData = await requiredImport();
 
-  children = childrenCreateFunction(importData as Awaited<ReturnType<R>>);
-
-  if (!hasClusterer) {
-    map.value.addChild(children);
+  if (requiredImport) {
+    const importPromise = requiredImport();
+    if (initPromises?.value) initPromises.value.push(Promise.resolve(importPromise));
+    importData = await importPromise;
   }
 
-  return children;
+  children.value = createFunction(importData as Awaited<ReturnType<R>>);
+
+  if (!returnOnly && map.value && !('toWorldCoordinates' in children.value)) {
+    if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
+      mapRoot.value = [
+        ...mapRoot.value,
+        children.value,
+      ];
+    } else {
+      (mapRoot?.value || map.value).addChild(children.value);
+    }
+  } else if (isLayer) {
+    layers.value.push(children.value);
+  }
+
+  return children.value;
 }
 
 export function isDev() {

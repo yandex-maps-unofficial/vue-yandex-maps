@@ -1,9 +1,9 @@
 <script lang="ts">
 import { YMapMarker } from '@yandex/ymaps3-types';
 import {
-  defineComponent, h, onMounted, PropType, ref, watch,
+  computed, defineComponent, h, onMounted, PropType, ref,
 } from 'vue';
-import { insertChildrenIntoMap } from '../composables/utils';
+import { setupMapChildren } from '../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapMarker',
@@ -35,19 +35,13 @@ export default defineComponent({
   }) {
     let mapChildren: YMapMarker | undefined;
 
-    watch(() => props, () => {
-      mapChildren?.update(props.settings || {});
-    }, {
-      deep: true,
-    });
-
     const element = ref<null | HTMLDivElement>(null);
 
     onMounted(async () => {
-      mapChildren = await insertChildrenIntoMap(() => new ymaps3.YMapMarker(
-        props.settings,
-          element.value!,
-      ));
+      mapChildren = await setupMapChildren({
+        settings: computed(() => props.settings),
+        createFunction: () => new ymaps3.YMapMarker(props.settings, element.value!),
+      });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
     });
