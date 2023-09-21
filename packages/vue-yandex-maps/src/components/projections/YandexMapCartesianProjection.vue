@@ -40,7 +40,8 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    emit('hold', true);
+    const hold = inject<Ref<number>>('needsToHold')!;
+    hold.value++;
     const projection = inject<Ref<null | Projection>>('projection');
 
     onMounted(async () => {
@@ -55,7 +56,7 @@ export default defineComponent({
       projection.value = cartesian;
       emit('input', cartesian);
       emit('update:modelValue', cartesian);
-      emit('hold', false);
+      hold.value--;
     });
 
     return () => h('div', slots.default?.());

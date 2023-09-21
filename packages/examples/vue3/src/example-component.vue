@@ -55,6 +55,7 @@ export default defineComponent({
     changeMarkerText() {
       this.markerValue = 'I\'ve changed!';
       this.clusterCoordinates.shift();
+      console.log(this.clusterCoordinates);
     },
     logMapClick(e: any) {
       console.log(e);
@@ -127,7 +128,7 @@ export default defineComponent({
       <yandex-map-clusterer>
         <yandex-map-marker
           v-for="(coordinates, index) in clusterCoordinates"
-          :key="coordinates"
+          :key="index"
           :settings="{ coordinates, properties: { hint: `Cluster Marker` } }"
         >
           <div class="hint">

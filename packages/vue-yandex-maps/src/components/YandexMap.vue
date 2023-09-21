@@ -99,6 +99,7 @@ export default defineComponent({
     provide('map', map);
     provide('layers', layers);
     provide('projection', projection);
+    provide('needsToHold', needsToHold);
     emit('input', map.value);
     emit('update:modelValue', map.value);
 
@@ -189,16 +190,7 @@ export default defineComponent({
             class: '__ymap_slots',
             style: { display: 'none' },
           },
-          slots.default?.()
-            .map((slot) => h(slot, {
-              onHold(needToHold: boolean) {
-                if (needToHold) {
-                  needsToHold.value++;
-                } else {
-                  needsToHold.value--;
-                }
-              },
-            })),
+          slots.default?.(),
         ),
       ]);
 

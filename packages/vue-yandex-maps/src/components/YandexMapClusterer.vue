@@ -3,7 +3,7 @@ import {
   computed, defineComponent, h, nextTick, onMounted, PropType, Ref, ref, shallowRef, VNode, watch,
 } from 'vue';
 import { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
-import { clusterByGrid, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
+import { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import { YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
 import { setupMapChildren, throwException } from '../composables/utils';
@@ -52,7 +52,7 @@ export default defineComponent({
     emit,
   }) {
     let mapChildrenRenderTick = false;
-    const mapChildren = shallowRef<YMapClusterer | null>(null);
+    const mapChildren = shallowRef<(Pick<YMapClusterer, 'update'> & Record<string, any>) | null>(null);
     // TODO: разобраться с дубликатами в кластере
     const entities: Ref<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]> = shallowRef([]);
     const clusterFeatures = ref<ClustererObject[]>([]);
@@ -67,9 +67,8 @@ export default defineComponent({
       if (!settings.method && _clusterByGrid) settings.method = _clusterByGrid?.({ gridSize: props.gridSize });
       settings.tickTimeout = tickTimeout.value;
 
-      const marker: Settings['marker'] = (feature) => {
-        // @ts-expect-error
-        const entity = entities.value.filter((x) => x._props.coordinates[0] === feature.geometry.coordinates[0] && x._props.coordinates[1] === feature.geometry.coordinates[1]);
+      const marker: Settings['marker'] = (feature: Pick<Feature, 'geometry'>) => {
+        const entity = entities.value.filter((x: Record<string, any>) => x._props.coordinates[0] === feature.geometry.coordinates[0] && x._props.coordinates[1] === feature.geometry.coordinates[1]);
 
         if (entity.length > 1) {
           throwException({
@@ -89,7 +88,7 @@ export default defineComponent({
       const cluster: Settings['cluster'] = (coordinates) => {
         const foundCluster = clusters.value.find((x) => x && x.getAttribute('coordinates') === JSON.stringify(coordinates));
 
-        /* if (!cluster) {
+        /* if (!foundCluster) {
           throwException({
             text: `No element with coordinates of ${coordinates.join(', ')} were found in YandexMapClusterer.`,
             isInternal: true,
@@ -101,16 +100,15 @@ export default defineComponent({
         }, foundCluster || document.createElement('span'));
       };
 
-      const features: Settings['features'] = entities.value.map((entity, i) => ({
+      const features: Settings['features'] = entities.value.map((entity: Record<string, any>, i) => ({
         type: 'Feature',
-        id: i.toString(),
+        id: Math.random()
+          .toString(),
         geometry: {
           type: 'Point',
-          // @ts-expect-error
           coordinates: entity._props.coordinates,
         },
-        // @ts-expect-error
-        properties: 'properties' in entity._props ? entity._props.properties as Record<string, any> : {},
+        properties: 'properties' in entity._props ? entity._props.properties : {},
       }));
 
       settings.onRender = (clustersList) => {
@@ -120,18 +118,14 @@ export default defineComponent({
           nextTick(() => {
             mapChildrenRenderTick = true;
 
-            // @ts-expect-error
             for (const key of Object.keys(mapChildren.value?._entitiesCache || {})) {
               // Reactivity is lost without this
               if (key.startsWith('cluster')) {
-                // @ts-expect-error
                 delete mapChildren.value?._entitiesCache[key];
-                // @ts-expect-error
                 delete mapChildren.value?._visibleEntities[key];
               }
             }
 
-            // @ts-expect-error
             mapChildren.value?._render();
           });
         } else {
@@ -149,22 +143,20 @@ export default defineComponent({
       };
     });
 
-    watch(() => props.settings, () => {
+    watch(() => props.settings, async () => {
+      await nextTick();
       mapChildren.value?.update(getSettings.value);
-      // @ts-expect-error
       mapChildren.value?._render();
     }, {
       deep: true,
     });
 
-    watch(entities, () => {
+    watch(entities, async () => {
+      await nextTick();
       mapChildren.value?.update(getSettings.value);
-      // @ts-expect-error
       mapChildren.value?._render();
 
-      console.log(entities.value.length, mapChildren.value);
-    }, {
-      deep: true,
+      setTimeout(() => mapChildren.value?._render(), tickTimeout.value);
     });
 
     onMounted(async () => {
@@ -182,8 +174,8 @@ export default defineComponent({
         mapRootRef: entities,
       });
 
-      emit('input', mapChildren.value);
-      emit('update:modelValue', mapChildren.value);
+      emit('input', mapChildren.value as YMapClusterer);
+      emit('update:modelValue', mapChildren.value as YMapClusterer);
     });
 
     return () => {
@@ -194,6 +186,9 @@ export default defineComponent({
         {
           ref: (item) => {
             clusters.value[index] = item as HTMLDivElement;
+          },
+          attrs: {
+            coordinates: JSON.stringify(clustererObject.lnglat),
           },
           coordinates: JSON.stringify(clustererObject.lnglat),
         },

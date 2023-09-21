@@ -3,26 +3,25 @@ import {
   defineComponent, h, inject, onMounted, PropType, Ref,
 } from 'vue';
 import { Projection } from '@yandex/ymaps3-types/common/types';
-import { SphericalMercator } from '@yandex/ymaps3-types/packages/spherical-mercator-projection';
 import { setupMapChildren } from '../../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapSphericalMercatorProjection',
   props: {
     value: {
-      type: Object as PropType<SphericalMercator>,
+      type: Object as PropType<Projection>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<SphericalMercator>,
+      type: Object as PropType<Projection>,
       default: null,
     },
   },
   emits: {
-    'input'(item: SphericalMercator): boolean {
+    'input'(item: Projection): boolean {
       return true;
     },
-    'update:modelValue'(item: SphericalMercator): boolean {
+    'update:modelValue'(item: Projection): boolean {
       return true;
     },
     hold(status: boolean) {
@@ -33,7 +32,8 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    emit('hold', true);
+    const hold = inject<Ref<number>>('needsToHold')!;
+    hold.value++;
     const projection = inject<Ref<null | Projection>>('projection');
 
     onMounted(async () => {
@@ -49,7 +49,7 @@ export default defineComponent({
       emit('input', mercator);
       emit('update:modelValue', mercator);
 
-      emit('hold', false);
+      hold.value--;
     });
 
     return () => h('div', slots.default?.());

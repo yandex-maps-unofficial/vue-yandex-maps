@@ -2,6 +2,7 @@
 import { YMapDefaultFeaturesLayer } from '@yandex/ymaps3-types';
 import {
   computed, defineComponent, h, onMounted, PropType,
+  inject, Ref,
 } from 'vue';
 import { setupMapChildren } from '../../composables/utils';
 
@@ -36,7 +37,8 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    emit('hold', true);
+    const hold = inject<Ref<number>>('needsToHold')!;
+    hold.value++;
     let mapLayer: YMapDefaultFeaturesLayer | undefined;
 
     onMounted(async () => {
@@ -47,7 +49,7 @@ export default defineComponent({
       });
       emit('input', mapLayer);
       emit('update:modelValue', mapLayer);
-      emit('hold', false);
+      hold.value--;
     });
 
     return () => h('div', slots.default?.());

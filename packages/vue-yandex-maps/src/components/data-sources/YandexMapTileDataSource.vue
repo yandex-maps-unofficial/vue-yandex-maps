@@ -3,6 +3,7 @@ import { YMapTileDataSource } from '@yandex/ymaps3-types';
 import {
   computed,
   defineComponent, h, onMounted, PropType,
+  inject, Ref,
 } from 'vue';
 import { setupMapChildren } from '../../composables/utils';
 
@@ -37,7 +38,8 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    emit('hold', false);
+    const hold = inject<Ref<number>>('needsToHold')!;
+    hold.value++;
     let mapChildren: YMapTileDataSource | undefined;
 
     onMounted(async () => {
@@ -48,7 +50,7 @@ export default defineComponent({
       });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
-      emit('hold', false);
+      hold.value--;
     });
 
     return () => h('div', slots.default?.());

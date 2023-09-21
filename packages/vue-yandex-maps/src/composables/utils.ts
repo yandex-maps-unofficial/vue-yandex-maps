@@ -281,7 +281,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
 
 export function isDev() {
   // @ts-expect-error
-  return (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development') || (import.meta?.env?.DEV);
+  return typeof process !== 'undefined' && (process.env?.NODE_ENV === 'development' || process.dev);
 }
 
 export function throwException({

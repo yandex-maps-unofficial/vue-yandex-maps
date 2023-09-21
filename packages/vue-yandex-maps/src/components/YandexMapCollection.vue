@@ -44,14 +44,7 @@ export default defineComponent({
     return () => {
       if (!mapChildren.value) return h('div');
 
-      const defaultSlots = slots.default?.();
-      const children = defaultSlots?.map((slot) => h(slot, {
-        onInput(item: any) {
-          mapChildren.value?.addChild(item);
-        },
-      }));
-
-      return h('div', children);
+      return h('div', slots.default?.());
     };
   },
 });

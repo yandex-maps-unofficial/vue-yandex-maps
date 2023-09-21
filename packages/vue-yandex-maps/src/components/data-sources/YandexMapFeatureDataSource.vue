@@ -1,7 +1,7 @@
 <script lang="ts">
 import { YMapFeatureDataSource } from '@yandex/ymaps3-types';
 import {
-  computed, defineComponent, h, onMounted, PropType,
+  computed, defineComponent, h, inject, onMounted, PropType, Ref,
 } from 'vue';
 import { setupMapChildren } from '../../composables/utils';
 
@@ -36,7 +36,8 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    emit('hold', true);
+    const hold = inject<Ref<number>>('needsToHold')!;
+    hold.value++;
     let mapChildren: YMapFeatureDataSource | undefined;
 
     onMounted(async () => {
@@ -47,7 +48,7 @@ export default defineComponent({
       });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
-      emit('hold', false);
+      hold.value--;
     });
 
     return () => h('div', slots.default?.());
