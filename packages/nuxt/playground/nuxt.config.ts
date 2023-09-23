@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   modules: ['../src/module'],
   devtools: { enabled: true },
   yandexMaps: {
-    apikey: '',
+    apikey: 'playground',
   },
   typescript: {
     strict: true,

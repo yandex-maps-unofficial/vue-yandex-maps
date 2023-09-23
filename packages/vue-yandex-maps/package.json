@@ -5,13 +5,17 @@
   "main": "./dist/vue-yandex-maps.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/vue-yandex-maps.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/vue-yandex-maps.js"
+    },
     "./nuxt": {
       "types": "./dist/nuxt/types.d.ts",
       "import": "./dist/nuxt/module.mjs",
       "require": "./dist/nuxt/module.cjs"
     },
-    "./nuxt2": "./dist/nuxt2.js"
+    "./nuxt2": "./dist/nuxt2.js",
+    "./dist/*": "./dist/*"
   },
   "scripts": {
     "build": "yarn workspace nuxt prepack && yarn build:package-only",

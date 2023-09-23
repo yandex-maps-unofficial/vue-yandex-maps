@@ -1,0 +1,19 @@
+name: 'Codecheck'
+description: 'Perform lint and build of project'
+
+runs:
+  using: composite
+  steps:
+    - name: Test
+      shell: bash
+      run: |
+        yarn
+        yarn lint
+        yarn workspace vue-yandex-maps build:package-only
+        yarn workspace vue-yandex-maps build
+        yarn workspace example-nuxt2 build
+        yarn workspace example-nuxt2 generate
+        yarn workspace example-nuxt3 build
+        yarn workspace example-nuxt3 generate
+        yarn workspace example-vue2 build
+        yarn workspace example-vue3 build

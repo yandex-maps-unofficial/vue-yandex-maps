@@ -16,7 +16,7 @@ import {
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
 
-const clusterCoordinates = [
+const clusterCoordinates: [number, number][] = [
   [37.64, 55.76],
   [37.63, 55.7],
   [37.43, 55.69],
