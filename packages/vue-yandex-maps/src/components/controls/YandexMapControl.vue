@@ -1,7 +1,6 @@
 <script lang="ts">
 import {
-  computed,
-  defineComponent, h, onMounted, PropType,
+  computed, defineComponent, h, onMounted, PropType,
 } from 'vue';
 import { YMapControl } from '@yandex/ymaps3-types';
 import { setupMapChildren } from '../../composables/utils';

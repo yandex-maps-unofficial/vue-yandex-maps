@@ -6,7 +6,7 @@ import { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import { YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { setupMapChildren, throwException } from '../composables/utils';
+import { setupMapChildren, throwException } from '../../../composables/utils.ts';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
 export type VueYandexMapClustererOptions = Omit<Settings, 'features' | 'marker' | 'cluster'>

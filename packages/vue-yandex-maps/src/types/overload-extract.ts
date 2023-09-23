@@ -3,18 +3,18 @@
 type OverloadProps<TOverload> = Pick<TOverload, keyof TOverload>;
 
 type OverloadUnionRecursive<TOverload, TPartialOverload = unknown> = TOverload extends (
-  ...args: infer TArgs
-) => infer TReturn
+    ...args: infer TArgs
+  ) => infer TReturn
   ? // Prevent infinite recursion by stopping recursion when TPartialOverload
-    // has accumulated all of the TOverload signatures.
-    TPartialOverload extends TOverload
+  // has accumulated all of the TOverload signatures.
+  TPartialOverload extends TOverload
     ? never
     :
-        | OverloadUnionRecursive<
-            TPartialOverload & TOverload,
-            TPartialOverload & ((...args: TArgs) => TReturn) & OverloadProps<TOverload>
-          >
-        | ((...args: TArgs) => TReturn)
+    | OverloadUnionRecursive<
+    TPartialOverload & TOverload,
+    TPartialOverload & ((...args: TArgs) => TReturn) & OverloadProps<TOverload>
+  >
+    | ((...args: TArgs) => TReturn)
   : never;
 
 type OverloadUnion<TOverload extends (...args: any[]) => any> = Exclude<

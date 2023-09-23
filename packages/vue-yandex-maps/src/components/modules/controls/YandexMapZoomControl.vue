@@ -1,12 +1,9 @@
 <script lang="ts">
 import {
-  onMounted, PropType, h,
-  defineComponent, computed,
+  computed, defineComponent, h, onMounted, PropType,
 } from 'vue';
 import { YMapZoomControl } from '@yandex/ymaps3-types/packages/controls';
-import {
-  setupMapChildren,
-} from '../../composables/utils';
+import { setupMapChildren } from '../../../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapZoomControl',
@@ -32,7 +29,10 @@ export default defineComponent({
       return true;
     },
   },
-  setup(props, { slots, emit }) {
+  setup(props, {
+    slots,
+    emit,
+  }) {
     let mapChildren: YMapZoomControl | undefined;
 
     onMounted(async () => {

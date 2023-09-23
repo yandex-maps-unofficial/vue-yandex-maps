@@ -3,7 +3,7 @@ import {
   defineComponent, h, onMounted, PropType, shallowRef,
 } from 'vue';
 import { YMapHint } from '@yandex/ymaps3-types/packages/hint';
-import { setupMapChildren } from '../composables/utils.ts';
+import { setupMapChildren } from '../../../composables/utils.ts';
 
 export default defineComponent({
   name: 'YandexMapHint',

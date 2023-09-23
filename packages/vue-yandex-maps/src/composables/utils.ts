@@ -16,9 +16,7 @@ import {
   watch,
   WatchStopHandle,
 } from 'vue';
-import {
-  YMap, YMapEntity, YMapGroupEntity,
-} from '@yandex/ymaps3-types';
+import { YMap, YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import { Projection } from '@yandex/ymaps3-types/common/types';
 import { VueYandexMaps } from '../namespace.ts';
 
