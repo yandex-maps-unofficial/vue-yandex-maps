@@ -4,6 +4,15 @@ on:
   push:
     branches: [ v2 ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   check:
     runs-on: ubuntu-latest
