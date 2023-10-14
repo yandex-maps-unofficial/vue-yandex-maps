@@ -37,7 +37,7 @@ export namespace VueYandexMaps {
      */
     lang?: string;
     /**
-     * @default 3.0
+     * @default v3
      */
     version?: string;
     /**
@@ -46,6 +46,10 @@ export namespace VueYandexMaps {
      * @default false
      */
     strictMode?: boolean;
+    /**
+     * @default https://api-maps.yandex.ru
+     */
+    domain?: string;
     /**
      * @description You can choose where to initialize Yandex Maps library
      *

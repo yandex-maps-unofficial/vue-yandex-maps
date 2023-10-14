@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import {
+  VueYandexMaps,
   YandexMap,
   YandexMapClusterer,
   YandexMapCollection,
@@ -16,6 +17,7 @@ import {
   YandexMapZoomControl,
   YandexMapControl,
   YandexMapControlButton,
+  createYmapsOptions,
 } from 'vue-yandex-maps';
 
 const clusterCoordinates: [number, number][] = [
@@ -49,6 +51,21 @@ export default defineComponent({
     YandexMapClusterer,
     YandexMapCollection,
   },
+  props: {
+    fromDocs: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup() {
+    if (!VueYandexMaps.settings.value.apikey) {
+      createYmapsOptions({
+        apikey: '9fa90fbc-ce5f-4dc9-ae6d-433e0ec7338b',
+      });
+    }
+
+    console.log(VueYandexMaps.settings.value);
+  },
   data() {
     return {
       markerValue: 'Click me to change',
@@ -72,7 +89,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div id="__app">
+  <div id="__app" :class="{ '__app--docs': fromDocs }">
     <yandex-map width="50dvw" height="75dvh" :settings="{ location: { center: [37.588144, 55.733842], zoom: 7 } }">
       <yandex-map-listener :settings="{ onClick: logMapClick }" />
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
@@ -161,7 +178,7 @@ html, body {
   padding: 0;
 }
 
-#__app {
+#__app:not(.__app--docs) {
   width: 100dvw;
   height: 100dvh;
   display: flex;

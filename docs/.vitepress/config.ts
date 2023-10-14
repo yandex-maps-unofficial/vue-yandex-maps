@@ -12,6 +12,10 @@ export default defineConfig({
     },
   },
   themeConfig: {
+    outline: {
+      label: 'На этой странице',
+      level: 'deep',
+    },
     search: {
       provider: 'local',
       options: {
@@ -31,25 +35,56 @@ export default defineConfig({
               navigateUpKeyAriaLabel: 'стрелка вверх',
               navigateDownKeyAriaLabel: 'стрелка вниз',
               closeText: 'чтобы закрыть',
-              closeKeyAriaLabel: 'escape'
-            }
-          }
-        }
-      }
+              closeKeyAriaLabel: 'escape',
+            },
+          },
+        },
+      },
     },
     i18nRouting: true,
     sidebar: [
       {
-        text: 'Index',
-        link: '/',
+        text: 'Начало работы',
+        collapsed: false,
+        items: [
+          {
+            text: 'О проекте',
+            link: '/guide/about',
+          },
+          {
+            text: 'Установка',
+            link: '/guide/vue3',
+            items: [
+              {
+                text: 'Vue 3 / Nuxt 3',
+                link: '/guide/vue3',
+              },
+              {
+                text: 'Vue 2 / Nuxt 2 / Nuxt Bridge',
+                link: '/guide/vue2',
+              },
+            ],
+          },
+          {
+            text: 'Конфигурация',
+            link: '/guide/configuration',
+          },
+        ],
       },
     ],
+    docFooter: {
+      prev: 'Предыдущая страница',
+      next: 'Далее',
+    },
     editLink: {
       pattern: 'https://github.com/PNKBizz/vue-yandex-maps/tree/v2/docs/:path',
-      text: 'Редактировать на GitHub'
+      text: 'Редактировать на GitHub',
     },
     lastUpdated: {
       text: 'Обновлено',
-    }
+    },
+    footer: {
+      message: 'Сделано с ♥ под лицензией MIT.',
+    },
   },
 });

@@ -11063,7 +11063,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"example-vue3@workspace:*, example-vue3@workspace:packages/examples/vue3":
+"example-vue3@workspace:*, example-vue3@workspace:^, example-vue3@workspace:packages/examples/vue3":
   version: 0.0.0-use.local
   resolution: "example-vue3@workspace:packages/examples/vue3"
   dependencies:
@@ -22568,12 +22568,14 @@ __metadata:
     eslint: ^8.51.0
     eslint-plugin-jest: ^27.4.2
     eslint-plugin-vue: ^9.17.0
+    example-vue3: "workspace:^"
     typescript: ^5.2.2
     vitepress: ^1.0.0-rc.21
+    vue-yandex-maps: "workspace:^"
   languageName: unknown
   linkType: soft
 
-"vue-yandex-maps@workspace:*, vue-yandex-maps@workspace:packages/vue-yandex-maps":
+"vue-yandex-maps@workspace:*, vue-yandex-maps@workspace:^, vue-yandex-maps@workspace:packages/vue-yandex-maps":
   version: 0.0.0-use.local
   resolution: "vue-yandex-maps@workspace:packages/vue-yandex-maps"
   dependencies:

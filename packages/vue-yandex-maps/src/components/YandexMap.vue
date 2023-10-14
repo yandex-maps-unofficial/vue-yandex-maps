@@ -40,6 +40,11 @@ export default defineComponent({
       type: String,
       default: '100%',
     },
+    // z-index for Map Container. Without this, elements of the map will be displayed under your site's elements due to high z-index inside of them
+    zIndex: {
+      type: Number,
+      default: 0,
+    },
     /**
      * @description Settings for cart initialization.
      *
@@ -181,6 +186,9 @@ export default defineComponent({
         style: {
           width: props.width,
           height: props.height,
+          color: '#000',
+          position: 'relative',
+          'z-index': props.zIndex.toString(),
         },
       }, [
         container,

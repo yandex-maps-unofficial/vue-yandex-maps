@@ -10,6 +10,7 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   importModules: true,
   version: true,
   strictMode: true,
+  domain: true,
 };
 
 export function initYmaps() {
@@ -37,7 +38,7 @@ export function initYmaps() {
     const settings = VueYandexMaps.settings.value;
 
     const yandexMapScript = document.createElement('SCRIPT');
-    const url = new URL(`https://api-maps.yandex.ru/${settings.version}/`);
+    const url = new URL(`${settings.domain}/${settings.version}/`);
     url.searchParams.set('lang', settings.lang || 'ru_RU');
     url.searchParams.set('apikey', settings.apikey);
 
@@ -84,8 +85,9 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings): VueYa
     lang: 'ru_RU',
     initializeOn: 'onComponentMount',
     importModules: [],
-    version: '3.0',
+    version: 'v3',
     strictMode: false,
+    domain: 'https://api-maps.yandex.ru',
     ...options,
   };
   if (!optionsShallowClone.apikey) {
