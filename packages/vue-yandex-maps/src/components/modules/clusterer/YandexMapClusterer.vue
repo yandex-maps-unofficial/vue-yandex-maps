@@ -190,6 +190,7 @@ export default defineComponent({
           attrs: {
             coordinates: JSON.stringify(clustererObject.lnglat),
           },
+          // @ts-ignore
           coordinates: JSON.stringify(clustererObject.lnglat),
         },
         slots.cluster?.({

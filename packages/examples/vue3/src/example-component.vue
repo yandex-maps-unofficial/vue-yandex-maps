@@ -14,6 +14,8 @@ import {
   YandexMapMarker,
   YandexMapOpenMapsButton,
   YandexMapZoomControl,
+  YandexMapControl,
+  YandexMapControlButton,
 } from 'vue-yandex-maps';
 
 const clusterCoordinates: [number, number][] = [
@@ -38,6 +40,8 @@ export default defineComponent({
     YandexMapListener,
     YandexMap,
     YandexMapControls,
+    YandexMapControl,
+    YandexMapControlButton,
     YandexMapGeolocationControl,
     YandexMapZoomControl,
     YandexMapHint,
@@ -117,6 +121,12 @@ export default defineComponent({
       <yandex-map-controls :settings="{ position: 'top right', orientation: 'horizontal' }">
         <yandex-map-geolocation-control />
         <yandex-map-zoom-control />
+        <yandex-map-control-button>
+          <strong>Custom control button</strong>
+        </yandex-map-control-button>
+        <yandex-map-control>
+          <strong>Custom control</strong>
+        </yandex-map-control>
       </yandex-map-controls>
       <yandex-map-hint hint-property="hint">
         <template #default="{ content }">

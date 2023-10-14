@@ -262,6 +262,11 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   children.value = createFunction(importData as Awaited<ReturnType<R>>);
 
   if (!returnOnly && map.value && !('toWorldCoordinates' in children.value)) {
+    if (initPromises?.value) {
+      await Promise.all(initPromises.value);
+      if (!requiredImport) await nextTick();
+    }
+
     if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
       mapRoot.value = [
         ...mapRoot.value,
