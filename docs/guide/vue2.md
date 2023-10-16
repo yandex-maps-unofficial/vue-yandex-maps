@@ -62,6 +62,10 @@ pnpm install vue-yandex-maps@v2
 
 ### Vue 2
 
+::: warning Требования к установке
+Для использования пакета минимальная версия Vue должна быть 2.7.
+:::
+
 В основном файле (например, main.ts) подключите Карты:
 
 ::: code-group
@@ -98,6 +102,12 @@ export default defineNuxtConfig({
 ```
 
 ### Nuxt 2
+
+::: warning Требования к установке
+Для использования пакета минимальная версия Vue должна быть 2.7, Nuxt 2.16 и выше.
+
+Также для работы потребуется [установить Nuxt Composition API](https://composition-api.nuxtjs.org/getting-started/setup).
+:::
 
 В `Nuxt Config` в `modules` добавьте нужный пакет, после чего произведите его конфигурацию по ключу `yandexMaps`.
 

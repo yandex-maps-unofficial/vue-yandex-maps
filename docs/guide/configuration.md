@@ -1,22 +1,12 @@
+---
+prev: false
+---
+
+
 # Конфигурация
 
 Конфигурация пакета производится при его подключении, например, в `main.ts/app.ts` и пр. файлах для Vue в
 аргументах `createYmaps`/`createYmapsVue2`, или `nuxt.config.ts` по ключу `yandexMaps` для Nuxt.
-
-## Доступ к конфигурации
-
-Вы можете получить доступ к конфигурации следующим способом:
-
-```typescript
-import { VueYandexMaps } from 'vue-yandex-maps';
-
-console.log(VueYandexMaps.settings.value) //ref
-```
-
-Там же в `VueYandexMaps` есть доступ к информации о загрузке скрипта (`loadStatus`, `loadError`, `isLoaded`).
-
-При желании, `VueYandexMaps.settings` можно даже изменять, но это не проверялось - меняйте  `VueYandexMaps.settings.value` на
-свой страх и риск и только если уверены в том, что по другому никак.
 
 ## Доступные настройки
 
@@ -97,3 +87,19 @@ app.use(createYmaps({
 
 - [Пакеты JS API](https://yandex.ru/dev/jsapi30/doc/ru/ref/packages/)
 - [Модули JS API](https://yandex.ru/dev/jsapi30/doc/ru/ref/modules/)
+
+
+## Доступ к конфигурации
+
+Вы можете получить доступ к конфигурации следующим способом:
+
+```typescript
+import { VueYandexMaps } from 'vue-yandex-maps';
+
+console.log(VueYandexMaps.settings.value) //ref
+```
+
+Там же в `VueYandexMaps` есть доступ к информации о загрузке скрипта (`loadStatus`, `loadError`, `isLoaded`).
+
+При желании, `VueYandexMaps.settings` можно даже изменять, но это не проверялось - меняйте  `VueYandexMaps.settings.value` на
+свой страх и риск и только если уверены в том, что по другому никак.
