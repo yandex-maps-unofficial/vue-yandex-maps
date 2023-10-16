@@ -1,3 +1,9 @@
 <template>
-  <nuxt/>
+  <nuxt />
 </template>
+
+<script setup>
+defineOptions({
+  name: 'DefaultLayout',
+});
+</script>

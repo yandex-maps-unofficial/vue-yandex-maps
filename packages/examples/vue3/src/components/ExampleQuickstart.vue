@@ -23,6 +23,7 @@ import { YMap } from '@yandex/ymaps3-types';
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
 import CommonWrapper from './CommonWrapper.vue';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
   isDarkTheme: {
     type: Boolean,
