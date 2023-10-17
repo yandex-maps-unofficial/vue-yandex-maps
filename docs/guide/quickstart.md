@@ -2,7 +2,39 @@
 
 В этом разделе подразумевается, что вы уже установили и сконфигурировали проект.
 
-<<< ../../packages/examples/vue3/src/components/ExampleQuickstart.vue
+Для запуска вам потребуется:
+1. Настроить карту
+2. Прописать location с center/zoom в settings
+3. Указать компоненты `<yandex-map-default-features-layer />` и `<yandex-map-default-scheme-layer />` в теле `<yandex-map />` - без этого не запустится
+4. Опционально указать width/height у `<yandex-map />` (по умолчанию: 100%)
+
+```vue
+<template>
+  <yandex-map
+      v-model="map"
+      :settings="{
+        location: {
+          center: [37.617644, 55.755819],
+          zoom: 9,
+        },
+      }"
+      width="100%"
+      height="500px"
+  >
+    <yandex-map-default-features-layer/>
+    <yandex-map-default-scheme-layer/>
+  </yandex-map>
+</template>
+
+<script setup lang="ts">
+  import { shallowRef } from 'vue';
+  import { YMap } from '@yandex/ymaps3-types';
+  import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+
+  //Можно использовать для различных преобразований
+  const map = shallowRef<null | YMap>(null);
+</script>
+```
 
 <example-quickstart :is-dark-theme="isDark()"/>
 
