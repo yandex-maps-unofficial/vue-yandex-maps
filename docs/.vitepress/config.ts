@@ -223,7 +223,7 @@ export default defineConfig({
             collapsed: true,
             items: [
               {
-                text: 'Создать и удалить карту',
+                text: 'Создание карты',
                 link: '/examples/map-basics',
               },
               {

@@ -37,10 +37,13 @@ export default defineComponent({
     const projection = inject<Ref<null | Projection>>('projection');
 
     onMounted(async () => {
-      if (!projection) return;
+      if (!projection) {
+        hold.value--;
+        return;
+      }
 
       const mercator = await setupMapChildren({
-        returnOnly: true,
+        isMercator: true,
         createFunction: ({ SphericalMercator: Mercator }) => new Mercator(),
         requiredImport: () => ymaps3.import('@yandex/ymaps3-spherical-mercator-projection@0.0.1'),
       });

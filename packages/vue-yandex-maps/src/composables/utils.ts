@@ -173,6 +173,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   createFunction,
   settings,
   isLayer,
+  isMercator,
   isMapRoot,
   mapRootRef,
 }: {
@@ -184,6 +185,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   createFunction: (neededImport: Awaited<ReturnType<R>>) => T
   settings?: ComputedRef<Record<string, any>>
   isLayer?: boolean
+  isMercator?: boolean
 }) {
   if (!getCurrentInstance()) {
     throwException({
@@ -208,12 +210,16 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
 
   if (!returnOnly) {
     onBeforeUnmount(() => {
-      if (children.value && !('toWorldCoordinates' in children.value)) {
+      if (children.value && !isMercator) {
         if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
           mapRoot.value = mapRoot.value.filter((x) => x !== children.value);
         } else {
-          (mapRoot?.value || map.value)?.removeChild(children.value);
+          (mapRoot?.value || map.value)?.removeChild(children.value as YMapEntity<unknown>);
         }
+      } else if (map.value && children.value && isMercator) {
+        map.value.update({
+          projection: undefined,
+        });
       }
     });
   }
@@ -224,7 +230,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     }, { deep: true });
   }
 
-  if (!isLayer) {
+  if (!isLayer && !isMercator) {
     await waitTillMapInit();
     if (!map.value) {
       throwException({
@@ -261,7 +267,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
 
   children.value = createFunction(importData as Awaited<ReturnType<R>>);
 
-  if (!returnOnly && map.value && !('toWorldCoordinates' in children.value)) {
+  if (!returnOnly && map.value && !isMercator) {
     if (initPromises?.value) {
       await Promise.all(initPromises.value);
       if (!requiredImport) await nextTick();
@@ -273,10 +279,14 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         children.value,
       ];
     } else {
-      (mapRoot?.value || map.value).addChild(children.value);
+      (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>);
     }
   } else if (isLayer) {
     layers.value.push(children.value);
+  } else if (isMercator && map.value) {
+    map.value.update({
+      projection: children.value as unknown as Projection,
+    });
   }
 
   return children.value;

@@ -11079,6 +11079,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"examples@workspace:^, examples@workspace:packages/examples/examples":
+  version: 0.0.0-use.local
+  resolution: "examples@workspace:packages/examples/examples"
+  dependencies:
+    "@types/node": ^20.8.6
+    "@vitejs/plugin-vue": ^4.4.0
+    "@vue/tsconfig": ^0.4.0
+    "@yandex/ymaps3-types": ^0.0.17
+    npm-run-all: ^4.1.5
+    typescript: ^5.2.2
+    vite: ^4.4.11
+    vue: ^3.3.4
+    vue-tsc: ^1.8.19
+    vue-yandex-maps: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "execa@npm:^1.0.0":
   version: 1.0.0
   resolution: "execa@npm:1.0.0"
@@ -22560,6 +22577,7 @@ __metadata:
     eslint-plugin-jest: ^27.4.2
     eslint-plugin-vue: ^9.17.0
     example-vue3: "workspace:^"
+    examples: "workspace:^"
     typescript: ^5.2.2
     vitepress: ^1.0.0-rc.22
     vue-yandex-maps: "workspace:^"

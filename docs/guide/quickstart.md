@@ -21,7 +21,6 @@
       width="100%"
       height="500px"
   >
-    <yandex-map-default-features-layer/>
     <yandex-map-default-scheme-layer/>
   </yandex-map>
 </template>

@@ -48,7 +48,7 @@ export default defineComponent({
       if (!projection) return;
 
       const cartesian = await setupMapChildren({
-        returnOnly: true,
+        isMercator: true,
         createFunction: ({ Cartesian: CartesianClass }) => new CartesianClass(props.bounds, props.cycled),
         requiredImport: () => ymaps3.import('@yandex/ymaps3-cartesian-projection@0.0.1'),
       });
