@@ -1,0 +1,48 @@
+name: Feature request (2.x Beta)
+description: Предложите улучшение в версию 2.х
+labels: [ "enhancement", "2.x" ]
+assignees:
+  - daniluk4000
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо, что предлагаете улучшения в библиотеку!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Опишите, какую проблему вы хотите решить
+      description: Что вам не нравится или что вы хотели бы видеть в библиотеке.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Опишите решение проблемы
+      description: Как бы вы хотели бы, чтобы было?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Альтернативы
+      description: Опишите, как вы работаете сейчас и какой нашли выход из ситуации, если он есть.
+    validations:
+      required: false
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Дополнительная информация
+      description: Опишите, что еще нам нужно знать.
+    validations:
+      required: false
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Немного формальностей
+      description: Пожалуйста, сверьтесь с пунктами ниже
+      options:
+        - label: Я использую версию 2.x
+          required: true
+        - label: Я готов(а) помочь с имплементацией этого улучшения
+          required: false
