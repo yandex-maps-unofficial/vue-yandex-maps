@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import {
- YandexMap, YandexMapDefaultSchemeLayer, YandexMapControls, YandexMapZoomControl 
+  YandexMap, YandexMapDefaultSchemeLayer, YandexMapControls, YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import CommonWrapper from '../CommonWrapper.vue';
 </script>
