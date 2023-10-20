@@ -12,7 +12,7 @@ import {
   watch,
 } from 'vue';
 import type { YMap, YMapEntity, YMapProps } from '@yandex/ymaps3-types';
-import { Projection } from '@yandex/ymaps3-types/common/types';
+import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../composables/maps';
 import { VueYandexMaps } from '../namespace.ts';
 import { throwException } from '../composables/utils.ts';

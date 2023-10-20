@@ -1,5 +1,5 @@
 <script lang="ts">
-import { YMapMarker } from '@yandex/ymaps3-types';
+import type { YMapMarker } from '@yandex/ymaps3-types';
 import {
   computed, defineComponent, h, onMounted, PropType, ref,
 } from 'vue';

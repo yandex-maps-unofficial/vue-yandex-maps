@@ -2,7 +2,7 @@
 import {
   computed, defineComponent, h, onMounted, PropType, ref,
 } from 'vue';
-import { YMapControlButton } from '@yandex/ymaps3-types';
+import type { YMapControlButton } from '@yandex/ymaps3-types';
 import { setupMapChildren } from '../../composables/utils.ts';
 
 export type YandexMapControlButtonSettings = Omit<ConstructorParameters<typeof YMapControlButton>[0], 'element'>

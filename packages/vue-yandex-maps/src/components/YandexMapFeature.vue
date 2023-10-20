@@ -1,5 +1,5 @@
 <script lang="ts">
-import { YMapFeature } from '@yandex/ymaps3-types';
+import type { YMapFeature } from '@yandex/ymaps3-types';
 import {
   computed, defineComponent, h, onMounted, PropType,
 } from 'vue';

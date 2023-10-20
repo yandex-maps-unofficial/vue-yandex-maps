@@ -2,7 +2,7 @@
 import {
   computed, defineComponent, h, onMounted, PropType,
 } from 'vue';
-import {
+import type {
   BehaviorEvents, DomEvents, MapEvents, YMapListener,
 } from '@yandex/ymaps3-types';
 import { setupMapChildren } from '../composables/utils.ts';

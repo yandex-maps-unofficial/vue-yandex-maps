@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { shallowRef } from 'vue';
-import { YMap } from '@yandex/ymaps3-types';
+import type { YMap } from '@yandex/ymaps3-types';
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
 import CommonWrapper from './CommonWrapper.vue';
 

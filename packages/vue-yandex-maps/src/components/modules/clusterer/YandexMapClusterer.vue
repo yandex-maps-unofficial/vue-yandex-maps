@@ -2,10 +2,10 @@
 import {
   computed, defineComponent, h, nextTick, onMounted, PropType, Ref, ref, shallowRef, VNode, watch,
 } from 'vue';
-import { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
-import { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
-import { YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
-import { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
+import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
+import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
+import type { YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
+import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
 import { setupMapChildren, throwException } from '../../../composables/utils.ts';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]

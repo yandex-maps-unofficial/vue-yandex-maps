@@ -2,7 +2,7 @@
 import {
   defineComponent, h, inject, onMounted, PropType, Ref,
 } from 'vue';
-import { Projection } from '@yandex/ymaps3-types/common/types';
+import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { setupMapChildren } from '../../../composables/utils.ts';
 
 export default defineComponent({

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { YMapDefaultSchemeLayer } from '@yandex/ymaps3-types';
+import type { YMapDefaultSchemeLayer } from '@yandex/ymaps3-types';
 import {
   computed, defineComponent, h, inject, onMounted, PropType, Ref,
 } from 'vue';

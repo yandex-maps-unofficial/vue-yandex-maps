@@ -2,7 +2,7 @@
 import {
   computed, defineComponent, h, onMounted, PropType, ref,
 } from 'vue';
-import { YMapControl } from '@yandex/ymaps3-types';
+import type { YMapControl } from '@yandex/ymaps3-types';
 import { setupMapChildren } from '../../composables/utils';
 
 export default defineComponent({

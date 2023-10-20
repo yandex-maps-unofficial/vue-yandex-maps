@@ -45,7 +45,7 @@ import {
   YandexMap, YandexMapDefaultSchemeLayer, YandexMapControls, YandexMapControlButton, YandexMapSphericalMercatorProjection, YandexMapTileDataSource, YandexMapLayer,
 } from 'vue-yandex-maps';
 import { shallowRef, ref } from 'vue';
-import { YMap } from '@yandex/ymaps3-types';
+import type { YMap } from '@yandex/ymaps3-types';
 import CommonWrapper from '../CommonWrapper.vue';
 
 const map = shallowRef<YMap | null>(null);

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { YMapTileDataSource } from '@yandex/ymaps3-types';
+import type { YMapTileDataSource } from '@yandex/ymaps3-types';
 import {
   computed, defineComponent, h, inject, onMounted, PropType, Ref,
 } from 'vue';

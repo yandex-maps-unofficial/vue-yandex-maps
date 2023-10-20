@@ -2,8 +2,8 @@
 import {
   defineComponent, h, inject, onMounted, PropType, Ref,
 } from 'vue';
-import { Cartesian } from '@yandex/ymaps3-types/packages/cartesian-projection';
-import { Projection } from '@yandex/ymaps3-types/common/types';
+import type { Cartesian } from '@yandex/ymaps3-types/packages/cartesian-projection';
+import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { setupMapChildren } from '../../../composables/utils.ts';
 
 export default defineComponent({
