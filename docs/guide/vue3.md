@@ -11,15 +11,15 @@ next:
 ::: code-group
 
 ```shell [npm]
-npm install vue-yandex-maps@v2
+npm install vue-yandex-maps@next
 ```
 
 ```shell [yarn]
-yarn add vue-yandex-maps@v2
+yarn add vue-yandex-maps@next
 ```
 
 ```shell [pnpm]
-pnpm install vue-yandex-maps@v2
+pnpm install vue-yandex-maps@next
 ```
 
 :::
@@ -52,6 +52,22 @@ app.mount('#app');
 ```
 
 :::
+
+#### Настройка для TypeScript
+Для более удобной работы с Картами вы также можете добавить пакет Карт в typeRoots вашего `tsconfig.json`. 
+
+```json {}
+{
+  "compilerOptions": {
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@yandex/ymaps3-types"
+    ]
+  }
+}
+```
+
+В Nuxt 3 это добавляется автоматически.
 
 ### Nuxt 3
 
