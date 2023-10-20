@@ -57,9 +57,12 @@ jobs:
         with:
           node-version: 20
       - run: yarn
-      - run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: yarn lint && yarn build:full
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./packages/vue-yandex-maps
+          tag: next
   docs-deploy:
     name: Docs Deploy
     environment:
