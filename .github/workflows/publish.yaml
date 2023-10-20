@@ -47,6 +47,7 @@ jobs:
     name: NPM Publish
     needs: check
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
