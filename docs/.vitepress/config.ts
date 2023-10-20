@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress';
 
 export default defineConfig({
+  base: process.env.NODE_ENV === 'development' ? '/' : '/vue-yandex-maps/',
   lang: 'ru-RU',
   title: 'Vue Yandex Maps',
   description: 'Откройте для себя Яндекс карты для Vue',

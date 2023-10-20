@@ -9,4 +9,4 @@
 
 Добро пожаловать в Vue Yandex Maps! Это - обертка над Яндекс Картами 3.0 под Vue 2 и 3, поддерживающая Nuxt и SSR. 
 
-[Документация](yandex-maps-unofficial.github.io)
+[Документация](https://yandex-maps-unofficial.github.io/vue-yandex-maps/)
