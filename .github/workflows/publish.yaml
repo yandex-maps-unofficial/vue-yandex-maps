@@ -38,6 +38,7 @@ jobs:
       - name: Build with VitePress
         run: |
           yarn
+          yarn build:full
           yarn docs:build
           touch docs/.vitepress/dist/.nojekyll
       - name: Upload artifact
