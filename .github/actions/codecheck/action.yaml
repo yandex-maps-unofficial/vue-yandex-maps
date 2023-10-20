@@ -4,16 +4,30 @@ description: 'Perform lint and build of project'
 runs:
   using: composite
   steps:
-    - name: Test
+    - name: Install deps
       shell: bash
-      run: |
-        yarn
-        yarn lint
-        yarn workspace vue-yandex-maps build:package-only
-        yarn workspace vue-yandex-maps build
-        yarn workspace example-nuxt2 build
-        yarn workspace example-nuxt2 generate
-        yarn workspace example-nuxt3 build
-        yarn workspace example-nuxt3 generate
-        yarn workspace example-vue2 build
-        yarn workspace example-vue3 build
+      run: yarn
+    - name: Lint
+      shell: bash
+      run: yarn lint
+    - name: Build package
+      shell: bash
+      run: yarn build:full
+    - name: Build Nuxt 2
+      shell: bash
+      run: yarn workspace example-nuxt2 build
+    - name: Generate Nuxt 2
+      shell: bash
+      run: yarn workspace example-nuxt2 generate
+    - name: Build Nuxt 3
+      shell: bash
+      run: yarn workspace example-nuxt3 build
+    - name: Generate Nuxt 3
+      shell: bash
+      run: yarn workspace example-nuxt3 generate
+    - name: Build Vue 2
+      shell: bash
+      run: yarn workspace example-vue2 build
+    - name: Generate Vue 3
+      shell: bash
+      run: yarn workspace example-vue3 build
