@@ -79,7 +79,7 @@ jobs:
         id: release
         uses: MatteoCampinoti94/changelog-to-release@v1.0.2
         with:
-          version-name: ${{ steps.get-version.outputs.version }}
+          version-name: ${{ steps.tagName.outputs.version }}
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
