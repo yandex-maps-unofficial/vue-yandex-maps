@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   check:
+    name: Run build and lint checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -64,6 +65,7 @@ jobs:
           package: ./packages/vue-yandex-maps
           tag: next
   github-release:
+    name: Release tag to Github
     needs: npm-publish
     runs-on: ubuntu-latest
     steps:
