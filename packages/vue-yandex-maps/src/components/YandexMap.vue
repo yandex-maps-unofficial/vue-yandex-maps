@@ -1,5 +1,6 @@
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   h,
   nextTick,
@@ -10,12 +11,19 @@ import {
   ref,
   shallowRef,
   watch,
+  WatchStopHandle,
 } from 'vue';
-import type { YMap, YMapEntity, YMapProps } from '@yandex/ymaps3-types';
+import type {
+  LngLat, YMap, YMapEntity, YMapProps,
+} from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../composables/maps';
 import { VueYandexMaps } from '../namespace.ts';
 import { throwException } from '../composables/utils.ts';
+import { toRaw } from 'vue-demi';
+import { diff } from 'deep-object-diff';
+
+export type YandexMapSettings = Omit<YMapProps, 'projection'>
 
 export default defineComponent({
   name: 'YandexMap',
@@ -46,21 +54,34 @@ export default defineComponent({
       default: 0,
     },
     /**
-     * @description Settings for cart initialization.
+     * @description Settings for cart initialization.,
      *
-     * Modifying this object after mount will cause no effect.
-     *
-     * Instead, you myst use map methods, such as setLocation/setBehaviors e.t.c.
+     * You can modify this object or use map methods, such as setLocation/setBehaviors e.t.c.
      * @see https://yandex.ru/dev/maps/jsapi/doc/3.0/dg/concepts/map.html#map-parms
      * @see https://yandex.com/dev/maps/jsapi/doc/3.0/dg/concepts/map.html#map-parms
      */
     settings: {
-      type: Object as PropType<YMapProps>,
+      type: Object as PropType<YandexMapSettings>,
       validator: (val: any) => {
         if (!('location' in val)) return false;
         return true;
       },
       required: true,
+    },
+    /**
+     * @description Makes settings readonly. Enable this if reactivity causes problems
+     */
+    readonlySettings: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * @description Always inserts actual user center or bounds (based on your input) on every location change
+     * @note This prop will cause user location change on every settings update (if user did move since last time). Use it with caution.
+     */
+    realSettingsLocation: {
+      type: Boolean,
+      default: false,
     },
     /**
      * @description You can also add layers through <yandex-*> components
@@ -108,6 +129,11 @@ export default defineComponent({
     emit('input', map.value);
     emit('update:modelValue', map.value);
 
+    const getSettings = computed<YMapProps>(() => ({
+      ...props.settings,
+      projection: undefined,
+    }));
+
     const init = async () => {
       const container = ymapContainer.value;
       if (!container) {
@@ -119,8 +145,8 @@ export default defineComponent({
 
       if (map.value) map.value.destroy();
 
-      const settings = { ...props.settings };
-      if (projection.value && !settings.projection) settings.projection = projection.value;
+      const settings: YMapProps = getSettings.value;
+      if (projection.value) settings.projection = projection.value;
 
       const createdMap = new ymaps3.YMap(container, settings, [
         ...layers.value,
@@ -161,6 +187,53 @@ export default defineComponent({
       }
 
       await init();
+
+      let watcher: WatchStopHandle | undefined;
+
+      const setupWatcher = () => {
+        watcher?.();
+
+        let settings: YMapProps = JSON.parse(JSON.stringify(toRaw(getSettings.value)));
+        watch(getSettings, (val) => {
+          const rawVal = toRaw(val);
+          const clonedSettings: YMapProps = JSON.parse(JSON.stringify(rawVal));
+
+          // Handling location change
+          if (props.realSettingsLocation && clonedSettings.location) {
+            if ('center' in clonedSettings.location && 'center' in settings.location) {
+              settings.location.center = map.value!.center as LngLat;
+            } else if ('bounds' in clonedSettings.location && 'bounds' in settings.location) {
+              settings.location.bounds = map.value!.bounds;
+            }
+          }
+
+          const settingsDiff: Record<string, any> = diff(settings, clonedSettings);
+          if (Object.keys(settingsDiff).length === 0) return;
+
+          settings = clonedSettings;
+
+          map.value?.update({
+            ...settingsDiff,
+            // Support duration and easing to be always passed
+            ...('location' in settingsDiff ? { location: { ...settingsDiff.location, duration: clonedSettings.location?.duration, easing: clonedSettings.location?.easing } } : {}),
+            ...('camera' in settingsDiff ? { camera: { ...settingsDiff.camera, duration: clonedSettings.camera?.duration, easing: clonedSettings.camera?.easing } } : {}),
+          });
+        }, {
+          deep: true,
+        });
+      };
+
+      if (!props.readonlySettings) {
+        setupWatcher();
+      }
+
+      watch(() => props.readonlySettings, (val) => {
+        if (!val) {
+          watcher?.();
+        } else {
+          setupWatcher();
+        }
+      });
     });
 
     onBeforeUnmount(() => {

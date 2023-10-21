@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import packageJson from '../../packages/vue-yandex-maps/package.json' assert { type: 'json' };
 
 export default defineConfig({
   base: '/vue-yandex-maps/',
@@ -13,6 +14,10 @@ export default defineConfig({
     },
   },
   themeConfig: {
+    sidebarMenuLabel: packageJson.version,
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/blob/v2' },
+    ],
     outline: {
       label: 'На этой странице',
       level: 'deep',
@@ -43,6 +48,59 @@ export default defineConfig({
       },
     },
     i18nRouting: true,
+    nav: [
+      {
+        text: 'О проекте',
+        link: '/guide/about',
+      },
+      {
+        text: 'Руководства',
+        items: [
+          {
+            text: 'Установка (Vue 3)',
+            link: '/guide/vue3',
+          },
+          {
+            text: 'Установка (Vue 2)',
+            link: '/guide/vue2',
+          },
+          {
+            text: 'Конфигурация',
+            link: '/guide/configuration',
+          },
+          {
+            text: 'Стартовый шаблон',
+            link: '/guide/quickstart',
+          },
+          {
+            text: 'Общие принципы работы компонентов',
+            link: '/components/',
+          },
+          {
+            text: 'YandexMap',
+            link: '/components/map',
+          },
+        ],
+      },
+      {
+        text: 'Песочница',
+        link: '/examples/playground',
+      },
+      {
+        text: packageJson.version,
+        items: [
+          { text: 'Список изменений', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/blob/v2/CHANGELOG.md' },
+          {
+            text: 'Создать новую Issue',
+            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/new/choose',
+          },
+          {
+            text: 'Задать вопрос',
+            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/discussions'
+          }
+        ],
+      },
+    ],
     sidebar: [
       {
         text: 'Начало работы',
@@ -71,14 +129,14 @@ export default defineConfig({
             link: '/guide/configuration',
           },
           {
-            text: 'Быстрый старт',
+            text: 'Начало работы',
             link: '/guide/quickstart',
           },
         ],
       },
       {
         text: 'Компоненты',
-        link: '/components/',
+        collapsed: false,
         items: [
           {
             text: 'Общие принципы работы',
@@ -86,7 +144,7 @@ export default defineConfig({
           },
           {
             text: 'Основные компоненты',
-            collapsed: true,
+            collapsed: false,
             items: [
               {
                 text: 'YandexMap',
@@ -214,6 +272,7 @@ export default defineConfig({
       },
       {
         text: 'Примеры',
+        collapsed: false,
         items: [
           {
             text: 'Песочница',

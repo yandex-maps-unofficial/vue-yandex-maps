@@ -38,7 +38,7 @@ jobs:
       - name: Build main package
         run: |
           yarn
-          yarn build:full
+          yarn build
       - name: Build with VitePress
         run: |
           yarn docs:build
@@ -57,7 +57,7 @@ jobs:
         with:
           node-version: 20
       - run: yarn
-      - run: yarn lint && yarn build:full
+      - run: yarn lint && yarn build
       - uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}

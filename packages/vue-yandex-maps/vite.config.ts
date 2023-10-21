@@ -1,9 +1,8 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import babel from '@rollup/plugin-babel';
 import dts from 'vite-plugin-dts';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
+import del from 'rollup-plugin-delete';
 
 export default defineConfig({
   optimizeDeps: {
@@ -35,25 +34,8 @@ export default defineConfig({
     },
   },
   plugins: [
+    del({ targets: 'dist/*' }),
     vue(),
     dts(),
-    babel({
-      babelHelpers: 'runtime',
-      exclude: '**/node_modules/**',
-      sourceType: 'unambiguous',
-    }),
-    viteStaticCopy({
-      targets: [
-        {
-          src: 'src/plugins/nuxt2-plugin.js',
-          dest: '',
-        },
-        {
-          src: '../nuxt/dist',
-          rename: 'nuxt',
-          dest: '',
-        },
-      ],
-    }),
   ],
 });

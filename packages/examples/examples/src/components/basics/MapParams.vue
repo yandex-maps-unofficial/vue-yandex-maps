@@ -5,14 +5,18 @@
         coordinates: center, theme, zoom, width, height,
       }"
     >
+      <!-- #region html -->
+      <!-- Параметр real-settings-location в примере вызывает изменение геопозиции на каждое изменение settings. -->
+      <!-- Ознакомьтесь с документацией компонента YandexMap, чтобы узнать больше, зачем он нужен и какие подводные камни -->
       <yandex-map
         v-model="map"
         :settings="{
-          location: {
+          location: localLocation || {
             center,
             zoom,
           },
         }"
+        real-settings-location
         :width="width"
         :height="height"
       >
@@ -25,46 +29,59 @@
         <yandex-map-spherical-mercator-projection v-if="useMercator" />
 
         <yandex-map-controls :settings="{ position: 'top left' }">
-          <yandex-map-control-button @click="changeCenter">
+          <yandex-map-control-button :settings="{ onClick: changeCenter }">
             Change center
           </yandex-map-control-button>
-          <yandex-map-control-button @click="setBounds">
+          <yandex-map-control-button :settings="{ onClick: setBounds }">
             Change borders
           </yandex-map-control-button>
-          <yandex-map-control-button @click="[useMercator = true, map!.setLocation(NEW_LOCATION)]">
+          <yandex-map-control-button :settings="{ onClick: () => [useMercator = true, localLocation = NEW_LOCATION] }">
             Change type and reset
           </yandex-map-control-button>
         </yandex-map-controls>
       </yandex-map>
+      <!-- #endregion html -->
     </template>
   </common-wrapper>
 </template>
 
 <script setup lang="ts">
-import {
-  YandexMap, YandexMapDefaultSchemeLayer, YandexMapControls, YandexMapControlButton, YandexMapSphericalMercatorProjection, YandexMapTileDataSource, YandexMapLayer,
-} from 'vue-yandex-maps';
-import { shallowRef, ref } from 'vue';
-import type { YMap } from '@yandex/ymaps3-types';
 import CommonWrapper from '../CommonWrapper.vue';
+// #region setup
+import {
+  YandexMap,
+  YandexMapControlButton,
+  YandexMapControls,
+  YandexMapDefaultSchemeLayer,
+  YandexMapLayer,
+  YandexMapSphericalMercatorProjection,
+  YandexMapTileDataSource,
+} from 'vue-yandex-maps';
+import { ref, shallowRef } from 'vue';
+import type { YMap } from '@yandex/ymaps3-types';
+import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
 
 const map = shallowRef<YMap | null>(null);
+
+const localLocation = shallowRef<YMapLocationRequest | null>(null);
 
 const useMercator = ref(false);
 
 const changeCenter = () => {
-  map.value!.setLocation({
+  localLocation.value = {
     center: [40.925358, 57.767265],
-  });
+    duration: 1000,
+  };
 };
 
 const setBounds = () => {
-  map.value!.setLocation({
+  localLocation.value = {
     bounds: [
       [37.60665514623445, 55.75504837113109],
       [37.64253237401767, 55.74430147115553],
     ],
-  });
+    duration: 1000,
+  };
 };
 
 const dataSourceProps = {
@@ -74,7 +91,10 @@ const dataSourceProps = {
     type: 'ground',
     fetchTile: 'https://tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png',
   },
-  zoomRange: { min: 0, max: 19 },
+  zoomRange: {
+    min: 0,
+    max: 19,
+  },
   clampMapZoom: true,
 };
 
@@ -94,4 +114,5 @@ const NEW_LOCATION = {
   zoom: 10,
   duration: 1000,
 };
+// #endregion setup
 </script>

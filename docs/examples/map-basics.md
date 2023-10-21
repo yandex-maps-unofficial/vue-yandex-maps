@@ -9,4 +9,8 @@ import MapComponent from 'examples/src/components/basics/MapBasics.vue';
 
 <map-component/>
 
-<<< ../../packages/examples/examples/src/components/basics/MapBasics.vue
+:::code-group
+<<< ../../packages/examples/examples/src/components/basics/MapBasics.vue#html{html} [Template]
+
+<<< ../../packages/examples/examples/src/components/basics/MapBasics.vue#setup{ts} [Setup]
+:::

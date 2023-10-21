@@ -12,7 +12,7 @@ runs:
       run: yarn lint
     - name: Build package
       shell: bash
-      run: yarn build:full
+      run: yarn build
     - name: Build Nuxt 2
       shell: bash
       run: yarn workspace example-nuxt2 build

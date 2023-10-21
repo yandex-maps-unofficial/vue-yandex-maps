@@ -6,7 +6,6 @@
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
         "docs:preview": "vitepress preview docs",
-        "build:full": "yarn workspace vue-yandex-maps build:package-only && yarn build",
         "build": "yarn workspace vue-yandex-maps build",
         "nuxt:build": "yarn workspace nuxt prepack",
         "test:vue2": "yarn workspace vue-yandex-maps build:package-only && yarn workspace example-vue2 serve",
@@ -16,7 +15,7 @@
         "test:nuxt3": "yarn workspace vue-yandex-maps build && yarn workspace example-nuxt3 dev",
         "lint": "eslint --ext \".js,.ts,.vue\" ./packages/* --max-warnings 0",
         "lint:fix": "yarn lint --fix",
-        "publish": "yarn lint && yarn build:full && yarn workspace vue-yandex-maps npm:publish"
+        "publish": "yarn lint && yarn build && yarn workspace vue-yandex-maps npm:publish"
     },
     "dependencies": {
         "@yandex/ymaps3-types": "^0.0.17",
@@ -31,7 +30,6 @@
         "@typescript-eslint/parser": "^6.8.0",
         "@vue/eslint-config-airbnb": "^7.0.0",
         "eslint": "^8.51.0",
-        "eslint-plugin-jest": "^27.4.2",
         "eslint-plugin-vue": "^9.17.0",
         "typescript": "^5.2.2",
         "vitepress": "^1.0.0-rc.22"
