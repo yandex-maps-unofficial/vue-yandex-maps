@@ -6,7 +6,7 @@
 
 ### Новые возможности
 - Поддержана реактивность `settings` в `YandexMap`
-- Добавлены настройки `YandexMap`: `readonlySettings` и `strictLocationSettings`
+- Добавлены настройки `YandexMap`: `readonlySettings` и `realSettingsLocation`
 - Добавлен экспортов локальных типов настроек из компонентов
 
 ### Документация
