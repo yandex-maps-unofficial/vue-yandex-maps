@@ -67,9 +67,8 @@ import {
 import {
   onMounted, reactive, ref, shallowRef,
 } from 'vue';
-import { LngLat, YMap, YMapCenterZoomLocation } from '@yandex/ymaps3-types';
+import type { LngLat, YMap, YMapCenterZoomLocation } from '@yandex/ymaps3-types';
 import type { YMapCameraRequest, YMapLocation } from '@yandex/ymaps3-types/imperative/YMap';
-import { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
 
 const map = shallowRef<YMap | null>(null);
 
