@@ -63,6 +63,26 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/vue-yandex-maps
           tag: next
+  github-release:
+    needs: npm-publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get Tag Name
+        id: tagName
+        uses: olegtarasov/get-tag@v2.1.2
+      - name: Build Release
+        id: release
+        uses: MatteoCampinoti94/changelog-to-release@v1.0.2
+        with:
+          version-name: ${{ steps.tagName.outputs.tag }}
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.tagName.outputs.tag }}
+          name: ${{ steps.release.outputs.title }}
+          body: ${{ steps.release.outputs.body }}
   docs-deploy:
     name: Docs Deploy
     continue-on-error: true
