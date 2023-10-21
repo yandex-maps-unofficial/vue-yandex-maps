@@ -86,12 +86,6 @@ function rangeRandom(min: number, max: number) {
   return (max - min) * Math.random() + min;
 }
 
-const camera = ref<YMapCameraRequest>({
-  tilt: 0,
-  azimuth: 0,
-  duration: 0,
-});
-
 type StateFly = YMapCenterZoomLocation & Partial<YMapCameraRequest>
 
 const state = reactive({
@@ -107,8 +101,6 @@ const settings = reactive<Partial<YandexMapSettings>>({
     duration: 0,
   },
 });
-
-const localLocation = shallowRef<YMapLocationRequest | null>(null);
 
 const changeCenter = () => {
   settings.location = {
