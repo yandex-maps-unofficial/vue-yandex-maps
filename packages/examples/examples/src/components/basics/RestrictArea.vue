@@ -2,14 +2,14 @@
   <common-wrapper>
     <template
       #default="{
-        coordinates: center, theme, zoom, width, height,
+        theme, zoom, width, height,
       }"
     >
       <!-- #region html -->
       <yandex-map
         :settings="{
           location: {
-            center,
+            center: [30.3, 59.938],
             zoom,
           },
           zoomRange: ZOOM_RANGE,
