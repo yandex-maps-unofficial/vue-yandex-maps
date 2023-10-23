@@ -1,4 +1,4 @@
-import type { App, Vue2 } from 'vue-demi';
+import type { App } from 'vue';
 import { VueYandexMaps } from '..';
 import { createYmapsOptions } from '../composables/maps';
 
@@ -14,7 +14,7 @@ export function createYmaps(settings: VueYandexMaps.PluginSettings) {
 export function createYmapsVue2(settings: VueYandexMaps.PluginSettings) {
   return {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    install(Vue: typeof Vue2) {
+    install(Vue: unknown) {
       createYmapsOptions(settings);
     },
   };

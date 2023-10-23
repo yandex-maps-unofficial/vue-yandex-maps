@@ -6,7 +6,7 @@ import del from 'rollup-plugin-delete';
 
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['vue', 'vue-demi'],
+    exclude: ['vue'],
   },
   build: {
     minify: false,
@@ -17,7 +17,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['vue', 'vue-demi', 'path'],
+      external: ['vue', 'path'],
       input: {
         'vue-yandex-maps': resolve(__dirname, 'src/index.ts'),
         nuxt2: resolve(__dirname, 'src/plugins/nuxt2'),
@@ -27,7 +27,6 @@ export default defineConfig({
         esModule: true,
         globals: {
           vue: 'Vue',
-          'vue-demi': 'VueDemi',
         },
         entryFileNames: '[name].js',
       },

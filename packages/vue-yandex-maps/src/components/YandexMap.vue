@@ -12,6 +12,7 @@ import {
   shallowRef,
   watch,
   WatchStopHandle,
+  toRaw,
 } from 'vue';
 import type {
   LngLat, YMap, YMapEntity, YMapProps,
@@ -20,7 +21,6 @@ import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../composables/maps';
 import { VueYandexMaps } from '../namespace.ts';
 import { throwException } from '../composables/utils.ts';
-import { toRaw } from 'vue-demi';
 import { diff } from 'deep-object-diff';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>
