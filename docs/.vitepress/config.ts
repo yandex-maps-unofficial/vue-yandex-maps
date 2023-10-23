@@ -314,10 +314,6 @@ export default defineConfig({
                 text: 'Ограничить область просмотра карты',
                 link: '/examples/map-restrict-area',
               },
-              {
-                text: 'Кастомизация',
-                link: '/examples/map-customization',
-              },
             ],
           },
           {
