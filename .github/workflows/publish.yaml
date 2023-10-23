@@ -74,11 +74,9 @@ jobs:
         uses: beaconbrigade/package-json-version@v0.3
         with:
           path: ./packages/vue-yandex-maps
-      - name: Build Release
-        id: release
-        uses: MatteoCampinoti94/changelog-to-release@v1.0.2
-        with:
-          version-name: ${{ steps.tagName.outputs.version }}
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v1
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
@@ -86,7 +84,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ steps.tagName.outputs.version }}
           name: ${{ steps.release.outputs.title }}
-          body: ${{ steps.release.outputs.body }}
+          body: ${{ steps.extract-release-notes.outputs.release_notes }}
   docs-deploy:
     name: Docs Deploy
     continue-on-error: true
