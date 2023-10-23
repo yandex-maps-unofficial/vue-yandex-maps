@@ -1,6 +1,6 @@
 {
   "name": "vue-yandex-maps",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "description": "Yandex Maps 3.0 components library for VueJS.",
   "main": "./dist/vue-yandex-maps.js",
   "types": "./dist/index.d.ts",
@@ -24,6 +24,9 @@
     "npm:publish": "npm publish --tag next"
   },
   "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
     "package.json",
     "dist"
   ],
@@ -31,6 +34,10 @@
     "node": ">=18"
   },
   "type": "module",
+  "homepage": "https://yandex-maps-unofficial.github.io/vue-yandex-maps/",
+  "bugs": {
+    "url": "https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/yandex-maps-unofficial/vue-yandex-maps"
@@ -40,10 +47,21 @@
     "яндекс-карты",
     "yandex maps",
     "yandex-maps",
+    "yandex",
     "maps",
-    "vue"
+    "vue",
+    "nuxt"
   ],
-  "author": "bizz.gc@gmail.com",
+  "author": {
+    "name": "Danila Rodichkin",
+    "email": "daniluk4000@outlook.com"
+  },
+  "contributors": [
+    {
+      "name": "pnkbizz",
+      "email": "bizz.gc@gmail.com"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "@nuxt/kit": "^3.8.0",

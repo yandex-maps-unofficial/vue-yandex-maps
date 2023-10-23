@@ -1,3 +1,7 @@
+## 2.0.0-beta.3
+
+- В npm добавлены README.md, LICENSE и CHANGELOG.md
+
 ## 2.0.0-beta.2
 
 ### Breaking Changes
