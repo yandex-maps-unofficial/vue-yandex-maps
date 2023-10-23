@@ -32,7 +32,7 @@
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-  YandexMap, YandexMapControls, YandexMapDefaultSchemeLayer, YandexMapZoomControl, YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker,
+  YandexMap, YandexMapDefaultSchemeLayer, YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker,
 } from 'vue-yandex-maps';
 
 const RESTRICT_AREA = [

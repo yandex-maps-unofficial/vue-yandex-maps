@@ -16,7 +16,7 @@
         :width="width"
         :height="height"
       >
-        <yandex-map-default-scheme-layer :settings="{ theme, customization: CUSTOMIZATION }" />
+        <yandex-map-default-scheme-layer :settings="{ theme, customization: customization2 ? CUSTOMIZATION_2 : CUSTOMIZATION }" />
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
         </yandex-map-controls>
