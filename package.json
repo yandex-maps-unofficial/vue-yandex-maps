@@ -18,25 +18,25 @@
         "publish": "yarn lint && yarn build && yarn workspace vue-yandex-maps npm:publish"
     },
     "dependencies": {
-        "@yandex/ymaps3-types": "^0.0.17",
+        "@yandex/ymaps3-types": "^0.0.18",
         "example-vue3": "workspace:^",
         "examples": "workspace:^",
         "vue-yandex-maps": "workspace:^"
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.22.15",
-        "@types/node": "^20.8.7",
-        "@typescript-eslint/eslint-plugin": "^6.8.0",
-        "@typescript-eslint/parser": "^6.8.0",
+        "@types/node": "^20.8.9",
+        "@typescript-eslint/eslint-plugin": "^6.9.0",
+        "@typescript-eslint/parser": "^6.9.0",
         "@vue/eslint-config-airbnb": "^7.0.0",
         "eslint": "^8.52.0",
-        "eslint-plugin-vue": "^9.17.0",
+        "eslint-plugin-vue": "^9.18.1",
         "typescript": "^5.2.2",
-        "vitepress": "^1.0.0-rc.23"
+        "vitepress": "^1.0.0-rc.24"
     },
     "workspaces": [
         "packages/*",
         "packages/examples/*"
     ],
-    "packageManager": "yarn@4.0.0"
+    "packageManager": "yarn@4.0.1"
 }
