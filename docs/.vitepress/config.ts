@@ -279,21 +279,77 @@ export default defineConfig({
             link: '/examples/playground',
           },
           {
-            text: 'Карта',
+            text: 'Параметры карты',
             collapsed: true,
             items: [
               {
-                text: 'Создание карты',
-                link: '/examples/map-basics',
+                text: 'Изменение позиции камеры',
+                link: '/examples/camera',
+              },
+              {
+                text: 'Изменение размера карты',
+                link: '/examples/fill-container',
+              },
+              {
+                text: 'Ограничение области просмотра карты',
+                link: '/examples/map-restrict-area',
               },
               {
                 text: 'Основные параметры',
                 link: '/examples/map-params',
               },
               {
-                text: 'Изменить положение камеры',
-                link: '/examples/camera',
+                text: 'Размещение в скрытом контейнере',
+                link: '/examples/hidden-div',
               },
+              {
+                text: 'Создание карты',
+                link: '/examples/map-basics',
+              },
+            ],
+          },
+          {
+            text: 'Объекты на карте',
+            collapsed: true,
+            items: [
+              {
+                text: 'Добавление метки на карту',
+                link: '/examples/placemark',
+              },
+              {
+                text: 'Добавление метки с собственным изображением',
+                link: '/examples/marker-custom-image',
+              },
+              {
+                text: 'Ломаная',
+                link: '/examples/polyline',
+              },
+              {
+                text: 'Многоугольник',
+                link: '/examples/polygon',
+              },
+              {
+                text: 'Перетаскивание объектов',
+                link: '/examples/draggable-objects',
+              },
+              {
+                text: 'Попап при клике на маркер',
+                link: '/examples/marker-popup',
+              },
+              {
+                text: 'Прямоугольник',
+                link: '/examples/rectangle',
+              },
+              {
+                text: 'Скрывать маркеры вне вьюпорта',
+                link: '/examples/hide-markers'
+              }
+            ],
+          },
+          {
+            text: 'Прочее',
+            collapsed: true,
+            items: [
               {
                 text: 'Кастомные тайлы на canvas',
                 link: '/examples/canvas-tiles',
@@ -303,64 +359,16 @@ export default defineConfig({
                 link: '/examples/custom-map',
               },
               {
-                text: 'Изменить размер карты',
-                link: '/examples/fill-container',
-              },
-              {
-                text: 'Поместите в скрытый контейнер',
-                link: '/examples/hidden-div',
-              },
-              {
-                text: 'Ограничить область просмотра карты',
-                link: '/examples/map-restrict-area',
-              },
-            ],
-          },
-          {
-            text: 'Геообъекты',
-            collapsed: true,
-            items: [
-              {
-                text: 'Добавление маркера на карту',
-                link: '/examples/placemark',
-              },
-              {
-                text: 'Маркеры со своим изображением',
-                link: '/examples/marker-custom-image',
-              },
-              {
-                text: 'Полигон',
-                link: '/examples/polygon',
-              },
-              {
-                text: 'Линия',
-                link: '/examples/polyline',
-              },
-              {
-                text: 'Перетаскиваемые объекты',
-                link: '/examples/draggable-objects',
-              },
-              {
-                text: 'Прямоугольник',
-                link: '/examples/rectangle',
-              },
-            ],
-          },
-          {
-            text: 'Прочее',
-            collapsed: true,
-            items: [
-              {
                 text: 'Элементы управления',
                 link: '/examples/controls',
               },
               {
-                text: 'Подсказки (Hints)',
-                link: '/examples/hint',
+                text: 'Множество точек (Кластеризация)',
+                link: '/examples/many-points',
               },
               {
-                text: 'Всплывающие окна (Popups)',
-                link: '/examples/popup',
+                text: 'Подсказки (Хинты)',
+                link: '/examples/hint',
               },
             ],
           },

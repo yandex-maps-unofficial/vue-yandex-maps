@@ -10,9 +10,9 @@ import {
   provide,
   ref,
   shallowRef,
+  toRaw,
   watch,
   WatchStopHandle,
-  toRaw,
 } from 'vue';
 import type {
   LngLat, YMap, YMapEntity, YMapProps,
@@ -205,6 +205,8 @@ export default defineComponent({
             } else if ('bounds' in clonedSettings.location && 'bounds' in settings.location) {
               settings.location.bounds = map.value!.bounds;
             }
+
+            if ('zoom' in clonedSettings.location && 'zoom' in settings.location) settings.location.zoom = map.value!.zoom;
           }
 
           const settingsDiff: Record<string, any> = diff(settings, clonedSettings);
@@ -215,8 +217,20 @@ export default defineComponent({
           map.value?.update({
             ...settingsDiff,
             // Support duration and easing to be always passed
-            ...('location' in settingsDiff ? { location: { ...settingsDiff.location, duration: clonedSettings.location?.duration, easing: clonedSettings.location?.easing } } : {}),
-            ...('camera' in settingsDiff ? { camera: { ...settingsDiff.camera, duration: clonedSettings.camera?.duration, easing: clonedSettings.camera?.easing } } : {}),
+            ...('location' in settingsDiff ? {
+              location: {
+                ...settingsDiff.location,
+                duration: clonedSettings.location?.duration,
+                easing: clonedSettings.location?.easing,
+              },
+            } : {}),
+            ...('camera' in settingsDiff ? {
+              camera: {
+                ...settingsDiff.camera,
+                duration: clonedSettings.camera?.duration,
+                easing: clonedSettings.camera?.easing,
+              },
+            } : {}),
           });
         }, {
           deep: true,

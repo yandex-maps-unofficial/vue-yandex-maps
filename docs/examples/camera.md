@@ -1,4 +1,4 @@
-# Изменить положение камеры
+# Изменение позиции камеры
 
 <script lang="ts" setup>
 import MapComponent from 'examples/src/components/basics/MapCamera.vue';

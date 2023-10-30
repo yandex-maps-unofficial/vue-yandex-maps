@@ -1,12 +1,24 @@
 <script lang="ts">
 import {
-  computed, defineComponent, h, nextTick, onMounted, PropType, Ref, ref, shallowRef, VNode, watch,
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  onMounted,
+  PropType,
+  Ref,
+  ref,
+  shallowRef,
+  VNode,
+  watch,
 } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import type { YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { setupMapChildren, throwException } from '../../../composables/utils.ts';
+import {
+  setupMapChildren, throwException,
+} from '../../../composables/utils.ts';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
 export type VueYandexMapClustererOptions = Omit<Settings, 'features' | 'marker' | 'cluster'>
@@ -53,7 +65,6 @@ export default defineComponent({
   }) {
     let mapChildrenRenderTick = false;
     const mapChildren = shallowRef<(Pick<YMapClusterer, 'update'> & Record<string, any>) | null>(null);
-    // TODO: разобраться с дубликатами в кластере
     const entities: Ref<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]> = shallowRef([]);
     const clusterFeatures = ref<ClustererObject[]>([]);
     const clusters = ref<HTMLDivElement[]>([]);
@@ -103,7 +114,7 @@ export default defineComponent({
       const features: Settings['features'] = entities.value.map((entity: Record<string, any>, i) => ({
         type: 'Feature',
         id: Math.random()
-          .toString(),
+          .toString() + Date.now().toString(),
         geometry: {
           type: 'Point',
           coordinates: entity._props.coordinates,
@@ -143,30 +154,27 @@ export default defineComponent({
       };
     });
 
-    watch(() => props.settings, async () => {
-      await nextTick();
-      mapChildren.value?.update(getSettings.value);
-      mapChildren.value?._render();
-    }, {
-      deep: true,
-    });
-
-    watch(entities, async () => {
+    const update = async () => {
       await nextTick();
       mapChildren.value?.update(getSettings.value);
       mapChildren.value?._render();
 
       setTimeout(() => mapChildren.value?._render(), tickTimeout.value);
+    };
+
+    watch(() => [props.settings, props.gridSize], () => {
+      update();
+    }, {
+      deep: true,
     });
 
-    onMounted(async () => {
+    const init = async () => {
       mapChildren.value = await setupMapChildren({
         createFunction: ({
           YMapClusterer: Clusterer,
-          clusterByGrid: clusterByGrid_,
+          clusterByGrid: _clusterByGrid_,
         }) => {
-          _clusterByGrid = clusterByGrid_;
-
+          _clusterByGrid = _clusterByGrid_;
           return new Clusterer(getSettings.value);
         },
         requiredImport: () => ymaps3.import('@yandex/ymaps3-clusterer@0.0.1'),
@@ -176,12 +184,23 @@ export default defineComponent({
 
       emit('input', mapChildren.value as YMapClusterer);
       emit('update:modelValue', mapChildren.value as YMapClusterer);
+    };
+
+    watch(entities, async () => {
+      await nextTick();
+      update();
+    }, {
+      deep: true,
+    });
+
+    onMounted(() => {
+      init();
     });
 
     return () => {
       if (!mapChildren.value) return h('div');
 
-      const clusterSlots: VNode[] = clusterFeatures.value.map((clustererObject, index) => h(
+      const clusterSlots: VNode[] = clusterFeatures.value.filter((x) => x.features.length > 1).map((clustererObject, index) => h(
         'div',
         {
           ref: (item) => {
@@ -195,6 +214,7 @@ export default defineComponent({
         },
         slots.cluster?.({
           clustererObject,
+          coordinates: clustererObject.lnglat,
           length: clustererObject.features.length,
         }),
       ));

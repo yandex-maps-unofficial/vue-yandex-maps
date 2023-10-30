@@ -1,4 +1,4 @@
-# Карта - Основные параметры
+# Основные параметры
 
 <script lang="ts" setup>
 import MapComponent from 'examples/src/components/basics/MapParams.vue';

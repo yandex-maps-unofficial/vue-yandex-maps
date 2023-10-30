@@ -1,4 +1,4 @@
-# Карта - Изменение размера карты
+# Изменение размера карты
 
 <script lang="ts" setup>
 import MapComponent from 'examples/src/components/basics/FillContainer.vue';

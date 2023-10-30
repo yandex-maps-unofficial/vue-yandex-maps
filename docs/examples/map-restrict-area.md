@@ -1,4 +1,4 @@
-# Карта - Ограничение области просмотра карты
+# Ограничение области просмотра карты
 
 <script lang="ts" setup>
 import MapComponent from 'examples/src/components/basics/RestrictArea.vue';

@@ -166,8 +166,29 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
   });
 }
 
+export function deleteMapChild({
+  children,
+  isMercator,
+  root,
+}: { children: YMapEntity<unknown> | Projection, isMercator?: boolean, root: Ref<YMap | YMapGroupEntity<any> | any[] | null> }) {
+  if (!root) throwException({ text: 'Failed to execute deleteMapChild due to destroyed root', isInternal: true });
+
+  if (children && !isMercator) {
+    if (typeof root?.value === 'object' && Array.isArray(root.value)) {
+      root.value = root.value.filter((x) => x !== children);
+    } else {
+      root.value?.removeChild(children as YMapEntity<unknown>);
+    }
+  } else if (root.value && children && isMercator && 'update' in root.value) {
+    root.value.update({
+      projection: undefined,
+    });
+  }
+}
+
 export async function setupMapChildren<T extends YMapEntity<unknown> | Projection, R extends (() => Promise<unknown>)>({
   returnOnly,
+  willDeleteByHand,
   strictMapRoot,
   requiredImport,
   createFunction,
@@ -176,7 +197,10 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   isMercator,
   isMapRoot,
   mapRootRef,
+  duplicateInit,
 }: {
+  duplicateInit?: boolean
+  willDeleteByHand?: boolean
   returnOnly?: boolean
   strictMapRoot?: boolean
   isMapRoot?: boolean
@@ -201,24 +225,20 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   const map = injectMap();
   const layers = injectLayers();
 
-  if (isMapRoot) {
+  if (isMapRoot && !duplicateInit) {
     provide('mapRoot', mapRootRef || children);
 
     childrenPromises = shallowRef([]);
     provide('mapRootInitPromises', childrenPromises);
   }
 
-  if (!returnOnly) {
+  if (!returnOnly && !willDeleteByHand) {
     onBeforeUnmount(() => {
-      if (children.value && !isMercator) {
-        if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
-          mapRoot.value = mapRoot.value.filter((x) => x !== children.value);
-        } else {
-          (mapRoot?.value || map.value)?.removeChild(children.value as YMapEntity<unknown>);
-        }
-      } else if (map.value && children.value && isMercator) {
-        map.value.update({
-          projection: undefined,
+      if (children.value) {
+        deleteMapChild({
+          children: children.value,
+          isMercator,
+          root: mapRoot?.value ? mapRoot : map,
         });
       }
     });
