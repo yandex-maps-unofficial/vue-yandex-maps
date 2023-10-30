@@ -97,7 +97,7 @@ import {
 } from 'vue';
 import type { YMapLocation } from '@yandex/ymaps3-types/imperative/YMap';
 import type { YMap } from '@yandex/ymaps3-types';
-import { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
+import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
 const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);
