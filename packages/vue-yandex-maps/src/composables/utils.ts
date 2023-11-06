@@ -1,24 +1,23 @@
+import type {
+  ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef, WatchStopHandle,
+} from 'vue';
 import {
   computed,
-  ComputedGetter,
-  ComputedRef,
-  DebuggerOptions,
   getCurrentInstance,
   inject,
   isRef,
   nextTick,
   onBeforeUnmount,
   provide,
-  Ref,
   ref,
   shallowRef,
-  UnwrapRef,
+  toRaw,
   watch,
-  WatchStopHandle,
 } from 'vue';
 import type { YMap, YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { VueYandexMaps } from '../namespace.ts';
+import { diff } from 'deep-object-diff';
 
 /**
  * @description Prevents memory leak on SSR when ref is called outside setup
@@ -170,8 +169,17 @@ export function deleteMapChild({
   children,
   isMercator,
   root,
-}: { children: YMapEntity<unknown> | Projection, isMercator?: boolean, root: Ref<YMap | YMapGroupEntity<any> | any[] | null> }) {
-  if (!root) throwException({ text: 'Failed to execute deleteMapChild due to destroyed root', isInternal: true });
+}: {
+  children: YMapEntity<unknown> | Projection,
+  isMercator?: boolean,
+  root: Ref<YMap | YMapGroupEntity<any> | any[] | null>
+}) {
+  if (!root) {
+    throwException({
+      text: 'Failed to execute deleteMapChild due to destroyed root',
+      isInternal: true,
+    });
+  }
 
   if (children && !isMercator) {
     if (typeof root?.value === 'object' && Array.isArray(root.value)) {
@@ -245,8 +253,24 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   }
 
   if (settings) {
+    let lastSettings = JSON.parse(JSON.stringify(toRaw(settings.value)));
+
     watch(settings, (value) => {
-      if (children.value && 'update' in children.value) children.value.update(value ?? {});
+      if (!value) return;
+
+      const rawVal = toRaw(value);
+
+      const settingsDiff: Record<string, any> = diff(lastSettings, rawVal);
+
+      for (const key in rawVal) {
+        if (typeof rawVal[key] === 'function') settingsDiff[key] = rawVal[key];
+      }
+
+      if (Object.keys(settingsDiff).length === 0) return;
+
+      lastSettings = rawVal;
+
+      if (children.value && 'update' in children.value) children.value.update({ ...settingsDiff });
     }, { deep: true });
   }
 
@@ -313,7 +337,6 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
 }
 
 export function isDev() {
-  // @ts-expect-error
   return typeof process !== 'undefined' && (process.env?.NODE_ENV === 'development' || process.dev);
 }
 

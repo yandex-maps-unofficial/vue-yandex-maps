@@ -1,5 +1,5 @@
-import { Ref } from 'vue';
-import { OverloadParameters } from './types/overload-extract.ts';
+import type { Ref } from 'vue';
+import type { OverloadParameters } from './types/overload-extract.ts';
 import { safeComputed, safeRef } from './composables/utils.ts';
 
 export namespace VueYandexMaps {

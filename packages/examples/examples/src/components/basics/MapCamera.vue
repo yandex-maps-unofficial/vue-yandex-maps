@@ -56,13 +56,13 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
+import type { YandexMapSettings } from 'vue-yandex-maps';
 import {
   YandexMap,
   YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultSchemeLayer,
   YandexMapGeolocationControl,
-  YandexMapSettings,
 } from 'vue-yandex-maps';
 import {
   onMounted, reactive, ref, shallowRef,

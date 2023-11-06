@@ -1,4 +1,8 @@
 <script lang="ts">
+import type {
+  PropType,
+  WatchStopHandle,
+} from 'vue';
 import {
   computed,
   defineComponent,
@@ -6,13 +10,11 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
-  PropType,
   provide,
   ref,
   shallowRef,
   toRaw,
   watch,
-  WatchStopHandle,
 } from 'vue';
 import type {
   LngLat, YMap, YMapEntity, YMapProps,

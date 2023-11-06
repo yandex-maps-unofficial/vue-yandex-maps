@@ -1,16 +1,29 @@
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
-import { VueYandexMaps } from 'vue-yandex-maps';
 import { join, relative } from 'path';
+import type { VueYandexMaps } from '../namespace.ts';
+import type { NuxtModule } from 'nuxt/schema';
 
 // Module options TypeScript interface definition
-export interface ModuleOptions extends VueYandexMaps.PluginSettings {
+interface ModuleOptions extends VueYandexMaps.PluginSettings {
 }
 
-export interface ModulePublicRuntimeConfig {
-  yandexMaps: VueYandexMaps.PluginSettings;
+declare module '@nuxt/schema' {
+  interface NuxtConfig { ['yandexMaps']?: Partial<ModuleOptions> }
+  interface NuxtOptions { ['yandexMaps']?: ModuleOptions }
+  interface PublicRuntimeConfig {
+    yandexMaps: VueYandexMaps.PluginSettings;
+  }
 }
 
-export default defineNuxtModule<ModuleOptions>({
+declare module 'nuxt/schema' {
+  interface NuxtConfig { ['yandexMaps']?: Partial<ModuleOptions> }
+  interface NuxtOptions { ['yandexMaps']?: ModuleOptions }
+  interface PublicRuntimeConfig {
+    yandexMaps: VueYandexMaps.PluginSettings;
+  }
+}
+
+const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'vue-yandex-maps',
     configKey: 'yandexMaps',
@@ -47,11 +60,17 @@ export default defineNuxtModule<ModuleOptions>({
 
       typeRoots!.push(join(path, 'node_modules/@types'));
       typeRoots!.push(join(path, 'node_modules/@yandex/ymaps3-types'));
+
+      if (!tsConfig.compilerOptions!.types) tsConfig.compilerOptions!.types = [];
+      tsConfig.compilerOptions!.types.push('vue-yandex-maps');
     });
 
     addPlugin({
       src: createResolver(import.meta.url)
-        .resolve('./runtime/plugin'),
+        .resolve('./nuxt3-plugin'),
     });
   },
 });
+
+// eslint-disable-next-line no-restricted-exports
+export { type ModuleOptions, _default as default };

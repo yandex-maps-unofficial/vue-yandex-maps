@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { PropType } from 'vue';
 import {
-  defineComponent, h, onMounted, PropType, shallowRef,
+  defineComponent, h, onMounted, shallowRef,
 } from 'vue';
 import type { YMapHint } from '@yandex/ymaps3-types/packages/hint';
 import { setupMapChildren } from '../../../composables/utils.ts';

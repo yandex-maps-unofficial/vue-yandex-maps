@@ -1,6 +1,6 @@
 import { join } from 'path';
-import { Module } from '@nuxt/types';
-import { VueYandexMaps } from '..';
+import type { Module } from '@nuxt/types';
+import type { VueYandexMaps } from '..';
 
 const nuxt2Module: Module<VueYandexMaps.PluginSettings> = function init(moduleOptions) {
   if (!this.nuxt.options.build) this.nuxt.options.build = {};
@@ -10,7 +10,7 @@ const nuxt2Module: Module<VueYandexMaps.PluginSettings> = function init(moduleOp
   moduleOptions = this.nuxt.options.yandexMaps || moduleOptions;
 
   this.addPlugin({
-    src: join(__dirname, 'plugins/nuxt2-plugin.js'),
+    src: join(__dirname, 'nuxt2-plugin.js'),
     fileName: 'vue-yandex-maps.js',
     options: moduleOptions,
   });

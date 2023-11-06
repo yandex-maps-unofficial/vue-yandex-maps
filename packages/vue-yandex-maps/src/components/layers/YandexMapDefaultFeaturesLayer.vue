@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { YMapDefaultFeaturesLayer } from '@yandex/ymaps3-types';
+import type { PropType, Ref } from 'vue';
 import {
-  computed, defineComponent, h, inject, onMounted, PropType, Ref,
+  computed, defineComponent, h, inject, onMounted,
 } from 'vue';
 import { setupMapChildren } from '../../composables/utils';
 

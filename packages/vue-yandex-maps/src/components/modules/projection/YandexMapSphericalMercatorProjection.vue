@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { PropType, Ref } from 'vue';
 import {
-  defineComponent, h, inject, onMounted, PropType, Ref,
+  defineComponent, h, inject, onMounted,
 } from 'vue';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { setupMapChildren } from '../../../composables/utils.ts';

@@ -1,5 +1,5 @@
 import type { App } from 'vue';
-import { VueYandexMaps } from '..';
+import type { VueYandexMaps } from '..';
 import { createYmapsOptions } from '../composables/maps';
 
 export function createYmaps(settings: VueYandexMaps.PluginSettings) {

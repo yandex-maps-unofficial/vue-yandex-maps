@@ -1,15 +1,17 @@
 <script lang="ts">
+import type {
+  PropType,
+  Ref,
+  VNode,
+} from 'vue';
 import {
   computed,
   defineComponent,
   h,
   nextTick,
   onMounted,
-  PropType,
-  Ref,
   ref,
   shallowRef,
-  VNode,
   watch,
 } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
@@ -189,8 +191,6 @@ export default defineComponent({
     watch(entities, async () => {
       await nextTick();
       update();
-    }, {
-      deep: true,
     });
 
     onMounted(() => {

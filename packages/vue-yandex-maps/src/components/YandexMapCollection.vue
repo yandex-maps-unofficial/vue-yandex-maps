@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { YMapCollection } from '@yandex/ymaps3-types';
+import type { PropType } from 'vue';
 import {
-  defineComponent, h, onMounted, PropType, shallowRef,
+  defineComponent, h, onMounted, shallowRef,
 } from 'vue';
 import { setupMapChildren } from '../composables/utils';
 

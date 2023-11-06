@@ -73,6 +73,9 @@ module.exports = {
     '@typescript-eslint/func-call-spacing': 'error',
     'no-spaced-func': 'off',
     'import/order': 'off',
+    '@typescript-eslint/no-import-type-side-effects': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
+    'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
   },
   parser: 'vue-eslint-parser',
   parserOptions: {

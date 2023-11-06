@@ -1,6 +1,6 @@
 {
   "name": "vue-yandex-maps",
-  "version": "2.0.0-beta.5",
+  "version": "2.0.0-beta.6",
   "description": "Yandex Maps 3.0 components library for VueJS.",
   "main": "./dist/vue-yandex-maps.js",
   "types": "./dist/index.d.ts",
@@ -10,16 +10,28 @@
       "default": "./dist/vue-yandex-maps.js"
     },
     "./nuxt": {
-      "types": "./dist/nuxt/types.d.ts",
-      "import": "./dist/nuxt/module.mjs",
-      "require": "./dist/nuxt/module.cjs"
+      "types": "./dist/plugins/nuxt3-module.d.ts",
+      "default": "./dist/plugins/nuxt3-module.js"
     },
-    "./nuxt2": "./dist/nuxt2.js",
+    "./nuxt2": {
+      "types": "./dist/plugins/nuxt2-module.d.ts",
+      "default": "./dist/plugins/nuxt2-module.js"
+    },
     "./package.json": "./package.json",
     "./dist/*": "./dist/*"
   },
+  "typesVersions": {
+    "*": {
+      "nuxt": [
+        "./dist/plugins/nuxt3-module.d.ts"
+      ],
+      "nuxt2": [
+        "./dist/plugins/nuxt2-module.d.ts"
+      ]
+    }
+  },
   "scripts": {
-    "build": "yarn build:package-only && yarn workspace nuxt prepack && yarn exec 'node ./copy-files.mjs'",
+    "build": "yarn build:package-only",
     "build:package-only": "vue-tsc --noEmit && vite build",
     "npm:publish": "npm publish --tag next"
   },
@@ -65,17 +77,19 @@
   "license": "MIT",
   "dependencies": {
     "@nuxt/kit": "^3.8.0",
-    "@yandex/ymaps3-types": "^0.0.18"
+    "@yandex/ymaps3-types": "^0.0.18",
+    "rollup-plugin-copy": "^3.5.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.17.2",
     "@vitejs/plugin-vue": "^4.4.0",
     "deep-object-diff": "^1.1.9",
+    "nuxt": "^3.8.0",
     "rollup-plugin-delete": "^2.0.0",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
     "vite-plugin-dts": "^3.6.3",
-    "vue": "^3.3.7",
+    "vue": "^3.3.8",
     "vue-tsc": "^1.8.22"
   },
   "peerDependencies": {
@@ -90,5 +104,6 @@
     "nuxt": {
       "optional": true
     }
-  }
+  },
+  "web-types": "web-types.json"
 }

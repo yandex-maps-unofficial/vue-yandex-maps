@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
+import type { PropType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted, PropType, ref,
+  computed, defineComponent, h, onMounted, ref,
 } from 'vue';
 import { setupMapChildren } from '../composables/utils';
 

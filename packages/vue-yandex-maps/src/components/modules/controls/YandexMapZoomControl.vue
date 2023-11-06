@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { PropType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted, PropType,
+  computed, defineComponent, h, onMounted,
 } from 'vue';
 import type { YMapZoomControl } from '@yandex/ymaps3-types/packages/controls';
 import { setupMapChildren } from '../../../composables/utils.ts';
