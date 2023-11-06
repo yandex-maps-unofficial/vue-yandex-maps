@@ -26,7 +26,7 @@
         <yandex-map-marker :settings="{ coordinates: center }">
           <img
             alt=""
-            src="/vue-yandex-maps/pin.svg"
+            :src="'/vue-yandex-maps/pin.svg'"
             :style="{
               minWidth: '50px',
               position: 'relative',

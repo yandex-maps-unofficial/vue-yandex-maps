@@ -39,14 +39,20 @@ import {
   YandexMapTileDataSource,
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
+import { onMounted } from 'vue';
 
 const TILE_SIZE = 256;
 
 const layerId = 'A';
 
-const image = new Image();
+let image: HTMLImageElement | null;
+
+onMounted(() => {
+  image = new Image();
+});
 
 const load = new Promise((resolve) => {
+  if (!image) return;
   image.src = '/vue-yandex-maps/ship.svg';
   if (image.complete) {
     resolve(image);
@@ -70,7 +76,7 @@ const dataSource = {
       y,
       z,
     }), 10, 10);
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image!, 0, 0);
     await load;
     return ({ image: canvas });
   },
