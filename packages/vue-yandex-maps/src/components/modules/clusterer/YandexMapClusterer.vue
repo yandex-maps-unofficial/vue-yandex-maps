@@ -54,7 +54,7 @@ export default defineComponent({
   }) {
     const mapChildren = shallowRef<(Pick<YMapClusterer, 'update'> & Record<string, any>) | null>(null);
     const entities: Ref<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]> = shallowRef([]);
-    const clusterFeatures = ref<{clusterer: ClustererObject, element: YMapCollection}[]>([]);
+    const clusterFeatures = ref<{ clusterer: ClustererObject, element: YMapCollection }[]>([]);
 
     let _clusterByGrid: typeof clusterByGrid | undefined;
 
@@ -169,20 +169,30 @@ export default defineComponent({
     return () => {
       if (!mapChildren.value) return h('div');
 
-      const clusterSlots: VNode[] = clusterFeatures.value.filter((x) => x.clusterer.features.length > 1)
-        .map(({ clusterer, element }, index) => h(
+      const features = clusterFeatures.value.filter((x) => x.clusterer.features.length > 1);
+
+      const clusterSlots: VNode[] = features
+        .map(({
+          clusterer,
+          element,
+        }, index) => h(
           'div',
           {
+            key: `${clusterer.clusterId}_${index}_${clusterer.features.length}_${clusterer.lnglat.join(',')}`,
             ref: async (item) => {
               if (!item) return;
 
               await nextTick();
 
-              element.children.forEach((x) => element.removeChild(x as any));
+              try {
+                element.children.forEach((x) => element.removeChild(x as any));
 
-              element.addChild(new ymaps3.YMapMarker({
-                coordinates: clusterer.lnglat,
-              }, item as HTMLDivElement));
+                element.addChild(new ymaps3.YMapMarker({
+                  coordinates: clusterer.lnglat,
+                }, item as HTMLDivElement));
+              } catch (e) {
+                console.error(e);
+              }
             },
             attrs: {
               coordinates: JSON.stringify(clusterer.lnglat),
