@@ -2,7 +2,7 @@
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import type { PropType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted, ref,
+  computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
 import { setupMapChildren } from '../composables/utils';
 
@@ -45,6 +45,10 @@ export default defineComponent({
       });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
+    });
+
+    watch(element, () => {
+      if (element.value) element.value.parentNode?.removeChild(element.value);
     });
 
     return () => h('div', {

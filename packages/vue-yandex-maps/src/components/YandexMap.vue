@@ -211,29 +211,17 @@ export default defineComponent({
             if ('zoom' in clonedSettings.location && 'zoom' in settings.location) settings.location.zoom = map.value!.zoom;
           }
 
-          const settingsDiff: Record<string, any> = diff(settings, clonedSettings);
-          if (Object.keys(settingsDiff).length === 0) return;
+          const settingsDiff = Object.keys(diff(settings, clonedSettings));
+          if (settingsDiff.length === 0) return;
+
+          const updatedSettings = { ...clonedSettings };
+          for (const key in updatedSettings) {
+            if (!settingsDiff.includes(key)) delete (updatedSettings as any)[key];
+          }
 
           settings = clonedSettings;
 
-          map.value?.update({
-            ...settingsDiff,
-            // Support duration and easing to be always passed
-            ...('location' in settingsDiff ? {
-              location: {
-                ...settingsDiff.location,
-                duration: clonedSettings.location?.duration,
-                easing: clonedSettings.location?.easing,
-              },
-            } : {}),
-            ...('camera' in settingsDiff ? {
-              camera: {
-                ...settingsDiff.camera,
-                duration: clonedSettings.camera?.duration,
-                easing: clonedSettings.camera?.easing,
-              },
-            } : {}),
-          });
+          map.value?.update(updatedSettings);
         }, {
           deep: true,
         });

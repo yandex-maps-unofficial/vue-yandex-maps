@@ -48,11 +48,20 @@
           <yandex-map-zoom-control />
         </yandex-map-controls>
         <yandex-map-clusterer v-model="clusterer" :grid-size="2 ** gridSize">
-          <yandex-map-default-marker
+          <yandex-map-marker
             v-for="(coordinates) in getPointList"
             :key="coordinates.join(',')"
-            :settings="{ coordinates, color: 'red' }"
-          />
+            :settings="{
+              coordinates,
+              onClick: () => background = background === 'red' ? 'green' : 'red',
+            }"
+          >
+            <div
+              :style="{
+                background, borderRadius: '100%', width: '20px', height: '20px',
+              }"
+            />
+          </yandex-map-marker>
           <template #cluster="{ length, coordinates }">
             <div
               class="cluster"
@@ -88,7 +97,7 @@ import {
   YandexMapControl,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
-  YandexMapDefaultMarker,
+  YandexMapMarker,
   YandexMapDefaultSchemeLayer,
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
@@ -102,8 +111,18 @@ import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);
 const count = ref(100);
+const savedCount = ref(100);
 const localLocation = shallowRef<YMapLocation | null>(null);
 const gridSize = ref(6);
+const background = ref('red');
+
+watch(count, async (val) => {
+  const oldVal = val;
+  setTimeout(() => {
+    if (oldVal !== count.value) return;
+    savedCount.value = val;
+  }, 500);
+});
 
 watch(map, (val) => console.log('map', val));
 watch(clusterer, (val) => console.log('cluster', val));
@@ -126,7 +145,7 @@ const getPointList = computed(() => {
   if (!map.value) return [];
   const result = [];
 
-  for (let i = 0; i < count.value; i++) {
+  for (let i = 0; i < savedCount.value; i++) {
     result.push(getRandomPoint());
   }
 

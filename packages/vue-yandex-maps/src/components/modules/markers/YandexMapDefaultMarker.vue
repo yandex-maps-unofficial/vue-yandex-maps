@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { PropType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted, ref,
+  computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import { setupMapChildren } from '../../../composables/utils.ts';
 
-type Settings = ConstructorParameters<typeof YMapDefaultMarker>[0]
+export type YandexMapDefaultMarkerSettings = ConstructorParameters<typeof YMapDefaultMarker>[0]
 
 export default defineComponent({
   name: 'YandexMapDefaultMarker',
@@ -20,7 +20,7 @@ export default defineComponent({
       default: null,
     },
     settings: {
-      type: Object as PropType<Settings>,
+      type: Object as PropType<YandexMapDefaultMarkerSettings>,
       default: () => ({}),
     },
   },
@@ -41,16 +41,18 @@ export default defineComponent({
     const closeFunc = ref<() => void>(() => {
     });
 
-    const getSettings = computed<Settings>(() => {
+    const contentFunc = (close: () => void) => {
+      closeFunc.value = close;
+      return popup.value!;
+    };
+
+    const getSettings = computed<YandexMapDefaultMarkerSettings>(() => {
       const settings = { ...props.settings };
 
       if (settings.popup && (typeof settings.popup.content === 'undefined' || settings.popup.content === 'fromSlot') && popup.value) {
         settings.popup = {
           ...settings.popup,
-          content: (close) => {
-            closeFunc.value = close;
-            return popup.value!;
-          },
+          content: contentFunc,
         };
       }
 
@@ -65,6 +67,10 @@ export default defineComponent({
       });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
+    });
+
+    watch(popup, () => {
+      if (popup.value) popup.value.parentNode?.removeChild(popup.value);
     });
 
     return () => h('div', {

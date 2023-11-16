@@ -194,6 +194,27 @@ export function deleteMapChild({
   }
 }
 
+function excludeKeys(item: Record<string, any>, ignoreKeys: string[]) {
+  for (const [key, value] of Object.entries(item)) {
+    if (ignoreKeys.includes(key)) delete item[key];
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      excludeKeys(value, ignoreKeys);
+      if (!Object.keys(value).length) delete item[key];
+    }
+  }
+}
+
+function copy<T>(target: T): T {
+  if (Array.isArray(target)) return target.map((i) => copy(i)) as T;
+  if (!target || typeof target !== 'object' || (target?.constructor !== undefined && target?.constructor !== Object)) return target;
+  return Object.keys(target)
+    .reduce((carry, key) => {
+      const val = (target as any)[key];
+      (carry as any)[key] = copy(val);
+      return carry;
+    }, {} as T);
+}
+
 export async function setupMapChildren<T extends YMapEntity<unknown> | Projection, R extends (() => Promise<unknown>)>({
   returnOnly,
   willDeleteByHand,
@@ -201,22 +222,69 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   requiredImport,
   createFunction,
   settings,
+  settingsUpdateIgnoreKeys,
   isLayer,
   isMercator,
   isMapRoot,
   mapRootRef,
   duplicateInit,
 }: {
+  /**
+   * @description Prevents duplicate provide injections
+   */
   duplicateInit?: boolean
+
+  /**
+   * @description Disables onBeforeUnmount hook
+   */
   willDeleteByHand?: boolean
+
+  /**
+   * @description Disables children-to-root injection
+   */
   returnOnly?: boolean
+
+  /**
+   * @description Requires map root to be present (map root can't be YMap in this case)
+   */
   strictMapRoot?: boolean
+
+  /**
+   * @description Sets injected component to be root of children components (array.push/.addChild will be called)
+   */
   isMapRoot?: boolean
+
+  /**
+   * @description Allows to use array instead of addChild mapRoot injection
+   */
   mapRootRef?: Ref<YMapEntity<any>[]>
+
+  /**
+   * @description Promise to call before calling createFunction. Executes only after Yandex script has been injected
+   */
   requiredImport?: R
+
+  /**
+   * @description Function that returns Yandex entity
+   */
   createFunction: (neededImport: Awaited<ReturnType<R>>) => T
+
+  /**
+   * @description Entity reactive settings. If passed, will be auto-watched
+   */
   settings?: ComputedRef<Record<string, any>>
+  /**
+   * @description Allows to not-update specific keys inside of settings watch
+   */
+  settingsUpdateIgnoreKeys?: string[] | ComputedRef<string[]>
+
+  /**
+   * @description Specifies that entity is a layer children. Will be injected to layer ref instead of root and will skip YandexMap initialization
+   */
   isLayer?: boolean
+  /**
+   * @description Specifies that entity is a layer children. Will be injected to layer ref instead of root and will skip YandexMap initialization, and will be added in special way to YandexMap
+   */
   isMercator?: boolean
 }) {
   if (!getCurrentInstance()) {
@@ -253,24 +321,27 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   }
 
   if (settings) {
-    let lastSettings = JSON.parse(JSON.stringify(toRaw(settings.value)));
+    let lastSettings = copy(toRaw(settings.value));
 
     watch(settings, (value) => {
       if (!value) return;
 
-      const rawVal = toRaw(value);
+      const settingsDiff = Object.keys(diff(lastSettings, value));
+      if (settingsDiff.length === 0) return;
 
-      const settingsDiff: Record<string, any> = diff(lastSettings, rawVal);
-
-      for (const key in rawVal) {
-        if (typeof rawVal[key] === 'function') settingsDiff[key] = rawVal[key];
+      const updatedSettings = { ...value };
+      for (const key in updatedSettings) {
+        if (!settingsDiff.includes(key)) delete (updatedSettings as any)[key];
       }
 
-      if (Object.keys(settingsDiff).length === 0) return;
+      const ignoreKeys = settingsUpdateIgnoreKeys && (isRef(settingsUpdateIgnoreKeys) ? settingsUpdateIgnoreKeys.value : settingsUpdateIgnoreKeys);
+      if (ignoreKeys) excludeKeys(updatedSettings, ignoreKeys);
 
-      lastSettings = rawVal;
+      if (Object.keys(updatedSettings).length === 0) return;
 
-      if (children.value && 'update' in children.value) children.value.update({ ...settingsDiff });
+      lastSettings = toRaw(copy(value));
+
+      if (children.value && 'update' in children.value) children.value.update(updatedSettings);
     }, { deep: true });
   }
 

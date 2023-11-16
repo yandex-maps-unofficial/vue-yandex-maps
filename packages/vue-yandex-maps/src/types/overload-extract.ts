@@ -7,7 +7,12 @@ type OverloadUnionRecursive<TOverload, TPartialOverload = unknown> = TOverload e
   ) => infer TReturn
   ? // Prevent infinite recursion by stopping recursion when TPartialOverload
   // has accumulated all of the TOverload signatures.
+  TArgs[0] extends '@yandex/ymaps3-vuefy' ?
+    never
+    :
   TPartialOverload extends TOverload
+    ? never
+    : TArgs[0] extends '@yandex/ymaps3-vuefy' | '@yandex/ymaps3-reactify'
     ? never
     :
     | OverloadUnionRecursive<

@@ -1,29 +1,16 @@
 <script lang="ts">
-import type {
-  PropType,
-  Ref,
-  VNode,
-} from 'vue';
+import type { PropType, Ref, VNode } from 'vue';
 import {
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  onMounted,
-  ref,
-  shallowRef,
-  watch,
+  computed, defineComponent, h, nextTick, onMounted, ref, shallowRef, watch,
 } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
-import type { YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
+import type { YMapCollection, YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import {
-  setupMapChildren, throwException,
-} from '../../../composables/utils.ts';
+import { setupMapChildren, throwException } from '../../../composables/utils.ts';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
-export type VueYandexMapClustererOptions = Omit<Settings, 'features' | 'marker' | 'cluster'>
+export type YandexMapClustererOptions = Omit<Settings, 'features' | 'marker' | 'cluster'>
 
 export default defineComponent({
   name: 'YandexMapClusterer',
@@ -37,7 +24,7 @@ export default defineComponent({
       default: null,
     },
     settings: {
-      type: Object as PropType<Partial<VueYandexMapClustererOptions>>,
+      type: Object as PropType<Partial<YandexMapClustererOptions>>,
       default: () => ({}),
     },
     /**
@@ -65,11 +52,9 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    let mapChildrenRenderTick = false;
     const mapChildren = shallowRef<(Pick<YMapClusterer, 'update'> & Record<string, any>) | null>(null);
     const entities: Ref<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]> = shallowRef([]);
-    const clusterFeatures = ref<ClustererObject[]>([]);
-    const clusters = ref<HTMLDivElement[]>([]);
+    const clusterFeatures = ref<{clusterer: ClustererObject, element: YMapCollection}[]>([]);
 
     let _clusterByGrid: typeof clusterByGrid | undefined;
 
@@ -99,24 +84,23 @@ export default defineComponent({
       };
 
       const cluster: Settings['cluster'] = (coordinates) => {
-        const foundCluster = clusters.value.find((x) => x && x.getAttribute('coordinates') === JSON.stringify(coordinates));
+        const foundCluster = clusterFeatures.value.find((x) => JSON.stringify(x.clusterer.lnglat) === JSON.stringify(coordinates));
 
-        /* if (!foundCluster) {
+        if (!foundCluster) {
           throwException({
             text: `No element with coordinates of ${coordinates.join(', ')} were found in YandexMapClusterer.`,
             isInternal: true,
           });
-        } */
+        }
 
-        return new ymaps3.YMapMarker({
-          coordinates,
-        }, foundCluster || document.createElement('span'));
+        return foundCluster.element as YMapMarker;
       };
 
       const features: Settings['features'] = entities.value.map((entity: Record<string, any>, i) => ({
         type: 'Feature',
         id: Math.random()
-          .toString() + Date.now().toString(),
+          .toString() + Date.now()
+          .toString(),
         geometry: {
           type: 'Point',
           coordinates: entity._props.coordinates,
@@ -125,25 +109,10 @@ export default defineComponent({
       }));
 
       settings.onRender = (clustersList) => {
-        clusterFeatures.value = clustersList;
-
-        if (!mapChildrenRenderTick) {
-          nextTick(() => {
-            mapChildrenRenderTick = true;
-
-            for (const key of Object.keys(mapChildren.value?._entitiesCache || {})) {
-              // Reactivity is lost without this
-              if (key.startsWith('cluster')) {
-                delete mapChildren.value?._entitiesCache[key];
-                delete mapChildren.value?._visibleEntities[key];
-              }
-            }
-
-            mapChildren.value?._render();
-          });
-        } else {
-          mapChildrenRenderTick = false;
-        }
+        clusterFeatures.value = clustersList.map((clusterer) => ({
+          clusterer,
+          element: clusterFeatures.value.find((x) => x.clusterer.clusterId === clusterer.clusterId)?.element || new ymaps3.YMapCollection({}),
+        }));
 
         if (props.settings.onRender) return props.settings.onRender(clustersList);
       };
@@ -200,24 +169,33 @@ export default defineComponent({
     return () => {
       if (!mapChildren.value) return h('div');
 
-      const clusterSlots: VNode[] = clusterFeatures.value.filter((x) => x.features.length > 1).map((clustererObject, index) => h(
-        'div',
-        {
-          ref: (item) => {
-            clusters.value[index] = item as HTMLDivElement;
+      const clusterSlots: VNode[] = clusterFeatures.value.filter((x) => x.clusterer.features.length > 1)
+        .map(({ clusterer, element }, index) => h(
+          'div',
+          {
+            ref: async (item) => {
+              if (!item) return;
+
+              await nextTick();
+
+              element.children.forEach((x) => element.removeChild(x as any));
+
+              element.addChild(new ymaps3.YMapMarker({
+                coordinates: clusterer.lnglat,
+              }, item as HTMLDivElement));
+            },
+            attrs: {
+              coordinates: JSON.stringify(clusterer.lnglat),
+            },
+            // @ts-ignore
+            coordinates: JSON.stringify(clusterer.lnglat),
           },
-          attrs: {
-            coordinates: JSON.stringify(clustererObject.lnglat),
-          },
-          // @ts-ignore
-          coordinates: JSON.stringify(clustererObject.lnglat),
-        },
-        slots.cluster?.({
-          clustererObject,
-          coordinates: clustererObject.lnglat,
-          length: clustererObject.features.length,
-        }),
-      ));
+          slots.cluster?.({
+            clusterer,
+            coordinates: clusterer.lnglat,
+            length: clusterer.features.length,
+          }),
+        ));
 
       return h('div', [
         ...slots.default?.() || [],

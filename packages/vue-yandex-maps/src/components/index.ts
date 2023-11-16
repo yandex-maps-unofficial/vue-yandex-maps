@@ -8,6 +8,7 @@ import YandexMapFeatureDataSource from './data-sources/YandexMapFeatureDataSourc
 import YandexMapLayer from './layers/YandexMapLayer.vue';
 import YandexMapMarker from './YandexMapMarker.vue';
 import YandexMapDefaultMarker from './modules/markers/YandexMapDefaultMarker.vue';
+import type { YandexMapDefaultMarkerSettings } from './modules/markers/YandexMapDefaultMarker.vue';
 import YandexMapFeature from './YandexMapFeature.vue';
 import YandexMapControls from './controls/YandexMapControls.vue';
 import YandexMapControl from './controls/YandexMapControl.vue';
@@ -19,7 +20,7 @@ import YandexMapCartesianProjection from './modules/projection/YandexMapCartesia
 import YandexMapSphericalMercatorProjection from './modules/projection/YandexMapSphericalMercatorProjection.vue';
 import YandexMapHint from './modules/hints/YandexMapHint.vue';
 import YandexMapOpenMapsButton from './modules/controls/YandexMapOpenMapsButton.vue';
-import type { VueYandexMapClustererOptions } from './modules/clusterer/YandexMapClusterer.vue';
+import type { YandexMapClustererOptions } from './modules/clusterer/YandexMapClusterer.vue';
 import YandexMapClusterer from './modules/clusterer/YandexMapClusterer.vue';
 import YandexMapCollection from './YandexMapCollection.vue';
 
@@ -66,5 +67,6 @@ export {
 export type {
   YandexMapSettings,
   YandexMapControlButtonSettings,
-  VueYandexMapClustererOptions,
+  YandexMapClustererOptions,
+  YandexMapDefaultMarkerSettings,
 };
