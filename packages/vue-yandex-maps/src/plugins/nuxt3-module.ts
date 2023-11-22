@@ -8,16 +8,28 @@ interface ModuleOptions extends VueYandexMaps.PluginSettings {
 }
 
 declare module '@nuxt/schema' {
-  interface NuxtConfig { ['yandexMaps']?: Partial<ModuleOptions> }
-  interface NuxtOptions { ['yandexMaps']?: ModuleOptions }
+  interface NuxtConfig {
+    ['yandexMaps']?: Partial<ModuleOptions>;
+  }
+
+  interface NuxtOptions {
+    ['yandexMaps']?: ModuleOptions;
+  }
+
   interface PublicRuntimeConfig {
     yandexMaps: VueYandexMaps.PluginSettings;
   }
 }
 
 declare module 'nuxt/schema' {
-  interface NuxtConfig { ['yandexMaps']?: Partial<ModuleOptions> }
-  interface NuxtOptions { ['yandexMaps']?: ModuleOptions }
+  interface NuxtConfig {
+    ['yandexMaps']?: Partial<ModuleOptions>;
+  }
+
+  interface NuxtOptions {
+    ['yandexMaps']?: ModuleOptions;
+  }
+
   interface PublicRuntimeConfig {
     yandexMaps: VueYandexMaps.PluginSettings;
   }
@@ -48,6 +60,11 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
 
     if (!nuxt.options.build.transpile) nuxt.options.build.transpile = [];
     nuxt.options.build.transpile.push('vue-yandex-maps');
+
+    if (!nuxt.options.vite) nuxt.options.vite = {};
+    if (!nuxt.options.vite.optimizeDeps) nuxt.options.vite.optimizeDeps = {};
+    if (!nuxt.options.vite.optimizeDeps.exclude) nuxt.options.vite.optimizeDeps.exclude = [];
+    nuxt.options.vite.optimizeDeps.exclude.push('vue-yandex-maps');
 
     nuxt.hook('prepare:types', ({ tsConfig }) => {
       let typeRoots = tsConfig.compilerOptions!.typeRoots as string[] | undefined;
