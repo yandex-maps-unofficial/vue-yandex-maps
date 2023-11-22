@@ -91,6 +91,7 @@ export default defineComponent({
 <template>
   <div id="__app" :class="{ '__app--docs': fromDocs }">
     <yandex-map class="map" width="50dvw" height="75dvh" :settings="{ location: { center: [37.588144, 55.733842], zoom: 7 } }">
+      <yandex-map-listener :settings="{ onClick: logMapClick }" />
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
       <yandex-map-default-features-layer />
       <yandex-map-marker
