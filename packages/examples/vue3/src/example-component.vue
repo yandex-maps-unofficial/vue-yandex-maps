@@ -90,8 +90,7 @@ export default defineComponent({
 
 <template>
   <div id="__app" :class="{ '__app--docs': fromDocs }">
-    <yandex-map width="50dvw" height="75dvh" :settings="{ location: { center: [37.588144, 55.733842], zoom: 7 } }">
-      <yandex-map-listener :settings="{ onClick: logMapClick }" />
+    <yandex-map class="map" width="50dvw" height="75dvh" :settings="{ location: { center: [37.588144, 55.733842], zoom: 7 } }">
       <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
       <yandex-map-default-features-layer />
       <yandex-map-marker
@@ -177,7 +176,9 @@ html, body {
   margin: 0;
   padding: 0;
 }
+</style>
 
+<style scoped>
 #__app:not(.__app--docs) {
   width: 100dvw;
   height: 100dvh;
@@ -199,5 +200,9 @@ html, body {
   aspect-ratio: 1/1;
   color: #fff;
   border-radius: 100%;
+}
+
+.map {
+  background: #000;
 }
 </style>

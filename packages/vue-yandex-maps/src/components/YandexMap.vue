@@ -1,8 +1,5 @@
 <script lang="ts">
-import type {
-  PropType,
-  WatchStopHandle,
-} from 'vue';
+import type { PropType, WatchStopHandle } from 'vue';
 import {
   computed,
   defineComponent,
@@ -247,18 +244,7 @@ export default defineComponent({
     });
 
     return () => {
-      const container = h('div', {
-        class: '__ymap_container',
-        style: {
-          width: '100%',
-          height: '100%',
-        },
-        ref: ymapContainer,
-      });
-
-      if (!mounted.value) return container;
-
-      const result = h(props.tag, {
+      const mapNode = h(props.tag, {
         class: '__ymap',
         style: {
           width: props.width,
@@ -267,19 +253,28 @@ export default defineComponent({
           position: 'relative',
           'z-index': props.zIndex.toString(),
         },
-      }, [
-        container,
-        h(
-          'div',
-          {
-            class: '__ymap_slots',
-            style: { display: 'none' },
-          },
-          slots.default?.(),
-        ),
-      ]);
+      });
 
-      return result;
+      const containerNode = h('div', {
+        class: '__ymap_container',
+        style: {
+          width: '100%',
+          height: '100%',
+        },
+        ref: ymapContainer,
+      });
+
+      const slotsNode = h('div', {
+        class: '__ymap_slots',
+        style: { display: 'none' },
+      });
+
+      if (!mounted.value) return h(mapNode, [containerNode, slotsNode]);
+
+      return h(mapNode, [
+        containerNode,
+        h(slotsNode, slots.default?.()),
+      ]);
     };
   },
 });
