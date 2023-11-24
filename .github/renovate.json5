@@ -30,7 +30,12 @@
     "v2"
   ],
   extends: [
-    "config:base",
+    ":dependencyDashboard",
+    ":semanticPrefixFixDepsChoreOthers",
+    "group:monorepos",
+    "group:recommended",
+    "replacements:all",
+    "workarounds:all",
     "group:allNonMajor"
   ],
   rangeStrategy: "bump",
