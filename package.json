@@ -14,6 +14,7 @@
         "test:nuxt3": "yarn workspace vue-yandex-maps build && yarn workspace example-nuxt3 dev",
         "lint": "eslint --ext \".js,.ts,.vue\" ./packages/* --max-warnings 0",
         "lint:fix": "yarn lint --fix",
+        "check": "yarn lint && yarn build && yarn docs:build",
         "publish": "yarn lint && yarn build && yarn workspace vue-yandex-maps npm:publish"
     },
     "dependencies": {

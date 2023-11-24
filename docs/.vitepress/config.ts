@@ -181,12 +181,12 @@ export default defineConfig({
                 link: '/components/layer',
               },
               {
-                text: 'YandexMapDefaultFeaturesLayer',
-                link: '/components/layer-default-features',
-              },
-              {
                 text: 'YandexMapDefaultSchemeLayer',
                 link: '/components/layer-default-scheme',
+              },
+              {
+                text: 'YandexMapDefaultFeaturesLayer',
+                link: '/components/layer-default-features',
               },
             ],
           },

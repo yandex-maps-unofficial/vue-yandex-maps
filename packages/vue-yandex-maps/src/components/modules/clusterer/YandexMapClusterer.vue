@@ -3,7 +3,6 @@ import type { PropType, Ref, VNode } from 'vue';
 import {
   computed, defineComponent, h, nextTick, onMounted, ref, shallowRef, watch,
 } from 'vue';
-import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import type { YMapCollection, YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';

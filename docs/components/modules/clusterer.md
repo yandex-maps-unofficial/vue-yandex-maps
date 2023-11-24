@@ -26,7 +26,7 @@
 
 Настройка позволяет указать параметры для маркера, в котором рисуется кластер.
 
-Принимает то же самое, что и `settings` в [YandexMapMarker](/examples/marker), кроме `coordinates`.
+Принимает то же самое, что и `settings` в [YandexMapMarker](/components/marker), кроме `coordinates`.
 
 ### settings
 
@@ -59,7 +59,7 @@
 
 ### default
 
-Слот с набором компонентов для отрисовки. Тестировался только с [YandexMapMarker](/examples/marker).
+Слот с набором компонентов для отрисовки. Тестировался только с [YandexMapMarker](/components/marker).
 
 ### cluster
 

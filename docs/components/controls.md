@@ -6,9 +6,9 @@
 Внутрь себя он принимает компоненты вида `Control`: 
 - [YandexMapControl](/components/control)
 - [YandexMapControlButton](/components/control-button)
-- [YandexMapGeolocationControl](/components/modules/control/geolocation)
-- [YandexMapZoomControl](/components/modules/control/zoom)
-- [YandexMapOpenMapsButton](/components/modules/control/open-maps)
+- [YandexMapGeolocationControl](/components/modules/controls/geolocation)
+- [YandexMapZoomControl](/components/modules/controls/zoom)
+- [YandexMapOpenMapsButton](/components/modules/controls/open-maps)
 
 ::: info Важно
 Параметр в `settings` `position` является обязательным к указанию.

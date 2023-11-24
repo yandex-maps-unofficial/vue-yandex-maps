@@ -4,7 +4,7 @@
 в `settings` [YMapDefaultMarkerProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapDefaultMarkerProps) и является
 маркером с предустановленными настройками стилей.
 
-![img.png](/vue-yandex-maps/default-marker.png)
+![img.png](./default-marker.png)
 
 ## Примеры использования
 
