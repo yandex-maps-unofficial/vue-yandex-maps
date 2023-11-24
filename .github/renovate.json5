@@ -13,5 +13,13 @@
     "enabled": true
   },
   "updateInternalDeps": true,
-  "baseBranches": ["v2"]
+  "baseBranches": ["v2"],
+  extends: [
+    "config:base",
+    "group:allNonMajor"
+  ],
+  rangeStrategy: "bump",
+  "npm": {
+    "commitMessageTopic": "{{prettyDepType}} {{depName}}"
+  }
 }
