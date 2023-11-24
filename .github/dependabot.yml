@@ -1,0 +1,36 @@
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    assignees:
+      - "daniluk4000"
+    reviewers:
+      - "daniluk4000"
+    target-branch: v2
+    groups:
+      yandex:
+        patterns:
+          - "@yandex/ymaps3-types"
+      minor-deps:
+        update-types:
+          - minor
+          - patch
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "nuxt"
+        versions:
+          - "2.x"
+        update-types:
+          - version-update:semver-major
+      - dependency-name: "vue"
+        versions:
+          - "2.x"
+        update-types:
+          - version-update:semver-major
+    milestone: 2
+    labels:
+      - 2.x
+      - dependencies
