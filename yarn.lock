@@ -4608,7 +4608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.9.4":
+"@types/node@npm:*":
   version: 20.9.4
   resolution: "@types/node@npm:20.9.4"
   dependencies:
@@ -4621,6 +4621,15 @@ __metadata:
   version: 16.18.64
   resolution: "@types/node@npm:16.18.64"
   checksum: 166132705e359a1232572f47093d320c282dbeb10e6899449136a6a2e7af4b6c7ff240ba7566248fdc3972a2ce362c6c5b680087d4415063e68c0b3ec6938914
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.10.0":
+  version: 20.10.0
+  resolution: "@types/node@npm:20.10.0"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: c7d5ddbdbf3491e2363135c9611eb6bfae90eda2957279237fa232bcb29cd0df1cc3ee149d6de9915b754262a531ee2d57d33c9ecd58d763e8ad4856113822f3
   languageName: node
   linkType: hard
 
@@ -10289,7 +10298,7 @@ __metadata:
   dependencies:
     "@nuxt/devtools": "npm:^1.0.3"
     "@nuxt/webpack-builder": "npm:^3.8.2"
-    "@types/node": "npm:^20.9.4"
+    "@types/node": "npm:^20.10.0"
     example-vue3: "workspace:*"
     nuxt: "npm:^3.8.2"
     vue-tsc: "npm:^1.8.22"
@@ -10317,7 +10326,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-vue3@workspace:packages/examples/vue3"
   dependencies:
-    "@types/node": "npm:^20.9.4"
+    "@types/node": "npm:^20.10.0"
     "@vitejs/plugin-vue": "npm:^4.5.0"
     "@vue/tsconfig": "npm:^0.4.0"
     npm-run-all: "npm:^4.1.5"
@@ -10333,7 +10342,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples@workspace:packages/examples/examples"
   dependencies:
-    "@types/node": "npm:^20.9.4"
+    "@types/node": "npm:^20.10.0"
     "@vitejs/plugin-vue": "npm:^4.5.0"
     "@vue/tsconfig": "npm:^0.4.0"
     "@yandex/ymaps3-types": "npm:^0.0.19"
@@ -20925,7 +20934,7 @@ __metadata:
   resolution: "vue-yandex-maps-monorepo@workspace:."
   dependencies:
     "@babel/eslint-parser": "npm:^7.23.3"
-    "@types/node": "npm:^20.9.4"
+    "@types/node": "npm:^20.10.0"
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
     "@typescript-eslint/parser": "npm:^6.12.0"
     "@vue/eslint-config-airbnb": "npm:^7.0.0"
