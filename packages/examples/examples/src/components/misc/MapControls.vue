@@ -41,8 +41,9 @@
             >
           </yandex-map-control-button>
         </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'bottom left' }">
+        <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
           <yandex-map-open-maps-button />
+          <yandex-map-open-maps-button :settings="{ title: 'Кастомный заголовок!' }" />
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'left' }">
           <yandex-map-geolocation-control />

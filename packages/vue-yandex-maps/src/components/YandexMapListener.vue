@@ -8,6 +8,8 @@ import type {
 } from '@yandex/ymaps3-types';
 import { setupMapChildren } from '../composables/utils.ts';
 
+export type YandexMapListenerSettings = Partial<DomEvents & MapEvents & BehaviorEvents>
+
 export default defineComponent({
   name: 'YandexMapListener',
   props: {
@@ -20,7 +22,7 @@ export default defineComponent({
       default: null,
     },
     settings: {
-      type: Object as PropType<Partial<DomEvents & MapEvents & BehaviorEvents>>,
+      type: Object as PropType<YandexMapListenerSettings>,
       default: () => ({}),
     },
   },

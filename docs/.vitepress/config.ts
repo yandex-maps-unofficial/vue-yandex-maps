@@ -54,6 +54,10 @@ export default defineConfig({
         link: '/guide/about',
       },
       {
+        text: 'Компоненты',
+        link: '/components/list'
+      },
+      {
         text: 'Руководства',
         items: [
           {
@@ -69,16 +73,12 @@ export default defineConfig({
             link: '/guide/configuration',
           },
           {
-            text: 'Стартовый шаблон',
-            link: '/guide/quickstart',
-          },
-          {
-            text: 'Общие принципы работы компонентов',
+            text: 'Общие принципы компонентов',
             link: '/components/',
           },
           {
-            text: 'YandexMap',
-            link: '/components/map',
+            text: 'Стартовый шаблон',
+            link: '/guide/quickstart',
           },
         ],
       },
@@ -143,8 +143,12 @@ export default defineConfig({
             link: '/components/',
           },
           {
+            text: 'Список компонентов',
+            link: '/components/list',
+          },
+          {
             text: 'Основные компоненты',
-            collapsed: false,
+            collapsed: true,
             items: [
               {
                 text: 'YandexMap',
@@ -220,7 +224,7 @@ export default defineConfig({
           },
           {
             text: 'Модули',
-            collapsed: false,
+            collapsed: true,
             items: [
               {
                 text: 'YandexMapClusterer',
@@ -279,7 +283,7 @@ export default defineConfig({
             link: '/examples/playground',
           },
           {
-            text: 'Параметры карты',
+            text: 'Карта',
             collapsed: true,
             items: [
               {
@@ -309,7 +313,7 @@ export default defineConfig({
             ],
           },
           {
-            text: 'Объекты на карте',
+            text: 'Маркеры',
             collapsed: true,
             items: [
               {
@@ -321,6 +325,20 @@ export default defineConfig({
                 link: '/examples/marker-custom-image',
               },
               {
+                text: 'Попап при клике на маркер',
+                link: '/examples/marker-popup',
+              },
+              {
+                text: 'Скрывать маркеры вне вьюпорта',
+                link: '/examples/hide-markers'
+              }
+            ]
+          },
+          {
+            text: 'Линии и полигоны',
+            collapsed: true,
+            items: [
+              {
                 text: 'Ломаная',
                 link: '/examples/polyline',
               },
@@ -329,27 +347,19 @@ export default defineConfig({
                 link: '/examples/polygon',
               },
               {
-                text: 'Перетаскивание объектов',
-                link: '/examples/draggable-objects',
-              },
-              {
-                text: 'Попап при клике на маркер',
-                link: '/examples/marker-popup',
-              },
-              {
                 text: 'Прямоугольник',
                 link: '/examples/rectangle',
               },
-              {
-                text: 'Скрывать маркеры вне вьюпорта',
-                link: '/examples/hide-markers'
-              }
             ],
           },
           {
             text: 'Прочее',
             collapsed: true,
             items: [
+              {
+                text: 'Перетаскивание объектов',
+                link: '/examples/draggable-objects',
+              },
               {
                 text: 'Кастомные тайлы на canvas',
                 link: '/examples/canvas-tiles',

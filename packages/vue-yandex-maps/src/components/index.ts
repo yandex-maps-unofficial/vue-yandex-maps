@@ -1,6 +1,7 @@
 import type { YandexMapSettings } from './YandexMap.vue';
 import YandexMap from './YandexMap.vue';
 import YandexMapListener from './YandexMapListener.vue';
+import type { YandexMapListenerSettings } from './YandexMapListener.vue';
 import YandexMapDefaultFeaturesLayer from './layers/YandexMapDefaultFeaturesLayer.vue';
 import YandexMapDefaultSchemeLayer from './layers/YandexMapDefaultSchemeLayer.vue';
 import YandexMapTileDataSource from './data-sources/YandexMapTileDataSource.vue';
@@ -69,4 +70,5 @@ export type {
   YandexMapControlButtonSettings,
   YandexMapClustererOptions,
   YandexMapDefaultMarkerSettings,
+  YandexMapListenerSettings,
 };

@@ -5,7 +5,7 @@
 Для запуска вам потребуется:
 1. Настроить карту
 2. Прописать location с center/zoom в settings
-3. Указать компоненты `<yandex-map-default-features-layer />` и `<yandex-map-default-scheme-layer />` в теле `<yandex-map />` - без этого не запустится
+3. Указать компоненты `<yandex-map-default-features-layer />` (нужен для маркеров и пр.) и `<yandex-map-default-scheme-layer />` в теле `<yandex-map />`
 4. Опционально указать width/height у `<yandex-map />` (по умолчанию: 100%)
 
 ```vue

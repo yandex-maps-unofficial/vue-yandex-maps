@@ -1,0 +1,12 @@
+# YandexMapFeature
+
+Компонент принимает в `settings` [YMapFeatureProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapFeatureProps) и позволяет рисовать геообъекты: полигоны, ломаные линии, многоугольники, и многое другое.
+
+Для использования компонента требуется подключить `<yandex-map-default-features-layer>`.
+
+Обратите внимание: в нём также доступны события типа `onClick` и пр., см. [FeatureClickEvents](https://yandex.ru/dev/jsapi30/doc/ru/ref/#interface-featureclickevents)
+
+## Примеры использования
+- [Ломаная](/examples/polyline)
+- [Прямоугольник](/examples/rectangle)
+- [Многоугольник](/examples/polygon)

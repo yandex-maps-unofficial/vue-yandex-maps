@@ -10,7 +10,7 @@ import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YM
 import { setupMapChildren, throwException } from '../../../composables/utils.ts';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
-export type YandexMapClustererOptions = Omit<Settings, 'features' | 'marker' | 'cluster'>
+export type YandexMapClustererOptions = Partial<Omit<Settings, 'features' | 'marker' | 'cluster'>>
 
 export default defineComponent({
   name: 'YandexMapClusterer',
@@ -20,11 +20,15 @@ export default defineComponent({
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapDefaultMarker>,
+      type: Object as PropType<YMapClusterer>,
       default: null,
     },
     settings: {
-      type: Object as PropType<Partial<YandexMapClustererOptions>>,
+      type: Object as PropType<YandexMapClustererOptions>,
+      default: () => ({}),
+    },
+    clusterMarkerProps: {
+      type: Object as PropType<Omit<ConstructorParameters<typeof YMapMarker>[0], 'coordinates'>>,
       default: () => ({}),
     },
     /**
@@ -188,6 +192,7 @@ export default defineComponent({
                 element.children.forEach((x) => element.removeChild(x as any));
 
                 element.addChild(new ymaps3.YMapMarker({
+                  ...props.clusterMarkerProps,
                   coordinates: clusterer.lnglat,
                 }, item as HTMLDivElement));
               } catch (e) {
