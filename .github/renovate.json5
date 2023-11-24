@@ -1,19 +1,37 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "assignees": ["daniluk4000"],
-  "reviewers": ["daniluk4000"],
+  "assignees": [
+    "daniluk4000"
+  ],
+  "reviewers": [
+    "daniluk4000"
+  ],
   "packageRules": [
     {
-      "matchPackageNames": ["vue", "nuxt"],
+      "matchPackageNames": [
+        "vue",
+        "nuxt"
+      ],
       "allowedVersions": "<3"
+    },
+    {
+      matchDepTypes: [
+        "peerDependencies",
+        "engines"
+      ],
+      enabled: false
     }
   ],
-  "labels": ["2.x", "dependencies"],
+  "labels": [
+    "2.x",
+    "dependencies"
+  ],
   "lockFileMaintenance": {
     "enabled": true
   },
   "updateInternalDeps": true,
-  "baseBranches": ["v2"],
+  "baseBranches": [
+    "v2"
+  ],
   extends: [
     "config:base",
     "group:allNonMajor"
