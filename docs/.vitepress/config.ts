@@ -16,7 +16,7 @@ export default defineConfig({
   themeConfig: {
     sidebarMenuLabel: packageJson.version,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/blob/v2' },
+      { icon: 'github', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps' },
     ],
     outline: {
       label: 'На этой странице',
@@ -93,7 +93,7 @@ export default defineConfig({
       {
         text: packageJson.version,
         items: [
-          { text: 'Список изменений', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/blob/v2/CHANGELOG.md' },
+          { text: 'Список изменений', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/blob/master/CHANGELOG.md' },
           {
             text: 'Создать новую Issue',
             link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/new/choose',
