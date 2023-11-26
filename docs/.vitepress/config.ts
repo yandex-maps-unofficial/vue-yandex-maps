@@ -6,7 +6,7 @@ export default defineConfig({
   lang: 'ru-RU',
   title: 'Vue Yandex Maps',
   description: 'Откройте для себя Яндекс карты для Vue',
-  lastUpdated: true,
+  lastUpdated: false,
   locales: {
     root: {
       label: 'Русский',
