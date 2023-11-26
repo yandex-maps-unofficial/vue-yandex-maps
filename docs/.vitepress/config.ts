@@ -80,6 +80,10 @@ export default defineConfig({
             text: 'Стартовый шаблон',
             link: '/guide/quickstart',
           },
+          {
+            text: 'Переход с 0.xx/1.xx',
+            link: '/guide/migration',
+          },
         ],
       },
       {
@@ -103,7 +107,7 @@ export default defineConfig({
     ],
     sidebar: [
       {
-        text: 'Начало работы',
+        text: 'Основная информация',
         collapsed: false,
         items: [
           {
@@ -131,6 +135,10 @@ export default defineConfig({
           {
             text: 'Начало работы',
             link: '/guide/quickstart',
+          },
+          {
+            text: 'Переход с 0.xx/1.xx',
+            link: '/guide/migration',
           },
         ],
       },

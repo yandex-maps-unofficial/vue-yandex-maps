@@ -12,6 +12,9 @@ hero:
       text: Начало работы
       link: /guide/about
     - theme: alt
+      text: Переход с 0.x/1.x
+      link: /guide/migration
+    - theme: alt
       text: Открыть на Github
       link: https://github.com/PNKBizz/vue-yandex-maps/tree/v2
 
