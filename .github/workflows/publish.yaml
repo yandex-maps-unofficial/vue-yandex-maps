@@ -2,7 +2,7 @@ name: NPM Publish
 
 on:
   push:
-    branches: [ v2 ]
+    branches: [ master ]
 
 permissions:
   contents: write
@@ -80,7 +80,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          target_commitish: v2
+          target_commitish: master
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ steps.tagName.outputs.version }}
           name: ${{ steps.release.outputs.title }}
