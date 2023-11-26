@@ -1,20 +1,16 @@
-name: Code checks
+name: Code check V2
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ v2 ]
 
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: install node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
-      - uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: install
-      - run: npm run lint
-      - run: npm test
+          node-version: 20.x
+      - uses: ./.github/actions/codecheck

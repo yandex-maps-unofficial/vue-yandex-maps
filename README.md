@@ -1,11 +1,12 @@
+[![npm](https://img.shields.io/npm/v/vue-yandex-maps.svg)](https://www.npmjs.com/package/vue-yandex-maps)
+[![GitHub issues](https://img.shields.io/github/issues/PNKBizz/vue-yandex-maps.svg)](https://github.com/PNKBizz/vue-yandex-maps/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/PNKBizz/vue-yandex-maps.svg)](https://github.com/PNKBizz/vue-yandex-maps)
+[![npm](https://img.shields.io/npm/dm/vue-yandex-maps.svg)](https://www.npmjs.com/package/vue-yandex-maps)
+[![GitHub license](https://img.shields.io/github/license/PNKBizz/vue-yandex-maps.svg)](https://github.com/PNKBizz/vue-yandex-maps/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/PNKBizz/vue-yandex-maps.svg?style=social)](https://github.com/PNKBizz/vue-yandex-maps/stargazers)
+
 # vue-yandex-maps
 
-Бета-версия плагина для Я.Карт на VueJS. Только для Vue 3. Полностью на TS.
+Добро пожаловать в Vue Yandex Maps! Это - обертка над Яндекс Картами 3.0 под Vue 2 и 3, поддерживающая Nuxt и SSR. 
 
-[Документация](https://vue-yandex-maps.github.io/new-docs/)
-
-```
-npm install vue-yandex-maps@beta
-```
-
-**Буду рад любому участию**. Нужна помощь с тестами и документацией (англ. версия).
+[Документация](https://yandex-maps-unofficial.github.io/vue-yandex-maps/)

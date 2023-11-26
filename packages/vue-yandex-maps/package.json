@@ -1,0 +1,109 @@
+{
+  "name": "vue-yandex-maps",
+  "version": "2.0.0-rc.1",
+  "description": "Yandex Maps 3.0 components library for VueJS.",
+  "main": "./dist/vue-yandex-maps.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/vue-yandex-maps.js"
+    },
+    "./nuxt": {
+      "types": "./dist/plugins/nuxt3-module.d.ts",
+      "default": "./dist/plugins/nuxt3-module.js"
+    },
+    "./nuxt2": {
+      "types": "./dist/plugins/nuxt2-module.d.ts",
+      "default": "./dist/plugins/nuxt2-module.js"
+    },
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*"
+  },
+  "typesVersions": {
+    "*": {
+      "nuxt": [
+        "./dist/plugins/nuxt3-module.d.ts"
+      ],
+      "nuxt2": [
+        "./dist/plugins/nuxt2-module.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "yarn build:package-only",
+    "build:package-only": "vue-tsc --noEmit && vite build",
+    "npm:publish": "npm publish --tag next"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "package.json",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "homepage": "https://yandex-maps-unofficial.github.io/vue-yandex-maps/",
+  "bugs": {
+    "url": "https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yandex-maps-unofficial/vue-yandex-maps"
+  },
+  "keywords": [
+    "яндекс карты",
+    "яндекс-карты",
+    "yandex maps",
+    "yandex-maps",
+    "yandex",
+    "maps",
+    "vue",
+    "nuxt"
+  ],
+  "author": {
+    "name": "Danila Rodichkin",
+    "email": "daniluk4000@outlook.com"
+  },
+  "contributors": [
+    {
+      "name": "pnkbizz",
+      "email": "bizz.gc@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@nuxt/kit": "^3.8.2",
+    "@yandex/ymaps3-types": "^0.0.19"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.17.2",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "deep-object-diff": "^1.1.9",
+    "nuxt": "^3.8.2",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.2",
+    "vite-plugin-dts": "^3.6.3",
+    "vue": "^3.3.9",
+    "vue-tsc": "^1.8.22"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": ">=1",
+    "nuxt": "2||3",
+    "vue": ">=2.7||3"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    },
+    "nuxt": {
+      "optional": true
+    }
+  },
+  "web-types": "web-types.json"
+}

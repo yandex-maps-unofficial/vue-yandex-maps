@@ -1,0 +1,33 @@
+name: 'Codecheck'
+description: 'Perform lint and build of project'
+
+runs:
+  using: composite
+  steps:
+    - name: Install deps
+      shell: bash
+      run: yarn
+    - name: Lint
+      shell: bash
+      run: yarn lint
+    - name: Build package
+      shell: bash
+      run: yarn build
+    - name: Build Nuxt 2
+      shell: bash
+      run: yarn workspace example-nuxt2 build
+    - name: Generate Nuxt 2
+      shell: bash
+      run: yarn workspace example-nuxt2 generate
+    - name: Build Nuxt 3
+      shell: bash
+      run: yarn workspace example-nuxt3 build
+    - name: Generate Nuxt 3
+      shell: bash
+      run: yarn workspace example-nuxt3 generate
+    - name: Build Vue 2
+      shell: bash
+      run: yarn workspace example-vue2 build
+    - name: Generate Vue 3
+      shell: bash
+      run: yarn workspace example-vue3 build
