@@ -16,7 +16,7 @@ hero:
       link: /guide/migration
     - theme: alt
       text: Открыть на Github
-      link: https://github.com/PNKBizz/vue-yandex-maps/tree/v2
+      link: https://github.com/PNKBizz/vue-yandex-maps
 
 features:
   - icon: 🚀

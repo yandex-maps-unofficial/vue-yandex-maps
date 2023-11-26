@@ -398,7 +398,7 @@ export default defineConfig({
       next: 'Далее',
     },
     editLink: {
-      pattern: 'https://github.com/PNKBizz/vue-yandex-maps/tree/v2/docs/:path',
+      pattern: 'https://github.com/PNKBizz/vue-yandex-maps/tree/master/docs/:path',
       text: 'Редактировать на GitHub',
     },
     lastUpdated: {
