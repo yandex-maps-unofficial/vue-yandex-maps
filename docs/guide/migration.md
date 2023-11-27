@@ -7,8 +7,155 @@
 :::
 
 ## Переход с определенных версий
+
 - [Переход с 0.xx](/guide/migration/v0)
 - [Переход с 1.xx](/guide/migration/v1)
+
+::: warning Важно!
+Перед переходом в гайды по версиям проделайте шаги ниже.
+:::
+
+## Смена версии
+Измените вашу версию на тэг `next`:
+
+::: code-group
+
+```shell [npm]
+npm install vue-yandex-maps@next
+```
+
+```shell [yarn]
+yarn add vue-yandex-maps@next
+```
+
+```shell [pnpm]
+pnpm install vue-yandex-maps@next
+```
+:::
+
+## Установка и конфигурация
+
+### Vue
+
+1. Удалите текущие Vue.use/app.use
+2. Замените их на обновлённую установку
+
+::: code-group
+```typescript [Vue 2]
+import Vue from 'vue';
+import YmapPlugin from 'vue-yandex-maps'; // [!code --]
+import { createYmapsVue2 } from 'vue-yandex-maps'; // [!code ++]
+import type { VueYandexMaps } from 'vue-yandex-maps'; // [!code ++]
+import App from './App.vue';
+
+const settings = { // [!code --]
+  apiKey: 'your-api-key', // [!code --]
+  lang: 'ru_RU', // [!code --]
+  coordorder: 'latlong', // [!code --]
+  enterprise: false, // [!code --]
+  version: '2.1' // [!code --]
+} // [!code --]
+
+//lang и version теперь задаются по умолчанию
+const settings: VueYandexMaps.PluginSettings = { // [!code ++]
+  apikey: 'your-api-key', // [!code ++]
+}; // [!code ++]
+
+Vue.use(YmapPlugin, settings); // [!code --]
+Vue.use(createYmapsVue2(settings)); // [!code ++]
+
+new Vue({
+  render: (h) => h(App),
+}).$mount('#app');
+```
+
+```typescript [Vue 3]
+import { createApp } from 'vue';
+import YmapPlugin from 'vue-yandex-maps'; // [!code --]
+import { createYmaps } from 'vue-yandex-maps'; // [!code ++]
+import type { VueYandexMaps } from 'vue-yandex-maps'; // [!code ++]
+import App from './App.vue';
+
+const app = createApp(App);
+
+const settings = { // [!code --]
+  apiKey: 'your-api-key', // [!code --]
+  lang: 'ru_RU', // [!code --]
+  coordorder: 'latlong', // [!code --]
+  enterprise: false, // [!code --]
+  version: '2.1' // [!code --]
+} // [!code --]
+
+//lang и version теперь задаются по умолчанию
+const settings: VueYandexMaps.PluginSettings = { // [!code ++]
+  apikey: 'your-api-key', // [!code ++]
+}; // [!code ++]
+
+app.use(YmapPlugin, settings); // [!code --]
+app.use(createYmaps(settings)); // [!code ++]
+
+app.mount('#app');
+```
+:::
+
+### Nuxt
+Если вы используете Nuxt, то выполните следующие шаги:
+1. Удалите `vue-yandex-maps` из плагинов. Вообще.
+2. Подключите встроенный модуль в вашем `nuxt.config.js(ts)`:
+
+::: code-group
+
+```typescript{2-5} [Nuxt 2, nuxt.config.js]
+export default {
+  modules: ['vue-yandex-maps/nuxt2'],
+  yandexMaps: {
+    apikey: 'your-api-key',
+  },
+};
+```
+
+```typescript{2-5} [Nuxt 3/Bridge, nuxt.config.ts]
+export default defineNuxtConfig({
+  modules: ['vue-yandex-maps/nuxt'],
+  yandexMaps: {
+    apikey: 'your-api-key',
+  },
+});
+```
+
+:::
+
+::: tip Совет
+Для полной конфигурации см. раздел [Конфигурация](/guide/configuration).
+
+Также, если вы **не используете Nuxt 3/Bridge**, просмотрите раздел [TypeScript](#typescript) для конфигурации `tsconfig.json`.
+
+В Nuxt 3/Bridge описанного выше подключения достаточно.
+:::
+
+## loadYmap
+
+Вместо данной функции, при желании, используйте `initYmaps()`.
+
+По умолчанию, `initYmaps` вызывается автоматически при загрузке компонента `<yandex-maps>` - так что, возможно, вам вообще больше не нужна эта функция, lazy-load реализован по умолчанию.
+
+Подробнее см. `initializeOn` в [Конфигурации](/guide/configuration.html#initializeon).
+
+## TypeScript
+Если вы используете `TypeScript` и не используете `Nuxt 3` / `Nuxt Bridge`, то для удобства работы добавьте следующую информацию в ваш `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@yandex/ymaps3-types"
+    ]
+  }
+}
+```
+
+В Nuxt (кроме Nuxt 2) эти строки добавляются автоматически в .nuxt/tsconfig.json.
 
 ## Сервисы (ymaps.*)
 

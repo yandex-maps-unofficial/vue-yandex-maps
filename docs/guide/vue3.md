@@ -42,7 +42,7 @@ import { createApp } from 'vue';
 import { createYmaps } from 'vue-yandex-maps';
 import App from './App.vue';
 
-const app = createApp(App);x
+const app = createApp(App);
 
 app.use(createYmaps({
   apikey: 'your-api-key',
