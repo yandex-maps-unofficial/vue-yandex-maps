@@ -4,7 +4,7 @@ import type { PropType, Ref } from 'vue';
 import {
   computed, defineComponent, h, inject, onMounted,
 } from 'vue';
-import { setupMapChildren } from '../../composables/utils';
+import { setupMapChildren, throwException } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapFeatureDataSource',
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     settings: {
       type: Object as PropType<ConstructorParameters<typeof YMapFeatureDataSource>[0]>,
-      default: () => ({}),
+      required: true,
     },
   },
   emits: {
@@ -42,6 +42,12 @@ export default defineComponent({
     let mapChildren: YMapFeatureDataSource | undefined;
 
     onMounted(async () => {
+      if (!props.settings.id) {
+        throwException({
+          text: 'You must specify id in YandexMapFeatureDataSource settings',
+        });
+      }
+
       mapChildren = await setupMapChildren({
         createFunction: () => new ymaps3.YMapFeatureDataSource(props.settings),
         settings: computed(() => props.settings),

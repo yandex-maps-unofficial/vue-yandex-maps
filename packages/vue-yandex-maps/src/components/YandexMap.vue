@@ -61,10 +61,6 @@ export default defineComponent({
      */
     settings: {
       type: Object as PropType<YandexMapSettings>,
-      validator: (val: any) => {
-        if (!('location' in val)) return false;
-        return true;
-      },
       required: true,
     },
     /**
@@ -134,6 +130,12 @@ export default defineComponent({
     }));
 
     const init = async () => {
+      if (!props.settings.location) {
+        throwException({
+          text: 'You must specify location in YandexMap settings',
+        });
+      }
+
       const container = ymapContainer.value;
       if (!container) {
         throwException({
@@ -244,7 +246,7 @@ export default defineComponent({
     });
 
     return () => {
-      const mapNode = h(props.tag, {
+      const mapNodeProps = {
         class: '__ymap',
         style: {
           width: props.width,
@@ -253,7 +255,7 @@ export default defineComponent({
           position: 'relative',
           'z-index': props.zIndex.toString(),
         },
-      });
+      };
 
       const containerNode = h('div', {
         class: '__ymap_container',
@@ -264,16 +266,16 @@ export default defineComponent({
         ref: ymapContainer,
       });
 
-      const slotsNode = h('div', {
+      const slotsNodeProps = {
         class: '__ymap_slots',
         style: { display: 'none' },
-      });
+      };
 
-      if (!mounted.value) return h(mapNode, [containerNode, slotsNode]);
+      if (!mounted.value) return h(props.tag, mapNodeProps, [containerNode, h('div', slotsNodeProps)]);
 
-      return h(mapNode, [
+      return h(props.tag, mapNodeProps, [
         containerNode,
-        h(slotsNode, slots.default?.()),
+        h('div', slotsNodeProps, slots.default?.()),
       ]);
     };
   },

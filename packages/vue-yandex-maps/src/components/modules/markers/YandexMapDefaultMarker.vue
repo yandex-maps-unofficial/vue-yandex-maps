@@ -4,7 +4,7 @@ import {
   computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
-import { setupMapChildren } from '../../../composables/utils.ts';
+import { setupMapChildren, throwException } from '../../../composables/utils.ts';
 
 export type YandexMapDefaultMarkerSettings = ConstructorParameters<typeof YMapDefaultMarker>[0]
 
@@ -21,7 +21,7 @@ export default defineComponent({
     },
     settings: {
       type: Object as PropType<YandexMapDefaultMarkerSettings>,
-      default: () => ({}),
+      required: true,
     },
   },
   emits: {
@@ -60,6 +60,12 @@ export default defineComponent({
     });
 
     onMounted(async () => {
+      if (!props.settings.coordinates) {
+        throwException({
+          text: 'You must specify coordinates in YandexMapDefaultMarker settings',
+        });
+      }
+
       mapChildren = await setupMapChildren({
         createFunction: ({ YMapDefaultMarker: Marker }) => new Marker(getSettings.value),
         requiredImport: () => ymaps3.import('@yandex/ymaps3-markers@0.0.1'),

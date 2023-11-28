@@ -4,7 +4,7 @@ import type { PropType } from 'vue';
 import {
   computed, defineComponent, h, onMounted,
 } from 'vue';
-import { setupMapChildren } from '../composables/utils';
+import { setupMapChildren, throwException } from '../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapFeature',
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     settings: {
       type: Object as PropType<ConstructorParameters<typeof YMapFeature>[0]>,
-      default: () => ({}),
+      required: true,
     },
   },
   emits: {
@@ -37,6 +37,12 @@ export default defineComponent({
     let mapChildren: YMapFeature | undefined;
 
     onMounted(async () => {
+      if (!props.settings.geometry) {
+        throwException({
+          text: 'You must specify geometry in YandexMapFeature settings',
+        });
+      }
+
       mapChildren = await setupMapChildren({
         createFunction: () => new ymaps3.YMapFeature(props.settings),
         settings: computed(() => props.settings),

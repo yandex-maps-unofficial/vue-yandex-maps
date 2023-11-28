@@ -4,7 +4,7 @@ import type { PropType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
-import { setupMapChildren } from '../composables/utils';
+import { setupMapChildren, throwException } from '../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapMarker',
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     settings: {
       type: Object as PropType<ConstructorParameters<typeof YMapMarker>[0]>,
-      default: () => ({}),
+      required: true,
     },
   },
   emits: {
@@ -39,6 +39,12 @@ export default defineComponent({
     const element = ref<null | HTMLDivElement>(null);
 
     onMounted(async () => {
+      if (!props.settings.coordinates) {
+        throwException({
+          text: 'You must specify coordinates in YandexMapMarker settings',
+        });
+      }
+
       mapChildren = await setupMapChildren({
         settings: computed(() => props.settings),
         createFunction: () => new ymaps3.YMapMarker(props.settings, element.value!),

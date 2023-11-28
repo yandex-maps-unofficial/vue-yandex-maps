@@ -4,7 +4,7 @@ import type { PropType, Ref } from 'vue';
 import {
   computed, defineComponent, h, inject, onMounted,
 } from 'vue';
-import { setupMapChildren } from '../../composables/utils';
+import { setupMapChildren, throwException } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapLayer',
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     settings: {
       type: Object as PropType<ConstructorParameters<typeof YMapLayer>[0]>,
-      default: () => ({}),
+      required: true,
     },
   },
   emits: {
@@ -42,6 +42,12 @@ export default defineComponent({
     let mapLayer: YMapLayer | undefined;
 
     onMounted(async () => {
+      if (!props.settings.type) {
+        throwException({
+          text: 'You must specify type in YandexMapLayer settings',
+        });
+      }
+
       mapLayer = await setupMapChildren({
         createFunction: () => new ymaps3.YMapLayer(props.settings || {}),
         settings: computed(() => props.settings),

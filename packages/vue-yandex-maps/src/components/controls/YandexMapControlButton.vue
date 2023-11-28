@@ -6,7 +6,7 @@ import {
 import type { YMapControlButton } from '@yandex/ymaps3-types';
 import { setupMapChildren } from '../../composables/utils.ts';
 
-export type YandexMapControlButtonSettings = Omit<ConstructorParameters<typeof YMapControlButton>[0], 'element'>
+export type YandexMapControlButtonSettings = Omit<ConstructorParameters<typeof YMapControlButton>[0], 'element' | 'text'>
 
 export default defineComponent({
   name: 'YandexMapControlButton',
