@@ -183,7 +183,7 @@ const positions: Record<YandexMapMarkerPosition | 'custom', YandexMapMarkerPosit
   default: 'default',
 };
 
-const position: keyof typeof positions = 'default';
+const position = ref<keyof typeof positions>('default');
 
 onMounted(() => {
   let inc = 0;
