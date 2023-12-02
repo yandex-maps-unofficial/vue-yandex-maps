@@ -15,15 +15,17 @@ concurrency:
 
 jobs:
   check:
+    name: Test build & lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install node
+      - name: install node
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
       - uses: ./.github/actions/codecheck
   test-vue2:
+    name: Vue 2 Cluster render test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +37,7 @@ jobs:
         with:
           type: vue2
   test-vue3:
+    name: Vue 3 Cluster render test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,6 +49,7 @@ jobs:
         with:
           type: vue3
   test-nuxt2:
+    name: Nuxt 2 Cluster render test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -57,6 +61,7 @@ jobs:
         with:
           type: nuxt2
   test-nuxt3:
+    name: Nuxt 3 Cluster render test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
