@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ExampleComponent from 'example-vue3/src/example-component.vue';
+import ExampleComponent from 'examples/src/CommonExamples.vue';
 
 export default defineComponent({
   components: {

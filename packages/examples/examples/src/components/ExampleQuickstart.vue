@@ -11,7 +11,6 @@
       width="100%"
       height="500px"
     >
-      <yandex-map-default-features-layer />
       <yandex-map-default-scheme-layer :settings="{ theme: isDarkTheme ? 'dark' : 'light' }" />
     </yandex-map>
   </common-wrapper>
@@ -20,7 +19,7 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue';
 import type { YMap } from '@yandex/ymaps3-types';
-import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+import { YandexMap, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
 import CommonWrapper from './CommonWrapper.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

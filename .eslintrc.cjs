@@ -68,6 +68,7 @@ module.exports = {
     'no-undef': 'off',
     'no-underscore-dangle': 'off',
     'no-restricted-syntax': 'off',
+    'no-restricted-globals': 'off',
     'no-alert': 'off',
     'no-continue': 'off',
     'func-call-spacing': 'off',
