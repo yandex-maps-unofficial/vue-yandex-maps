@@ -20,4 +20,4 @@ runs:
       run: npm run postinstall --prefix ./node_modules/puppeteer
     - name: Test render
       shell: bash
-      run: node test-app.mjs ${{ github.event.inputs.type }}
+      run: node test-app.mjs ${{ inputs.type }}
