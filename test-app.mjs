@@ -76,19 +76,14 @@ spawnedProcess.once('spawn', async () => {
     waitUntil: 'networkidle2',
   });
 
-  const result = await page.evaluate(() => {
-    const cluster = document.querySelector('ymaps .cluster');
-
-    return [!!cluster, document.body.innerHTML];
-  });
-
-  // Send SIGHUP to process.
-  spawnedProcess.kill();
-
-  if (!result[0]) {
-    console.log(result[1]);
+  try {
+    await page.waitForSelector('ymaps .cluster', { timeout: 1000 * 10 });
+  } catch (e) {
+    spawnedProcess.kill();
     throw new Error('Test failed: selector "ymaps .cluster" was not found.');
   }
+
+  spawnedProcess.kill();
   process.exit();
 });
 
