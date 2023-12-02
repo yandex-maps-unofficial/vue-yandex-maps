@@ -79,13 +79,16 @@ spawnedProcess.once('spawn', async () => {
   const result = await page.evaluate(() => {
     const cluster = document.querySelector('ymaps .cluster');
 
-    return !!cluster;
+    return [!!cluster, document.body.innerHTML];
   });
 
   // Send SIGHUP to process.
   spawnedProcess.kill();
 
-  if (!result) throw new Error('Test failed: selector "ymaps .cluster" was not found.');
+  if (!result[0]) {
+    console.log(result[1]);
+    throw new Error('Test failed: selector "ymaps .cluster" was not found.');
+  }
   process.exit();
 });
 
