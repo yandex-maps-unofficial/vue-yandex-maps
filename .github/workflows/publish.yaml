@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 20.x
       - uses: ./.github/actions/codecheck
-  test:vue2:
+  test-vue2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
       - uses: ./.github/actions/test
         with:
           type: vue2
-  test:vue3:
+  test-vue3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
       - uses: ./.github/actions/test
         with:
           type: vue3
-  test:nuxt2:
+  test-nuxt2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -56,7 +56,7 @@ jobs:
       - uses: ./.github/actions/test
         with:
           type: nuxt2
-  test:nuxt3:
+  test-nuxt3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -95,10 +95,10 @@ jobs:
     name: NPM Publish
     needs:
       - check
-      - test:vue2
-      - test:vue3
-      - test:nuxt2
-      - test:nuxt3
+      - test-vue2
+      - test-vue3
+      - test-nuxt2
+      - test-nuxt3
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
