@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import ManyPoints from 'examples/src/components/misc/ManyPoints.vue';
 
 export default defineComponent({
+  name: 'IndexPage',
   components: {
     ManyPoints,
   },
