@@ -1,0 +1,23 @@
+name: 'Test'
+description: 'Perform render tests'
+
+inputs:
+  type:
+    description: Type of environment
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install deps
+      shell: bash
+      run: yarn
+    - name: Build package
+      shell: bash
+      run: yarn build
+    - name: Prepare Puppeteer
+      shell: bash
+      run: npm run postinstall --prefix ./node_modules/puppeteer
+    - name: Test render
+      shell: bash
+      run: node test-app.mjs ${{ github.event.inputs.type }}

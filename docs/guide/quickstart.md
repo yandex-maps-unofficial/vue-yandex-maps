@@ -26,19 +26,19 @@
 </template>
 
 <script setup lang="ts">
-  import { shallowRef } from 'vue';
-  import type { YMap } from '@yandex/ymaps3-types';
-  import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+import { shallowRef } from 'vue';
+import type { YMap } from '@yandex/ymaps3-types';
+import { YandexMap, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
 
-  //Можно использовать для различных преобразований
-  const map = shallowRef<null | YMap>(null);
+//Можно использовать для различных преобразований
+const map = shallowRef<null | YMap>(null);
 </script>
 ```
 
 <example-quickstart :is-dark-theme="isDark()"/>
 
 <script lang="ts" setup>
-import ExampleQuickstart from 'example-vue3/src/components/ExampleQuickstart.vue';
+import ExampleQuickstart from 'examples/src/components/ExampleQuickstart.vue';
 
 const isDark = () => {
     if (typeof window === 'undefined') return false;
