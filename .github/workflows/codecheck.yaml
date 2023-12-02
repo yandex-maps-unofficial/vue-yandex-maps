@@ -7,9 +7,6 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test
-      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -19,9 +16,6 @@ jobs:
       - uses: ./.github/actions/codecheck
   test-vue2:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test
-      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -33,9 +27,6 @@ jobs:
           type: vue2
   test-vue3:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test
-      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -47,9 +38,6 @@ jobs:
           type: vue3
   test-nuxt2:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test
-      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -61,9 +49,6 @@ jobs:
           type: nuxt2
   test-nuxt3:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test
-      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
