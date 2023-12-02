@@ -6,8 +6,10 @@ on:
 
 jobs:
   check:
-    name: Test build & lint
     runs-on: ubuntu-latest
+    concurrency:
+      group: test
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -16,8 +18,10 @@ jobs:
           node-version: 20.x
       - uses: ./.github/actions/codecheck
   test-vue2:
-    name: Vue 2 Cluster render test
     runs-on: ubuntu-latest
+    concurrency:
+      group: test
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -28,8 +32,10 @@ jobs:
         with:
           type: vue2
   test-vue3:
-    name: Vue 3 Cluster render test
     runs-on: ubuntu-latest
+    concurrency:
+      group: test
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -40,8 +46,10 @@ jobs:
         with:
           type: vue3
   test-nuxt2:
-    name: Nuxt 2 Cluster render test
     runs-on: ubuntu-latest
+    concurrency:
+      group: test
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
@@ -52,8 +60,10 @@ jobs:
         with:
           type: nuxt2
   test-nuxt3:
-    name: Nuxt 3 Cluster render test
     runs-on: ubuntu-latest
+    concurrency:
+      group: test
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: install node
