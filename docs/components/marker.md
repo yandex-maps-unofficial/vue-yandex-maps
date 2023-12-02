@@ -6,6 +6,10 @@
 
 Обратите внимание: в нём также доступны события типа `onClick` и пр., см. [FeatureClickEvents](https://yandex.ru/dev/jsapi30/doc/ru/ref/#interface-featureclickevents).
 
+::: info Важно
+Параметр в `settings` `coordinates` является обязательным к указанию.
+:::
+
 ## Примеры использования
 
 - [Добавление метки на карту](/examples/placemark)

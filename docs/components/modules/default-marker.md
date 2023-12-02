@@ -4,6 +4,10 @@
 в `settings` [YMapDefaultMarkerProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapDefaultMarkerProps) и является
 маркером с предустановленными настройками стилей.
 
+::: info Важно
+Параметр в `settings` `coordinates` является обязательным к указанию.
+:::
+
 ![img.png](./default-marker.png)
 
 ## Примеры использования

@@ -1,6 +1,6 @@
 # YandexMapLayer
 
-Компонент принимает в `settings` [YMapLayerProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapLayerProps) и позволяет полностью взять на себя отображение слоя и кастомизировать таким образом карту как угодно.
+Компонент принимает в `settings` [YMapLayerProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapLayerProps) с обязательным параметром `type` и позволяет полностью взять на себя отображение слоя и кастомизировать таким образом карту как угодно.
 
 ::: warning Важно
 Собственная реализации слоев доступна только на платных тарифах.

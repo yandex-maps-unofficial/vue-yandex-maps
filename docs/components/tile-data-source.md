@@ -1,7 +1,7 @@
 # YandexMapTileDataSource
 
 Компонент принимает
-в `settings` [YMapTileDataSourceProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapTileDataSourceProps) и представляет собой объект для загрузки тайлов растровой или векторной карты.
+в `settings` [YMapTileDataSourceProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapTileDataSourceProps) с обязательным параметром `id` и представляет собой объект для загрузки тайлов растровой или векторной карты.
 
 ### Примеры
 - [Основные параметры](/examples/map-params)

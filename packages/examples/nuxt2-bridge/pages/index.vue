@@ -1,15 +1,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ExampleComponent from 'example-vue3/src/example-component.vue';
+import ManyPoints from 'examples/src/components/misc/ManyPoints.vue';
 
 export default defineComponent({
   name: 'IndexPage',
   components: {
-    ExampleComponent,
+    ManyPoints,
   },
 });
 </script>
 
 <template>
-  <example-component />
+  <many-points />
 </template>

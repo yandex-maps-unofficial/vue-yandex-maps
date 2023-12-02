@@ -4,7 +4,7 @@ import type { PropType, Ref } from 'vue';
 import {
   computed, defineComponent, h, onMounted, shallowRef,
 } from 'vue';
-import { setupMapChildren } from '../../composables/utils';
+import { setupMapChildren, throwException } from '../../composables/utils';
 
 export default defineComponent({
   name: 'YandexMapControls',
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     settings: {
       type: Object as PropType<ConstructorParameters<typeof YMapControls>[0]>,
-      default: () => ({}),
+      required: true,
     },
   },
   emits: {
@@ -37,6 +37,12 @@ export default defineComponent({
     const mapChildren: Ref<YMapControls | null> = shallowRef(null);
 
     onMounted(async () => {
+      if (!props.settings.position) {
+        throwException({
+          text: 'You must specify position in YandexMapControls settings',
+        });
+      }
+
       mapChildren.value = await setupMapChildren({
         createFunction: () => new ymaps3.YMapControls(props.settings),
         isMapRoot: true,

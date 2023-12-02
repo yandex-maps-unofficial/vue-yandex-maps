@@ -12,6 +12,7 @@
         "test:nuxt2-bridge": "yarn workspace vue-yandex-maps build && yarn workspace example-nuxt2-bridge dev",
         "test:vue3": "yarn workspace vue-yandex-maps build:package-only && yarn workspace example-vue3 dev",
         "test:nuxt3": "yarn workspace vue-yandex-maps build && yarn workspace example-nuxt3 dev",
+        "test:render": "npm run postinstall --prefix ./node_modules/puppeteer && node test-app.mjs",
         "lint": "eslint --ext \".js,.ts,.vue\" ./packages/* --max-warnings 0",
         "lint:fix": "yarn lint --fix",
         "check": "yarn lint && yarn build && yarn docs:build",
@@ -19,18 +20,18 @@
     },
     "dependencies": {
         "@yandex/ymaps3-types": "^0.0.19",
-        "example-vue3": "workspace:^",
         "examples": "workspace:^",
+        "puppeteer": "^21.5.2",
         "vue-yandex-maps": "workspace:^"
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.23.3",
-        "@types/node": "^20.10.0",
-        "@typescript-eslint/eslint-plugin": "^6.13.0",
-        "@typescript-eslint/parser": "^6.13.0",
-        "@vue/eslint-config-airbnb": "^7.0.0",
-        "eslint": "^8.54.0",
-        "eslint-plugin-vue": "^9.18.1",
+        "@types/node": "^20.10.2",
+        "@typescript-eslint/eslint-plugin": "^6.13.1",
+        "@typescript-eslint/parser": "^6.13.1",
+        "@vue/eslint-config-airbnb": "^7.0.1",
+        "eslint": "^8.55.0",
+        "eslint-plugin-vue": "^9.19.2",
         "typescript": "^5.3.2",
         "vitepress": "^1.0.0-rc.31"
     },
