@@ -13,6 +13,9 @@ runs:
     - name: Build package
       shell: bash
       run: yarn build
+    - name: Build docs
+      shell: bash
+      run: yarn docs:build
     - name: Build Nuxt 2
       shell: bash
       run: yarn workspace example-nuxt2 build
