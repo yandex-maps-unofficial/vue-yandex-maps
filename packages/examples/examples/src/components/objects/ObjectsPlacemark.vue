@@ -21,10 +21,26 @@
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
         </yandex-map-controls>
+
+        <yandex-map-controls :settings="{ position: 'top left' }">
+          <yandex-map-control-button>
+            <label>
+              Position
+
+              <select v-model="position" :style="{ colorScheme: 'light', border: '1px solid #000', paddingLeft: '5px' }">
+                <option v-for="(key, value) in positions" :key="key" :value="value">
+                  {{ key }}
+                </option>
+              </select>
+            </label>
+          </yandex-map-control-button>
+        </yandex-map-controls>
+
         <template v-for="(point, index) in POINTS" :key="index">
           <yandex-map-marker
             v-if="'element' in point"
             :settings="point"
+            :position="positions[position]"
           >
             <template v-if="point.element === 'diagram'">
               <div
@@ -133,8 +149,10 @@ import {
   YandexMapDefaultMarker,
   YandexMapDefaultSchemeLayer,
   YandexMapMarker,
+  YandexMapControlButton,
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
+import type { YandexMapMarkerPosition } from 'vue-yandex-maps';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const INC_POINT = {
@@ -143,6 +161,29 @@ const INC_POINT = {
 };
 
 const markerTitle = ref('');
+
+const positions: Record<YandexMapMarkerPosition | 'custom', YandexMapMarkerPosition> = {
+  top: 'top',
+  bottom: 'bottom',
+  left: 'left',
+  right: 'right',
+
+  'top left': 'top left',
+  'top right': 'top right',
+  'bottom left': 'bottom left',
+  'bottom right': 'bottom right',
+
+  'left top': 'left top',
+  'left bottom': 'left bottom',
+  'right top': 'right top',
+  'right bottom': 'right bottom',
+
+  custom: 'translate(-50%, -50%)',
+
+  default: 'default',
+};
+
+const position = ref<keyof typeof positions>('default');
 
 onMounted(() => {
   let inc = 0;
