@@ -15,37 +15,53 @@
   <yandex-map>
     <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
     <yandex-map-default-features-layer />
-      <yandex-map-marker v-for="(point, index) in markers" :key="index" :onClick="handleClick" :settings="point">
-        <template #default>
-          <div
-            style="position: relative; width: 20px; height: 20px; background-color: #ff0000; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); text-align: center; color: #ffffff; font-weight: bold; line-height: 20px;"
-          ></div>
-        </template>
-      </yandex-map-marker>
+    <yandex-map-marker
+      v-for="(marker, index) in markers"
+      :key="index"
+      :settings="marker"
+    >
+      <template #default>
+        <div :style="styleObject" />
+      </template>
+    </yandex-map-marker>
   </yandex-map>
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from "vue";
 import {
   YandexMap,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultSchemeLayer,
   YandexMapMarker,
 } from "vue-yandex-maps";
-import { YMapMarkerProps } from '@yandex/ymaps3-types/imperative/YMapMarker';
+import { YMapMarkerProps } from "@yandex/ymaps3-types/imperative/YMapMarker";
 
-const markers: YMapMarkerProps = [
+const handleClick = (event: MouseEvent) => console.log(event);
+const markers: YMapMarkerProps[] = [
   {
     coordinates: [51.789682128109, 55.140428698122],
+    onClick: handleClick,
   },
   {
     coordinates: [54.76778893634, 57.108481458691],
-  }
-]
+    onClick: handleClick,
+  },
+];
 
-const handleClick = () => { 
-  console.log('marker is clicked!');
-  }
+const styleObject: CSSProperties = {
+  position: "relative",
+  width: "20px",
+  height: "20px",
+  backgroundColor: "#ff0000",
+  borderRadius: "50%",
+  border: "2px solid #ffffff",
+  boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)",
+  textAlign: "center",
+  color: "#ffffff",
+  fontWeight: "bold",
+  lineHeight: "20px",
+};
 </script>
 ```
 
