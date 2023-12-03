@@ -10,9 +10,11 @@
 Параметр в `settings` `coordinates` является обязательным к указанию.
 :::
 
+### Пример использования
+
 ```vue
 <template>
-  <yandex-map>
+  <yandex-map height='500px'>
     <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
     <yandex-map-default-features-layer />
     <yandex-map-marker
