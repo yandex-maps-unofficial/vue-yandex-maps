@@ -10,6 +10,63 @@
 Параметр в `settings` `coordinates` является обязательным к указанию.
 :::
 
+### Пример использования
+
+```vue
+<template>
+  <yandex-map height='500px'>
+    <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }" />
+    <yandex-map-default-features-layer />
+    <yandex-map-marker
+      v-for="(marker, index) in markers"
+      :key="index"
+      :settings="marker"
+    >
+      <template #default>
+        <div :style="styleObject" />
+      </template>
+    </yandex-map-marker>
+  </yandex-map>
+</template>
+
+<script setup lang="ts">
+import type { CSSProperties } from "vue";
+import {
+  YandexMap,
+  YandexMapDefaultFeaturesLayer,
+  YandexMapDefaultSchemeLayer,
+  YandexMapMarker,
+} from "vue-yandex-maps";
+import { YMapMarkerProps } from "@yandex/ymaps3-types/imperative/YMapMarker";
+
+const handleClick = (event: MouseEvent) => console.log(event);
+const markers: YMapMarkerProps[] = [
+  {
+    coordinates: [51.789682128109, 55.140428698122],
+    onClick: handleClick,
+  },
+  {
+    coordinates: [54.76778893634, 57.108481458691],
+    onClick: handleClick,
+  },
+];
+
+const styleObject: CSSProperties = {
+  position: "relative",
+  width: "20px",
+  height: "20px",
+  backgroundColor: "#ff0000",
+  borderRadius: "50%",
+  border: "2px solid #ffffff",
+  boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)",
+  textAlign: "center",
+  color: "#ffffff",
+  fontWeight: "bold",
+  lineHeight: "20px",
+};
+</script>
+```
+
 ## Параметр `position`
 
 Помимо `settings`, компонент принимает кастомную настройку `position`. Она пригодится, если вам кажется, что ваши маркеры "летают" по карте при зуме, и ведут себя не так, как хотелось бы.
@@ -17,6 +74,7 @@
 Настройка задаёт корневому элементу маркера свойство `translate`. Принимает он практически то же самое, что и `position` в [YandexMapControls](/components/controls) - с дополнениями в виде свойства `default` и возможности передать свой `translate()`.
 
 ::: details Доступные значения и их поведение
+
 - `default`: '0, 0' (по умолчанию)
 - `top`: '0, -100%'
 - `bottom`: '0, 100%'
