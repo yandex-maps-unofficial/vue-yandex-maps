@@ -5,14 +5,14 @@
 ### Breaking changes
 - Вариации `position` маркера `left` и `right` теперь откидывают на 100% вместо 50%
 - В кластере позиция маркеров теперь по умолчанию `top-center left-center` (то есть ровно по центру кружочка, которым обычно является маркер)
-  - Вы можете изменить это поведение, передав его в `clusterMarkerProps`
+  - Вы можете изменить это поведение, передав `position` в `clusterMarkerProps`
 
 ### Маркер
 
 - Добавлены параметры `containerAttrs`, `wrapperAttrs` и `zeroSizes` в `YandexMapMarker`:
     - Теперь контейнер `YandexMapMarker` будет иметь `width: 0` и `height: 0` по умолчанию, если передан `position`. Отключить (или форсировать) это поведение можно настройкой `zero-sizes` (boolean/null (по умолчанию: null))
     - Перезаписать и добавить свои стили, классы и другие атрибуты вы можете, используя новый пропс `containerAttrs` и `wrapperAttrs` (при передаче в них `style` он должен быть объектом)
-- Теперь маркер с 2 дивов разделился на 2: __ymap-marker (на него ставится width, height 0 - и всё остальное) и __ymap-marker_wrapper (на него - translate и width `fit-content`, если есть `translate` (для корректной работы))
+- Теперь маркер с 1 элементов разделился на 2: __ymap-marker (на него ставится width, height 0) и __ymap-marker_wrapper (на него - translate и width `fit-content`, если есть `translate` (для корректной работы))
 - Добавлены вариации `position` `top-center` и `bottom-center`, которые будут задавать translateY в 50% вместо 100%
 - **BREAKING**: Вариации `position` `left` и `right` теперь откидывают на 100% вместо 50%
 - Добавлены вариации `left-center` и `right-center`
