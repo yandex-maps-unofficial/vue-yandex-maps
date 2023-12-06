@@ -4,7 +4,8 @@ import type { PropType } from 'vue';
 import {
   defineComponent, h, onMounted, shallowRef,
 } from 'vue';
-import { setupMapChildren } from '../composables/utils';
+
+import { setupMapChildren } from '../composables/utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapCollection',

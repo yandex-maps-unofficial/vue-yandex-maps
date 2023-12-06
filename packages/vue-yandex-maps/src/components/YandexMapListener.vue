@@ -6,7 +6,8 @@ import {
 import type {
   BehaviorEvents, DomEvents, MapEvents, YMapListener,
 } from '@yandex/ymaps3-types';
-import { setupMapChildren } from '../composables/utils.ts';
+
+import { setupMapChildren } from '../composables/utils/setupMapChildren.ts';
 
 export type YandexMapListenerSettings = Partial<DomEvents & MapEvents & BehaviorEvents>
 

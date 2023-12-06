@@ -1,7 +1,7 @@
 import { watch } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
-import { throwException } from './utils.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
+import { throwException } from './utils/system.ts';
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   apikey: true,

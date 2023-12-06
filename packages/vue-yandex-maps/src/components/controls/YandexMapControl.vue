@@ -4,7 +4,8 @@ import {
   computed, defineComponent, h, onMounted, ref,
 } from 'vue';
 import type { YMapControl } from '@yandex/ymaps3-types';
-import { setupMapChildren } from '../../composables/utils';
+
+import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapControl',

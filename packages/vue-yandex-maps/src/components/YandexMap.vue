@@ -17,10 +17,10 @@ import type {
   LngLat, YMap, YMapEntity, YMapProps,
 } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import { initYmaps } from '../composables/maps';
+import { initYmaps } from '../composables/init.ts';
 import { VueYandexMaps } from '../namespace.ts';
-import { throwException } from '../composables/utils.ts';
 import { diff } from 'deep-object-diff';
+import { throwException } from '../composables/utils/system.ts';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>
 

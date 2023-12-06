@@ -4,7 +4,8 @@ import {
   defineComponent, h, inject, onMounted,
 } from 'vue';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import { setupMapChildren } from '../../../composables/utils.ts';
+
+import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapSphericalMercatorProjection',

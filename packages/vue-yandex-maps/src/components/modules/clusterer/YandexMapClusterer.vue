@@ -6,7 +6,10 @@ import {
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import type { YMapCollection, YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { setupMapChildren, throwException } from '../../../composables/utils.ts';
+import { throwException } from '../../../composables/utils/system.ts';
+import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../composables/utils/marker.ts';
+import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
 export type YandexMapClustererOptions = Partial<Omit<Settings, 'features' | 'marker' | 'cluster'>>
@@ -26,8 +29,11 @@ export default defineComponent({
       type: Object as PropType<YandexMapClustererOptions>,
       default: () => ({}),
     },
+    /**
+     * @description All custom (non-settings) props are also supported
+     */
     clusterMarkerProps: {
-      type: Object as PropType<Omit<ConstructorParameters<typeof YMapMarker>[0], 'coordinates'>>,
+      type: Object as PropType<Omit<ConstructorParameters<typeof YMapMarker>[0], 'coordinates'> & YandexMapMarkerCustomProps>,
       default: () => ({}),
     },
     /**
@@ -174,6 +180,13 @@ export default defineComponent({
 
       const features = clusterFeatures.value.filter((x) => x.clusterer.features.length > 1);
 
+      const containerProps = getMarkerContainerProps({
+        position: props.clusterMarkerProps?.position ?? 'top-center left-center',
+        containerAttrs: props.clusterMarkerProps?.containerAttrs,
+        wrapperAttrs: props.clusterMarkerProps?.wrapperAttrs,
+        zeroSizes: props.clusterMarkerProps?.zeroSizes,
+      });
+
       const clusterSlots: VNode[] = features
         .map(({
           clusterer,
@@ -181,6 +194,7 @@ export default defineComponent({
         }, index) => h(
           'div',
           {
+            ...containerProps.root,
             key: `${clusterer.clusterId}_${index}_${clusterer.features.length}_${clusterer.lnglat.join(',')}`,
             ref: async (item) => {
               if (!item) return;
@@ -191,7 +205,7 @@ export default defineComponent({
                 element.children.forEach((x) => element.removeChild(x as any));
 
                 element.addChild(new ymaps3.YMapMarker({
-                  ...props.clusterMarkerProps,
+                  ...excludeYandexMarkerProps(props.clusterMarkerProps),
                   coordinates: clusterer.lnglat,
                 }, item as HTMLDivElement));
               } catch (e) {
@@ -204,16 +218,21 @@ export default defineComponent({
             // @ts-ignore
             coordinates: JSON.stringify(clusterer.lnglat),
           },
-          slots.cluster?.({
+          h('div', {
+            ...containerProps.children,
+          }, slots.cluster?.({
             clusterer,
             coordinates: clusterer.lnglat,
             length: clusterer.features.length,
-          }),
+          })),
         ));
 
       return h('div', [
         ...slots.default?.() || [],
-        ...clusterSlots,
+        h('div', {
+          key: features.map((x) => x.clusterer.clusterId)
+            .join(','),
+        }, [clusterSlots]),
       ]);
     };
   },

@@ -1,16 +1,14 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
-import type { PropType, CSSProperties } from 'vue';
+import type { PropType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
-import { setupMapChildren, throwException } from '../composables/utils';
-import type { YMapControlsProps } from '@yandex/ymaps3-types/imperative/YMapControls';
+import { throwException } from '../composables/utils/system.ts';
+import { setupMapChildren } from '../composables/utils/setupMapChildren.ts';
+import { getMarkerContainerProps } from '../composables/utils/marker.ts';
 
-export type YandexMapMarkerPosition =
-    YMapControlsProps['position']
-    | 'default'
-    | `translate${string}`
+import type { YandexMapMarkerPosition } from '../types/marker.ts';
 
 export default defineComponent({
   name: 'YandexMapMarker',
@@ -30,11 +28,40 @@ export default defineComponent({
     /**
      * @description Sets translate(%, %) to marker to align it properly.
      *
-     * If you want to make aligment to be like Yandex Maps 2.0, set this property to "top left".
+     * If you want to make aligment to be like Yandex Maps 2.0, set this property to "top left-center".
      * @default default (as goes in Yandex by default)
      */
     position: {
       type: String as PropType<YandexMapMarkerPosition>,
+    },
+    /**
+     * @description Allows you to add any attributes to <div class="__ymap-marker"> container.
+     *
+     * Important: to pass styles, you must use object-style prop instead of string.
+     */
+    containerAttrs: {
+      type: Object,
+      default: () => ({}),
+    },
+    /**
+     * @description Allows you to add any attributes to <div class="__ymap-marker_wrapper"> container.
+     *
+     * Important: to pass styles, you must use object-style prop instead of string.
+     */
+    wrapperAttrs: {
+      type: Object,
+      default: () => ({}),
+    },
+    /**
+     * @description Will add width and height: 0 to container.
+     *
+     * Null enables default behaviour, false disables it completely (even if position is specified).
+     *
+     * @default true if position is specified, false otherwise
+     */
+    zeroSizes: {
+      type: Boolean as PropType<boolean | null>,
+      default: null,
     },
   },
   emits: {
@@ -72,40 +99,19 @@ export default defineComponent({
       if (element.value) element.value.parentNode?.removeChild(element.value);
     });
 
-    const possiblePositions: Record<YandexMapMarkerPosition, `${`${number}%` | 0}, ${`${number}%` | 0}`> = {
-      default: '0, 0',
-
-      top: '0, -100%',
-      bottom: '0, 100%',
-      left: '-50%, 0',
-      right: '50%, 0',
-
-      'top left': '-50%, -100%',
-      'top right': '50%, -100%',
-      'bottom left': '-50%, 100%',
-      'bottom right': '50%, 100%',
-
-      'left top': '-50%, -100%',
-      'left bottom': '-50%, 100%',
-      'right top': '50%, -100%',
-      'right bottom': '50%, 100%',
-    };
-
-    const rootStyles = computed<CSSProperties>(() => {
-      const styles: CSSProperties = {};
-
-      if (props.position && props.position !== 'default') {
-        if (props.position in possiblePositions) styles.transform = `translate(${possiblePositions[props.position ?? 'default']})`;
-        else if (props.position.startsWith('translate')) styles.transform = props.position;
-      }
-
-      return styles;
-    });
+    const rootProps = computed(() => getMarkerContainerProps({
+      position: props.position,
+      containerAttrs: props.containerAttrs,
+      wrapperAttrs: props.wrapperAttrs,
+      zeroSizes: props.zeroSizes,
+    }));
 
     return () => h('div', {
+      ...rootProps.value.root,
       ref: element,
-      style: rootStyles.value,
-    }, slots.default?.());
+    }, h('div', {
+      ...rootProps.value.children,
+    }, slots.default?.()));
   },
 });
 </script>

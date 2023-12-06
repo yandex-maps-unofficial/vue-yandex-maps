@@ -8,7 +8,6 @@ import YandexMapTileDataSource from './data-sources/YandexMapTileDataSource.vue'
 import YandexMapFeatureDataSource from './data-sources/YandexMapFeatureDataSource.vue';
 import YandexMapLayer from './layers/YandexMapLayer.vue';
 import YandexMapMarker from './YandexMapMarker.vue';
-import type { YandexMapMarkerPosition } from './YandexMapMarker.vue';
 import YandexMapDefaultMarker from './modules/markers/YandexMapDefaultMarker.vue';
 import type { YandexMapDefaultMarkerSettings } from './modules/markers/YandexMapDefaultMarker.vue';
 import YandexMapFeature from './YandexMapFeature.vue';
@@ -25,6 +24,7 @@ import YandexMapOpenMapsButton from './modules/controls/YandexMapOpenMapsButton.
 import type { YandexMapClustererOptions } from './modules/clusterer/YandexMapClusterer.vue';
 import YandexMapClusterer from './modules/clusterer/YandexMapClusterer.vue';
 import YandexMapCollection from './YandexMapCollection.vue';
+import type { YandexMapMarkerCustomProps, YandexMapMarkerPosition } from '../types/marker.ts';
 
 export {
   YandexMap,
@@ -68,6 +68,7 @@ export {
 
 export type {
   YandexMapMarkerPosition,
+  YandexMapMarkerCustomProps,
   YandexMapSettings,
   YandexMapControlButtonSettings,
   YandexMapClustererOptions,

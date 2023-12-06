@@ -25,10 +25,21 @@
         <yandex-map-controls :settings="{ position: 'top left' }">
           <yandex-map-control-button>
             <label>
-              Position
+              Position (X)
 
-              <select v-model="position" :style="{ colorScheme: 'light', border: '1px solid #000', paddingLeft: '5px' }">
-                <option v-for="(key, value) in positions" :key="key" :value="value">
+              <select v-model="positionX" :style="{ colorScheme: 'light', border: '1px solid #000', paddingLeft: '5px' }">
+                <option v-for="(key, value) in positionsX" :key="key" :value="value">
+                  {{ key }}
+                </option>
+              </select>
+            </label>
+          </yandex-map-control-button>
+          <yandex-map-control-button>
+            <label>
+              Position (Y)
+
+              <select v-model="positionY" :style="{ colorScheme: 'light', border: '1px solid #000', paddingLeft: '5px' }">
+                <option v-for="(key, value) in positionsY" :key="key" :value="value">
                   {{ key }}
                 </option>
               </select>
@@ -40,7 +51,7 @@
           <yandex-map-marker
             v-if="'element' in point"
             :settings="point"
-            :position="positions[position]"
+            :position="`${positionX} ${positionY}`"
           >
             <template v-if="point.element === 'diagram'">
               <div
@@ -155,6 +166,10 @@ import {
 import type { YandexMapMarkerPosition } from 'vue-yandex-maps';
 import { onMounted, onUnmounted, ref } from 'vue';
 
+type PartialRecord<K extends keyof any, T> = {
+  [P in K]?: T;
+};
+
 const INC_POINT = {
   coordinates: [37.95, 55.9],
   title: 'Marker inc #0',
@@ -162,28 +177,30 @@ const INC_POINT = {
 
 const markerTitle = ref('');
 
-const positions: Record<YandexMapMarkerPosition | 'custom', YandexMapMarkerPosition> = {
-  top: 'top',
-  bottom: 'bottom',
+const positionsX = {
   left: 'left',
   right: 'right',
+  'right-center': 'right-center',
+  'left-center': 'left-center',
 
-  'top left': 'top left',
-  'top right': 'top right',
-  'bottom left': 'bottom left',
-  'bottom right': 'bottom right',
-
-  'left top': 'left top',
-  'left bottom': 'left bottom',
-  'right top': 'right top',
-  'right bottom': 'right bottom',
-
-  custom: 'translate(-50%, -50%)',
+  custom: '-25%',
 
   default: 'default',
-};
+} satisfies PartialRecord<YandexMapMarkerPosition | 'custom', string>;
 
-const position = ref<keyof typeof positions>('default');
+const positionsY = {
+  top: 'top',
+  bottom: 'bottom',
+  'top-center': 'top-center',
+  'bottom-center': 'bottom-center',
+
+  custom: '-25%',
+
+  default: 'default',
+} satisfies PartialRecord<YandexMapMarkerPosition | 'custom', string>;
+
+const positionX = ref<keyof typeof positionsX>('default');
+const positionY = ref<keyof typeof positionsY>('default');
 
 onMounted(() => {
   let inc = 0;

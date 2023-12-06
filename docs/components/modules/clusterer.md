@@ -28,6 +28,10 @@
 
 Принимает то же самое, что и `settings` в [YandexMapMarker](/components/marker), кроме `coordinates`.
 
+Кроме того, настройка принимает все остальные настройки `YandexMapMarker` (`position` и пр.).
+
+Для кластеров, `position` по умолчанию равен `left-center top-center` (так как обычно кластеры являются кружками). Вы можете изменить это поведение, передав, например, `cluster-marker-props="{ position: 'default' }"`
+
 ### settings
 
 #### method

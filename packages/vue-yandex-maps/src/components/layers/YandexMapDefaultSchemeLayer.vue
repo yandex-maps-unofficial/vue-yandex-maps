@@ -4,7 +4,8 @@ import type { PropType, Ref } from 'vue';
 import {
   computed, defineComponent, h, inject, onMounted,
 } from 'vue';
-import { setupMapChildren } from '../../composables/utils';
+
+import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapDefaultSchemeLayer',

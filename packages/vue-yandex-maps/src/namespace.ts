@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import type { OverloadParameters } from './types/overload-extract.ts';
-import { safeComputed, safeRef } from './composables/utils.ts';
+import { safeComputed, safeRef } from './composables/utils/system.ts';
 
 export namespace VueYandexMaps {
   export const settings: Ref<VueYandexMaps.PluginSettings> = safeRef({
