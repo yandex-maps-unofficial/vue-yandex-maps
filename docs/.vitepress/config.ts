@@ -139,6 +139,21 @@ export default defineConfig({
           {
             text: 'Переход с 0.xx/1.xx',
             link: '/guide/migration',
+            collapsed: true,
+            items: [
+              {
+                text: 'Общие принципы перехода',
+                link: '/guide/migration',
+              },
+              {
+                text: 'Переход с 0.xx',
+                link: '/guide/migration/v0',
+              },
+              {
+                text: 'Переход с 1.xx',
+                link: '/guide/migration/v1',
+              }
+            ]
           },
         ],
       },

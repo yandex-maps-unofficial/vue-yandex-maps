@@ -2,6 +2,8 @@
 
 Компонент принимает в `settings` `YandexMapListenerSettings` и позволяет прослушивать события на карте. 
 
+Документация по доступным событиям: https://yandex.ru/dev/jsapi30/doc/ru/dg/concepts/events#list-of-events
+
 ```vue
 <template>
   <yandex-map>
