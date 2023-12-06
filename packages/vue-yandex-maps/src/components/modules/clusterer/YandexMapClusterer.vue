@@ -218,13 +218,15 @@ export default defineComponent({
             // @ts-ignore
             coordinates: JSON.stringify(clusterer.lnglat),
           },
-          h('div', {
-            ...containerProps.children,
-          }, slots.cluster?.({
-            clusterer,
-            coordinates: clusterer.lnglat,
-            length: clusterer.features.length,
-          })),
+          [
+            h('div', {
+              ...containerProps.children,
+            }, slots.cluster?.({
+              clusterer,
+              coordinates: clusterer.lnglat,
+              length: clusterer.features.length,
+            })),
+          ],
         ));
 
       return h('div', [

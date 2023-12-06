@@ -109,9 +109,11 @@ export default defineComponent({
     return () => h('div', {
       ...rootProps.value.root,
       ref: element,
-    }, h('div', {
-      ...rootProps.value.children,
-    }, slots.default?.()));
+    }, [
+      h('div', {
+        ...rootProps.value.children,
+      }, slots.default?.()),
+    ]);
   },
 });
 </script>
