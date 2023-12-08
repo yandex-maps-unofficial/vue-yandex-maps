@@ -28,7 +28,7 @@
 
         <yandex-map-spherical-mercator-projection v-if="useMercator" />
 
-        <yandex-map-controls :settings="{ position: 'top left-center' }">
+        <yandex-map-controls :settings="{ position: 'top left' }">
           <yandex-map-control-button :settings="{ onClick: changeCenter }">
             Change center
           </yandex-map-control-button>

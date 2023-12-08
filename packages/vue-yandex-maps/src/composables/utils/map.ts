@@ -54,7 +54,7 @@ export function waitTillYmapInit() {
   }
 
   return new Promise<void>((resolve, reject) => {
-    if (typeof ymaps3 !== 'undefined') {
+    if (typeof ymaps3 === 'undefined') {
       const timeout = setTimeout(() => {
         reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized.'));
       }, 5000);
