@@ -12,6 +12,7 @@ next: false
 :::
 
 ## Смена версии
+
 Измените вашу версию на тэг `next`:
 
 ::: code-group
@@ -27,6 +28,7 @@ yarn add vue-yandex-maps@next
 ```shell [pnpm]
 pnpm install vue-yandex-maps@next
 ```
+
 :::
 
 ## Установка и конфигурация
@@ -37,6 +39,7 @@ pnpm install vue-yandex-maps@next
 2. Замените их на обновлённую установку
 
 ::: code-group
+
 ```typescript [Vue 2]
 import Vue from 'vue';
 import YmapPlugin from 'vue-yandex-maps'; // [!code --]
@@ -92,10 +95,13 @@ app.use(createYmaps(settings)); // [!code ++]
 
 app.mount('#app');
 ```
+
 :::
 
 ### Nuxt
+
 Если вы используете Nuxt, то выполните следующие шаги:
+
 1. Удалите `vue-yandex-maps` из плагинов. Вообще.
 2. Подключите встроенный модуль в вашем `nuxt.config.js(ts)`:
 
@@ -138,6 +144,7 @@ export default defineNuxtConfig({
 Подробнее см. `initializeOn` в [Конфигурации](/guide/configuration.html#initializeon).
 
 ## TypeScript
+
 Если вы используете `TypeScript` и не используете `Nuxt 3` / `Nuxt Bridge`, то для удобства работы добавьте следующую информацию в ваш `tsconfig.json`:
 
 ```json
@@ -160,6 +167,7 @@ export default defineNuxtConfig({
 Короткий вывод: в большинстве случаев вам либо требуется перейти на API Яндекса и/или реализовать функционал самостоятельно.
 
 ### ymaps.ready
+
 Теперь промис. При желании, вы можете реактивно отслеживать `VueYandexMaps.loadStatus`:
 
 ```typescript
@@ -188,7 +196,8 @@ watch(VueYandexMaps.loadStatus, (val) => {
 ```typescript
 //Первый аргумент: параметры enableHighAccuracy, maximumAge, timeout
 //Второй аргумент: кажется, внутренний Яндекса. Содержит setExperiments/setApikeys
-const position = await ymaps3.suggest().getPosition({});
+const position = await ymaps3.suggest()
+  .getPosition({});
 console.log(position); //{ accuracy: 12345, coords: [12.345, 54.321] }
 ```
 
@@ -200,12 +209,13 @@ console.log(position); //{ accuracy: 12345, coords: [12.345, 54.321] }
 
 ### ymaps.route
 
-Всё еще существует, также отсутствует в документации.
-
-Так как создатель документации ни разу не использовал ymaps.route, совет - ознакомиться с типизацией и также, как и с `ymaps.search`, понять число изменений.
+По сути функционал отсутствует.
 
 У Яндекса есть новые API, позволяющие вам реализовать этот функционал самостоятельно: https://yandex.ru/maps-api/docs#routes-navi
 
+::: warning Внимание
+На момент написания гайда при попытке использовать `ymaps3.route` Яндекс выдавал ошибку `Route requests is not allowed`.
+:::
 
 ## Что дальше?
 
