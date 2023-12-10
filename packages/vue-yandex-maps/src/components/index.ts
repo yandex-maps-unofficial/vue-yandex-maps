@@ -24,6 +24,7 @@ import YandexMapOpenMapsButton from './modules/controls/YandexMapOpenMapsButton.
 import type { YandexMapClustererOptions } from './modules/clusterer/YandexMapClusterer.vue';
 import YandexMapClusterer from './modules/clusterer/YandexMapClusterer.vue';
 import YandexMapCollection from './YandexMapCollection.vue';
+import YandexMapEntity from './YandexMapEntity.vue';
 import type { YandexMapMarkerCustomProps, YandexMapMarkerPosition } from '../types/marker.ts';
 
 export {
@@ -32,6 +33,7 @@ export {
   YandexMapMarker,
   YandexMapFeature,
   YandexMapCollection,
+  YandexMapEntity,
 
   // Data Sources
   YandexMapTileDataSource,

@@ -1,5 +1,7 @@
 <script lang="ts">
-import type { PropType, Ref, VNode } from 'vue';
+import type {
+  PropType, Ref, SlotsType, VNode,
+} from 'vue';
 import {
   computed, defineComponent, h, nextTick, onMounted, ref, shallowRef, watch,
 } from 'vue';
@@ -65,6 +67,14 @@ export default defineComponent({
       default: false,
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+    cluster: {
+      clusterer: ClustererObject,
+      coordinates: ClustererObject['lnglat'],
+      length: number,
+    },
+  }>,
   emits: {
     'input'(item: YMapClusterer): boolean {
       return true;
@@ -255,11 +265,8 @@ export default defineComponent({
 
                       const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
 
-                      let latDiff = maxLatitude - minLatitude;
-                      let longDiff = maxLongitude - minLongitude;
-
-                      if (latDiff < 0.1) latDiff = 0.1;
-                      if (longDiff < 0.1) longDiff = 0.1;
+                      const latDiff = maxLatitude - minLatitude;
+                      const longDiff = maxLongitude - minLongitude;
 
                       const bounds: [LngLat, LngLat] = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
 
@@ -298,7 +305,7 @@ export default defineComponent({
         ));
 
       return h('div', [
-        ...slots.default?.() || [],
+        ...slots.default?.({}) || [],
         h('div', {
           key: features.map((x) => x.clusterer.clusterId)
             .join(','),

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
-import type { PropType } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
@@ -72,6 +72,9 @@ export default defineComponent({
       return true;
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+  }>,
   setup(props, {
     slots,
     emit,
@@ -112,7 +115,7 @@ export default defineComponent({
     }, [
       h('div', {
         ...rootProps.value.children,
-      }, slots.default?.()),
+      }, slots.default?.({})),
     ]);
   },
 });

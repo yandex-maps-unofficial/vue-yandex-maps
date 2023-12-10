@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
@@ -33,6 +33,11 @@ export default defineComponent({
       return true;
     },
   },
+  slots: Object as SlotsType<{
+    popup: {
+      close: () => void,
+    },
+  }>,
   setup(props, {
     slots,
     emit,

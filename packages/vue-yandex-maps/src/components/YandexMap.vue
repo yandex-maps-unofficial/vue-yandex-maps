@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType, WatchStopHandle } from 'vue';
+import type { PropType, SlotsType, WatchStopHandle } from 'vue';
 import {
   computed,
   defineComponent,
@@ -105,6 +105,9 @@ export default defineComponent({
       return !map || typeof ymaps3 === 'undefined' || map instanceof ymaps3.YMap;
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+  }>,
   setup(props, {
     slots,
     emit,
@@ -275,7 +278,7 @@ export default defineComponent({
 
       return h(props.tag, mapNodeProps, [
         containerNode,
-        h('div', slotsNodeProps, slots.default?.()),
+        h('div', slotsNodeProps, slots.default?.({})),
       ]);
     };
   },

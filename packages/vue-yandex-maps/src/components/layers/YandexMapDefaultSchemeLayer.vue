@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { YMapDefaultSchemeLayer } from '@yandex/ymaps3-types';
-import type { PropType, Ref } from 'vue';
+import type { PropType, Ref, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, inject, onMounted,
 } from 'vue';
@@ -23,6 +23,9 @@ export default defineComponent({
       default: () => ({}),
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+  }>,
   emits: {
     'input'(item: YMapDefaultSchemeLayer): boolean {
       return true;
@@ -53,7 +56,7 @@ export default defineComponent({
       hold.value--;
     });
 
-    return () => h('div', slots.default?.());
+    return () => h('div', slots.default?.({}));
   },
 });
 </script>

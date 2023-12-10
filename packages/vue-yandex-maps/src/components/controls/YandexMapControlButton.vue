@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, ref,
 } from 'vue';
@@ -33,6 +33,9 @@ export default defineComponent({
       return true;
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+  }>,
   setup(props, {
     slots,
     emit,
@@ -59,7 +62,7 @@ export default defineComponent({
 
     return () => h('div', {
       ref: element,
-    }, slots.default?.());
+    }, slots.default?.({}));
   },
 });
 </script>

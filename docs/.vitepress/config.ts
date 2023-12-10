@@ -193,6 +193,10 @@ export default defineConfig({
                 text: 'YandexMapMarker',
                 link: '/components/marker',
               },
+              {
+                text: 'YandexMapEntity',
+                link: '/components/entity',
+              },
             ],
           },
           {

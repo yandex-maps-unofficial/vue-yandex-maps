@@ -32,6 +32,9 @@
 ### [YandexMapMarker](marker)
 Маркеры со своим содержимым.
 
+### [YandexMapEntity](entity)
+Простейший Entity Яндекса.
+
 ::: tip Совет
 Также смотрите маркеры со встроенным дизайном [ниже на странице](#yandexmapdefaultmarker)
 :::

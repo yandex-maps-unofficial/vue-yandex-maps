@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import {
   defineComponent, h, onMounted, shallowRef,
 } from 'vue';
@@ -32,6 +32,11 @@ export default defineComponent({
       return true;
     },
   },
+  slots: Object as SlotsType<{
+    default: {
+      content: string,
+    },
+  }>,
   setup(props, {
     slots,
     emit,

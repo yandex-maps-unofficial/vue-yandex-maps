@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted,
 } from 'vue';
@@ -31,6 +31,9 @@ export default defineComponent({
       return true;
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+  }>,
   setup(props, {
     slots,
     emit,
@@ -49,7 +52,7 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', slots.default?.());
+    return () => h('div', slots.default?.({}));
   },
 });
 </script>

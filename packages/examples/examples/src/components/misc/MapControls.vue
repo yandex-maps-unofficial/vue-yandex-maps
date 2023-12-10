@@ -49,9 +49,11 @@
           <yandex-map-geolocation-control />
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'top left' }">
-          <yandex-map-control-button :settings="{ onClick: updateCounter }">
-            Counter #{{ counter }}
-          </yandex-map-control-button>
+          <yandex-map-entity>
+            <div :style="{ color: '#fff', pointerEvents: 'all' }" @click="updateCounter">
+              Entity counter #{{ counter }}
+            </div>
+          </yandex-map-entity>
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'top right' }">
           <yandex-map-control-button>
@@ -78,6 +80,7 @@ import {
   YandexMapGeolocationControl,
   YandexMapOpenMapsButton,
   YandexMapZoomControl,
+  YandexMapEntity,
 } from 'vue-yandex-maps';
 import {
   computed, onBeforeUnmount, onMounted, ref, shallowRef, isRef,

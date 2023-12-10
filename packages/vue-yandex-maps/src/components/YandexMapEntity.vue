@@ -1,33 +1,28 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted, ref,
+  defineComponent, h, onMounted, ref,
 } from 'vue';
-import type { YMapControl } from '@yandex/ymaps3-types';
-
-import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
+import type { YMapEntity } from '@yandex/ymaps3-types';
+import { setupMapChildren } from '../composables/utils/setupMapChildren.ts';
 
 export default defineComponent({
-  name: 'YandexMapControl',
+  name: 'YandexMapEntity',
   props: {
     value: {
-      type: Object as PropType<YMapControl>,
+      type: Object as PropType<YMapEntity<any>>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapControl>,
+      type: Object as PropType<YMapEntity<any>>,
       default: null,
-    },
-    settings: {
-      type: Object as PropType<ConstructorParameters<typeof YMapControl>[0]>,
-      default: () => ({}),
     },
   },
   emits: {
-    'input'(item: YMapControl): boolean {
+    'input'(item: YMapEntity<any>): boolean {
       return true;
     },
-    'update:modelValue'(item: YMapControl): boolean {
+    'update:modelValue'(item: YMapEntity<any>): boolean {
       return true;
     },
   },
@@ -38,15 +33,13 @@ export default defineComponent({
     slots,
     emit,
   }) {
-    let mapChildren: YMapControl | undefined;
+    let mapChildren: YMapEntity<any> | undefined;
     const element = ref<null | HTMLDivElement>(null);
 
     onMounted(async () => {
       mapChildren = await setupMapChildren({
         createFunction: () => {
-          const control = new ymaps3.YMapControl(props.settings);
-
-          class YMapSomeController extends ymaps3.YMapEntity<any> {
+          class Entity extends ymaps3.YMapEntity<any> {
             _onAttach() {
               // @ts-ignore
               this._element = element.value;
@@ -64,12 +57,9 @@ export default defineComponent({
             }
           }
 
-          control.addChild(new YMapSomeController({}));
-          return control;
+          return new Entity({}) as YMapEntity<any>;
         },
-        settings: computed(() => props.settings),
-        strictMapRoot: true,
-      });
+      }) as YMapEntity<any>;
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
     });

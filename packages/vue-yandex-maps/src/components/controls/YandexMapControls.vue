@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { YMapControls } from '@yandex/ymaps3-types';
-import type { PropType, Ref } from 'vue';
+import type { PropType, Ref, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, shallowRef,
 } from 'vue';
@@ -31,6 +31,9 @@ export default defineComponent({
       return true;
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+  }>,
   setup(props, {
     slots,
     emit,
@@ -54,7 +57,7 @@ export default defineComponent({
       emit('update:modelValue', mapChildren.value);
     });
 
-    return () => (mapChildren.value ? h('div', slots.default?.()) : h('div'));
+    return () => (mapChildren.value ? h('div', slots.default?.({})) : h('div'));
   },
 });
 </script>

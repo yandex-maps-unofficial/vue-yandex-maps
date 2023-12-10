@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted,
 } from 'vue';
@@ -23,6 +23,9 @@ export default defineComponent({
       default: () => ({}),
     },
   },
+  slots: Object as SlotsType<{
+    default: {},
+  }>,
   emits: {
     'input'(item: YMapZoomControl): boolean {
       return true;
@@ -48,7 +51,7 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', slots.default?.());
+    return () => h('div', slots.default?.({}));
   },
 });
 </script>
