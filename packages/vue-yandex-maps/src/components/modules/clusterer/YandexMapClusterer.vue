@@ -4,15 +4,24 @@ import {
   computed, defineComponent, h, nextTick, onMounted, ref, shallowRef, watch,
 } from 'vue';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
-import type { YMapCollection, YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
+import type {
+  LngLat, YMapCollection, YMapEntity, YMapMarker,
+} from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
 import { throwException } from '../../../composables/utils/system.ts';
 import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
 import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../composables/utils/marker.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
+import { injectMap } from '../../../composables/utils/map.ts';
+import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/types';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
 export type YandexMapClustererOptions = Partial<Omit<Settings, 'features' | 'marker' | 'cluster'>>
+
+export type YandexMapClustererZoomOptionsObject = {
+  duration?: number,
+  easing?: EasingFunctionDescription,
+}
 
 export default defineComponent({
   name: 'YandexMapClusterer',
@@ -48,6 +57,13 @@ export default defineComponent({
       type: Number,
       default: 64,
     },
+    /**
+     * @description Zooms to bounds of features of cluster
+     */
+    zoomOnClusterClick: {
+      type: [Boolean, Object] as PropType<boolean | YandexMapClustererZoomOptionsObject>,
+      default: false,
+    },
   },
   emits: {
     'input'(item: YMapClusterer): boolean {
@@ -56,11 +72,20 @@ export default defineComponent({
     'update:modelValue'(item: YMapClusterer): boolean {
       return true;
     },
+    // Exact features bounds returned on cluster click
+    trueBounds(bounds: [LngLat, LngLat]): boolean {
+      return bounds.length === 2;
+    },
+    // Auto-corrected features bounds returned on cluster click
+    updatedBounds(bounds: [LngLat, LngLat]): boolean {
+      return bounds.length === 2;
+    },
   },
   setup(props, {
     slots,
     emit,
   }) {
+    const map = injectMap();
     const mapChildren = shallowRef<(Pick<YMapClusterer, 'update'> & Record<string, any>) | null>(null);
     const entities: Ref<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]> = shallowRef([]);
     const clusterFeatures = ref<{ clusterer: ClustererObject, element: YMapCollection }[]>([]);
@@ -207,6 +232,49 @@ export default defineComponent({
                 element.addChild(new ymaps3.YMapMarker({
                   ...excludeYandexMarkerProps(props.clusterMarkerProps),
                   coordinates: clusterer.lnglat,
+                  onClick: (e) => {
+                    props.clusterMarkerProps.onClick?.(e);
+
+                    if (clusterer.features.length >= 2) {
+                      const {
+                        minLongitude, minLatitude, maxLongitude, maxLatitude,
+                      } = clusterer.features.map((x) => x.geometry.coordinates).reduce(
+                        (acc, [longitude, latitude]) => ({
+                          minLongitude: Math.min(acc.minLongitude, longitude),
+                          minLatitude: Math.min(acc.minLatitude, latitude),
+                          maxLongitude: Math.max(acc.maxLongitude, longitude),
+                          maxLatitude: Math.max(acc.maxLatitude, latitude),
+                        }),
+                        {
+                          minLongitude: Infinity,
+                          minLatitude: Infinity,
+                          maxLongitude: -Infinity,
+                          maxLatitude: -Infinity,
+                        },
+                      );
+
+                      const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
+
+                      let latDiff = maxLatitude - minLatitude;
+                      let longDiff = maxLongitude - minLongitude;
+
+                      if (latDiff < 0.1) latDiff = 0.1;
+                      if (longDiff < 0.1) longDiff = 0.1;
+
+                      const bounds: [LngLat, LngLat] = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
+
+                      emit('trueBounds', [[minLongitude, maxLatitude], [maxLongitude, minLatitude]]);
+                      emit('updatedBounds', bounds);
+
+                      if (!props.zoomOnClusterClick) return;
+
+                      map.value?.setLocation({
+                        bounds,
+                        duration: settings.duration ?? 500,
+                        easing: settings.easing,
+                      });
+                    }
+                  },
                 }, item as HTMLDivElement));
               } catch (e) {
                 console.error(e);

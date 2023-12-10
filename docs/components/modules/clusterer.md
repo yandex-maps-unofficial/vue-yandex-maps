@@ -32,6 +32,20 @@
 
 Для кластеров, `position` по умолчанию равен `left-center top-center` (так как обычно кластеры являются кружками). Вы можете изменить это поведение, передав, например, `cluster-marker-props="{ position: 'default' }"`
 
+### zoomOnClusterClick
+
+При клике на кластер автоматически произойдёт зум в область маркеров (feature), входящих в него - почти как в Яндекс Картах 2.0.
+
+Из-за поведения Яндекса в зум встроена логика, высчитывающая область таким образом, чтобы маркеры в ней точно не пропали, добавляя отступы для области на основе максимального расстояния между углами области.
+
+Пропс принимает `boolean` или объект с параметрами `duration` (по умолчанию: 500) и `easing`.
+
+::: tip Совет
+События `trueBounds` и `updatedBounds` будут возвращаться всегда - даже если эта настройка выключена. Используйте их, чтобы реализовать эту функциональность самостоятельно.
+
+Также сделать такое же поведение можно, используя объект `clusterer.features` из слота `#cluster`.
+:::
+
 ### settings
 
 #### method
@@ -59,6 +73,18 @@
 Если вы посмотрите в документацию Яндекса, там также будут вышеуказанные параметры. В нашей обертке, передавать их не
 требуется - они передадутся в Яндекса автоматически.
 
+## События
+
+Помимо стандартного `v-model`, компонент возвращает:
+
+### trueBounds
+
+Возвращается при клике на кластер и содержит точную область всех маркеров (feature), входящих в него.
+
+### updatedBounds
+
+Возвращается при клике на кластер и содержит скорректированную таким образом область, чтобы Яндекс отобразил полное (или хотя бы максимально возможное) число маркеров (feature), входящих в него
+
 ## Слоты
 
 ### default
@@ -84,15 +110,13 @@
 ### Простейший пример
 
 ```vue
-
 <template>
-  <yandex-map :settings="{ location }" v-model="map">
+  <yandex-map :settings="{ location }">
     <yandex-map-default-features-layer/>
     <yandex-map-default-scheme-layer/>
 
-    <yandex-map-clusterer
-        :clusterMarkerProps="{ onClick: () => localLocation = { center: coordinates, zoom: 9, duration: 1000 } }"
-    >
+    <!-- Активируем зум при клике на #cluster -->
+    <yandex-map-clusterer zoom-on-cluster-click>
       <yandex-map-marker
           v-for="(coordinates, index) in markers"
           :key="index"
@@ -103,20 +127,15 @@
         </div>
       </yandex-map-marker>
 
-      <template #cluster="{ coordinates, length }">
-        <div class="cluster" @click="map!.setLocation({ coordinates, zoom: 9 })">
+      <!-- Тут также есть clusterer и coordinates -->
+      <template #cluster="{ length }">
+        <div class="cluster">
           {{ length }}
         </div>
       </template>
     </yandex-map-clusterer>
   </yandex-map>
 </template>
-
-<script setup lang="ts">
-  import type { YMap } from '@yandex/ymaps3-types';
-
-  const map = shallowRef<YMap | null>(null);
-</script>
 ```
 
-### [Множество точек](/examples/many-points)
+### См. также: [Множество точек](/examples/many-points)

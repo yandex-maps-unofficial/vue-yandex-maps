@@ -9,7 +9,7 @@
       <yandex-map
         v-model="map"
         :settings="{
-          location: localLocation || {
+          location: {
             center,
             zoom: 5,
           },
@@ -47,7 +47,11 @@
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
         </yandex-map-controls>
-        <yandex-map-clusterer v-model="clusterer" :grid-size="2 ** gridSize">
+        <yandex-map-clusterer
+          v-model="clusterer"
+          :grid-size="2 ** gridSize"
+          zoom-on-cluster-click
+        >
           <yandex-map-marker
             v-for="(coordinates) in getPointList"
             :key="coordinates.join(',')"
@@ -62,7 +66,7 @@
               }"
             />
           </yandex-map-marker>
-          <template #cluster="{ length, coordinates }">
+          <template #cluster="{ length }">
             <div
               class="cluster"
               :style="{
@@ -76,7 +80,6 @@
                 borderRadius: '100%',
                 cursor: 'pointer',
               }"
-              @click="localLocation = { center: coordinates, zoom: 9, duration: 1000 }"
             >
               {{ length }}
             </div>
@@ -104,7 +107,6 @@ import {
 import {
   computed, ref, shallowRef, watch,
 } from 'vue';
-import type { YMapLocation } from '@yandex/ymaps3-types/imperative/YMap';
 import type { YMap } from '@yandex/ymaps3-types';
 import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
@@ -112,7 +114,6 @@ const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);
 const count = ref(100);
 const savedCount = ref(100);
-const localLocation = shallowRef<YMapLocation | null>(null);
 const gridSize = ref(6);
 const background = ref('red');
 
