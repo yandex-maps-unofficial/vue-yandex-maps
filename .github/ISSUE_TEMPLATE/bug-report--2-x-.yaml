@@ -1,4 +1,4 @@
-name: Bug report (2.x Beta)
+name: Bug report (2.x)
 description: Шаблон ошибок в Vue Yandex Maps 2.x
 labels: ["bug", "2.x"]
 assignees:
@@ -13,7 +13,7 @@ body:
     attributes:
       label: Версия библиотеки
       description: Пожалуйста, укажите версию библиотеки на момент написания этой формы
-      placeholder: Например, 2.0.0-beta.1
+      placeholder: Например, 2.0.0-rc.1
     validations:
       required: true
   - type: textarea
@@ -27,14 +27,7 @@ body:
     id: what-happened
     attributes:
       label: Опишите проблему
-      description: Опишите простым и понятным языком, что идет не так.
-    validations:
-      required: true
-  - type: textarea
-    id: expected-result
-    attributes:
-      label: Как должно быть
-      description: Расскажите, какой ожидаемый результат вы хотели бы видеть.
+      description: Опишите простым и понятным языком, что идет не так, и какой результат ожидался
     validations:
       required: true
   - type: textarea

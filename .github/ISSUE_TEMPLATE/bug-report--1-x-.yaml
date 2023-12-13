@@ -27,14 +27,7 @@ body:
     id: what-happened
     attributes:
       label: Опишите проблему
-      description: Опишите простым и понятным языком, что идет не так.
-    validations:
-      required: true
-  - type: textarea
-    id: expected-result
-    attributes:
-      label: Как должно быть
-      description: Расскажите, какой ожидаемый результат вы хотели бы видеть.
+      description: Опишите простым и понятным языком, что идет не так, и какой результат ожидался
     validations:
       required: true
   - type: textarea
