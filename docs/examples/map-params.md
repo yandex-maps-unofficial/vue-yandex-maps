@@ -12,6 +12,10 @@ import MapComponent from 'examples/src/components/basics/MapParams.vue';
 Ознакомьтесь с [документацией компонента YandexMap](/components/map), чтобы узнать больше, зачем он нужен и какие подводные камни.
 :::
 
+::: warning Слой Спутника
+Обратите внимание на `key` на карте для `satellite`. Слой Спутника важно добавлять при инициализации карты - в противном случае он перекроет объекты карты.
+:::
+
 :::code-group
 <<< ../../packages/examples/examples/src/components/basics/MapParams.vue#html{html} [Template]
 

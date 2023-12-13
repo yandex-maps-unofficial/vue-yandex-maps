@@ -9,6 +9,7 @@
       <!-- Параметр real-settings-location в примере вызывает изменение геопозиции на каждое изменение settings. -->
       <!-- Ознакомьтесь с документацией компонента YandexMap, чтобы узнать больше, зачем он нужен и какие подводные камни -->
       <yandex-map
+        :key="String(satellite)"
         v-model="map"
         :settings="{
           location: localLocation || {
@@ -20,11 +21,13 @@
         :width="width"
         :height="height"
       >
-        <yandex-map-default-scheme-layer v-if="!useMercator" :settings="{ theme }" />
-        <template v-else>
+        <yandex-map-default-scheme-layer v-if="!useMercator && !satellite" :settings="{ theme }" />
+        <template v-else-if="useMercator">
           <yandex-map-tile-data-source :settings="dataSourceProps" />
           <yandex-map-layer :settings="layerProps" />
         </template>
+
+        <yandex-map-default-satellite-layer v-if="satellite" />
 
         <yandex-map-spherical-mercator-projection v-if="useMercator" />
 
@@ -36,9 +39,15 @@
             Change borders
           </yandex-map-control-button>
           <yandex-map-control-button :settings="{ onClick: () => [useMercator = true, localLocation = NEW_LOCATION] }">
-            Change type and reset
+            Use OpenStreetMaps
+          </yandex-map-control-button>
+          <yandex-map-control-button :settings="{ onClick: () => satellite = !satellite }">
+            Toggle Satellite layer
           </yandex-map-control-button>
         </yandex-map-controls>
+
+        <yandex-map-default-features-layer />
+        <yandex-map-default-marker :settings="{ coordinates: center }" />
       </yandex-map>
       <!-- #endregion html -->
     </template>
@@ -52,6 +61,9 @@ import {
   YandexMap,
   YandexMapControlButton,
   YandexMapControls,
+  YandexMapDefaultMarker,
+  YandexMapDefaultSatelliteLayer,
+  YandexMapDefaultFeaturesLayer,
   YandexMapDefaultSchemeLayer,
   YandexMapLayer,
   YandexMapSphericalMercatorProjection,
@@ -66,10 +78,12 @@ const map = shallowRef<YMap | null>(null);
 const localLocation = shallowRef<YMapLocationRequest | null>(null);
 
 const useMercator = ref(false);
+const satellite = ref(false);
 
 const changeCenter = () => {
   localLocation.value = {
     center: [40.925358, 57.767265],
+    zoom: 9,
     duration: 1000,
   };
 };
@@ -80,6 +94,7 @@ const setBounds = () => {
       [37.60665514623445, 55.75504837113109],
       [37.64253237401767, 55.74430147115553],
     ],
+    zoom: 9,
     duration: 1000,
   };
 };

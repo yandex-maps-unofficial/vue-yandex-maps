@@ -215,6 +215,10 @@ export default defineConfig({
                 text: 'YandexMapDefaultFeaturesLayer',
                 link: '/components/layer-default-features',
               },
+              {
+                text: 'YandexMapDefaultSatelliteLayer',
+                link: '/components/layer-default-satellite',
+              },
             ],
           },
           {
@@ -314,6 +318,14 @@ export default defineConfig({
             collapsed: true,
             items: [
               {
+                text: 'Создание карты',
+                link: '/examples/map-basics',
+              },
+              {
+                text: 'Основные параметры',
+                link: '/examples/map-params',
+              },
+              {
                 text: 'Изменение позиции камеры',
                 link: '/examples/camera',
               },
@@ -326,16 +338,8 @@ export default defineConfig({
                 link: '/examples/map-restrict-area',
               },
               {
-                text: 'Основные параметры',
-                link: '/examples/map-params',
-              },
-              {
                 text: 'Размещение в скрытом контейнере',
                 link: '/examples/hidden-div',
-              },
-              {
-                text: 'Создание карты',
-                link: '/examples/map-basics',
               },
             ],
           },

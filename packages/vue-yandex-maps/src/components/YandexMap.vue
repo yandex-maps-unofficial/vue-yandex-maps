@@ -203,14 +203,14 @@ export default defineComponent({
           const clonedSettings: YMapProps = JSON.parse(JSON.stringify(rawVal));
 
           // Handling location change
-          if (props.realSettingsLocation && clonedSettings.location) {
+          if (props.realSettingsLocation && clonedSettings.location && map.value) {
             if ('center' in clonedSettings.location && 'center' in settings.location) {
-              settings.location.center = map.value!.center as LngLat;
+              settings.location.center = map.value.center as LngLat;
             } else if ('bounds' in clonedSettings.location && 'bounds' in settings.location) {
-              settings.location.bounds = map.value!.bounds;
+              settings.location.bounds = map.value.bounds;
             }
 
-            if ('zoom' in clonedSettings.location && 'zoom' in settings.location) settings.location.zoom = map.value!.zoom;
+            if ('zoom' in clonedSettings.location && 'zoom' in settings.location) settings.location.zoom = map.value.zoom;
           }
 
           const settingsDiff = Object.keys(diff(settings, clonedSettings));

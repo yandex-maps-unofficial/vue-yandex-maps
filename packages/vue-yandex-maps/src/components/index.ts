@@ -4,6 +4,7 @@ import YandexMapListener from './YandexMapListener.vue';
 import type { YandexMapListenerSettings } from './YandexMapListener.vue';
 import YandexMapDefaultFeaturesLayer from './layers/YandexMapDefaultFeaturesLayer.vue';
 import YandexMapDefaultSchemeLayer from './layers/YandexMapDefaultSchemeLayer.vue';
+import YandexMapDefaultSatelliteLayer from './layers/YandexMapDefaultSatelliteLayer.vue';
 import YandexMapTileDataSource from './data-sources/YandexMapTileDataSource.vue';
 import YandexMapFeatureDataSource from './data-sources/YandexMapFeatureDataSource.vue';
 import YandexMapLayer from './layers/YandexMapLayer.vue';
@@ -42,6 +43,7 @@ export {
   // Layers
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultSchemeLayer,
+  YandexMapDefaultSatelliteLayer,
   YandexMapLayer,
 
   // Controls
