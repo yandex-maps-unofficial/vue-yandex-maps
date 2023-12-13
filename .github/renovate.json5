@@ -3,6 +3,9 @@
     "daniluk4000"
   ],
   rebaseWhen: "behind-base-branch",
+  "github-actions": {
+    automerge: true
+  },
   "packageRules": [
     {
       "matchPackageNames": [
@@ -20,7 +23,10 @@
       enabled: false
     },
     {
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     }
