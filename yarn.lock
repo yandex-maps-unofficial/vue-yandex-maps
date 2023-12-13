@@ -208,7 +208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@antfu/utils@npm:^0.7.6":
+"@antfu/utils@npm:^0.7.6, @antfu/utils@npm:^0.7.7":
   version: 0.7.7
   resolution: "@antfu/utils@npm:0.7.7"
   checksum: 28b1a9caecc26bb43c5b08ea18c384f97a1eccc29763ad19c719e57f252fc12296f13849917fdf6611bd3aceff17137011363703e7ac0a07a083c9dce4676e42
@@ -3153,6 +3153,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nuxt/devtools-kit@npm:1.0.6":
+  version: 1.0.6
+  resolution: "@nuxt/devtools-kit@npm:1.0.6"
+  dependencies:
+    "@nuxt/kit": "npm:^3.8.2"
+    "@nuxt/schema": "npm:^3.8.2"
+    execa: "npm:^7.2.0"
+  peerDependencies:
+    nuxt: ^3.8.2
+    vite: "*"
+  checksum: 20e444c5669dda85fc80faa22eba023deec1b0bf3d98ea304b12c4943197d6ca14f431fc3e9a2d9496dc74ff3027b28befadb36a4918a7b4cd6cec88a0ada187
+  languageName: node
+  linkType: hard
+
 "@nuxt/devtools-wizard@npm:1.0.5":
   version: 1.0.5
   resolution: "@nuxt/devtools-wizard@npm:1.0.5"
@@ -3173,7 +3187,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/devtools@npm:^1.0.3, @nuxt/devtools@npm:^1.0.5":
+"@nuxt/devtools-wizard@npm:1.0.6":
+  version: 1.0.6
+  resolution: "@nuxt/devtools-wizard@npm:1.0.6"
+  dependencies:
+    consola: "npm:^3.2.3"
+    diff: "npm:^5.1.0"
+    execa: "npm:^7.2.0"
+    global-directory: "npm:^4.0.1"
+    magicast: "npm:^0.3.2"
+    pathe: "npm:^1.1.1"
+    pkg-types: "npm:^1.0.3"
+    prompts: "npm:^2.4.2"
+    rc9: "npm:^2.1.1"
+    semver: "npm:^7.5.4"
+  bin:
+    devtools-wizard: cli.mjs
+  checksum: a1a56187ddfa5fa5e38bb59923ed1a9a8b2aefa69845bcc5195c760db7195bf02344848fe9c695f0b202b30d0718d7b78fed5f86a08b05c31e5656e1715c27e7
+  languageName: node
+  linkType: hard
+
+"@nuxt/devtools@npm:^1.0.3":
   version: 1.0.5
   resolution: "@nuxt/devtools@npm:1.0.5"
   dependencies:
@@ -3220,6 +3254,56 @@ __metadata:
   bin:
     devtools: cli.mjs
   checksum: 5e53b728d94f77dc5f10a1ee4105997bc9741b285298226edb317867b014a7b34d128b8c2dbe4c6c1404e4d4b13e31e8be0f21d7a2f484c0ff5173a3b1049ca6
+  languageName: node
+  linkType: hard
+
+"@nuxt/devtools@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@nuxt/devtools@npm:1.0.6"
+  dependencies:
+    "@antfu/utils": "npm:^0.7.7"
+    "@nuxt/devtools-kit": "npm:1.0.6"
+    "@nuxt/devtools-wizard": "npm:1.0.6"
+    "@nuxt/kit": "npm:^3.8.2"
+    birpc: "npm:^0.2.14"
+    consola: "npm:^3.2.3"
+    destr: "npm:^2.0.2"
+    error-stack-parser-es: "npm:^0.1.1"
+    execa: "npm:^7.2.0"
+    fast-glob: "npm:^3.3.2"
+    flatted: "npm:^3.2.9"
+    get-port-please: "npm:^3.1.1"
+    h3: "npm:^1.9.0"
+    hookable: "npm:^5.5.3"
+    image-meta: "npm:^0.2.0"
+    is-installed-globally: "npm:^1.0.0"
+    launch-editor: "npm:^2.6.1"
+    local-pkg: "npm:^0.5.0"
+    magicast: "npm:^0.3.2"
+    nitropack: "npm:^2.8.1"
+    nypm: "npm:^0.3.3"
+    ofetch: "npm:^1.3.3"
+    ohash: "npm:^1.1.3"
+    pacote: "npm:^17.0.5"
+    pathe: "npm:^1.1.1"
+    perfect-debounce: "npm:^1.0.0"
+    pkg-types: "npm:^1.0.3"
+    rc9: "npm:^2.1.1"
+    scule: "npm:^1.1.1"
+    semver: "npm:^7.5.4"
+    simple-git: "npm:^3.21.0"
+    sirv: "npm:^2.0.3"
+    unimport: "npm:^3.6.1"
+    vite-plugin-inspect: "npm:^0.8.1"
+    vite-plugin-vue-inspector: "npm:^4.0.2"
+    which: "npm:^3.0.1"
+    ws: "npm:^8.15.0"
+  peerDependencies:
+    nuxt: ^3.8.2
+    vite: "*"
+  bin:
+    devtools: cli.mjs
+  checksum: b92c85525fd5f7eabc391f6c334aee57a76964dafb19a45a67e5510e32917b4ef25f112527bfa0db6b5b9720d2b752992660f02dd32389f95cad4d608cbc27ef
   languageName: node
   linkType: hard
 
@@ -10473,7 +10557,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-nuxt3@workspace:packages/examples/nuxt3"
   dependencies:
-    "@nuxt/devtools": "npm:^1.0.5"
+    "@nuxt/devtools": "npm:^1.0.6"
     "@nuxt/webpack-builder": "npm:^3.8.2"
     "@types/node": "npm:^20.10.4"
     examples: "workspace:*"
@@ -17802,30 +17886,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:21.6.0":
-  version: 21.6.0
-  resolution: "puppeteer-core@npm:21.6.0"
+"puppeteer-core@npm:21.6.1":
+  version: 21.6.1
+  resolution: "puppeteer-core@npm:21.6.1"
   dependencies:
     "@puppeteer/browsers": "npm:1.9.0"
     chromium-bidi: "npm:0.5.1"
     cross-fetch: "npm:4.0.0"
     debug: "npm:4.3.4"
     devtools-protocol: "npm:0.0.1203626"
-    ws: "npm:8.14.2"
-  checksum: 4ea348b2ad5a33985f1b11012bde0d263b59bbc068e49a640906a079d5a69ec83fecc45cb5115263ecef4b4054bc1c71be13667357ff08f33a2105c87b8020d1
+    ws: "npm:8.15.1"
+  checksum: a3293c3b97dc14ae3b78c30ba8d4d52847c7052064f795884f1318a77480d67cc297507e382ee5546962a191c31919e66d667e6ad52ce96fd0760c334038bee6
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^21.6.0":
-  version: 21.6.0
-  resolution: "puppeteer@npm:21.6.0"
+"puppeteer@npm:^21.6.1":
+  version: 21.6.1
+  resolution: "puppeteer@npm:21.6.1"
   dependencies:
     "@puppeteer/browsers": "npm:1.9.0"
     cosmiconfig: "npm:8.3.6"
-    puppeteer-core: "npm:21.6.0"
+    puppeteer-core: "npm:21.6.1"
   bin:
     puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: 2b4075bff9f5e9c742e3f43f0826fbb2a49fd8619aea5f5f7c68088350973f781b9652b2a76dc3d53a0ad71a96dc0e3cad332b4d18a1d7df5310f38aada1f0ff
+  checksum: ea9490a79df5de9a6f65aff7cc7a1d1071237e6446ab5f7a2c79ebb7c82337a9863e6078710ea7fab029d7be6ad19bad308f82d9571d3468044d467c8cbe0864
   languageName: node
   linkType: hard
 
@@ -21661,7 +21745,7 @@ __metadata:
     eslint: "npm:^8.55.0"
     eslint-plugin-vue: "npm:^9.19.2"
     examples: "workspace:^"
-    puppeteer: "npm:^21.6.0"
+    puppeteer: "npm:^21.6.1"
     typescript: "npm:^5.3.3"
     vitepress: "npm:^1.0.0-rc.31"
     vue-yandex-maps: "workspace:^"
@@ -22306,9 +22390,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:8.14.2":
-  version: 8.14.2
-  resolution: "ws@npm:8.14.2"
+"ws@npm:8.15.1, ws@npm:^8.15.0":
+  version: 8.15.1
+  resolution: "ws@npm:8.15.1"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ">=5.0.2"
@@ -22317,7 +22401,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 815ff01d9bc20a249b2228825d9739268a03a4408c2e0b14d49b0e2ae89d7f10847e813b587ba26992bdc33e9d03bed131e4cae73ff996baf789d53e99c31186
+  checksum: 746a3102d43e8df7b09f5814bec858f12d10185a7abd655537f3291b687d440bb80fc9d1e082f8dee42d4d74307f78a96810e18a2c8e13053b003c6608c1c648
   languageName: node
   linkType: hard
 
