@@ -16,12 +16,13 @@
             center,
             zoom,
           },
+          theme,
         }"
         real-settings-location
         :width="width"
         :height="height"
       >
-        <yandex-map-default-scheme-layer v-if="!useMercator && !satellite" :settings="{ theme }" />
+        <yandex-map-default-scheme-layer v-if="!useMercator && !satellite" />
         <template v-else-if="useMercator">
           <yandex-map-tile-data-source :settings="dataSourceProps" />
           <yandex-map-layer :settings="layerProps" />

@@ -13,11 +13,12 @@
             center,
             zoom: 14,
           },
+          theme,
         }"
         :width="width"
         :height="height"
       >
-        <yandex-map-default-scheme-layer :settings="{ theme }" />
+        <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
@@ -26,14 +27,14 @@
         <yandex-map-controls :settings="{ position: 'top left' }">
           <yandex-map-control-button>
             <label>
-              <input v-model="draggable" type="checkbox" :style="{ colorScheme: 'light' }">
+              <input v-model="draggable" type="checkbox">
               Drag and drop
             </label>
           </yandex-map-control-button>
           <yandex-map-control-button>
             <label>
               Restrictions
-              <select v-model="controlMode" :style="{ colorScheme: 'light', border: '1px solid #000', paddingLeft: '5px' }">
+              <select v-model="controlMode" :style="{ border: '1px solid #000', paddingLeft: '5px' }">
                 <option :value="null">
                   No
                 </option>

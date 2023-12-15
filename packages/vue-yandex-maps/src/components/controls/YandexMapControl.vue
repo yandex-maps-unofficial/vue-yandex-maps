@@ -18,10 +18,6 @@ export default defineComponent({
       type: Object as PropType<YMapControl>,
       default: null,
     },
-    settings: {
-      type: Object as PropType<ConstructorParameters<typeof YMapControl>[0]>,
-      default: () => ({}),
-    },
   },
   emits: {
     'input'(item: YMapControl): boolean {
@@ -44,7 +40,7 @@ export default defineComponent({
     onMounted(async () => {
       mapChildren = await setupMapChildren({
         createFunction: () => {
-          const control = new ymaps3.YMapControl(props.settings);
+          const control = new ymaps3.YMapControl();
 
           class YMapSomeController extends ymaps3.YMapEntity<any> {
             _onAttach() {
@@ -67,7 +63,6 @@ export default defineComponent({
           control.addChild(new YMapSomeController({}));
           return control;
         },
-        settings: computed(() => props.settings),
         strictMapRoot: true,
       });
       emit('input', mapChildren);

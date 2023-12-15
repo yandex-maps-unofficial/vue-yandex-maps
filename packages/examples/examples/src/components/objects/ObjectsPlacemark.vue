@@ -12,11 +12,12 @@
             center,
             zoom,
           },
+          theme,
         }"
         :width="width"
         :height="height"
       >
-        <yandex-map-default-scheme-layer :settings="{ theme }" />
+        <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
@@ -27,7 +28,7 @@
             <label>
               Position (X)
 
-              <select v-model="positionX" :style="{ colorScheme: 'light', border: '1px solid #000', paddingLeft: '5px' }">
+              <select v-model="positionX" :style="{ border: '1px solid #000', paddingLeft: '5px' }">
                 <option v-for="(key, value) in positionsX" :key="key" :value="value">
                   {{ key }}
                 </option>
@@ -38,7 +39,7 @@
             <label>
               Position (Y)
 
-              <select v-model="positionY" :style="{ colorScheme: 'light', border: '1px solid #000', paddingLeft: '5px' }">
+              <select v-model="positionY" :style="{ border: '1px solid #000', paddingLeft: '5px' }">
                 <option v-for="(key, value) in positionsY" :key="key" :value="value">
                   {{ key }}
                 </option>

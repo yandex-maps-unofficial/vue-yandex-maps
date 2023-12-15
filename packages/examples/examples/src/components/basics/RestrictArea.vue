@@ -14,11 +14,12 @@
           },
           zoomRange: ZOOM_RANGE,
           restrictMapArea: RESTRICT_AREA,
+          theme,
         }"
         :width="width"
         :height="height"
       >
-        <yandex-map-default-scheme-layer :settings="{ theme }" />
+        <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
         <yandex-map-default-marker :settings="{ coordinates: RESTRICT_AREA[0], color: 'green' }" />
         <yandex-map-default-marker :settings="{ coordinates: RESTRICT_AREA[1], color: 'red' }" />

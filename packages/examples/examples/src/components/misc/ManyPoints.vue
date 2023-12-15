@@ -13,12 +13,13 @@
             center,
             zoom: 5,
           },
+          theme,
         }"
         :width="width"
         :height="height"
         real-settings-location
       >
-        <yandex-map-default-scheme-layer :settings="{ theme }" />
+        <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
         <yandex-map-controls :settings="{ position: 'top left' }">
           <yandex-map-control>
