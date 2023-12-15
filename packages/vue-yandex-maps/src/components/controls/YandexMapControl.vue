@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted, ref,
+  defineComponent, h, onMounted, ref,
 } from 'vue';
 import type { YMapControl } from '@yandex/ymaps3-types';
 
