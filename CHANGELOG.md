@@ -1,5 +1,15 @@
 # Список изменений
 
+## [Unreleased]
+
+### @yandex/ymaps3-types@0.0.20
+
+- Добавлена совместимость с новой версией
+- Из `YandexMapControl` убран `settings`
+- В `YandexMap` добавлена поддержка тёмной темы
+  - `theme` в DefaultSchemeLayer Яндекс признал `deprecated` - используйте `theme` в `YandexMap`
+- В кластер добавлен параметр `maxZoom`
+
 ## [2.0.0-rc.8]
 
 ### Улучшения

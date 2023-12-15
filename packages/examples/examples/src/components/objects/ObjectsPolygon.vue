@@ -13,11 +13,12 @@
             center,
             zoom: 10,
           },
+          theme,
         }"
         :width="width"
         :height="height"
       >
-        <yandex-map-default-scheme-layer :settings="{ theme }" />
+        <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
