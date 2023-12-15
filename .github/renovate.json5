@@ -11,6 +11,7 @@
       "matchDepNames": [
         "@yandex/ymaps3-types"
       ],
+      automerge: false,
       groupName: "Yandex",
     },
     {
@@ -18,6 +19,7 @@
         "vue",
         "nuxt"
       ],
+      automerge: true,
       matchCurrentVersion: "<=2",
       "allowedVersions": "<=2"
     },
@@ -26,6 +28,7 @@
         "peerDependencies",
         "engines"
       ],
+      automerge: true,
       enabled: false
     },
     {
