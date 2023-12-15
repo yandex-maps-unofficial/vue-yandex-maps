@@ -8,6 +8,12 @@
   },
   "packageRules": [
     {
+      "matchDepNames": [
+        "@yandex/ymaps3-types"
+      ],
+      groupName: "Yandex",
+    },
+    {
       "matchPackageNames": [
         "vue",
         "nuxt"
