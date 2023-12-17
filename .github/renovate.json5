@@ -8,7 +8,7 @@
   },
   "packageRules": [
     {
-      "matchDepNames": [
+      "matchPackageNames": [
         "@yandex/ymaps3-types"
       ],
       automerge: false,
@@ -28,7 +28,6 @@
         "peerDependencies",
         "engines"
       ],
-      automerge: true,
       enabled: false
     },
     {
