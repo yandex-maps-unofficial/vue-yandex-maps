@@ -31,6 +31,11 @@
       enabled: false
     },
     {
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "matchPackagePatterns": [
+        "*"
+      ],
       "matchUpdateTypes": [
         "minor",
         "patch"
@@ -57,8 +62,7 @@
     "group:monorepos",
     "group:recommended",
     "replacements:all",
-    "workarounds:all",
-    "group:allNonMajor"
+    "workarounds:all"
   ],
   rangeStrategy: "bump",
   "npm": {
