@@ -81,7 +81,7 @@ export default defineConfig({
             link: '/guide/quickstart',
           },
           {
-            text: 'Переход с 0.xx/1.xx',
+            text: 'Переход с 0.x/1.x',
             link: '/guide/migration',
           },
         ],
@@ -101,6 +101,14 @@ export default defineConfig({
           {
             text: 'Задать вопрос',
             link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/discussions'
+          },
+          {
+            text: 'Версия 0.x',
+            link: 'https://vue-yandex-maps.github.io/',
+          },
+          {
+            text: 'Версия 1.x',
+            link: 'https://vue-yandex-maps.github.io/new-docs/',
           }
         ],
       },
@@ -137,7 +145,7 @@ export default defineConfig({
             link: '/guide/quickstart',
           },
           {
-            text: 'Переход с 0.xx/1.xx',
+            text: 'Переход с 0.x/1.x',
             link: '/guide/migration',
             collapsed: true,
             items: [
@@ -146,11 +154,11 @@ export default defineConfig({
                 link: '/guide/migration',
               },
               {
-                text: 'Переход с 0.xx',
+                text: 'Переход с 0.x',
                 link: '/guide/migration/v0',
               },
               {
-                text: 'Переход с 1.xx',
+                text: 'Переход с 1.x',
                 link: '/guide/migration/v1',
               }
             ]
