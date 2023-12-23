@@ -116,7 +116,7 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
     watcher = watch(map, () => {
       if (map.value) {
         watcher?.();
-        clearTimeout(timeout);
+        if (timeout) clearTimeout(timeout);
         resolve();
       }
     }, {
