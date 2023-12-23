@@ -66,6 +66,21 @@ export namespace VueYandexMaps {
      * @see https://yandex.com/dev/maps/jsapi/doc/3.0/ref/modules/index.html
      */
     importModules?: OverloadParameters<typeof ymaps3['import']>[0][];
+    /**
+     * @description Amount of time in milliseconds library will wait for Yandex script full load.
+     *
+     * Set this to false, to disable this behaviour and make library wait forever.
+     * @default true (5000)
+     */
+    yandexMapsScriptWaitDuration?: number | boolean;
+    /**
+     * @description Amount of time in milliseconds library will wait for all components render after Yandex script was loaded.
+     *
+     * Set this to false, to disable this behaviour and make library wait forever.
+     * @note If you disable this behaviour completely, any fatal error inside components will not lead to exception and library will never load.
+     * @default true (5000)
+     */
+    mapsRenderWaitDuration?: number | boolean;
   }
 
   /**

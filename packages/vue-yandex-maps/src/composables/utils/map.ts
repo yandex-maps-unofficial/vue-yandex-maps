@@ -53,14 +53,20 @@ export function waitTillYmapInit() {
     });
   }
 
+  if (typeof ymaps3 !== 'undefined') return;
+
   return new Promise<void>((resolve, reject) => {
     if (typeof ymaps3 === 'undefined') {
-      const timeout = setTimeout(() => {
-        reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized.'));
-      }, 5000);
+      let timeout: NodeJS.Timeout | undefined;
+
+      if (VueYandexMaps.settings.value.yandexMapsScriptWaitDuration !== false) {
+        timeout = setTimeout(() => {
+          reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized.'));
+        }, typeof VueYandexMaps.settings.value.yandexMapsScriptWaitDuration === 'number' ? VueYandexMaps.settings.value.yandexMapsScriptWaitDuration : 5000);
+      }
 
       watch(VueYandexMaps.isLoaded, () => {
-        clearTimeout(timeout);
+        if (timeout) clearTimeout(timeout);
         if (VueYandexMaps.loadStatus.value === 'loaded') {
           resolve();
         } else {
@@ -92,10 +98,16 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
 
   const map = _map || injectMap();
 
+  if (map.value) return;
+
   return new Promise<void>((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      if (!map.value) reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillMapInit.'));
-    }, 5000);
+    let timeout: NodeJS.Timeout | undefined;
+
+    if (VueYandexMaps.settings.value.mapsRenderWaitDuration !== false) {
+      timeout = setTimeout(() => {
+        reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillMapInit.'));
+      }, typeof VueYandexMaps.settings.value.mapsRenderWaitDuration === 'number' ? VueYandexMaps.settings.value.mapsRenderWaitDuration : 5000);
+    }
 
     // Breaks without this
     let watcher: WatchStopHandle | undefined;
