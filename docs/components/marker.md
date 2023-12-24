@@ -95,8 +95,7 @@
 - [Попап при клике на маркер](/examples/marker-popup)
 - [Скрывать маркеры вне вьюпорта](/examples/hide-markers)
 
-```vue
-
+```html
 <template>
   <yandex-map height="500px">
     <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }"/>

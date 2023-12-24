@@ -217,7 +217,6 @@ https://github.com/yandex-maps-unofficial/vue-yandex-maps/assets/10450717/bcf0b4
 Т.е. до:
 
 ```html
-
 <div id="__app">
   <div class="__ymap_container" style="width:100%;height:100%;"></div>
 </div>
@@ -227,7 +226,6 @@ https://github.com/yandex-maps-unofficial/vue-yandex-maps/assets/10450717/bcf0b4
 После:
 
 ```html
-
 <div id="__app">
   <div class="__ymap" style="width:50dvw;height:75dvh;color:#000;position:relative;z-index:0;">
     <div class="__ymap_container" style="width:100%;height:100%;"></div>
