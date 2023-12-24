@@ -1,10 +1,18 @@
 # Список изменений
 
-## [Unreleased]
+## [2.0.0-rc.10]
 
 ### Изменения
 
 - Минимальная версия `@yandex/ymaps3-types` установлена на `0.0.20`
+- Добавлена возможность изменять время, которое библиотека ожидает для загрузки Яндекс.Карт и для отрисовки компонентов. Также добавлена возможность полностью отключить это поведение (ждать вечно). См. https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/147
+- Незначительно улучшена производительность запуска Карт
+
+### Документация
+
+- Исправлена работа tilt-а камеры в примере "Изменение позиции камеры"
+- Улучшена человекочитабельность документации хинта
+- В документацию кластеризатора добавлен параметр maxZoom
 
 ## [2.0.0-rc.9]
 
@@ -209,7 +217,6 @@ https://github.com/yandex-maps-unofficial/vue-yandex-maps/assets/10450717/bcf0b4
 Т.е. до:
 
 ```html
-
 <div id="__app">
   <div class="__ymap_container" style="width:100%;height:100%;"></div>
 </div>
@@ -219,7 +226,6 @@ https://github.com/yandex-maps-unofficial/vue-yandex-maps/assets/10450717/bcf0b4
 После:
 
 ```html
-
 <div id="__app">
   <div class="__ymap" style="width:50dvw;height:75dvh;color:#000;position:relative;z-index:0;">
     <div class="__ymap_container" style="width:100%;height:100%;"></div>

@@ -20,6 +20,7 @@
         :height="height"
       >
         <yandex-map-default-scheme-layer />
+        <yandex-map-default-features-layer />
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-geolocation-control />
         </yandex-map-controls>
@@ -63,6 +64,7 @@ import {
   YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultSchemeLayer,
+  YandexMapDefaultFeaturesLayer,
   YandexMapGeolocationControl,
 } from 'vue-yandex-maps';
 import {
@@ -98,7 +100,7 @@ const settings = reactive<Partial<YandexMapSettings>>({
   camera: {
     tilt: 0,
     azimuth: 0,
-    duration: 0,
+    duration: 1000,
   },
 });
 
@@ -110,19 +112,21 @@ const changeCenter = () => {
 };
 
 const rotateCamera = (angle: number) => {
-  settings.camera = {
-    ...settings.camera,
-    azimuth: map.value!.azimuth + angle,
-    duration: 1000,
-  };
+  map.value!.update({
+    camera: {
+      azimuth: map.value!.azimuth + angle,
+      duration: 1000,
+    },
+  });
 };
 
 const tiltCamera = (angle: number) => {
-  settings.camera = {
-    ...settings.camera,
-    tilt: map.value!.tilt + angle,
-    duration: 1000,
-  };
+  map.value!.update({
+    camera: {
+      tilt: map.value!.tilt + angle,
+      duration: 1000,
+    },
+  });
 };
 
 const changeAzimuthLeft = () => rotateCamera(Math.PI / 4);
