@@ -72,7 +72,7 @@ export namespace VueYandexMaps {
      * Set this to false, to disable this behaviour and make library wait forever.
      * @default true (5000)
      */
-    yandexMapsScriptWaitDuration?: number | boolean;
+    mapsScriptWaitDuration?: number | boolean;
     /**
      * @description Amount of time in milliseconds library will wait for all components render after Yandex script was loaded.
      *

@@ -20,6 +20,7 @@
         :height="height"
       >
         <yandex-map-default-scheme-layer />
+        <yandex-map-default-features-layer />
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-geolocation-control />
         </yandex-map-controls>
@@ -63,6 +64,7 @@ import {
   YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultSchemeLayer,
+  YandexMapDefaultFeaturesLayer,
   YandexMapGeolocationControl,
 } from 'vue-yandex-maps';
 import {

@@ -12,7 +12,7 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   strictMode: true,
   domain: true,
   mapsRenderWaitDuration: true,
-  yandexMapsScriptWaitDuration: true,
+  mapsScriptWaitDuration: true,
 };
 
 export function initYmaps() {
@@ -91,7 +91,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings): VueYa
     strictMode: false,
     domain: 'https://api-maps.yandex.ru',
     mapsRenderWaitDuration: true,
-    yandexMapsScriptWaitDuration: true,
+    mapsScriptWaitDuration: true,
     ...options,
   };
   if (!optionsShallowClone.apikey) {
