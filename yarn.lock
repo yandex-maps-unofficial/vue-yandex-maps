@@ -2710,7 +2710,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/api-extractor@npm:^7.38.0":
+"@microsoft/api-extractor@npm:7.39.0":
   version: 7.39.0
   resolution: "@microsoft/api-extractor@npm:7.39.0"
   dependencies:
@@ -5746,7 +5746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/language-core@npm:1.8.26, @vue/language-core@npm:^1.8.20":
+"@vue/language-core@npm:1.8.26, @vue/language-core@npm:^1.8.26":
   version: 1.8.26
   resolution: "@vue/language-core@npm:1.8.26"
   dependencies:
@@ -21235,23 +21235,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-dts@npm:^3.6.4":
-  version: 3.6.4
-  resolution: "vite-plugin-dts@npm:3.6.4"
+"vite-plugin-dts@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "vite-plugin-dts@npm:3.7.0"
   dependencies:
-    "@microsoft/api-extractor": "npm:^7.38.0"
-    "@rollup/pluginutils": "npm:^5.0.5"
-    "@vue/language-core": "npm:^1.8.20"
+    "@microsoft/api-extractor": "npm:7.39.0"
+    "@rollup/pluginutils": "npm:^5.1.0"
+    "@vue/language-core": "npm:^1.8.26"
     debug: "npm:^4.3.4"
     kolorist: "npm:^1.8.0"
-    vue-tsc: "npm:^1.8.20"
+    vue-tsc: "npm:^1.8.26"
   peerDependencies:
     typescript: "*"
     vite: "*"
   peerDependenciesMeta:
     vite:
       optional: true
-  checksum: 33c46aa1bb7d9d9b8948b6c0b9302c39fd7745aebf4efeb85968cf33034a5a3147baae0a4e488124423dbc7121456168bc5e454ab695bee46afa8ff6bbaa230b
+  checksum: bb0cbe51b6aa96b7039d46242d4b4fb89522d0051e2712606e24bbb5cad72e28da675e7a02be9c07ad7dc7255c3091d315a8f234bf224812be22ef6416f78e15
   languageName: node
   linkType: hard
 
@@ -21633,7 +21633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:^1.8.20, vue-tsc@npm:^1.8.26":
+"vue-tsc@npm:^1.8.26":
   version: 1.8.26
   resolution: "vue-tsc@npm:1.8.26"
   dependencies:
@@ -21682,7 +21682,7 @@ __metadata:
     rollup-plugin-delete: "npm:^2.0.0"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.0.10"
-    vite-plugin-dts: "npm:^3.6.4"
+    vite-plugin-dts: "npm:^3.7.0"
     vue: "npm:^3.3.13"
     vue-tsc: "npm:^1.8.26"
   peerDependencies:
