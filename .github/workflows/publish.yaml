@@ -111,6 +111,7 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/vue-yandex-maps
+          provenance: true
           tag: next
   github-release:
     name: Release tag to Github
