@@ -8116,7 +8116,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorette@npm:^2.0.10, colorette@npm:^2.0.20":
+"colorette@npm:^2.0.10":
   version: 2.0.20
   resolution: "colorette@npm:2.0.20"
   checksum: 0b8de48bfa5d10afc160b8eaa2b9938f34a892530b2f7d7897e0458d9535a066e3998b49da9d21161c78225b272df19ae3a64d6df28b4c9734c0e55bbd02406f
@@ -11502,19 +11502,20 @@ __metadata:
   linkType: hard
 
 "giget@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "giget@npm:1.1.3"
+  version: 1.2.0
+  resolution: "giget@npm:1.2.0"
   dependencies:
-    colorette: "npm:^2.0.20"
-    defu: "npm:^6.1.2"
-    https-proxy-agent: "npm:^7.0.2"
-    mri: "npm:^1.2.0"
-    node-fetch-native: "npm:^1.4.0"
+    citty: "npm:^0.1.5"
+    consola: "npm:^3.2.3"
+    defu: "npm:^6.1.3"
+    node-fetch-native: "npm:^1.6.1"
+    nypm: "npm:^0.3.3"
+    ohash: "npm:^1.1.3"
     pathe: "npm:^1.1.1"
     tar: "npm:^6.2.0"
   bin:
     giget: dist/cli.mjs
-  checksum: d46faa23d7ea747e8f854843d6b8f1be645f2a374af10a7590156ac5703b82cc3beec5fe723fc900099c8da7d810a7a2b0e0e3cd9db9ad58b453ce4b5090eb5f
+  checksum: f0424f94f5e8202684873eadfbff060741a3f734749e375f12476918e503f9cf111f3828afccd18be6a108833425f4d62e3bff4d980e24240d95be9f2ccc453f
   languageName: node
   linkType: hard
 
@@ -15011,10 +15012,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch-native@npm:^1.4.0, node-fetch-native@npm:^1.4.1":
-  version: 1.5.1
-  resolution: "node-fetch-native@npm:1.5.1"
-  checksum: 347fdac5ab7a9a2df58713636a497dc40e418594c35862356dc96bf681a711e72e83a1242b0ea05c5d2e39b5810539cdc47d92d01ea75759864b8d3c14291394
+"node-fetch-native@npm:^1.4.0, node-fetch-native@npm:^1.4.1, node-fetch-native@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "node-fetch-native@npm:1.6.1"
+  checksum: 83fbe9abea807fe479b45f5512389c71be1328b211bfd2aab39ce56356e6e8b74df41b50f4b7954eac8869c0f09b61dd0e563f28df90218e77ecf3977ed72065
   languageName: node
   linkType: hard
 
@@ -15082,12 +15083,12 @@ __metadata:
   linkType: hard
 
 "node-html-parser@npm:^6.1.10":
-  version: 6.1.11
-  resolution: "node-html-parser@npm:6.1.11"
+  version: 6.1.12
+  resolution: "node-html-parser@npm:6.1.12"
   dependencies:
     css-select: "npm:^5.1.0"
     he: "npm:1.2.0"
-  checksum: 090be2781cbe6f9475a4ee9151a67af9635179ce9bccc77ec8218a455665078fa9ba939db073f750dd26eb94e0a907079b8ff9a3c1a90c406425e8ab42e448ce
+  checksum: 83e6b8bc2921522ca0eba7f2bdaad6d4a182cb3e578444504e2603fb35604a95a5787430be04066799669a27c6d3886a89c792b1848307bfad9028b9483752a0
   languageName: node
   linkType: hard
 
