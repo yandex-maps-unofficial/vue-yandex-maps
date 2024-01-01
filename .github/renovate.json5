@@ -3,9 +3,6 @@
     "daniluk4000"
   ],
   rebaseWhen: "behind-base-branch",
-  "github-actions": {
-    automerge: true
-  },
   "packageRules": [
     {
       "matchPackageNames": [
@@ -19,7 +16,6 @@
         "vue",
         "nuxt"
       ],
-      automerge: true,
       matchCurrentVersion: "<=2",
       "allowedVersions": "<=2"
     },
@@ -41,7 +37,6 @@
         "patch"
       ],
       "matchCurrentVersion": "!/^0/",
-      "automerge": true
     }
   ],
   "labels": [
@@ -50,7 +45,7 @@
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    automerge: true
+    
   },
   "updateInternalDeps": true,
   "baseBranches": [
