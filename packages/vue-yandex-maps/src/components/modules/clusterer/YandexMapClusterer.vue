@@ -109,22 +109,19 @@ export default defineComponent({
       if (!settings.method && _clusterByGrid) settings.method = _clusterByGrid?.({ gridSize: props.gridSize });
       settings.tickTimeout = tickTimeout.value;
 
-      const marker: Settings['marker'] = (feature: Pick<Feature, 'geometry'>) => {
-        const entity = entities.value.filter((x: Record<string, any>) => x._props.coordinates[0] === feature.geometry.coordinates[0] && x._props.coordinates[1] === feature.geometry.coordinates[1]);
+      const marker: Settings['marker'] = (feature: Feature) => {
+        const entity = entities.value.find((x: Record<string, any>) => x._props.id === feature.id);
 
-        if (entity.length > 1) {
+        if (!entity) {
           throwException({
-            text: `More than one entities with coordinates of ${feature.geometry.coordinates.join(', ')} were found in YandexMapClusterer, which is not allowed`,
-          });
-        }
-        if (!entity.length) {
-          throwException({
-            text: `No entity with coordinates of ${feature.geometry.coordinates.join(', ')} were found in YandexMapClusterer.`,
+            text: `No entity with id ${feature.id} (coordinates: ${feature.geometry.coordinates.join(', ')}) were found in YandexMapClusterer.`,
             isInternal: true,
+            warn: true,
           });
+          return new ymaps3.YMapMarker({ coordinates: feature.geometry.coordinates });
         }
 
-        return entity[0];
+        return entity;
       };
 
       const cluster: Settings['cluster'] = (coordinates) => {
@@ -134,23 +131,33 @@ export default defineComponent({
           throwException({
             text: `No element with coordinates of ${coordinates.join(', ')} were found in YandexMapClusterer.`,
             isInternal: true,
+            warn: true,
           });
+          return new ymaps3.YMapMarker({ coordinates });
         }
 
         return foundCluster.element as YMapMarker;
       };
 
-      const features: Settings['features'] = entities.value.map((entity: Record<string, any>, i) => ({
-        type: 'Feature',
-        id: Math.random()
-          .toString() + Date.now()
-          .toString(),
-        geometry: {
-          type: 'Point',
-          coordinates: entity._props.coordinates,
-        },
-        properties: 'properties' in entity._props ? entity._props.properties : {},
-      }));
+      const features: Settings['features'] = entities.value.map((entity: Record<string, any>, i) => {
+        if (!entity._props.id) {
+          entity.update({
+            id: Math.random()
+              .toString() + Date.now()
+              .toString(),
+          });
+        }
+
+        return {
+          type: 'Feature',
+          id: entity._props.id,
+          geometry: {
+            type: 'Point',
+            coordinates: entity._props.coordinates,
+          },
+          properties: 'properties' in entity._props ? entity._props.properties : {},
+        };
+      });
 
       settings.onRender = (clustersList) => {
         clusterFeatures.value = clustersList.map((clusterer) => ({
@@ -247,21 +254,25 @@ export default defineComponent({
 
                     if (clusterer.features.length >= 2) {
                       const {
-                        minLongitude, minLatitude, maxLongitude, maxLatitude,
-                      } = clusterer.features.map((x) => x.geometry.coordinates).reduce(
-                        (acc, [longitude, latitude]) => ({
-                          minLongitude: Math.min(acc.minLongitude, longitude),
-                          minLatitude: Math.min(acc.minLatitude, latitude),
-                          maxLongitude: Math.max(acc.maxLongitude, longitude),
-                          maxLatitude: Math.max(acc.maxLatitude, latitude),
-                        }),
-                        {
-                          minLongitude: Infinity,
-                          minLatitude: Infinity,
-                          maxLongitude: -Infinity,
-                          maxLatitude: -Infinity,
-                        },
-                      );
+                        minLongitude,
+                        minLatitude,
+                        maxLongitude,
+                        maxLatitude,
+                      } = clusterer.features.map((x) => x.geometry.coordinates)
+                        .reduce(
+                          (acc, [longitude, latitude]) => ({
+                            minLongitude: Math.min(acc.minLongitude, longitude),
+                            minLatitude: Math.min(acc.minLatitude, latitude),
+                            maxLongitude: Math.max(acc.maxLongitude, longitude),
+                            maxLatitude: Math.max(acc.maxLatitude, latitude),
+                          }),
+                          {
+                            minLongitude: Infinity,
+                            minLatitude: Infinity,
+                            maxLongitude: -Infinity,
+                            maxLatitude: -Infinity,
+                          },
+                        );
 
                       const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
 

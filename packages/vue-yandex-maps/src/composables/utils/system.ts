@@ -59,13 +59,23 @@ export function isDev() {
   return typeof process !== 'undefined' && (process.env?.NODE_ENV === 'development' || process.dev);
 }
 
+interface ThrowExceptionSettings {
+  text: string,
+  isInternal?: boolean
+  warn?: boolean
+}
+
+export function throwException(settings: Omit<ThrowExceptionSettings, 'warn'> & { warn: true }): void
+export function throwException(settings: Omit<ThrowExceptionSettings, 'warn'> & { warn?: false }): never
 export function throwException({
   text,
   isInternal,
-}: {
-  text: string,
-  isInternal?: boolean
-}): never {
+  warn,
+}: ThrowExceptionSettings): never | void {
+  if (warn) {
+    text = `Warning: ${text}`;
+  }
+
   if (isInternal) {
     text += ' This is likely Vue Yandex Maps internal bug.';
 
@@ -74,7 +84,13 @@ export function throwException({
     }
   }
 
-  throw new VueYandexMaps.YandexMapException(text);
+  const exception = new VueYandexMaps.YandexMapException(text);
+
+  if (warn) {
+    console.warn(exception);
+  } else {
+    throw exception;
+  }
 }
 
 export function excludeKeys(item: Record<string, any>, ignoreKeys: string[]) {
