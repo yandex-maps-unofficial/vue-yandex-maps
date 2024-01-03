@@ -31,6 +31,7 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
         },
+        chunkFileNames: 'vue-yandex-maps-[hash].js',
         entryFileNames: '[name].js',
       },
     },
