@@ -45,7 +45,9 @@ export function injectLayers(): Ref<any[]> {
   return layers;
 }
 
-export function waitTillYmapInit() {
+export function waitTillYmapInit({ timeoutCallback }: {
+  timeoutCallback?: (timeout: NodeJS.Timeout, isDelete: boolean) => any
+} = {}) {
   if (typeof window === 'undefined') {
     throwException({
       text: 'waitTillYmapInit cannot be called on SSR.',
@@ -61,12 +63,17 @@ export function waitTillYmapInit() {
 
       if (VueYandexMaps.settings.value.mapsScriptWaitDuration !== false) {
         timeout = setTimeout(() => {
+          timeoutCallback?.(timeout!, true);
           reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized. You can change this behaviour by using mapsScriptWaitDuration.'));
         }, typeof VueYandexMaps.settings.value.mapsScriptWaitDuration === 'number' ? VueYandexMaps.settings.value.mapsScriptWaitDuration : 5000);
+        timeoutCallback?.(timeout, false);
       }
 
       watch(VueYandexMaps.isLoaded, () => {
-        if (timeout) clearTimeout(timeout);
+        if (timeout) {
+          clearTimeout(timeout);
+          timeoutCallback?.(timeout, true);
+        }
         if (VueYandexMaps.loadStatus.value === 'loaded') {
           resolve();
         } else {
@@ -81,7 +88,10 @@ export function waitTillYmapInit() {
   });
 }
 
-export function waitTillMapInit(_map?: Ref<YMap | null>) {
+export function waitTillMapInit({
+  map: _map,
+  timeoutCallback,
+}: { map?: Ref<YMap | null>, timeoutCallback?: (timeout: NodeJS.Timeout, isDelete: boolean) => any } = {}) {
   if (!_map && !getCurrentInstance()) {
     throwException({
       text: 'onMapInit must be only called on runtime.',
@@ -105,8 +115,10 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
 
     if (VueYandexMaps.settings.value.mapsRenderWaitDuration !== false) {
       timeout = setTimeout(() => {
+        timeoutCallback?.(timeout!, true);
         reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillMapInit. You can change this behaviour by using mapsRenderWaitDuration.'));
       }, typeof VueYandexMaps.settings.value.mapsRenderWaitDuration === 'number' ? VueYandexMaps.settings.value.mapsRenderWaitDuration : 5000);
+      timeoutCallback?.(timeout, false);
     }
 
     // Breaks without this
@@ -116,7 +128,10 @@ export function waitTillMapInit(_map?: Ref<YMap | null>) {
     watcher = watch(map, () => {
       if (map.value) {
         watcher?.();
-        if (timeout) clearTimeout(timeout);
+        if (timeout) {
+          clearTimeout(timeout);
+          timeoutCallback?.(timeout, true);
+        }
         resolve();
       }
     }, {
