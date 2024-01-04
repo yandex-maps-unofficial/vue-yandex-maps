@@ -17,7 +17,7 @@
         }"
         :width="width"
         :height="height"
-        real-settings-location
+        cursor-grab
       >
         <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
