@@ -1,2 +1,2 @@
 export * from './getCenterAndZoom.ts';
-export { initYmaps } from './init.ts';
+export * from './init.ts';
