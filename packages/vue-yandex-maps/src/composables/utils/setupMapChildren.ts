@@ -1,19 +1,8 @@
 import type { YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import type {
-  ComputedRef,
-  Ref,
-} from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import {
-  getCurrentInstance,
-  inject,
-  isRef,
-  nextTick,
-  onBeforeUnmount,
-  provide,
-  shallowRef,
-  toRaw,
-  watch,
+  getCurrentInstance, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, toRaw, watch,
 } from 'vue';
 import { copy, excludeKeys, throwException } from './system.ts';
 import {
@@ -106,6 +95,13 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   let childrenPromises;
   const map = injectMap();
   const layers = injectLayers();
+  let timeouts: Set<NodeJS.Timeout> | null = null;
+
+  const timeoutCallback = (timeout: NodeJS.Timeout, isDelete: boolean) => {
+    if (!timeouts) timeouts = new Set();
+    if (!isDelete) timeouts.add(timeout);
+    else timeouts.delete(timeout);
+  };
 
   if (isMapRoot && !duplicateInit) {
     provide('mapRoot', mapRootRef || children);
@@ -122,6 +118,11 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
           isMercator,
           root: mapRoot?.value ? mapRoot : map,
         });
+      }
+
+      if (timeouts?.size) {
+        timeouts.forEach((timeout) => clearTimeout(timeout));
+        timeouts.clear();
       }
     });
   }
@@ -152,7 +153,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   }
 
   if (!isLayer && !isMercator) {
-    await waitTillMapInit();
+    await waitTillMapInit({ timeoutCallback });
     if (!map.value) {
       throwException({
         text: 'map is undefined in setupMapChildren.',
@@ -160,7 +161,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
       });
     }
   } else {
-    await waitTillYmapInit();
+    await waitTillYmapInit({ timeoutCallback });
   }
 
   if (strictMapRoot) {

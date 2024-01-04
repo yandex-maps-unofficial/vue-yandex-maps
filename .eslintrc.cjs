@@ -78,6 +78,7 @@ module.exports = {
     '@typescript-eslint/no-import-type-side-effects': 'error',
     '@typescript-eslint/consistent-type-imports': 'error',
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+    'prefer-const': ['error', { destructuring: 'all' }],
   },
   parser: 'vue-eslint-parser',
   parserOptions: {

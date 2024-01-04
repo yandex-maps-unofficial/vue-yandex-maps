@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 import del from 'rollup-plugin-delete';
 import copy from 'rollup-plugin-copy';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
   optimizeDeps: {
@@ -31,6 +32,7 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
         },
+        chunkFileNames: 'vue-yandex-maps-[hash].js',
         entryFileNames: '[name].js',
       },
     },
@@ -38,6 +40,7 @@ export default defineConfig({
   plugins: [
     del({ targets: 'dist/*' }),
     vue(),
+    libInjectCss(),
     dts(),
     copy({
       targets: [

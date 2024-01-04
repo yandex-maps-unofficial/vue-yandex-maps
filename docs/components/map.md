@@ -63,6 +63,10 @@ const map = shallowRef<null | YMap>(null); //map передать в v-model
 
 Параметр является числом, по умолчанию `0`.
 
+### cursorGrab (cursor-grab)
+
+Добавляет cursor grab/grabbing на слой схемы карты. grabbing будет активироваться только тогда, когда пользователь начнёт движение курсором.
+
 ### readonlySettings (readonly-settings)
 
 Отключает слежение за объектом настроек. Включите, если вам по каким-то причинам мешает реактивность `settings`.
