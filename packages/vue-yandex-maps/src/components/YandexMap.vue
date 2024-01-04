@@ -255,8 +255,12 @@ export default defineComponent({
 
         if (val) {
           listener = new ymaps3.YMapListener({
-            onActionStart: (e) => e.type === 'drag' && (grabbing.value = true),
-            onActionEnd: (e) => e.type === 'drag' && (grabbing.value = false),
+            onActionStart: (e) => {
+              if (e.type === 'drag') grabbing.value = true;
+            },
+            onActionEnd: (e) => {
+              if (e.type === 'drag') grabbing.value = false;
+            },
           });
           map.value.addChild(listener);
         } else if (listener) map.value.removeChild(listener);
