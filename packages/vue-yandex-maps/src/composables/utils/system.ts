@@ -3,6 +3,7 @@ import type {
 } from 'vue';
 import { computed, ref } from 'vue';
 import { VueYandexMaps } from '../../namespace.ts';
+import YandexMapException = VueYandexMaps.YandexMapException;
 
 /**
  * @description Prevents memory leak on SSR when ref is called outside setup
@@ -65,13 +66,7 @@ interface ThrowExceptionSettings {
   warn?: boolean
 }
 
-export function throwException(settings: Omit<ThrowExceptionSettings, 'warn'> & { warn: true }): void
-export function throwException(settings: Omit<ThrowExceptionSettings, 'warn'> & { warn?: false }): never
-export function throwException({
-  text,
-  isInternal,
-  warn,
-}: ThrowExceptionSettings): never | void {
+export function getException({ text, isInternal, warn }: ThrowExceptionSettings): YandexMapException {
   if (warn) {
     text = `Warning: ${text}`;
   }
@@ -84,9 +79,15 @@ export function throwException({
     }
   }
 
-  const exception = new VueYandexMaps.YandexMapException(text);
+  return new VueYandexMaps.YandexMapException(text);
+}
 
-  if (warn) {
+export function throwException(settings: Omit<ThrowExceptionSettings, 'warn'> & { warn: true }): void
+export function throwException(settings: Omit<ThrowExceptionSettings, 'warn'> & { warn?: false }): never
+export function throwException(settings: ThrowExceptionSettings): never | void {
+  const exception = getException(settings);
+
+  if (settings.warn) {
     console.warn(exception);
   } else {
     throw exception;

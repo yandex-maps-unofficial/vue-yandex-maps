@@ -58,6 +58,10 @@ export default defineConfig({
         link: '/components/list'
       },
       {
+        text: 'API',
+        link: '/api/'
+      },
+      {
         text: 'Руководства',
         items: [
           {
@@ -312,6 +316,28 @@ export default defineConfig({
             ],
           },
         ],
+      },
+      {
+        text: 'API',
+        collapsed: true,
+        items: [
+          {
+            text: 'Список методов',
+            link: '/api/'
+          },
+          {
+            text: 'Инстанс VueYandexMaps',
+            link: '/api/namespace'
+          },
+          {
+            text: 'useYMapsLocationFromBounds',
+            link: '/api/location-from-bounds'
+          },
+          {
+            text: 'Yandex Maps API',
+            link: '/api/yandex-maps-api'
+          }
+        ]
       },
       {
         text: 'Примеры',

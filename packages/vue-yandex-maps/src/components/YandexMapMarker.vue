@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
-import type { PropType, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import { throwException } from '../composables/utils/system.ts';
 import { setupMapChildren } from '../composables/utils/setupMapChildren.ts';
 import { getMarkerContainerProps } from '../composables/utils/marker.ts';

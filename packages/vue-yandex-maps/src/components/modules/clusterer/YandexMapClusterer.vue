@@ -7,22 +7,38 @@ import {
 } from 'vue';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import type {
-  LngLat, YMapCollection, YMapEntity, YMapMarker,
+  LngLatBounds, YMapCollection, YMapEntity, YMapMarker,
 } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { throwException } from '../../../composables/utils/system.ts';
+import { sleep, throwException } from '../../../composables/utils/system.ts';
 import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
 import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../composables/utils/marker.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import { injectMap } from '../../../composables/utils/map.ts';
 import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/types';
+import { useYMapsLocationFromBounds } from '../../../composables/getCenterAndZoom.ts';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0]
 export type YandexMapClustererOptions = Partial<Omit<Settings, 'features' | 'marker' | 'cluster'>>
 
 export type YandexMapClustererZoomOptionsObject = {
-  duration?: number,
-  easing?: EasingFunctionDescription,
+  duration?: number
+  easing?: EasingFunctionDescription
+
+  /**
+   * @description zoomCorrect will apply Math.floor after initial bounds update. boundsCorrect will instead subtract the distance between left top and right bottom coordinates of bounds.
+   *
+   * If boundsCorrect is active, updated bounds will be returned in updatedBounds event.
+   * @default zoomCorrect
+   */
+  strategy?: 'zoomCorrect' | 'boundsCorrect'
+
+  /**
+   * @description By default, if objects are too close to borders, library will add -1 zoom for user's comfort.
+   *
+   * This can work poor on large grid sizes and/or high density of objects. You can disable behaviour by using this setting.
+   */
+  disableMinimalZoomCorrectDiff?: boolean
 }
 
 export default defineComponent({
@@ -83,11 +99,11 @@ export default defineComponent({
       return true;
     },
     // Exact features bounds returned on cluster click
-    trueBounds(bounds: [LngLat, LngLat]): boolean {
+    trueBounds(bounds: LngLatBounds): boolean {
       return bounds.length === 2;
     },
     // Auto-corrected features bounds returned on cluster click
-    updatedBounds(bounds: [LngLat, LngLat]): boolean {
+    updatedBounds(bounds: LngLatBounds): boolean {
       return bounds.length === 2;
     },
   },
@@ -249,7 +265,7 @@ export default defineComponent({
                 element.addChild(new ymaps3.YMapMarker({
                   ...excludeYandexMarkerProps(props.clusterMarkerProps),
                   coordinates: clusterer.lnglat,
-                  onClick: (e) => {
+                  onClick: async (e) => {
                     props.clusterMarkerProps.onClick?.(e);
 
                     if (clusterer.features.length >= 2) {
@@ -276,21 +292,50 @@ export default defineComponent({
 
                       const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
 
-                      const latDiff = maxLatitude - minLatitude;
-                      const longDiff = maxLongitude - minLongitude;
-
-                      const bounds: [LngLat, LngLat] = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
-
-                      emit('trueBounds', [[minLongitude, maxLatitude], [maxLongitude, minLatitude]]);
-                      emit('updatedBounds', bounds);
+                      const bounds: LngLatBounds = [[minLongitude, maxLatitude], [maxLongitude, minLatitude]];
+                      emit('trueBounds', bounds);
 
                       if (!props.zoomOnClusterClick) return;
 
-                      map.value?.setLocation({
-                        bounds,
-                        duration: settings.duration ?? 500,
-                        easing: settings.easing,
-                      });
+                      const defaultDuration = settings.duration ?? 500;
+
+                      if (settings.strategy === 'boundsCorrect') {
+                        const latDiff = maxLatitude - minLatitude;
+                        const longDiff = maxLongitude - minLongitude;
+
+                        const updatedBounds: LngLatBounds = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
+                        emit('updatedBounds', updatedBounds);
+
+                        map.value?.setLocation({
+                          bounds: updatedBounds,
+                          duration: defaultDuration,
+                          easing: settings.easing,
+                        });
+                      } else {
+                        let { center, zoom } = await useYMapsLocationFromBounds({
+                          bounds,
+                          map: map.value!,
+                        });
+
+                        const originalZoom = zoom;
+                        zoom = Math.floor(zoom);
+                        const diff = originalZoom - zoom;
+
+                        if (!settings.disableMinimalZoomCorrectDiff && diff < 0.5) {
+                          // Set minimal zoom diff for user's comfort
+                          zoom -= 1;
+                        }
+
+                        map.value?.setLocation({
+                          center,
+                          zoom,
+                          duration: defaultDuration,
+                          easing: settings.easing,
+                        });
+
+                        await sleep(defaultDuration + 50);
+                        if (map.value) emit('updatedBounds', map.value.bounds);
+                      }
                     }
                   },
                 }, item as HTMLDivElement));

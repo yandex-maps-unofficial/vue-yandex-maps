@@ -45,6 +45,14 @@
             </label>
           </yandex-map-control>
         </yandex-map-controls>
+        <yandex-map-controls :settings="{ position: 'bottom left' }">
+          <yandex-map-control-button>
+            Zoom: {{ zoom }}
+          </yandex-map-control-button>
+          <yandex-map-control-button>
+            Bounds: <span :style="{ userSelect: 'all' }">{{ JSON.stringify(bounds) }}</span>
+          </yandex-map-control-button>
+        </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'right' }">
           <yandex-map-zoom-control />
         </yandex-map-controls>
@@ -99,6 +107,7 @@ import {
   YandexMap,
   YandexMapClusterer,
   YandexMapControl,
+  YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
   YandexMapMarker,
@@ -106,9 +115,9 @@ import {
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import {
-  computed, ref, shallowRef, watch,
+  computed, onMounted, ref, shallowRef, watch,
 } from 'vue';
-import type { YMap } from '@yandex/ymaps3-types';
+import type { LngLatBounds, YMap } from '@yandex/ymaps3-types';
 import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
 const map = shallowRef<YMap | null>(null);
@@ -117,6 +126,17 @@ const count = ref(100);
 const savedCount = ref(100);
 const gridSize = ref(6);
 const background = ref('red');
+const zoom = ref(0);
+const bounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
+
+onMounted(() => {
+  setInterval(() => {
+    if (map.value) {
+      zoom.value = map.value.zoom;
+      bounds.value = map.value.bounds;
+    }
+  }, 1000);
+});
 
 watch(count, async (val) => {
   const oldVal = val;
