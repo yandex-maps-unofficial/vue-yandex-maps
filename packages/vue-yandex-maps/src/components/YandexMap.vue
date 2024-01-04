@@ -14,7 +14,7 @@ import {
   watch,
 } from 'vue';
 import type {
-  LngLat, YMap, YMapEntity, YMapProps,
+  LngLat, YMap, YMapEntity, YMapListener, YMapProps,
 } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../composables/init.ts';
@@ -91,6 +91,13 @@ export default defineComponent({
       type: Array as PropType<YMapEntity<unknown>[]>,
       default: (() => []),
     },
+    /**
+     * @description Adds cursor: grab/grabbing to ymaps scheme layer
+     */
+    cursorGrab: {
+      type: Boolean,
+      default: false,
+    },
   },
   /**
    * @description Other events are NOT available. You can listen to events via layers prop, addChildren prop or by adding <ymap-listener> as children.
@@ -117,6 +124,7 @@ export default defineComponent({
     const projection = shallowRef<null | Projection>(null);
     const ymapContainer = ref<HTMLDivElement | null>(null);
     const mounted = shallowRef(false);
+    const grabbing = shallowRef(false);
     // Count of components which initialization we need to wait for
     const needsToHold = ref(0);
 
@@ -192,6 +200,7 @@ export default defineComponent({
 
       await init();
 
+      let listener: YMapListener | undefined;
       let watcher: WatchStopHandle | undefined;
 
       const setupWatcher = () => {
@@ -240,6 +249,18 @@ export default defineComponent({
           setupWatcher();
         }
       });
+
+      watch(() => props.cursorGrab, (val) => {
+        if (!map.value) return;
+
+        if (val) {
+          listener = new ymaps3.YMapListener({
+            onActionStart: (e) => e.type === 'drag' && (grabbing.value = true),
+            onActionEnd: (e) => e.type === 'drag' && (grabbing.value = false),
+          });
+          map.value.addChild(listener);
+        } else if (listener) map.value.removeChild(listener);
+      }, { immediate: true });
     });
 
     onBeforeUnmount(() => {
@@ -250,22 +271,22 @@ export default defineComponent({
 
     return () => {
       const mapNodeProps = {
-        class: '__ymap',
+        class: [
+          '__ymap',
+          {
+            '__ymap--grab': props.cursorGrab,
+            '__ymap--grabbing': props.cursorGrab && grabbing.value,
+          },
+        ],
         style: {
           width: props.width,
           height: props.height,
-          color: '#000',
-          position: 'relative',
           'z-index': props.zIndex.toString(),
         },
       };
 
       const containerNode = h('div', {
         class: '__ymap_container',
-        style: {
-          width: '100%',
-          height: '100%',
-        },
         ref: ymapContainer,
       });
 
@@ -284,3 +305,27 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.__ymap {
+  color: #000;
+  position: relative;
+}
+
+.__ymap_container {
+width: 100%;
+  height: 100%;
+}
+
+.__ymap_slots {
+  display: none;
+}
+
+.__ymap--grab [class$="main-engine-container"] canvas {
+  cursor: grab;
+}
+
+.__ymap--grabbing [class$="main-engine-container"] canvas {
+  cursor: grabbing;
+}
+</style>

@@ -16,6 +16,7 @@
         }"
         :width="width"
         :height="height"
+        cursor-grab
       >
         <yandex-map-default-scheme-layer />
         <yandex-map-controls :settings="{ position: 'right' }">
