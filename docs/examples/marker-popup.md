@@ -10,4 +10,6 @@ import MapComponent from 'examples/src/components/objects/MarkerPopup.vue';
 <<< ../../packages/examples/examples/src/components/objects/MarkerPopup.vue#html{html} [Template]
 
 <<< ../../packages/examples/examples/src/components/objects/MarkerPopup.vue#setup{ts} [Setup]
+
+<<< ../../packages/examples/examples/src/components/objects/MarkerPopup.vue#style{css} [Style]
 :::

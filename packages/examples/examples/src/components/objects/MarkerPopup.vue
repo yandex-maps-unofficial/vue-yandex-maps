@@ -34,15 +34,7 @@
         >
           <template #popup="{ close }">
             <div
-              :style="{
-                background: '#fff',
-                borderRadius: '10px',
-                padding: '10px',
-                color: 'black',
-                cursor: 'pointer',
-                fontSize: '14px',
-                whiteSpace: 'nowrap',
-              }"
+              class="marker-popup"
               @click="close()"
             >
               Click me to close popup
@@ -61,15 +53,7 @@
         >
           <template #popup="{ close }">
             <div
-              :style="{
-                background: '#fff',
-                borderRadius: '10px',
-                padding: '10px',
-                color: 'black',
-                cursor: 'pointer',
-                fontSize: '14px',
-                whiteSpace: 'nowrap',
-              }"
+              class="marker-popup"
               @click="close()"
             >
               Click me to close popup
@@ -125,10 +109,10 @@ import CommonWrapper from '../CommonWrapper.vue';
 import {
   YandexMap,
   YandexMapControls,
-  YandexMapDefaultSchemeLayer,
   YandexMapDefaultFeaturesLayer,
-  YandexMapMarker,
   YandexMapDefaultMarker,
+  YandexMapDefaultSchemeLayer,
+  YandexMapMarker,
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import { ref } from 'vue';
@@ -148,3 +132,17 @@ const markers = [
 const openMarker = ref<null | number>(null);
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+.marker-popup {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+</style>
+<!-- #endregion style -->
