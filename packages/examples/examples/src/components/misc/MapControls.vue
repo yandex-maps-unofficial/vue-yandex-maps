@@ -51,7 +51,7 @@
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'top left' }">
           <yandex-map-entity>
-            <div :style="{ color: '#fff', pointerEvents: 'all' }" @click="updateCounter">
+            <div class="counter" @click="updateCounter">
               Entity counter #{{ counter }}
             </div>
           </yandex-map-entity>
@@ -180,3 +180,12 @@ onMounted(() => {
 });
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+.counter {
+  color: #fff;
+  pointer-events: all;
+}
+</style>
+<!-- #endregion style -->

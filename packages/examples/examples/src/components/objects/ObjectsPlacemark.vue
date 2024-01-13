@@ -28,7 +28,7 @@
             <label>
               Position (X)
 
-              <select v-model="positionX" :style="{ border: '1px solid #000', paddingLeft: '5px' }">
+              <select v-model="positionX">
                 <option v-for="(key, value) in positionsX" :key="key" :value="value">
                   {{ key }}
                 </option>
@@ -39,7 +39,7 @@
             <label>
               Position (Y)
 
-              <select v-model="positionY" :style="{ border: '1px solid #000', paddingLeft: '5px' }">
+              <select v-model="positionY">
                 <option v-for="(key, value) in positionsY" :key="key" :value="value">
                   {{ key }}
                 </option>
@@ -53,88 +53,47 @@
             v-if="'element' in point"
             :settings="point"
             :position="`${positionX} ${positionY}`"
+            :style="{
+              '--color': 'color' in point && point.color,
+              '--image': 'colors' in point && diagramBackground(point.colors),
+            }"
           >
             <template v-if="point.element === 'diagram'">
               <div
                 v-if="'title' in point"
                 class="pie-marker-title"
-                :style="{
-                  position: 'absolute',
-                  top: '120%',
-                  left: '50%',
-                  padding: '2px 4px',
-                  backgroundColor: '#fff',
-                  transform: 'translateX(-50%)',
-                }"
               >
                 {{ point.title }}
               </div>
               <div
                 class="pie-marker"
-                :style="{
-                  color: 'color' in point && point.color,
-                  backgroundColor: 'currentColor',
-                  backgroundImage: 'colors' in point && diagramBackground(point.colors),
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                }"
               />
             </template>
             <div
               v-else-if="point.element === 'circle'"
               class="circle"
               :style="{
-                width: 'radius' in point ? point.radius : '20px',
-                height: 'radius' in point ? point.radius : '20px',
-                borderRadius: '50%',
-                backgroundColor: 'currentColor',
-                color: 'color' in point && point.color,
+                '--radius': 'radius' in point ? point.radius : '20px',
+                '--color': 'color' in point && point.color,
                 '--icon': 'icon' in point ? point.icon : '#fff',
+                '--image': 'icon' in point && point.icon,
               }"
               :title="'title' in point && point.title"
             >
-              <div
-                class="circle_element"
-                :style="{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  display: 'inline-block',
-                  width: '50%',
-                  height: '50%',
-                  borderRadius: '50%',
-                  background: 'no-repeat center center #fff',
-                  backgroundImage: 'icon' in point && point.icon,
-                  transform: 'translate3d(-50%, -50%, 0)',
-                }"
-              />
+              <div class="circle_element" />
             </div>
             <div
               v-else-if="point.element === 'icon'"
               class="icon"
               :style="{
-                position: 'relative',
-                width: 'size' in point ? point.size : '20px',
-                height: 'size' in point ? point.size : '20px',
-                color: 'color' in point && point.color,
-                background: 'no-repeat center center',
-                backgroundSize: 'contain',
-                backgroundImage: 'icon' in point && `url(${point.icon})`,
+                '--size': 'size' in point ? point.size : '20px',
+                '--color': 'color' in point && point.color,
+                '--icon': 'icon' in point && `url(${point.icon})`,
               }"
             >
               <div
                 v-if="'title' in point"
                 class="icon_title"
-                :style="{
-                  position: 'absolute',
-                  top: '120%',
-                  left: '50%',
-                  padding: '2px 4px',
-                  backgroundColor: '#fff',
-                  transform: 'translateX(-50%)',
-                }"
                 v-html="point.title"
               />
             </div>
@@ -326,3 +285,68 @@ const POINTS = [
 
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+select {
+  border: 1px solid #000;
+  padding-left: 5px;
+}
+
+.pie-marker-title {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  padding: 2px 4px;
+  background-color: #fff;
+  transform: translateX(-50%);
+  color: var(--color);
+}
+
+.pie-marker {
+  background-color: currentColor;
+  background-image: var(--image);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.circle {
+  width: var(--radius);
+  height: var(--radius);
+  border-radius: 50%;
+  background-color: currentColor;
+  color: var(--color);
+}
+
+.circle_element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-block;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background: #fff var(--image) no-repeat center center;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.icon {
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  color: var(--color);
+  background: var(--icon) no-repeat center center / contain;
+}
+
+.icon_title {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  padding: 2px 4px;
+  background-color: #fff;
+  transform: translateX(-50%);
+}
+</style>
+<!-- #endregion style -->

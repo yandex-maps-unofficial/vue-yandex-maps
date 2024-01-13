@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import {
-  computed, defineComponent, h, onMounted, ref, watch,
+  computed, defineComponent, h, onMounted, ref,
 } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { throwException } from '../composables/utils/system.ts';
@@ -96,10 +96,6 @@ export default defineComponent({
       });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
-    });
-
-    watch(element, () => {
-      if (element.value) element.value.parentNode?.removeChild(element.value);
     });
 
     const rootProps = computed(() => getMarkerContainerProps({

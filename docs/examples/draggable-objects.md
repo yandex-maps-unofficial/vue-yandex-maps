@@ -10,4 +10,6 @@ import MapComponent from 'examples/src/components/objects/DraggableObjects.vue';
 <<< ../../packages/examples/examples/src/components/objects/DraggableObjects.vue#html{html} [Template]
 
 <<< ../../packages/examples/examples/src/components/objects/DraggableObjects.vue#setup{ts} [Setup]
+
+<<< ../../packages/examples/examples/src/components/objects/DraggableObjects.vue#style{css} [Style]
 :::

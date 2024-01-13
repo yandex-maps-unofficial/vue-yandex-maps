@@ -41,16 +41,9 @@
           v-for="(p, i) in points"
           :key="i"
           :settings="{ coordinates: p.coordinates, hideOutsideViewport: mode === true ? true : false }"
-          :style="{
-            ...p.style,
-            width: 'var(--point-size, 10px)',
-            height: 'var(--point-size, 10px)',
-            border: '1px solid #0e86e6',
-            backgroundColor: 'var(--point-bg-color, #858585)',
-            borderRadius: '50%',
-            transform: 'translate(-50%, -50%)',
-          }"
-        />
+        >
+          <div class="marker" :style="p.style" />
+        </yandex-map-marker>
       </yandex-map>
       <!-- #endregion html -->
     </template>
@@ -117,3 +110,16 @@ const points = getRandomPoints(2000);
 
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+.marker {
+  width: var(--point-size, 10px);
+  aspect-ratio: 1/1;
+  border: 1px solid #0e86e6;
+  background-color: var(--point-bg-color, #858585);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+<!-- #endregion style -->

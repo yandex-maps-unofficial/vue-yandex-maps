@@ -26,15 +26,9 @@
 
         <yandex-map-marker :settings="{ coordinates: center }">
           <img
+            class="pin"
             alt=""
             :src="'/vue-yandex-maps/pin.svg'"
-            :style="{
-              minWidth: '50px',
-              position: 'relative',
-              boxSizing: 'border-box',
-              transform: 'translate(-50%, calc(-50% - 24px))',
-              cursor: 'pointer',
-            }"
             @click="map?.setLocation({ center, zoom, duration: 400 })"
           />
         </yandex-map-marker>
@@ -61,3 +55,15 @@ import type { YMap } from '@yandex/ymaps3-types';
 const map = shallowRef<YMap | null>(null);
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+.pin {
+  min-width: 50px;
+  position: relative;
+  box-sizing: border-box;
+  transform: translate(-50%, calc(-50% - 24px));
+  cursor: pointer;
+}
+</style>
+<!-- #endregion style -->

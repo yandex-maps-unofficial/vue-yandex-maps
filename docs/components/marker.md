@@ -101,26 +101,17 @@
     <yandex-map-default-scheme-layer :settings="{ theme: 'dark' }"/>
     <yandex-map-default-features-layer/>
     <yandex-map-marker
-        v-for="(marker, index) in markers"
-        :key="index"
-        :settings="marker"
+            v-for="(marker, index) in markers"
+            :key="index"
+            :settings="marker"
     >
-      <template #default>
-        <div :style="styleObject"/>
-      </template>
+      <div class="marker"/>
     </yandex-map-marker>
   </yandex-map>
 </template>
 
 <script setup lang="ts">
-  import type { CSSProperties } from "vue";
-  import {
-    YandexMap,
-    YandexMapDefaultFeaturesLayer,
-    YandexMapDefaultSchemeLayer,
-    YandexMapMarker,
-  } from "vue-yandex-maps";
-  import { YMapMarkerProps } from "@yandex/ymaps3-types/imperative/YMapMarker";
+  import { YMapMarkerProps } from '@yandex/ymaps3-types/imperative/YMapMarker';
 
   const handleClick = (event: MouseEvent) => console.log(event);
   const markers: YMapMarkerProps[] = [
@@ -133,19 +124,21 @@
       onClick: handleClick,
     },
   ];
-
-  const styleObject: CSSProperties = {
-    position: "relative",
-    width: "20px",
-    height: "20px",
-    backgroundColor: "#ff0000",
-    borderRadius: "50%",
-    border: "2px solid #ffffff",
-    boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)",
-    textAlign: "center",
-    color: "#ffffff",
-    fontWeight: "bold",
-    lineHeight: "20px",
-  };
 </script>
+
+<style scoped>
+  .marker {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: #ff0000;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    line-height: 20px;
+  }
+</style>
 ```

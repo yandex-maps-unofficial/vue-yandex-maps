@@ -18,6 +18,9 @@
         :width="width"
         :height="height"
         cursor-grab
+        :style="{
+          '--background': background,
+        }"
       >
         <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
@@ -50,7 +53,7 @@
             Zoom: {{ zoom }}
           </yandex-map-control-button>
           <yandex-map-control-button>
-            Bounds: <span :style="{ userSelect: 'all' }">{{ JSON.stringify(bounds) }}</span>
+            Bounds: <span class="bounds">{{ JSON.stringify(bounds) }}</span>
           </yandex-map-control-button>
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'right' }">
@@ -69,27 +72,10 @@
               onClick: () => background = background === 'red' ? 'green' : 'red',
             }"
           >
-            <div
-              :style="{
-                background, borderRadius: '100%', width: '20px', height: '20px',
-              }"
-            />
+            <div class="marker" />
           </yandex-map-marker>
           <template #cluster="{ length }">
-            <div
-              class="cluster"
-              :style="{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '50px',
-                aspectRatio: '1/1',
-                background: 'green',
-                color: '#fff',
-                borderRadius: '100%',
-                cursor: 'pointer',
-              }"
-            >
+            <div class="cluster">
               {{ length }}
             </div>
           </template>
@@ -176,3 +162,32 @@ const getPointList = computed(() => {
 
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+.bounds {
+  user-select: all;
+}
+
+.marker {
+  background: var(--background);
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+}
+
+.cluster {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background: green;
+  color: #fff;
+  border-radius: 100%;
+  cursor: pointer;
+  border: 2px solid limegreen;
+  outline: 2px solid green;
+}
+</style>
+<!-- #endregion style -->

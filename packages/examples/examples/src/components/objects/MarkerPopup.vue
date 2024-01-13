@@ -67,30 +67,13 @@
           :settings="{ coordinates: marker.coordinates, onClick: () => openMarker = index, zIndex: openMarker === index ? 1 : 0 }"
         >
           <div
-            :style="{
-              background: 'green',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '10px',
-              cursor: 'pointer',
-              color: 'white',
-              padding: '10px 20px',
-              whiteSpace: 'nowrap',
-            }"
+            class="marker"
           >
             Marker {{ index }}
 
             <div
               v-if="openMarker === index"
-              :style="{
-                position: 'absolute',
-                top: 'calc(100% + 10px)',
-                background: '#fff',
-                borderRadius: '10px',
-                padding: '10px',
-                color: 'black',
-              }"
+              class="popup"
               @click.stop="openMarker = null"
             >
               Click me to close popup
@@ -143,6 +126,27 @@ const openMarker = ref<null | number>(null);
   cursor: pointer;
   font-size: 14px;
   white-space: nowrap;
+}
+
+.marker {
+  background: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+.popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  color: black;
 }
 </style>
 <!-- #endregion style -->

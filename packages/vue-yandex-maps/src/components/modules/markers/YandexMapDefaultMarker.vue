@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted, ref, watch,
+  computed, defineComponent, h, onMounted, ref,
 } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import { throwException } from '../../../composables/utils/system.ts';
@@ -79,10 +79,6 @@ export default defineComponent({
       });
       emit('input', mapChildren);
       emit('update:modelValue', mapChildren);
-    });
-
-    watch(popup, () => {
-      if (popup.value) popup.value.parentNode?.removeChild(popup.value);
     });
 
     return () => h('div', {

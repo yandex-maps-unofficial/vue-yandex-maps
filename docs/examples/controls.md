@@ -10,4 +10,6 @@ import MapComponent from 'examples/src/components/misc/MapControls.vue';
 <<< ../../packages/examples/examples/src/components/misc/MapControls.vue#html{html} [Template]
 
 <<< ../../packages/examples/examples/src/components/misc/MapControls.vue#setup{ts} [Setup]
+
+<<< ../../packages/examples/examples/src/components/misc/MapControls.vue#style{css} [Style]
 :::

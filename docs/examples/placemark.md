@@ -18,4 +18,6 @@ import MapComponent from 'examples/src/components/objects/ObjectsPlacemark.vue';
 <<< ../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#html{html} [Template]
 
 <<< ../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#setup{ts} [Setup]
+
+<<< ../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#style{css} [Style]
 :::

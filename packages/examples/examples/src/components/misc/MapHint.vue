@@ -22,7 +22,7 @@
 
         <yandex-map-collection>
           <yandex-map-marker v-for="(feature, index) in POINTS" :key="index" :settings="{ coordinates: feature.coordinates, color: feature.color, properties: { hint: feature.hint } }">
-            <div :style="{ transform: 'translate(-15px -33px)', position: 'absolute' }" v-html="markerSvg(feature.color)" />
+            <div class="marker" v-html="markerSvg(feature.color)" />
           </yandex-map-marker>
         </yandex-map-collection>
         <yandex-map-collection>
@@ -36,15 +36,6 @@
           <template #default="{ content }">
             <div
               class="hint"
-              :style="{
-                position: 'absolute',
-                padding: '4px',
-                background: 'white',
-                border: '1px solid black',
-                whiteSpace: 'nowrap',
-                opacity: '0.7',
-                transform: 'translate(8px, -50%)',
-              }"
             >
               {{ content }}
             </div>
@@ -121,3 +112,22 @@ const markerSvg = (fill: string) => `
 `;
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+.marker {
+  transform: translate(-15px, -33px);
+  position: absolute;
+}
+
+.hint {
+  position: absolute;
+  padding: 4px;
+  background: white;
+  border: 1px solid black;
+  white-space: nowrap;
+  opacity: 0.7;
+  transform: translate(8px, -50%)
+}
+</style>
+<!-- #endregion style -->

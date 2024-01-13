@@ -10,4 +10,6 @@ import MapComponent from 'examples/src/components/objects/HideMarkers.vue';
 <<< ../../packages/examples/examples/src/components/objects/HideMarkers.vue#html{html} [Template]
 
 <<< ../../packages/examples/examples/src/components/objects/HideMarkers.vue#setup{ts} [Setup]
+
+<<< ../../packages/examples/examples/src/components/objects/HideMarkers.vue#style{css} [Style]
 :::

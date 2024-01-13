@@ -10,4 +10,6 @@ import MapComponent from 'examples/src/components/objects/ObjectsCustomImage.vue
 <<< ../../packages/examples/examples/src/components/objects/ObjectsCustomImage.vue#html{html} [Template]
 
 <<< ../../packages/examples/examples/src/components/objects/ObjectsCustomImage.vue#setup{ts} [Setup]
+
+<<< ../../packages/examples/examples/src/components/objects/ObjectsCustomImage.vue#style{css} [Style]
 :::

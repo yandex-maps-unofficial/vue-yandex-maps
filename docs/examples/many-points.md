@@ -10,4 +10,6 @@ import MapComponent from 'examples/src/components/misc/ManyPoints.vue';
 <<< ../../packages/examples/examples/src/components/misc/ManyPoints.vue#html{html} [Template]
 
 <<< ../../packages/examples/examples/src/components/misc/ManyPoints.vue#setup{ts} [Setup]
+
+<<< ../../packages/examples/examples/src/components/misc/ManyPoints.vue#style{css} [Style]
 :::

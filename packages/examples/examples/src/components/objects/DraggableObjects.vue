@@ -34,7 +34,7 @@
           <yandex-map-control-button>
             <label>
               Restrictions
-              <select v-model="controlMode" :style="{ border: '1px solid #000', paddingLeft: '5px' }">
+              <select v-model="controlMode" class="select">
                 <option :value="null">
                   No
                 </option>
@@ -83,13 +83,13 @@ import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
   YandexMap,
+  YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultMarker,
   YandexMapDefaultSchemeLayer,
   YandexMapFeature,
   YandexMapZoomControl,
-  YandexMapControlButton,
 } from 'vue-yandex-maps';
 import type { LngLat, YMap, YMapFeatureProps } from '@yandex/ymaps3-types';
 import { computed, ref, shallowRef } from 'vue';
@@ -291,3 +291,12 @@ const onDragMoveTriangle = computed(() => (controlMode.value === 'bound' ? RESTR
 
 // #endregion setup
 </script>
+
+<!-- #region style -->
+<style scoped>
+.select {
+  border: 1px solid #000;
+  padding-left: 5px;
+}
+</style>
+<!-- #endregion style -->
