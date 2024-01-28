@@ -6252,6 +6252,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ansi-styles@npm:^5.0.0":
+  version: 5.2.0
+  resolution: "ansi-styles@npm:5.2.0"
+  checksum: d7f4e97ce0623aea6bc0d90dcd28881ee04cba06c570b97fd3391bd7a268eedfd9d5e2dd4fdcbdd82b8105df5faf6f24aaedc08eaf3da898e702db5948f63469
+  languageName: node
+  linkType: hard
+
 "ansi-styles@npm:^6.1.0":
   version: 6.2.1
   resolution: "ansi-styles@npm:6.2.1"
@@ -8195,7 +8202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^6.0.0, cross-spawn@npm:^6.0.5":
+"cross-spawn@npm:^6.0.0":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
   dependencies:
@@ -10044,7 +10051,7 @@ __metadata:
     "@vitejs/plugin-vue": "npm:^5.0.3"
     "@vue/tsconfig": "npm:^0.5.1"
     examples: "workspace:*"
-    npm-run-all: "npm:^4.1.5"
+    npm-run-all2: "npm:^5.0.0"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.0.11"
     vue: "npm:^3.4.13"
@@ -10061,7 +10068,7 @@ __metadata:
     "@vitejs/plugin-vue": "npm:^5.0.3"
     "@vue/tsconfig": "npm:^0.5.1"
     "@yandex/ymaps3-types": "npm:^0.0.20"
-    npm-run-all: "npm:^4.1.5"
+    npm-run-all2: "npm:^5.0.0"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.0.11"
     vue: "npm:^3.4.13"
@@ -13101,18 +13108,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"load-json-file@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "load-json-file@npm:4.0.0"
-  dependencies:
-    graceful-fs: "npm:^4.1.2"
-    parse-json: "npm:^4.0.0"
-    pify: "npm:^3.0.0"
-    strip-bom: "npm:^3.0.0"
-  checksum: 8f5d6d93ba64a9620445ee9bde4d98b1eac32cf6c8c2d20d44abfa41a6945e7969456ab5f1ca2fb06ee32e206c9769a20eec7002fe290de462e8c884b6b8b356
-  languageName: node
-  linkType: hard
-
 "loader-runner@npm:^2.4.0":
   version: 2.4.0
   resolution: "loader-runner@npm:2.4.0"
@@ -14462,7 +14457,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"normalize-package-data@npm:^2.3.2, normalize-package-data@npm:^2.5.0":
+"normalize-package-data@npm:^2.5.0":
   version: 2.5.0
   resolution: "normalize-package-data@npm:2.5.0"
   dependencies:
@@ -14601,24 +14596,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-run-all@npm:^4.1.5":
-  version: 4.1.5
-  resolution: "npm-run-all@npm:4.1.5"
+"npm-run-all2@npm:^5.0.0":
+  version: 5.0.2
+  resolution: "npm-run-all2@npm:5.0.2"
   dependencies:
-    ansi-styles: "npm:^3.2.1"
-    chalk: "npm:^2.4.1"
-    cross-spawn: "npm:^6.0.5"
+    ansi-styles: "npm:^5.0.0"
+    cross-spawn: "npm:^7.0.3"
     memorystream: "npm:^0.3.1"
     minimatch: "npm:^3.0.4"
-    pidtree: "npm:^0.3.0"
-    read-pkg: "npm:^3.0.0"
+    pidtree: "npm:^0.5.0"
+    read-pkg: "npm:^5.2.0"
     shell-quote: "npm:^1.6.1"
-    string.prototype.padend: "npm:^3.0.0"
   bin:
     npm-run-all: bin/npm-run-all/index.js
     run-p: bin/run-p/index.js
     run-s: bin/run-s/index.js
-  checksum: 46020e92813223d015f4178cce5a2338164be5f25b0c391e256c0e84ac082544986c220013f1be7f002dcac07b81c7ee0cb5c5c30b84fd6ebb6de96a8d713745
+  checksum: fbebbc7837fa6a67d4fb158566018c8d26dbf55b5035969e45722e7a2b82f373b56acf9619013ba182aa85725d7f7bfa8649961b6c3ca4cba17af9afe54b33bd
   languageName: node
   linkType: hard
 
@@ -15507,15 +15500,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-type@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "path-type@npm:3.0.0"
-  dependencies:
-    pify: "npm:^3.0.0"
-  checksum: 735b35e256bad181f38fa021033b1c33cfbe62ead42bb2222b56c210e42938eecb272ae1949f3b6db4ac39597a61b44edd8384623ec4d79bfdc9a9c0f12537a6
-  languageName: node
-  linkType: hard
-
 "path-type@npm:^4.0.0":
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
@@ -15592,12 +15576,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pidtree@npm:^0.3.0":
-  version: 0.3.1
-  resolution: "pidtree@npm:0.3.1"
+"pidtree@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "pidtree@npm:0.5.0"
   bin:
     pidtree: bin/pidtree.js
-  checksum: eb85b841cd168151bfadb984f9514d67a884d6962d4a2d250d4e8acf85cf031d7dab080f7272fb2735f9033364e5058c73eeebbee3cf6fd829169a75d19f189a
+  checksum: 72a5d75c345d7b1ed1f30ff50342d601040334be50f9cad1d6d7457f1ad7bbaacccb037667f4088ca2c257a574eeb00f03664bbd05c5e7d02e3feb1bc77ddbd3
   languageName: node
   linkType: hard
 
@@ -17294,17 +17278,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"read-pkg@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "read-pkg@npm:3.0.0"
-  dependencies:
-    load-json-file: "npm:^4.0.0"
-    normalize-package-data: "npm:^2.3.2"
-    path-type: "npm:^3.0.0"
-  checksum: 398903ebae6c7e9965419a1062924436cc0b6f516c42c4679a90290d2f87448ed8f977e7aa2dbba4aa1ac09248628c43e493ac25b2bc76640e946035200e34c6
-  languageName: node
-  linkType: hard
-
 "read-pkg@npm:^5.1.1, read-pkg@npm:^5.2.0":
   version: 5.2.0
   resolution: "read-pkg@npm:5.2.0"
@@ -18823,17 +18796,6 @@ __metadata:
     set-function-name: "npm:^2.0.0"
     side-channel: "npm:^1.0.4"
   checksum: 0f7a1a7f91790cd45f804039a16bc6389c8f4f25903e648caa3eea080b019a5c7b0cac2ca83976646140c2332b159042140bf389f23675609d869dd52450cddc
-  languageName: node
-  linkType: hard
-
-"string.prototype.padend@npm:^3.0.0":
-  version: 3.1.5
-  resolution: "string.prototype.padend@npm:3.1.5"
-  dependencies:
-    call-bind: "npm:^1.0.2"
-    define-properties: "npm:^1.2.0"
-    es-abstract: "npm:^1.22.1"
-  checksum: 03ea16c8c3bb25cb014affef2c238baa894b8a6060a5576c3980fe7e0e79e13af3b449f55eadd9e950669aa562ce9a7de8531cbd49b489f50f50e64f7167f8fd
   languageName: node
   linkType: hard
 
