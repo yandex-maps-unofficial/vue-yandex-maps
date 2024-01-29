@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, nextTick, onMounted, provide, shallowRef, watch,
+  computed, defineComponent, h, nextTick, onMounted, provide, shallowRef, watch, version,
 } from 'vue';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import type {
@@ -237,6 +237,24 @@ export default defineComponent({
     return () => {
       if (!mapChildren.value) return h('div');
 
+      if (version.startsWith('2')) {
+        return h('div', [
+          ...slots.default?.({}) || [],
+          h(YandexMapClustererClusters, {
+            props: {
+              clusterMarkerProps: props.clusterMarkerProps,
+              zoomOnClusterClick: props.zoomOnClusterClick,
+            },
+            on: {
+              trueBounds: (e: LngLatBounds) => emit('trueBounds', e),
+              updatedBounds: (e: LngLatBounds) => emit('updatedBounds', e),
+            },
+            scopedSlots: {
+              default: (options: any) => h('div', {}, [slots.cluster?.(options)]),
+            },
+          }),
+        ]);
+      }
       return h('div', [
         ...slots.default?.({}) || [],
         h(YandexMapClustererClusters, {

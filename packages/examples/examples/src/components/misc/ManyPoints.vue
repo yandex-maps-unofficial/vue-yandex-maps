@@ -48,12 +48,15 @@
             </label>
           </yandex-map-control>
         </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'bottom left' }">
+        <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
           <yandex-map-control-button>
             Zoom: {{ zoom }}
           </yandex-map-control-button>
           <yandex-map-control-button>
             Bounds: <span class="bounds">{{ JSON.stringify(bounds) }}</span>
+          </yandex-map-control-button>
+          <yandex-map-control-button>
+            True bounds: <span class="bounds">{{ JSON.stringify(trueBounds) }}</span>
           </yandex-map-control-button>
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'right' }">
@@ -63,6 +66,7 @@
           v-model="clusterer"
           :grid-size="2 ** gridSize"
           zoom-on-cluster-click
+          @trueBounds="trueBounds = $event"
         >
           <yandex-map-marker
             v-for="(coordinates) in getPointList"
@@ -114,6 +118,7 @@ const gridSize = ref(6);
 const background = ref('red');
 const zoom = ref(0);
 const bounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
+const trueBounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
 
 onMounted(() => {
   setInterval(() => {

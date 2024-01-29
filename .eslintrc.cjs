@@ -79,6 +79,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 'error',
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
     'prefer-const': ['error', { destructuring: 'all' }],
+    'vue/v-on-event-hyphenation': 'off',
     quotes: [
       'error',
       'single',
