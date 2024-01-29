@@ -31,9 +31,9 @@
               <input
                 v-model="count"
                 type="range"
-                min="100"
-                max="5000"
-                step="100"
+                min="500"
+                max="20000"
+                step="500"
               >
             </label>
             <label style="padding: 5px">
@@ -108,8 +108,8 @@ import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
 const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);
-const count = ref(100);
-const savedCount = ref(100);
+const count = ref(500);
+const savedCount = ref(500);
 const gridSize = ref(6);
 const background = ref('red');
 const zoom = ref(0);

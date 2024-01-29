@@ -120,11 +120,11 @@ export default defineComponent({
     emit,
   }) {
     const map = shallowRef<YMap | null>(null);
+    const mapRef = shallowRef<HTMLDivElement | null>(null);
     const layers = shallowRef([]);
     const projection = shallowRef<null | Projection>(null);
-    const ymapContainer = ref<HTMLDivElement | null>(null);
+    const ymapContainer = shallowRef<HTMLDivElement | null>(null);
     const mounted = shallowRef(false);
-    const grabbing = shallowRef(false);
     // Count of components which initialization we need to wait for
     const needsToHold = ref(0);
 
@@ -256,10 +256,10 @@ export default defineComponent({
         if (val) {
           listener = new ymaps3.YMapListener({
             onActionStart: (e) => {
-              if (e.type === 'drag') grabbing.value = true;
+              if (e.type === 'drag' && props.cursorGrab) mapRef.value?.classList.add('__ymap--grabbing');
             },
             onActionEnd: (e) => {
-              if (e.type === 'drag') grabbing.value = false;
+              if (e.type === 'drag') mapRef.value?.classList.remove('__ymap--grabbing');
             },
           });
           map.value.addChild(listener);
@@ -279,9 +279,9 @@ export default defineComponent({
           '__ymap',
           {
             '__ymap--grab': props.cursorGrab,
-            '__ymap--grabbing': props.cursorGrab && grabbing.value,
           },
         ],
+        ref: mapRef,
         style: {
           width: props.width,
           height: props.height,

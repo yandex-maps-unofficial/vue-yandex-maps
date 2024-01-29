@@ -167,7 +167,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     if (!mapRoot?.value) await nextTick();
     if (!mapRoot?.value) {
       throwException({
-        text: `mapRoot is undefined in setupMapChildren. Please verify, that you are using component inside it's root: for example, don't use Controls outside <yandex-map-controls>.`,
+        text: `mapRoot is undefined in setupMapChildren. Please verify that you are using component inside it's root: for example, don't use Controls outside <yandex-map-controls>.`,
       });
     }
   }
