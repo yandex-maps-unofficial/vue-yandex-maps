@@ -4,7 +4,7 @@
 в `settings` [YMapGeolocationControlProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapGeolocationControlProps) и
 добавляет управление геолокацией.
 
-::: warning Внимание!
+::: warning Внимание
 Компонент должен использоваться строго внутри `<yandex-map-controls>`.
 :::
 
