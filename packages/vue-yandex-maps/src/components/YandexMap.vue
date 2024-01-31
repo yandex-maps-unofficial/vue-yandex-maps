@@ -21,6 +21,7 @@ import { initYmaps } from '../composables/init.ts';
 import { VueYandexMaps } from '../namespace.ts';
 import { diff } from 'deep-object-diff';
 import { throwException } from '../composables/utils/system.ts';
+import { waitTillMapInit } from '../composables/utils/map.ts';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>
 
@@ -171,35 +172,6 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      if (!VueYandexMaps.isLoaded.value) {
-        if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
-          try {
-            await initYmaps();
-          } catch (e) {
-            console.error('An error occured while initializing Yandex Map with onComponentMount setting');
-            console.error(e);
-            return;
-          }
-        } else {
-          throwException({
-            text: 'You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.',
-          });
-        }
-      }
-
-      mounted.value = true;
-      await nextTick();
-
-      if (needsToHold.value) {
-        await new Promise<void>((resolve) => watch(needsToHold, () => {
-          if (!needsToHold.value) resolve();
-        }, {
-          immediate: true,
-        }));
-      }
-
-      await init();
-
       let listener: YMapListener | undefined;
       let watcher: WatchStopHandle | undefined;
 
@@ -207,7 +179,7 @@ export default defineComponent({
         watcher?.();
 
         let settings: YMapProps = JSON.parse(JSON.stringify(toRaw(getSettings.value)));
-        watch(getSettings, (val) => {
+        watcher = watch(getSettings, (val) => {
           const rawVal = toRaw(val);
           const clonedSettings: YMapProps = JSON.parse(JSON.stringify(rawVal));
 
@@ -250,7 +222,8 @@ export default defineComponent({
         }
       });
 
-      watch(() => props.cursorGrab, (val) => {
+      watch(() => props.cursorGrab, async (val) => {
+        await waitTillMapInit();
         if (!map.value) return;
 
         if (val) {
@@ -265,6 +238,35 @@ export default defineComponent({
           map.value.addChild(listener);
         } else if (listener) map.value.removeChild(listener);
       }, { immediate: true });
+
+      if (!VueYandexMaps.isLoaded.value) {
+        if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
+          try {
+            await initYmaps();
+          } catch (e) {
+            console.error('An error occured while initializing Yandex Map with onComponentMount setting');
+            console.error(e);
+            return;
+          }
+        } else {
+          throwException({
+            text: 'You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.',
+          });
+        }
+      }
+
+      mounted.value = true;
+      await nextTick();
+
+      if (needsToHold.value) {
+        await new Promise<void>((resolve) => watch(needsToHold, () => {
+          if (!needsToHold.value) resolve();
+        }, {
+          immediate: true,
+        }));
+      }
+
+      await init();
     });
 
     onBeforeUnmount(() => {
