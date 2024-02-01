@@ -180,11 +180,12 @@ export default defineComponent({
 
         let settings: YMapProps = JSON.parse(JSON.stringify(toRaw(getSettings.value)));
         watcher = watch(getSettings, (val) => {
+          if (!map.value) return;
           const rawVal = toRaw(val);
           const clonedSettings: YMapProps = JSON.parse(JSON.stringify(rawVal));
 
           // Handling location change
-          if (props.realSettingsLocation && clonedSettings.location && map.value) {
+          if (props.realSettingsLocation && clonedSettings.location) {
             if ('center' in clonedSettings.location && 'center' in settings.location) {
               settings.location.center = map.value.center as LngLat;
             } else if ('bounds' in clonedSettings.location && 'bounds' in settings.location) {
@@ -223,7 +224,7 @@ export default defineComponent({
       });
 
       watch(() => props.cursorGrab, async (val) => {
-        await waitTillMapInit();
+        await waitTillMapInit({ map });
         if (!map.value) return;
 
         if (val) {
