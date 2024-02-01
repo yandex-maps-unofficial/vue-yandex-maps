@@ -21,6 +21,7 @@ import { initYmaps } from '../composables/init.ts';
 import { VueYandexMaps } from '../namespace.ts';
 import { diff } from 'deep-object-diff';
 import { throwException } from '../composables/utils/system.ts';
+import { waitTillMapInit } from '../composables/utils/map.ts';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>
 
@@ -120,11 +121,11 @@ export default defineComponent({
     emit,
   }) {
     const map = shallowRef<YMap | null>(null);
+    const mapRef = shallowRef<HTMLDivElement | null>(null);
     const layers = shallowRef([]);
     const projection = shallowRef<null | Projection>(null);
-    const ymapContainer = ref<HTMLDivElement | null>(null);
+    const ymapContainer = shallowRef<HTMLDivElement | null>(null);
     const mounted = shallowRef(false);
-    const grabbing = shallowRef(false);
     // Count of components which initialization we need to wait for
     const needsToHold = ref(0);
 
@@ -171,35 +172,6 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      if (!VueYandexMaps.isLoaded.value) {
-        if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
-          try {
-            await initYmaps();
-          } catch (e) {
-            console.error('An error occured while initializing Yandex Map with onComponentMount setting');
-            console.error(e);
-            return;
-          }
-        } else {
-          throwException({
-            text: 'You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.',
-          });
-        }
-      }
-
-      mounted.value = true;
-      await nextTick();
-
-      if (needsToHold.value) {
-        await new Promise<void>((resolve) => watch(needsToHold, () => {
-          if (!needsToHold.value) resolve();
-        }, {
-          immediate: true,
-        }));
-      }
-
-      await init();
-
       let listener: YMapListener | undefined;
       let watcher: WatchStopHandle | undefined;
 
@@ -207,12 +179,13 @@ export default defineComponent({
         watcher?.();
 
         let settings: YMapProps = JSON.parse(JSON.stringify(toRaw(getSettings.value)));
-        watch(getSettings, (val) => {
+        watcher = watch(getSettings, (val) => {
+          if (!map.value) return;
           const rawVal = toRaw(val);
           const clonedSettings: YMapProps = JSON.parse(JSON.stringify(rawVal));
 
           // Handling location change
-          if (props.realSettingsLocation && clonedSettings.location && map.value) {
+          if (props.realSettingsLocation && clonedSettings.location) {
             if ('center' in clonedSettings.location && 'center' in settings.location) {
               settings.location.center = map.value.center as LngLat;
             } else if ('bounds' in clonedSettings.location && 'bounds' in settings.location) {
@@ -250,21 +223,51 @@ export default defineComponent({
         }
       });
 
-      watch(() => props.cursorGrab, (val) => {
+      watch(() => props.cursorGrab, async (val) => {
+        await waitTillMapInit({ map });
         if (!map.value) return;
 
         if (val) {
           listener = new ymaps3.YMapListener({
             onActionStart: (e) => {
-              if (e.type === 'drag') grabbing.value = true;
+              if (e.type === 'drag' && props.cursorGrab) mapRef.value?.classList.add('__ymap--grabbing');
             },
             onActionEnd: (e) => {
-              if (e.type === 'drag') grabbing.value = false;
+              if (e.type === 'drag') mapRef.value?.classList.remove('__ymap--grabbing');
             },
           });
           map.value.addChild(listener);
         } else if (listener) map.value.removeChild(listener);
       }, { immediate: true });
+
+      if (!VueYandexMaps.isLoaded.value) {
+        if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
+          try {
+            await initYmaps();
+          } catch (e) {
+            console.error('An error occured while initializing Yandex Map with onComponentMount setting');
+            console.error(e);
+            return;
+          }
+        } else {
+          throwException({
+            text: 'You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.',
+          });
+        }
+      }
+
+      mounted.value = true;
+      await nextTick();
+
+      if (needsToHold.value) {
+        await new Promise<void>((resolve) => watch(needsToHold, () => {
+          if (!needsToHold.value) resolve();
+        }, {
+          immediate: true,
+        }));
+      }
+
+      await init();
     });
 
     onBeforeUnmount(() => {
@@ -279,9 +282,9 @@ export default defineComponent({
           '__ymap',
           {
             '__ymap--grab': props.cursorGrab,
-            '__ymap--grabbing': props.cursorGrab && grabbing.value,
           },
         ],
+        ref: mapRef,
         style: {
           width: props.width,
           height: props.height,

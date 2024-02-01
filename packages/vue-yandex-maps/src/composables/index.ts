@@ -1,2 +1,2 @@
-export * from './getCenterAndZoom.ts';
-export * from './init.ts';
+export { useYMapsLocationFromBounds } from './getCenterAndZoom.ts';
+export { createYmapsOptions, initYmaps } from './init.ts';

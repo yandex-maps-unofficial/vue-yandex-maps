@@ -156,8 +156,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     await waitTillMapInit({ timeoutCallback });
     if (!map.value) {
       throwException({
-        text: 'map is undefined in setupMapChildren.',
-        isInternal: true,
+        text: 'map is undefined in setupMapChildren. Please verify that Yandex Maps were initialized successfully and you only use components inside <yandex-map>.',
       });
     }
   } else {
@@ -168,8 +167,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     if (!mapRoot?.value) await nextTick();
     if (!mapRoot?.value) {
       throwException({
-        text: 'mapRoot is undefined in setupMapChildren.',
-        isInternal: true,
+        text: `mapRoot is undefined in setupMapChildren. Please verify that you are using component inside it's root: for example, don't use Controls outside <yandex-map-controls>.`,
       });
     }
   }

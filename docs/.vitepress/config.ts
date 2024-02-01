@@ -330,6 +330,10 @@ export default defineConfig({
             link: '/api/namespace'
           },
           {
+            text: 'initYmaps',
+            link: '/api/init-ymaps'
+          },
+          {
             text: 'useYMapsLocationFromBounds',
             link: '/api/location-from-bounds'
           },

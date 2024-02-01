@@ -31,9 +31,9 @@
               <input
                 v-model="count"
                 type="range"
-                min="100"
-                max="5000"
-                step="100"
+                min="500"
+                max="20000"
+                step="500"
               >
             </label>
             <label style="padding: 5px">
@@ -48,12 +48,15 @@
             </label>
           </yandex-map-control>
         </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'bottom left' }">
+        <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
           <yandex-map-control-button>
             Zoom: {{ zoom }}
           </yandex-map-control-button>
           <yandex-map-control-button>
             Bounds: <span class="bounds">{{ JSON.stringify(bounds) }}</span>
+          </yandex-map-control-button>
+          <yandex-map-control-button>
+            True bounds: <span class="bounds">{{ JSON.stringify(trueBounds) }}</span>
           </yandex-map-control-button>
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'right' }">
@@ -63,6 +66,7 @@
           v-model="clusterer"
           :grid-size="2 ** gridSize"
           zoom-on-cluster-click
+          @trueBounds="trueBounds = $event"
         >
           <yandex-map-marker
             v-for="(coordinates) in getPointList"
@@ -108,12 +112,13 @@ import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
 const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);
-const count = ref(100);
-const savedCount = ref(100);
+const count = ref(500);
+const savedCount = ref(500);
 const gridSize = ref(6);
 const background = ref('red');
 const zoom = ref(0);
 const bounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
+const trueBounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
 
 onMounted(() => {
   setInterval(() => {

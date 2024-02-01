@@ -4,7 +4,7 @@
 в `settings` [YMapZoomControlProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapZoomControlProps) и
 добавляет управление масштабированием карты.
 
-::: warning Внимание!
+::: warning Внимание
 Компонент должен использоваться строго внутри `<yandex-map-controls>`.
 :::
 
