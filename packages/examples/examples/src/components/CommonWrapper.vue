@@ -27,3 +27,9 @@ if (!VueYandexMaps.settings.value.apikey) {
   });
 }
 </script>
+
+<style>
+.vue-yandex-maps-wrapper * {
+  line-height: normal;
+}
+</style>

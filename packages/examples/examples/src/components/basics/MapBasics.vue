@@ -13,15 +13,12 @@
             zoom,
           },
           theme,
+          showScaleInCopyrights: true,
         }"
         :width="width"
         :height="height"
-        cursor-grab
       >
         <yandex-map-default-scheme-layer />
-        <yandex-map-controls :settings="{ position: 'right' }">
-          <yandex-map-zoom-control />
-        </yandex-map-controls>
       </yandex-map>
       <!-- #endregion html -->
     </template>
@@ -32,7 +29,7 @@
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-  YandexMap, YandexMapControls, YandexMapDefaultSchemeLayer, YandexMapZoomControl,
+  YandexMap, YandexMapDefaultSchemeLayer,
 } from 'vue-yandex-maps';
 // #endregion setup
 </script>

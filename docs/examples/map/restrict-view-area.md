@@ -7,7 +7,7 @@ import MapComponent from 'examples/src/components/basics/RestrictArea.vue';
 <map-component/>
 
 :::code-group
-<<< ../../packages/examples/examples/src/components/basics/RestrictArea.vue#html{html} [Template]
+<<< ../../../packages/examples/examples/src/components/basics/RestrictArea.vue#html{html} [Template]
 
-<<< ../../packages/examples/examples/src/components/basics/RestrictArea.vue#setup{ts} [Setup]
+<<< ../../../packages/examples/examples/src/components/basics/RestrictArea.vue#setup{ts} [Setup]
 :::

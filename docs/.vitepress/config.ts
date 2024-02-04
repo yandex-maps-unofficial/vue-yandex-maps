@@ -50,10 +50,6 @@ export default defineConfig({
     i18nRouting: true,
     nav: [
       {
-        text: 'О проекте',
-        link: '/guide/about',
-      },
-      {
         text: 'Компоненты',
         link: '/components/list'
       },
@@ -91,8 +87,8 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Песочница',
-        link: '/examples/playground',
+        text: 'Примеры кода',
+        link: '/examples/',
       },
       {
         text: packageJson.version,
@@ -348,9 +344,14 @@ export default defineConfig({
         ]
       },
       {
-        text: 'Примеры',
+        text: 'Примеры кода',
+        link: '/examples/',
         collapsed: false,
         items: [
+          {
+            text: 'Список примеров',
+            link: '/examples/',
+          },
           {
             text: 'Песочница',
             link: '/examples/playground',
@@ -361,27 +362,31 @@ export default defineConfig({
             items: [
               {
                 text: 'Создание карты',
-                link: '/examples/map-basics',
+                link: '/examples/map/basics',
               },
               {
-                text: 'Основные параметры',
-                link: '/examples/map-params',
+                text: 'Асинхронная подгрузка',
+                link: '/examples/map/async-api-load',
+              },
+              {
+                text: 'Изменение поведений',
+                link: '/examples/map/behaviors',
               },
               {
                 text: 'Изменение позиции камеры',
-                link: '/examples/camera',
+                link: '/examples/map/camera',
               },
               {
-                text: 'Изменение размера карты',
-                link: '/examples/fill-container',
+                text: 'Ограничение области просмотра',
+                link: '/examples/map/restrict-view-area',
               },
               {
-                text: 'Ограничение области просмотра карты',
-                link: '/examples/map-restrict-area',
+                text: 'Перемещение карты',
+                link: '/examples/map/moving',
               },
               {
-                text: 'Размещение в скрытом контейнере',
-                link: '/examples/hidden-div',
+                text: 'Создание и удаление карты',
+                link: '/examples/map/create-and-delete',
               },
             ],
           },
