@@ -25,6 +25,7 @@
         </yandex-map-controls>
         <yandex-map-controls :settings="{ position: 'bottom' }">
           <yandex-map-zoom-control />
+          <yandex-map-scale-control />
         </yandex-map-controls>
         <yandex-map-controls :key="buttons" :settings="{ position: 'top' }">
           <yandex-map-control-button :settings="{ onClick: shiftRight }">
@@ -81,6 +82,7 @@ import {
   YandexMapGeolocationControl,
   YandexMapOpenMapsButton,
   YandexMapZoomControl,
+  YandexMapScaleControl,
   YandexMapEntity,
 } from 'vue-yandex-maps';
 import {

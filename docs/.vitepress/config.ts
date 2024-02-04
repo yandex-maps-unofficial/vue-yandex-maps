@@ -263,6 +263,10 @@ export default defineConfig({
                 text: 'YandexMapControlButton',
                 link: '/components/control-button',
               },
+              {
+                text: 'YandexMapScaleControl',
+                link: '/components/control-scale',
+              },
             ],
           },
           {

@@ -18,6 +18,7 @@ import type { YandexMapControlButtonSettings } from './controls/YandexMapControl
 import YandexMapControlButton from './controls/YandexMapControlButton.vue';
 import YandexMapGeolocationControl from './modules/controls/YandexMapGeolocationControl.vue';
 import YandexMapZoomControl from './modules/controls/YandexMapZoomControl.vue';
+import YandexMapScaleControl from './controls/YandexMapScaleControl.vue';
 import YandexMapCartesianProjection from './modules/projection/YandexMapCartesianProjection.vue';
 import YandexMapSphericalMercatorProjection from './modules/projection/YandexMapSphericalMercatorProjection.vue';
 import YandexMapHint from './modules/hints/YandexMapHint.vue';
@@ -50,6 +51,7 @@ export {
   YandexMapControls,
   YandexMapControl,
   YandexMapControlButton,
+  YandexMapScaleControl,
 
   // Controls Module
   YandexMapGeolocationControl,

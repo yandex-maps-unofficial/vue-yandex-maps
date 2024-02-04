@@ -12,6 +12,7 @@
 - [YandexMapControlButton](/components/control-button)
 - [YandexMapGeolocationControl](/components/modules/controls/geolocation)
 - [YandexMapZoomControl](/components/modules/controls/zoom)
+- [YandexMapScaleControl](/components/control-scale)
 - [YandexMapOpenMapsButton](/components/modules/controls/open-maps)
 
 ::: tip Совет
