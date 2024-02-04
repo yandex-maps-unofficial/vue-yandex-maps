@@ -16,7 +16,10 @@ export default defineConfig({
   themeConfig: {
     sidebarMenuLabel: packageJson.version,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps' },
+      {
+        icon: 'github',
+        link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps',
+      },
     ],
     outline: {
       label: 'На этой странице',
@@ -51,11 +54,11 @@ export default defineConfig({
     nav: [
       {
         text: 'Компоненты',
-        link: '/components/list'
+        link: '/components/list',
       },
       {
         text: 'API',
-        link: '/api/'
+        link: '/api/',
       },
       {
         text: 'Руководства',
@@ -93,14 +96,17 @@ export default defineConfig({
       {
         text: packageJson.version,
         items: [
-          { text: 'Список изменений', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/blob/master/CHANGELOG.md' },
+          {
+            text: 'Список изменений',
+            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/releases',
+          },
           {
             text: 'Создать новую Issue',
             link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/new/choose',
           },
           {
             text: 'Задать вопрос',
-            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/discussions'
+            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/discussions',
           },
           {
             text: 'Версия 0.x',
@@ -109,7 +115,7 @@ export default defineConfig({
           {
             text: 'Версия 1.x',
             link: 'https://vue-yandex-maps.github.io/new-docs/',
-          }
+          },
         ],
       },
     ],
@@ -160,8 +166,8 @@ export default defineConfig({
               {
                 text: 'Переход с 1.x',
                 link: '/guide/migration/v1',
-              }
-            ]
+              },
+            ],
           },
         ],
       },
@@ -323,25 +329,25 @@ export default defineConfig({
         items: [
           {
             text: 'Список методов',
-            link: '/api/'
+            link: '/api/',
           },
           {
             text: 'Инстанс VueYandexMaps',
-            link: '/api/namespace'
+            link: '/api/namespace',
           },
           {
             text: 'initYmaps',
-            link: '/api/init-ymaps'
+            link: '/api/init-ymaps',
           },
           {
             text: 'useYMapsLocationFromBounds',
-            link: '/api/location-from-bounds'
+            link: '/api/location-from-bounds',
           },
           {
             text: 'Yandex Maps API',
-            link: '/api/yandex-maps-api'
-          }
-        ]
+            link: '/api/yandex-maps-api',
+          },
+        ],
       },
       {
         text: 'Примеры кода',
@@ -391,42 +397,60 @@ export default defineConfig({
             ],
           },
           {
-            text: 'Маркеры',
+            text: 'Объекты на карте',
             collapsed: true,
             items: [
               {
-                text: 'Добавление метки на карту',
-                link: '/examples/placemark',
+                text: 'Маркеры',
+                collapsed: false,
+                items: [
+                  {
+                    text: 'Добавление маркера с пользовательским изображением',
+                    link: '/examples/objects/marker-custom-icon',
+                  },
+                  {
+                    text: 'Скрытие маркеров вне зоны видимости',
+                    link: '/examples/objects/hide-markers',
+                  },
+                  {
+                    text: 'Кластеризатор маркеров',
+                    link: '/examples/objects/clusterer',
+                  },
+                  {
+                    text: 'Маркер со всплывающим окном',
+                    link: '/examples/objects/marker-popup',
+                  },
+                  {
+                    text: 'Перетаскиваемый маркер',
+                    link: '/examples/objects/draggable-marker',
+                  },
+                  {
+                    text: 'Маркер с дизайном по умолчанию',
+                    link: '/examples/object/default-marker',
+                  },
+                ],
               },
               {
-                text: 'Добавление метки с собственным изображением',
-                link: '/examples/marker-custom-image',
+                text: 'Линии и полигоны',
+                collapsed: false,
+                items: [
+                  {
+                    text: 'Линия',
+                    link: '/examples/objects/line',
+                  },
+                  {
+                    text: 'Прямоугольник',
+                    link: '/examples/objects/rectangle',
+                  },
+                  {
+                    text: 'Полигон',
+                    link: '/examples/objects/polygon',
+                  },
+                ],
               },
               {
-                text: 'Попап при клике на маркер',
-                link: '/examples/marker-popup',
-              },
-              {
-                text: 'Скрывать маркеры вне вьюпорта',
-                link: '/examples/hide-markers'
-              }
-            ]
-          },
-          {
-            text: 'Линии и полигоны',
-            collapsed: true,
-            items: [
-              {
-                text: 'Ломаная',
-                link: '/examples/polyline',
-              },
-              {
-                text: 'Многоугольник',
-                link: '/examples/polygon',
-              },
-              {
-                text: 'Прямоугольник',
-                link: '/examples/rectangle',
+                text: 'Подсказка при наведении на элементы карты',
+                link: '/examples/objects/hints',
               },
             ],
           },
@@ -434,10 +458,6 @@ export default defineConfig({
             text: 'Прочее',
             collapsed: true,
             items: [
-              {
-                text: 'Перетаскивание объектов',
-                link: '/examples/draggable-objects',
-              },
               {
                 text: 'Кастомные тайлы на canvas',
                 link: '/examples/canvas-tiles',
@@ -449,14 +469,6 @@ export default defineConfig({
               {
                 text: 'Элементы управления',
                 link: '/examples/controls',
-              },
-              {
-                text: 'Множество точек (Кластеризация)',
-                link: '/examples/many-points',
-              },
-              {
-                text: 'Подсказки (Хинты)',
-                link: '/examples/hint',
               },
             ],
           },

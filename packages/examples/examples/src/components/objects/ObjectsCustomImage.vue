@@ -7,12 +7,12 @@
     >
       <!-- #region html -->
       <yandex-map
-        v-model="map"
         :settings="{
           location: {
             center,
             zoom,
           },
+          showScaleInCopyrights: true,
           theme,
         }"
         :width="width"
@@ -20,16 +20,13 @@
       >
         <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
-        <yandex-map-controls :settings="{ position: 'right' }">
-          <yandex-map-zoom-control />
-        </yandex-map-controls>
 
-        <yandex-map-marker :settings="{ coordinates: center }">
+        <yandex-map-marker v-for="marker in markers" :key="marker.iconSrc" :settings="{ coordinates: marker.coordinates }" position="top-center left-center">
           <img
             class="pin"
             alt=""
-            :src="'/vue-yandex-maps/pin.svg'"
-            @click="map?.setLocation({ center, zoom, duration: 400 })"
+            :src="marker.iconSrc"
+            @click="produceAnAlert"
           />
         </yandex-map-marker>
       </yandex-map>
@@ -43,27 +40,47 @@ import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
   YandexMap,
-  YandexMapControls,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultSchemeLayer,
   YandexMapMarker,
-  YandexMapZoomControl,
 } from 'vue-yandex-maps';
-import { shallowRef } from 'vue';
-import type { YMap } from '@yandex/ymaps3-types';
+import type { LngLat } from '@yandex/ymaps3-types';
+import { ref } from 'vue';
 
-const map = shallowRef<YMap | null>(null);
+const counter = ref(0);
+
+const produceAnAlert = () => {
+  alert(`${++counter.value} capybara`);
+};
+
+const markers = [
+  {
+    coordinates: [37.623, 55.752] as LngLat,
+    iconSrc:
+        'https://yastatic.net/s3/front-maps-static/maps-front-jsapi-3/examples/images/marker-custom-icon/yellow-capybara.png',
+  },
+  {
+    coordinates: [38.125, 55.622] as LngLat,
+    iconSrc:
+        'https://yastatic.net/s3/front-maps-static/maps-front-jsapi-3/examples/images/marker-custom-icon/purple-capybara.png',
+  },
+  {
+    coordinates: [37.295, 55.415] as LngLat,
+    iconSrc:
+        'https://yastatic.net/s3/front-maps-static/maps-front-jsapi-3/examples/images/marker-custom-icon/green-capybara.png',
+  },
+];
 // #endregion setup
 </script>
 
 <!-- #region style -->
 <style scoped>
 .pin {
-  min-width: 50px;
-  position: relative;
-  box-sizing: border-box;
-  transform: translate(-50%, calc(-50% - 24px));
   cursor: pointer;
+  max-width: unset;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
 }
 </style>
 <!-- #endregion style -->
