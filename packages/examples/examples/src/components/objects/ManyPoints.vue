@@ -32,7 +32,7 @@
                 v-model="count"
                 type="range"
                 min="500"
-                max="20000"
+                max="30000"
                 step="500"
               >
             </label>

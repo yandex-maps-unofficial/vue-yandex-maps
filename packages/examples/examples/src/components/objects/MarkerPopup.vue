@@ -13,6 +13,7 @@
             zoom,
           },
           theme,
+          showScaleInCopyrights: true,
         }"
         :width="width"
         :height="height"

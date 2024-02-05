@@ -426,7 +426,7 @@ export default defineConfig({
                   },
                   {
                     text: 'Маркер с дизайном по умолчанию',
-                    link: '/examples/object/default-marker',
+                    link: '/examples/objects/default-marker',
                   },
                 ],
               },

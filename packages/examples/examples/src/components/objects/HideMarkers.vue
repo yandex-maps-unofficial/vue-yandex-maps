@@ -14,6 +14,7 @@
           },
           zoomRange: ZOOM_RANGE,
           theme,
+          showScaleInCopyrights: true,
         }"
         :width="width"
         :height="height"
