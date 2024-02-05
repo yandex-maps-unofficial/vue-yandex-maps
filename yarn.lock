@@ -3784,9 +3784,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@puppeteer/browsers@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@puppeteer/browsers@npm:1.9.1"
+"@puppeteer/browsers@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@puppeteer/browsers@npm:2.0.0"
   dependencies:
     debug: "npm:4.3.4"
     extract-zip: "npm:2.0.1"
@@ -3797,7 +3797,7 @@ __metadata:
     yargs: "npm:17.7.2"
   bin:
     browsers: lib/cjs/main-cli.js
-  checksum: 10/804cbc18bcc68796f1abebc2b008346fdcc10952a224bfdb1b81b5618a63e4b685a6f2a71e997a454d5695c8faec58e05e04a7cf83e56a899d6adbe94427de3b
+  checksum: 10/02e5042f1ea50645cf87b0e887ed36f8119afca4bcdb579908fb3d8e677a9cf2f9d081f9552ecc5f6f3b4b2fc7e8818592087570bb310b29a8858447c641433c
   languageName: node
   linkType: hard
 
@@ -17403,30 +17403,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:21.11.0":
-  version: 21.11.0
-  resolution: "puppeteer-core@npm:21.11.0"
+"puppeteer-core@npm:22.0.0":
+  version: 22.0.0
+  resolution: "puppeteer-core@npm:22.0.0"
   dependencies:
-    "@puppeteer/browsers": "npm:1.9.1"
+    "@puppeteer/browsers": "npm:2.0.0"
     chromium-bidi: "npm:0.5.8"
     cross-fetch: "npm:4.0.0"
     debug: "npm:4.3.4"
     devtools-protocol: "npm:0.0.1232444"
     ws: "npm:8.16.0"
-  checksum: 10/44bda6ab4995a224358d6cf8bd877ed2251446fbe9e36c38325bf5e09fd7e783e27ba4a76046140a38bfdd3c47df8ded6597c832e418db3212bebfb193382692
+  checksum: 10/2f23f5dbeece2169a0d928a66d757b15ee0427bae5f432a3b5d765b1f6dcfb00ea17836ce9c4cd74391c47e400f20f1368005380306c039c6cd69d6334197162
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^21.11.0":
-  version: 21.11.0
-  resolution: "puppeteer@npm:21.11.0"
+"puppeteer@npm:^22.0.0":
+  version: 22.0.0
+  resolution: "puppeteer@npm:22.0.0"
   dependencies:
-    "@puppeteer/browsers": "npm:1.9.1"
+    "@puppeteer/browsers": "npm:2.0.0"
     cosmiconfig: "npm:9.0.0"
-    puppeteer-core: "npm:21.11.0"
+    puppeteer-core: "npm:22.0.0"
   bin:
     puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: 10/eab0eed6cdcf2fb5c975e6d8fcb35c40cf4b2c234e58987e752c1d89a66bb1c4286e0fcccab1272e09ee0c5d0ba47f7fbc68642b3ae21b90a7256956f02ea9fe
+  checksum: 10/b9160390ca9d8eba6c74c29c0feb8a8edff68caf317e8f481a34abcd4e06063be7dbbe4ffcaf9e643bbaa589e32af36bac95bf672f0720cd4eda5ce2a3c63945
   languageName: node
   linkType: hard
 
@@ -20967,7 +20967,7 @@ __metadata:
     eslint: "npm:^8.56.0"
     eslint-plugin-vue: "npm:^9.21.1"
     examples: "workspace:^"
-    puppeteer: "npm:^21.11.0"
+    puppeteer: "npm:^22.0.0"
     typescript: "npm:^5.3.3"
     vitepress: "npm:^1.0.0-rc.41"
     vue-yandex-maps: "workspace:^"
