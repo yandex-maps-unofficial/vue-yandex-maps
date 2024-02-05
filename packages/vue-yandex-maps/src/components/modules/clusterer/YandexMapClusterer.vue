@@ -32,7 +32,7 @@ export type YandexMapClustererZoomOptionsObject = {
   /**
    * @description By default, if objects are too close to borders, library will add -1 zoom for user's comfort.
    *
-   * This can work poor on large grid sizes and/or high density of objects. You can disable behaviour by using this setting.
+   * This can work poor on large grid sizes and/or high density of objects. You can disable behavior by using this setting.
    */
   disableMinimalZoomCorrectDiff?: boolean
 }

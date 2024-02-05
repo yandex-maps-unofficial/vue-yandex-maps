@@ -45,9 +45,13 @@ export function injectLayers(): Ref<any[]> {
   return layers;
 }
 
-export function waitTillYmapInit({ timeoutCallback }: {
-  timeoutCallback?: (timeout: NodeJS.Timeout, isDelete: boolean) => any
-} = {}) {
+export async function waitTillYmapInit({
+  timeoutCallback,
+  waitDuration,
+}: {
+  timeoutCallback?: (timeout: NodeJS.Timeout, isDelete: boolean) => any,
+  waitDuration?: number | boolean
+} = {}): Promise<void> {
   if (typeof window === 'undefined') {
     throwException({
       text: 'waitTillYmapInit cannot be called on SSR.',
@@ -61,11 +65,13 @@ export function waitTillYmapInit({ timeoutCallback }: {
     if (typeof ymaps3 === 'undefined') {
       let timeout: NodeJS.Timeout | undefined;
 
-      if (VueYandexMaps.settings.value.mapsScriptWaitDuration !== false) {
+      waitDuration = typeof waitDuration !== 'undefined' ? waitDuration : VueYandexMaps.settings.value.mapsScriptWaitDuration;
+
+      if (waitDuration !== false) {
         timeout = setTimeout(() => {
           timeoutCallback?.(timeout!, true);
-          reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized. You can change this behaviour by using mapsScriptWaitDuration.'));
-        }, typeof VueYandexMaps.settings.value.mapsScriptWaitDuration === 'number' ? VueYandexMaps.settings.value.mapsScriptWaitDuration : 5000);
+          reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized. You can change this behavior by using mapsScriptWaitDuration.'));
+        }, typeof waitDuration === 'number' ? waitDuration : 5000);
         timeoutCallback?.(timeout, false);
       }
 
@@ -88,10 +94,15 @@ export function waitTillYmapInit({ timeoutCallback }: {
   });
 }
 
-export function waitTillMapInit({
+export async function waitTillMapInit({
   map: _map,
   timeoutCallback,
-}: { map?: Ref<YMap | null>, timeoutCallback?: (timeout: NodeJS.Timeout, isDelete: boolean) => any } = {}) {
+  waitDuration,
+}: {
+  map?: Ref<YMap | null>,
+  timeoutCallback?: (timeout: NodeJS.Timeout, isDelete: boolean) => any,
+  waitDuration?: number | boolean,
+} = {}): Promise<void> {
   if (!_map && !getCurrentInstance()) {
     throwException({
       text: 'onMapInit must be only called on runtime.',
@@ -113,11 +124,13 @@ export function waitTillMapInit({
   return new Promise<void>((resolve, reject) => {
     let timeout: NodeJS.Timeout | undefined;
 
-    if (VueYandexMaps.settings.value.mapsRenderWaitDuration !== false) {
+    waitDuration = typeof waitDuration !== 'undefined' ? waitDuration : VueYandexMaps.settings.value.mapsRenderWaitDuration;
+
+    if (waitDuration !== false) {
       timeout = setTimeout(() => {
         timeoutCallback?.(timeout!, true);
-        reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillMapInit. You can change this behaviour by using mapsRenderWaitDuration.'));
-      }, typeof VueYandexMaps.settings.value.mapsRenderWaitDuration === 'number' ? VueYandexMaps.settings.value.mapsRenderWaitDuration : 5000);
+        reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillMapInit. You can change this behavior by using mapsRenderWaitDuration.'));
+      }, typeof waitDuration === 'number' ? waitDuration : 5000);
       timeoutCallback?.(timeout, false);
     }
 
