@@ -174,6 +174,11 @@ export default defineComponent({
     onMounted(async () => {
       let listener: YMapListener | undefined;
       let watcher: WatchStopHandle | undefined;
+      let cursorGrabTimeout: NodeJS.Timeout | null = null;
+
+      onBeforeUnmount(() => {
+        if (cursorGrabTimeout) clearTimeout(cursorGrabTimeout);
+      });
 
       const setupWatcher = () => {
         watcher?.();
@@ -224,7 +229,14 @@ export default defineComponent({
       });
 
       watch(() => props.cursorGrab, async (val) => {
-        await waitTillMapInit({ map });
+        await waitTillMapInit({
+          map,
+          timeoutCallback: (_timeout, isDelete) => {
+            if (isDelete) cursorGrabTimeout = null;
+            else cursorGrabTimeout = _timeout;
+          },
+        }).catch(() => {});
+
         if (!map.value) return;
 
         if (val) {
@@ -332,7 +344,7 @@ width: 100%;
   cursor: grab;
 }
 
-.__ymap--grabbing [class$="main-engine-container"] canvas {
+.__ymap--grabbing:focus [class$="main-engine-container"] canvas, .__ymap--grabbing:active [class$="main-engine-container"] canvas {
   cursor: grabbing;
 }
 </style>

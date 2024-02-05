@@ -55,7 +55,7 @@ export default defineComponent({
     /**
      * @description Will add width and height: 0 to container.
      *
-     * Null enables default behaviour, false disables it completely (even if position is specified).
+     * Null enables default behavior, false disables it completely (even if position is specified).
      *
      * @default true if position is specified, false otherwise
      */
