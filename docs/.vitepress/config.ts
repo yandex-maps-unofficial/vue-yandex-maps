@@ -405,6 +405,10 @@ export default defineConfig({
                 collapsed: false,
                 items: [
                   {
+                    text: 'Общие примеры маркеров',
+                    link: '/examples/objects/placemark',
+                  },
+                  {
                     text: 'Добавление маркера с пользовательским изображением',
                     link: '/examples/objects/marker-custom-icon',
                   },
@@ -453,6 +457,28 @@ export default defineConfig({
                 link: '/examples/objects/hints',
               },
             ],
+          },
+          {
+            text: 'Слои',
+            collapsed: true,
+            items: [
+              {
+                text: 'Кастомизация карты',
+                link: '/examples/layers/customization'
+              },
+              {
+                text: 'Кастомные тайлы на canvas',
+                link: '/examples/layers/canvas-tiles'
+              },
+              {
+                text: 'Свой источник данных',
+                link: '/examples/layers/custom-map-type'
+              },
+              {
+                text: 'Кастомная карта',
+                link: '/examples/layers/custom-map'
+              }
+            ]
           },
           {
             text: 'Прочее',

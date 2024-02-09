@@ -45,7 +45,7 @@ export default defineConfig({
     copy({
       targets: [
         {
-          src: ['../../README.md', '../../CHANGELOG.md', '../../LICENSE'],
+          src: ['../../README.md', '../../LICENSE'],
           dest: './',
         },
         {

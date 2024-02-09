@@ -1,4 +1,4 @@
-# Добавление метки на карту
+# Добавление маркеров на карту
 
 <script lang="ts" setup>
 import MapComponent from 'examples/src/components/objects/ObjectsPlacemark.vue';
@@ -15,9 +15,9 @@ import MapComponent from 'examples/src/components/objects/ObjectsPlacemark.vue';
 :::
 
 :::code-group
-<<< ../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#html{html} [Template]
+<<< ../../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#html{html} [Template]
 
-<<< ../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#setup{ts} [Setup]
+<<< ../../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#setup{ts} [Setup]
 
-<<< ../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#style{css} [Style]
+<<< ../../../packages/examples/examples/src/components/objects/ObjectsPlacemark.vue#style{css} [Style]
 :::
