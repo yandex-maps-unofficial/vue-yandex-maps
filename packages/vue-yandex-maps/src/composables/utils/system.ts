@@ -49,14 +49,14 @@ export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function copy<T>(target: MaybeRefOrGetter<T> | ComputedRef<T>): T {
+export function copy<T, K = UnwrapRef<T>>(target: T): K {
   target = toValue(target);
 
   // Array copy
-  if (Array.isArray(target)) return target.map((i) => copy(i)) as T;
+  if (Array.isArray(target)) return target.map((i) => copy(i)) as K;
 
   // Ignore functions, classes, raw values
-  if (!target || typeof target !== 'object' || (target?.constructor !== undefined && target?.constructor !== Object)) return target;
+  if (!target || typeof target !== 'object' || (target?.constructor !== undefined && target?.constructor !== Object)) return target as unknown as K;
 
   // Objects copy
   return Object.keys(target)
@@ -64,7 +64,7 @@ export function copy<T>(target: MaybeRefOrGetter<T> | ComputedRef<T>): T {
       const val = (target as any)[key];
       (carry as any)[key] = copy(val);
       return carry;
-    }, {} as T);
+    }, {} as K);
 }
 
 export function isDev() {
