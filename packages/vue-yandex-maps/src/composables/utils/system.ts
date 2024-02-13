@@ -1,10 +1,9 @@
 import {
   toRaw,
-  computed, ref, toValue,
+  computed, ref, unref,
 } from 'vue';
 import type {
   ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef,
-  MaybeRefOrGetter,
 } from 'vue';
 import { VueYandexMaps } from '../../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
@@ -50,7 +49,7 @@ export function sleep(ms: number) {
 }
 
 export function copy<T, K = UnwrapRef<T>>(target: T): K {
-  target = toValue(target);
+  target = toRaw(unref(target));
 
   // Array copy
   if (Array.isArray(target)) return target.map((i) => copy(i)) as K;
