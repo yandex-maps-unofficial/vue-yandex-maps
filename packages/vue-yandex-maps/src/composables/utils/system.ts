@@ -1,7 +1,11 @@
+import {
+  toRaw,
+  computed, ref, toValue,
+} from 'vue';
 import type {
   ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef,
+  MaybeRefOrGetter,
 } from 'vue';
-import { computed, ref } from 'vue';
 import { VueYandexMaps } from '../../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
 
@@ -45,9 +49,16 @@ export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function copy<T>(target: T): T {
+export function copy<T>(target: MaybeRefOrGetter<T> | ComputedRef<T>): T {
+  target = toValue(target);
+
+  // Array copy
   if (Array.isArray(target)) return target.map((i) => copy(i)) as T;
+
+  // Ignore functions, classes, raw values
   if (!target || typeof target !== 'object' || (target?.constructor !== undefined && target?.constructor !== Object)) return target;
+
+  // Objects copy
   return Object.keys(target)
     .reduce((carry, key) => {
       const val = (target as any)[key];
