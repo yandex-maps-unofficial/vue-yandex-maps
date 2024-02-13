@@ -136,7 +136,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
       const settingsDiff = Object.keys(diff(lastSettings, value));
       if (settingsDiff.length === 0) return;
 
-      const updatedSettings = { ...value };
+      const updatedSettings = copy(toRaw(value));
       for (const key in updatedSettings) {
         if (!settingsDiff.includes(key)) delete (updatedSettings as any)[key];
       }

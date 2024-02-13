@@ -148,25 +148,18 @@ export default defineComponent({
         });
       }
 
-      const container = ymapContainer.value;
-      if (!container) {
-        throwException({
-          text: '<yandex-map> container is undefined after component mount.',
-          isInternal: true,
-        });
-      }
-
       if (map.value) map.value.destroy();
+
+      const container = ymapContainer.value;
+      if (!container) return;
 
       const settings: YMapProps = getSettings.value;
       if (projection.value) settings.projection = projection.value;
 
-      const createdMap = new ymaps3.YMap(container, settings, [
+      map.value = new ymaps3.YMap(container, settings, [
         ...layers.value,
         ...props.layers,
       ]);
-
-      map.value = createdMap;
       emit('input', map.value);
       emit('update:modelValue', map.value);
     };
