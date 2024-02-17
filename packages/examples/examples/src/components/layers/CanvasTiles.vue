@@ -44,7 +44,7 @@ import {
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import { onMounted } from 'vue';
-import type { YMapTileDataSourceProps } from '@yandex/ymaps3-types';
+import type { FetchedTile, YMapTileDataSourceProps } from '@yandex/ymaps3-types';
 
 const TILE_SIZE = 256;
 
@@ -55,33 +55,40 @@ let dataSource: YMapTileDataSourceProps['raster'] | undefined;
 onMounted(() => {
   const image = new Image();
 
-  const load = new Promise((resolve) => {
+  const load = new Promise<void>((resolve, reject) => {
     image.src = '/vue-yandex-maps/ship.svg';
     if (image.complete) {
-      resolve(image);
+      resolve();
     } else {
-      image.onload = () => resolve(image);
-      image.onerror = () => resolve(image);
+      image.onload = () => resolve();
+      image.onerror = () => reject();
     }
   });
 
   dataSource = {
     type: layerId,
-    fetchTile: async (x: number, y: number, z: number) => {
+    fetchTile: async (x: number, y: number, z: number): Promise<FetchedTile> => {
+      // When the image is loaded fetchTile will return a canvas tile promise
+      await load;
       const canvas = document.createElement('canvas');
+
       canvas.width = TILE_SIZE;
       canvas.height = TILE_SIZE;
-      const ctx = canvas.getContext('2d')!;
-      ctx.strokeStyle = 'red';
+
+      const ctx = canvas.getContext('2d');
+
+      if (!ctx) throw new Error('ctx is undefined');
+
+      ctx.strokeStyle = '#007afce6';
       ctx.strokeRect(0, 0, TILE_SIZE, TILE_SIZE);
-      ctx.fillText(JSON.stringify({
-        x,
-        y,
-        z,
-      }), 10, 10);
-      ctx.drawImage(image, 0, 0);
-      await load;
-      return ({ image: canvas });
+
+      ctx.font = '20px Arial';
+      ctx.fillStyle = '#999';
+      ctx.fillText(JSON.stringify({ x, y, z }), 10, 30);
+
+      ctx.drawImage(image, TILE_SIZE / 2, TILE_SIZE / 2, TILE_SIZE / 2, TILE_SIZE / 2);
+
+      return { image: canvas };
     },
   };
 });

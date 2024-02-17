@@ -1,9 +1,8 @@
-import {
-  toRaw,
-  computed, ref, unref,
-} from 'vue';
 import type {
   ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef,
+} from 'vue';
+import {
+  computed, ref, toRaw, unref,
 } from 'vue';
 import { VueYandexMaps } from '../../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
@@ -76,7 +75,11 @@ interface ThrowExceptionSettings {
   warn?: boolean
 }
 
-export function getException({ text, isInternal, warn }: ThrowExceptionSettings): YandexMapException {
+export function getException({
+  text,
+  isInternal,
+  warn,
+}: ThrowExceptionSettings): YandexMapException {
   if (warn) {
     text = `Warning: ${text}`;
   }
