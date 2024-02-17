@@ -398,6 +398,10 @@ export default defineConfig({
                 text: 'Создание и удаление карты',
                 link: '/examples/map/create-and-delete',
               },
+              {
+                text: 'Элементы управления',
+                link: '/examples/map/controls',
+              },
             ],
           },
           {
@@ -483,10 +487,6 @@ export default defineConfig({
                 link: '/examples/layers/custom-map'
               }
             ]
-          },
-          {
-            text: 'Элементы управления',
-            link: '/examples/controls',
           },
         ],
       },

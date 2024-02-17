@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-yandex-maps-wrapper" style="margin-top: 20px">
+  <div class="vue-yandex-maps-wrapper">
     <!-- @vue-ignore -->
     <slot
       :coordinates="[37.617644, 55.755819]"
@@ -29,7 +29,16 @@ if (!VueYandexMaps.settings.value.apikey) {
 </script>
 
 <style>
+.vue-yandex-maps-wrapper {
+  margin-top: 20px
+}
+
 .vue-yandex-maps-wrapper * {
   line-height: normal;
+}
+
+.vue-yandex-maps-wrapper .__ymap {
+  border-radius: 8px;
+  overflow: hidden;
 }
 </style>

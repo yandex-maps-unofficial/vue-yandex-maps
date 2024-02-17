@@ -26,7 +26,7 @@
         <yandex-map-default-features-layer />
         <yandex-map-controls :settings="{ position: 'top left' }">
           <yandex-map-control>
-            <label style="padding: 5px">
+            <label class="padded">
               Elements count: {{ count }}
               <input
                 v-model="count"
@@ -36,7 +36,7 @@
                 step="500"
               >
             </label>
-            <label style="padding: 5px">
+            <label class="padded">
               Grid Size: {{ 2 ** gridSize }}
               <input
                 :value="gridSize"
@@ -193,6 +193,10 @@ const getPointList = computed(() => {
   cursor: pointer;
   border: 2px solid limegreen;
   outline: 2px solid green;
+}
+
+.padded {
+  padding: 5px;
 }
 </style>
 <!-- #endregion style -->
