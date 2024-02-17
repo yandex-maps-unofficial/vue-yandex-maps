@@ -391,6 +391,10 @@ export default defineConfig({
                 link: '/examples/map/moving',
               },
               {
+                text: 'Обработка событий карты',
+                link: '/examples/map/events',
+              },
+              {
                 text: 'Создание и удаление карты',
                 link: '/examples/map/create-and-delete',
               },
@@ -481,22 +485,8 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Прочее',
-            collapsed: true,
-            items: [
-              {
-                text: 'Кастомные тайлы на canvas',
-                link: '/examples/canvas-tiles',
-              },
-              {
-                text: 'Собственная карта',
-                link: '/examples/custom-map',
-              },
-              {
-                text: 'Элементы управления',
-                link: '/examples/controls',
-              },
-            ],
+            text: 'Элементы управления',
+            link: '/examples/controls',
           },
         ],
       },

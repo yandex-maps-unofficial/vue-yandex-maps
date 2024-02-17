@@ -42,7 +42,7 @@ const pages = {
 
   'misc/MapControls': 'Элементы управления',
   'misc/ManyPoints': 'Множество точек (Кластеризация)',
-  'misc/MapHint': 'Подсказки (Хинты)',
+  'objects/MapHint': 'Подсказки (Хинты)',
 } satisfies Record<string, string>;
 const page = ref<keyof typeof pages | null>(null);
 
