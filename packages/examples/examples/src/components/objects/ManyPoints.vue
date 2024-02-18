@@ -43,7 +43,7 @@
                 type="range"
                 min="6"
                 max="11"
-                @input="gridSize = $event.target.value"
+                @input="gridSize = ($event.target as any).value"
               >
             </label>
           </yandex-map-control>
@@ -69,7 +69,7 @@
           @trueBounds="trueBounds = $event"
         >
           <yandex-map-marker
-            v-for="(coordinates) in getPointList"
+            v-for="(coordinates) in getPointList as LngLat[]"
             :key="coordinates.join(',')"
             :settings="{
               coordinates,
@@ -107,7 +107,7 @@ import {
 import {
   computed, onMounted, ref, shallowRef, watch,
 } from 'vue';
-import type { LngLatBounds, YMap } from '@yandex/ymaps3-types';
+import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
 import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
 const map = shallowRef<YMap | null>(null);

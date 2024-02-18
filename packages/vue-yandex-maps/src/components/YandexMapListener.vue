@@ -15,11 +15,11 @@ export default defineComponent({
   name: 'YandexMapListener',
   props: {
     value: {
-      type: Object as PropType<YMapListener>,
+      type: Object as PropType<YMapListener | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapListener>,
+      type: Object as PropType<YMapListener | null>,
       default: null,
     },
     settings: {

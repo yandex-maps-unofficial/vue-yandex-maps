@@ -15,11 +15,11 @@ export default defineComponent({
   name: 'YandexMapScaleControl',
   props: {
     value: {
-      type: Object as PropType<YMapScaleControl>,
+      type: Object as PropType<YMapScaleControl | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapScaleControl>,
+      type: Object as PropType<YMapScaleControl | null>,
       default: null,
     },
     settings: {

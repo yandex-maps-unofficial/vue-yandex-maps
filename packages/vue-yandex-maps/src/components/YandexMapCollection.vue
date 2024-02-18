@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapCollection',
   props: {
     value: {
-      type: Object as PropType<YMapCollection>,
+      type: Object as PropType<YMapCollection | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapCollection>,
+      type: Object as PropType<YMapCollection | null>,
       default: null,
     },
   },

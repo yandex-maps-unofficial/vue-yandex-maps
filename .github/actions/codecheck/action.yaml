@@ -16,6 +16,9 @@ runs:
     - name: Build docs
       shell: bash
       run: yarn docs:build
+    - name: Test examples types
+      shell: bash
+      run: yarn workspace examples type-check
     - name: Build Nuxt 2
       shell: bash
       run: yarn workspace example-nuxt2 build

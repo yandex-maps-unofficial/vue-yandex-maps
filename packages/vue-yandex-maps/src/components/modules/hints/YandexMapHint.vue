@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapHint',
   props: {
     value: {
-      type: Object as PropType<YMapHint>,
+      type: Object as PropType<YMapHint | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapHint>,
+      type: Object as PropType<YMapHint | null>,
       default: null,
     },
     // Property that you will set on YandexMapMarker or YandexMapFeature to display hint content

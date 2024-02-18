@@ -28,7 +28,7 @@
           <yandex-map-zoom-control />
           <yandex-map-scale-control />
         </yandex-map-controls>
-        <yandex-map-controls :key="buttons" :settings="{ position: 'top' }">
+        <yandex-map-controls :settings="{ position: 'top' }">
           <yandex-map-control-button :settings="{ onClick: shiftRight }">
             {{ '<' }}
           </yandex-map-control-button>

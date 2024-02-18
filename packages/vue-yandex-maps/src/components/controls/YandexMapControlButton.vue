@@ -13,11 +13,11 @@ export default defineComponent({
   name: 'YandexMapControlButton',
   props: {
     value: {
-      type: Object as PropType<YMapControlButton>,
+      type: Object as PropType<YMapControlButton | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapControlButton>,
+      type: Object as PropType<YMapControlButton | null>,
       default: null,
     },
     settings: {

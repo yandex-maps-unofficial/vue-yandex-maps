@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapDefaultFeaturesLayer',
   props: {
     value: {
-      type: Object as PropType<YMapDefaultFeaturesLayer>,
+      type: Object as PropType<YMapDefaultFeaturesLayer | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapDefaultFeaturesLayer>,
+      type: Object as PropType<YMapDefaultFeaturesLayer | null>,
       default: null,
     },
     settings: {

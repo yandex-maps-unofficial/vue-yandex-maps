@@ -12,11 +12,11 @@ export default defineComponent({
   name: 'YandexMapCartesianProjection',
   props: {
     value: {
-      type: Object as PropType<Cartesian>,
+      type: Object as PropType<Cartesian | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<Cartesian>,
+      type: Object as PropType<Cartesian | null>,
       default: null,
     },
     bounds: {

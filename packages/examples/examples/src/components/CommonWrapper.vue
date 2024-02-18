@@ -2,7 +2,7 @@
   <div class="vue-yandex-maps-wrapper">
     <!-- @vue-ignore -->
     <slot
-      :coordinates="[37.617644, 55.755819]"
+      :coordinates="[37.617644, 55.755819] as LngLat"
       :zoom="9"
       :width="'100%'"
       :height="'500px'"
@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import { createYmapsOptions, VueYandexMaps } from 'vue-yandex-maps';
 import { computed } from 'vue';
+import type { LngLat } from '@yandex/ymaps3-types';
 
 const theme = computed<'light' | 'dark'>(() => {
   if (typeof window === 'undefined') return 'light';

@@ -152,7 +152,7 @@ function debounce<T extends Function>(func: T, delay: number): (...args: any[]) 
   };
 }
 
-const createEvent = <T extends keyof typeof events, E = keyof typeof events[T]>(category: T, type: E | boolean) => {
+const createEvent = <T extends keyof typeof events, E = keyof typeof events[T]>(category: T, type: E | boolean): any => {
   const eventState = events[category] as any;
 
   if (typeof type !== 'boolean') {

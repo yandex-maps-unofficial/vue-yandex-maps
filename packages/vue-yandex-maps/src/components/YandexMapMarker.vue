@@ -14,11 +14,11 @@ export default defineComponent({
   name: 'YandexMapMarker',
   props: {
     value: {
-      type: Object as PropType<YMapMarker>,
+      type: Object as PropType<YMapMarker | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapMarker>,
+      type: Object as PropType<YMapMarker | null>,
       default: null,
     },
     settings: {

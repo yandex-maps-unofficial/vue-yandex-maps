@@ -47,7 +47,7 @@
           </yandex-map-control>
         </yandex-map-controls>
       </yandex-map>
-      <textarea class="editor" :value="JSON.stringify(customization, undefined, 2)" @change="changeCustomization" />
+      <textarea class="editor" :value="JSON.stringify(customization, undefined, 2)" @change="(e) => changeCustomization(e as InputEvent)" />
       <!-- #endregion html -->
     </template>
   </common-wrapper>

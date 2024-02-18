@@ -17,15 +17,15 @@ next:
 ::: code-group
 
 ```shell [npm]
-npm install vue-yandex-maps@next
+npm install vue-yandex-maps
 ```
 
 ```shell [yarn]
-yarn add vue-yandex-maps@next
+yarn add vue-yandex-maps
 ```
 
 ```shell [pnpm]
-pnpm install vue-yandex-maps@next
+pnpm install vue-yandex-maps
 ```
 
 :::

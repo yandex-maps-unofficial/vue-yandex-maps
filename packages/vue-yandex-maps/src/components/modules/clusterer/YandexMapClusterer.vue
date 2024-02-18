@@ -46,11 +46,11 @@ export default defineComponent({
   name: 'YandexMapClusterer',
   props: {
     value: {
-      type: Object as PropType<YMapClusterer>,
+      type: Object as PropType<YMapClusterer | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapClusterer>,
+      type: Object as PropType<YMapClusterer | null>,
       default: null,
     },
     settings: {

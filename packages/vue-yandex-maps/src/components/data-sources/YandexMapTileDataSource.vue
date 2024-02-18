@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapTileDataSource',
   props: {
     value: {
-      type: Object as PropType<YMapTileDataSource>,
+      type: Object as PropType<YMapTileDataSource | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapTileDataSource>,
+      type: Object as PropType<YMapTileDataSource | null>,
       default: null,
     },
     settings: {

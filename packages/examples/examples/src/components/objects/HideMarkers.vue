@@ -64,6 +64,7 @@ import {
   YandexMapControlButton,
 } from 'vue-yandex-maps';
 import { ref } from 'vue';
+import type { LngLat } from '@yandex/ymaps3-types';
 
 const mode = ref(true);
 const BOUNDS = [
@@ -98,7 +99,7 @@ const getRandomPoints = (count: number) => Array.from({ length: count }, (_, i) 
   const size = 10 + rnd() * MAX_POINT_SIZE;
 
   return {
-    coordinates: point(EXT_BOUNDS),
+    coordinates: point(EXT_BOUNDS) as LngLat,
     style: {
       '--point-size': `${size}px`,
       '--point-bg-color': `hsl(${i % 365}deg 50% 50%)`,
