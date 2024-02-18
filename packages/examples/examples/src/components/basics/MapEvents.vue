@@ -103,11 +103,11 @@ import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
   YandexMap,
+  YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultSchemeLayer,
   YandexMapEntity,
   YandexMapListener,
-  YandexMapControlButton,
 } from 'vue-yandex-maps';
 import { reactive, ref } from 'vue';
 import type { BehaviorMapEventHandler, BehaviorType, DomEvent } from '@yandex/ymaps3-types';
@@ -143,7 +143,7 @@ const events = reactive({
 function debounce<T extends Function>(func: T, delay: number): (...args: any[]) => void {
   let timeoutId: ReturnType<typeof setTimeout>;
 
-  return function (this: any, ...args: any[]): void {
+  return function _(this: any, ...args: any[]): void {
     clearTimeout(timeoutId);
 
     timeoutId = setTimeout(() => {
@@ -199,7 +199,7 @@ const createEvent = <T extends keyof typeof events, E = keyof typeof events[T]>(
 .events-container {
   pointer-events: all;
 
-  +.events-container {
+  + .events-container {
     margin-left: 10px;
   }
 }

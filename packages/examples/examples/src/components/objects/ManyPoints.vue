@@ -38,12 +38,13 @@
             </label>
             <label class="padded">
               Grid Size: {{ 2 ** gridSize }}
+              <!-- @vue-ignore -->
               <input
                 :value="gridSize"
                 type="range"
                 min="6"
                 max="11"
-                @input="gridSize = ($event.target as any).value"
+                @input="gridSize = $event.target.value"
               >
             </label>
           </yandex-map-control>
@@ -69,7 +70,7 @@
           @trueBounds="trueBounds = $event"
         >
           <yandex-map-marker
-            v-for="(coordinates) in getPointList as LngLat[]"
+            v-for="(coordinates) in getPointList"
             :key="coordinates.join(',')"
             :settings="{
               coordinates,
@@ -154,7 +155,8 @@ function getRandomPoint() {
   return [x + (rnd() > 0.5 ? -1 : 1) * rnd() * DELTA_LENGTH * 2, y + (rnd() > 0.5 ? -1 : 1) * rnd() * DELTA_LENGTH];
 }
 
-const getPointList = computed(() => {
+// @ts-expect-error
+const getPointList = computed<LngLat[]>(() => {
   if (!map.value) return [];
   const result = [];
 
