@@ -138,10 +138,6 @@ const INC_POINT = {
 
 const markerTitle = ref('');
 
-ymaps3.search({
-
-});
-
 const positionsX = {
   left: 'left',
   right: 'right',
