@@ -21,6 +21,8 @@
 
 Всех поздравляю со стабильным релизом и желаю приятного пользования! Ваш [@daniluk4000](https://github.com/daniluk4000).
 
+Also, English translation is currently not supported in docs. If somebody needs that - please fill a feature request and/or vote for it with reactions. I'm just not sure if somebody needs English Translation for this library nowadays.
+
 ### Изменения в этой сборке по сравнению с rc.14
 
 #### Улучшения и исправления
