@@ -8,7 +8,7 @@ function sleep(ms) {
 
 const browser = await launch({
   executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
-  headless: 'new',
+  headless: true,
   ignoreHTTPSErrors: true,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
 });
@@ -28,7 +28,7 @@ const envs = {
   },
   vue3: {
     command: ['yarn', 'workspace', 'example-vue3', 'dev'],
-    url: 'http://localhost:5173/#misc/ManyPoints',
+    url: 'http://localhost:5173/#objects/ManyPoints',
     htmlValidSelector: 'html',
   },
   nuxt2: {
@@ -38,7 +38,7 @@ const envs = {
   },
   nuxt3: {
     command: ['yarn', 'workspace', 'example-nuxt3', 'dev'],
-    url: 'http://localhost:3000/#misc/ManyPoints',
+    url: 'http://localhost:3000/#objects/ManyPoints',
     htmlValidSelector: '__nuxt',
   },
 };

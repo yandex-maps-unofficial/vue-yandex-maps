@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapControl',
   props: {
     value: {
-      type: Object as PropType<YMapControl>,
+      type: Object as PropType<YMapControl | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapControl>,
+      type: Object as PropType<YMapControl | null>,
       default: null,
     },
   },

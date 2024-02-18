@@ -17,6 +17,8 @@ Namespace с настройками Vue Yandex Maps.
 ### [initYmaps](/api/init-ymaps)
 Функция инициализации скрипта Яндекс Карт.
 
+### [API ymaps3](yandex)
+
 ### [Yandex Maps API (TODO)](/api/yandex-maps-api)
 
 Узнать об идее проекта Yandex Maps API.

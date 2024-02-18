@@ -14,4 +14,4 @@
 
 ## Примеры использования
 
-- [Основные параметры](/examples/map-params)
+- [Слой спутника](/examples/layers/satellite)

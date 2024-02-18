@@ -22,27 +22,33 @@ import {
 } from 'vue';
 
 const pages = {
-  'basics/MapCamera': 'Изменение позиции камеры',
-  'basics/FillContainer': 'Изменение размера карты',
-  'basics/RestrictArea': 'Ограничение области карты',
-  'basics/MapParams': 'Основные параметры',
-  'basics/HiddenDiv': 'Размещение в скрытом контейнере',
   'basics/MapBasics': 'Создание карты',
-  'basics/CanvasTiles': 'Кастомные тайлы на canvas',
-  'basics/CustomMap': 'Собственная карта',
+  'basics/MapAsync': 'Асинхронная подгрузка',
+  'basics/MapBehaviors': 'Изменение поведений',
+  'basics/MapCamera': 'Изменение позиции камеры',
+  'basics/RestrictArea': 'Ограничение области просмотра',
+  'basics/MapParams': 'Перемещение карты',
+  'basics/MapEvents': 'Обработка событий карты',
+  'basics/HiddenDiv': 'Создание и удаление карты',
+  'basics/MapControls': 'Элементы управления',
 
-  'objects/ObjectsPlacemark': 'Добавление метки',
+  'objects/ObjectsPlacemark': 'Общие примеры маркеров',
   'objects/ObjectsCustomImage': 'Добавление метки с собственным изображением',
-  'objects/MarkerPopup': 'Попап при клике на маркер',
-  'objects/HideMarkers': 'Скрывать маркеры вне вьюпорта',
-  'objects/ObjectsLine': 'Ломаная',
-  'objects/ObjectsPolygon': 'Многоугольник (полигон)',
-  'objects/ObjectsRectangle': 'Прямоугольник',
-  'objects/DraggableObjects': 'Перетаскивание объектов',
+  'objects/HideMarkers': 'Скрытие маркеров вне зоны видимости',
+  'objects/ManyPoints': 'Кластеризатор маркеров',
+  'objects/MarkerPopup': 'Маркер со всплывающим окном',
+  'objects/DraggableMarker': 'Перетаскиваемый маркер',
+  'objects/DefaultMarker': 'Перетаскиваемый маркер',
 
-  'misc/MapControls': 'Элементы управления',
-  'misc/ManyPoints': 'Множество точек (Кластеризация)',
-  'misc/MapHint': 'Подсказки (Хинты)',
+  'objects/ObjectsLine': 'Линия',
+  'objects/ObjectsPolygon': 'Полигон',
+  'objects/ObjectsRectangle': 'Прямоугольник',
+  'objects/MapHint': 'Хинты',
+
+  'layers/LayersCustomization': 'Кастомизация карты',
+  'layers/CanvasTiles': 'Кастомные тайлы на canvas',
+  'layers/CustomMapType': 'Свой источник данных',
+  'layers/CreateCustomMap': 'Кастомная карта',
 } satisfies Record<string, string>;
 const page = ref<keyof typeof pages | null>(null);
 
@@ -75,7 +81,3 @@ onMounted(() => {
   });
 });
 </script>
-
-<style scoped>
-
-</style>

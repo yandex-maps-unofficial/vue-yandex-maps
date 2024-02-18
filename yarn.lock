@@ -6892,7 +6892,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"available-typed-arrays@npm:^1.0.5, available-typed-arrays@npm:^1.0.6":
+"available-typed-arrays@npm:^1.0.6":
   version: 1.0.6
   resolution: "available-typed-arrays@npm:1.0.6"
   checksum: 10/c1e2e3d3a694f21bf60e0a048d8275fa7358131a0b8e6b57714318d618b59522416db67fb9f56973af0ce596f4333ef1336ca12c37a41d5a72ef79885373a7fd
@@ -7614,9 +7614,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001576, caniuse-lite@npm:^1.0.30001578, caniuse-lite@npm:^1.0.30001587":
-  version: 1.0.30001587
-  resolution: "caniuse-lite@npm:1.0.30001587"
-  checksum: 10/960e26927ad876971021186337df1df2d37d7ed4fc7907098c060f56ae8de737d471791e51387ca55bea07f56b0a76553a90125f88a2f958ca1f4f715013cf71
+  version: 1.0.30001588
+  resolution: "caniuse-lite@npm:1.0.30001588"
+  checksum: 10/09150ef2daa65c75cb2681832d5bc203760a02d9f71eb033dc0401fbfdbe026d3a84e54a8d2085f730a4f51eb074028b89013dd033841e1a0eb3c7323a50ed45
   languageName: node
   linkType: hard
 
@@ -8719,9 +8719,9 @@ __metadata:
   linkType: hard
 
 "cssdb@npm:^7.9.0":
-  version: 7.10.0
-  resolution: "cssdb@npm:7.10.0"
-  checksum: 10/b02d839f268ca58728c81c7746272c3dfbc6d3e84009751f0b8518d0f8e73f967f5468c1c681c4deb69bdfe282b41de58ff0718895c2c7748e9a1a8d90a83a31
+  version: 7.11.0
+  resolution: "cssdb@npm:7.11.0"
+  checksum: 10/e3e97c4dd13a7f93babd6724af8f6fdcc012b8213b1a92fae28d5a0d9309681a2f2672fff1f4e402f26dc1c30072600f60737ba6a931c517df2ebe05fe3c646e
   languageName: node
   linkType: hard
 
@@ -12157,13 +12157,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hyperdyperid@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "hyperdyperid@npm:1.2.0"
-  checksum: 10/64abb5568ff17aa08ac0175ae55e46e22831c5552be98acdd1692081db0209f36fff58b31432017b4e1772c178962676a2cc3c54e4d5d7f020d7710cec7ad7a6
-  languageName: node
-  linkType: hard
-
 "iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.24":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
@@ -13163,30 +13156,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json-joy@npm:^11.0.0":
-  version: 11.28.0
-  resolution: "json-joy@npm:11.28.0"
-  dependencies:
-    arg: "npm:^5.0.2"
-    hyperdyperid: "npm:^1.2.0"
-    thingies: "npm:^1.14.1"
-  peerDependencies:
-    quill-delta: ^5
-    rxjs: 7
-    tslib: 2
-  bin:
-    jj: bin/jj.js
-    json-pack: bin/json-pack.js
-    json-pack-test: bin/json-pack-test.js
-    json-patch: bin/json-patch.js
-    json-patch-test: bin/json-patch-test.js
-    json-pointer: bin/json-pointer.js
-    json-pointer-test: bin/json-pointer-test.js
-    json-unpack: bin/json-unpack.js
-  checksum: 10/d4687b5844143ea3cb5b5d29e7d2e8905f21c132ef1a99e56b65f0022e871e366f085740e4df2fcfc1878ecd71c588bd85d27bf33f56289bd47abb8cb3c3aa7f
-  languageName: node
-  linkType: hard
-
 "json-parse-better-errors@npm:^1.0.1, json-parse-better-errors@npm:^1.0.2":
   version: 1.0.2
   resolution: "json-parse-better-errors@npm:1.0.2"
@@ -13930,14 +13899,11 @@ __metadata:
   linkType: hard
 
 "memfs@npm:^4.6.0, memfs@npm:^4.7.0":
-  version: 4.7.1
-  resolution: "memfs@npm:4.7.1"
+  version: 4.7.6
+  resolution: "memfs@npm:4.7.6"
   dependencies:
-    json-joy: "npm:^11.0.0"
-    thingies: "npm:^1.11.1"
-  peerDependencies:
-    tslib: 2
-  checksum: 10/efabf57a072474c96b010f3ba968db07c065e8ec073039dbe0c0b0c2c3927a7b132ae17f2a95e8103ffc11ea2ff7f20fab2275cf1ad3d15fdf2ee77fb783cd34
+    tslib: "npm:^2.0.0"
+  checksum: 10/b2a4c95635aa7ed9162c647b60ebbe6f84c541dd91d99e56602f1e904503447aaf92c46918ddf0b84acfb8e52e9af90bd63a6c0cfb1cc8bfdf31379f2fba8e11
   languageName: node
   linkType: hard
 
@@ -19106,7 +19072,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"streamx@npm:^2.13.0":
+"streamx@npm:^2.13.0, streamx@npm:^2.15.0":
   version: 2.16.0
   resolution: "streamx@npm:2.16.0"
   dependencies:
@@ -19117,20 +19083,6 @@ __metadata:
     bare-events:
       optional: true
   checksum: 10/b405d6e7ed8bffcd2aad84a7781dd0d5202b07384e886ac9d670421a34e0cc9962cdc864749910236bcf1048e6001275ecf83c00b418a03d15af8349821c7e93
-  languageName: node
-  linkType: hard
-
-"streamx@npm:^2.15.0":
-  version: 2.15.8
-  resolution: "streamx@npm:2.15.8"
-  dependencies:
-    bare-events: "npm:^2.2.0"
-    fast-fifo: "npm:^1.1.0"
-    queue-tick: "npm:^1.0.1"
-  dependenciesMeta:
-    bare-events:
-      optional: true
-  checksum: 10/0d47ed1db324ca72d21696ddffa9e6bf06c7476a9e4ea2a5a4c007fd6ee4177520c4423432102528c7ffdf38facabb6c4220364f14e18cc133c67c4e96ed93b0
   languageName: node
   linkType: hard
 
@@ -19639,15 +19591,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"thingies@npm:^1.11.1, thingies@npm:^1.14.1":
-  version: 1.16.0
-  resolution: "thingies@npm:1.16.0"
-  peerDependencies:
-    tslib: ^2
-  checksum: 10/19b062220e9b27d958c92c8257f7112786d4e3cdcb7f91acd7b30f7dd1b785c77dc11a5938b10a66bd2ec4cefe581ebe4867a939dbf65f09fc23259cfa857f3a
-  languageName: node
-  linkType: hard
-
 "thread-loader@npm:^3.0.0, thread-loader@npm:^3.0.4":
   version: 3.0.4
   resolution: "thread-loader@npm:3.0.4"
@@ -19866,7 +19809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.3.1":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.3.1":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 10/bd26c22d36736513980091a1e356378e8b662ded04204453d353a7f34a4c21ed0afc59b5f90719d4ba756e581a162ecbf93118dc9c6be5acf70aa309188166ca
@@ -19969,15 +19912,16 @@ __metadata:
   linkType: hard
 
 "typed-array-byte-offset@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "typed-array-byte-offset@npm:1.0.0"
+  version: 1.0.1
+  resolution: "typed-array-byte-offset@npm:1.0.1"
   dependencies:
-    available-typed-arrays: "npm:^1.0.5"
-    call-bind: "npm:^1.0.2"
+    available-typed-arrays: "npm:^1.0.6"
+    call-bind: "npm:^1.0.7"
     for-each: "npm:^0.3.3"
+    gopd: "npm:^1.0.1"
     has-proto: "npm:^1.0.1"
-    is-typed-array: "npm:^1.1.10"
-  checksum: 10/2d81747faae31ca79f6c597dc18e15ae3d5b7e97f7aaebce3b31f46feeb2a6c1d6c92b9a634d901c83731ffb7ec0b74d05c6ff56076f5ae39db0cd19b16a3f92
+    is-typed-array: "npm:^1.1.13"
+  checksum: 10/b174c0bac20bcd8787d2f5ccd7bd8f5e5a128e060ffe0909ffe27d65e486de50a3552248a307a45e5c9c593fd8ec97f5acdf119c3e13806f11943b7a2ce555be
   languageName: node
   linkType: hard
 

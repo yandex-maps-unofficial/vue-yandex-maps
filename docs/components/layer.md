@@ -12,11 +12,8 @@
 - [Собственные реализации слоёв](https://yandex.ru/dev/jsapi30/doc/ru/dg/concepts/custom-layers)
 - [Слои](https://yandex.ru/dev/jsapi30/doc/ru/dg/concepts/map-objects#layers)
 
-### Примеры
-- [Основные параметры](/examples/map-params)
-- [Собственная карта](/examples/custom-map)
-- [Кастомные тайлы на canvas](/examples/canvas-tiles)
-
-::: tip Совет
-В [основных параметрах](/examples/map-params) нажмите "Change type and reset" - подставится слой OpenStreetMaps вместо Яндексового
-:::
+## Примеры использования
+- [Кастомизация карты](/examples/layers/customization)
+- [Собственная карта](/examples/layers/custom-map)
+- [Свой источник данных](/examples/layers/custom-map-type)
+- [Кастомные тайлы на canvas](/examples/layers/canvas-tiles)

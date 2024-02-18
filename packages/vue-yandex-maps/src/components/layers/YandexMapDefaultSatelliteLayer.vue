@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapDefaultSatelliteLayer',
   props: {
     value: {
-      type: Object as PropType<YMapDefaultSatelliteLayer>,
+      type: Object as PropType<YMapDefaultSatelliteLayer | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapDefaultSatelliteLayer>,
+      type: Object as PropType<YMapDefaultSatelliteLayer | null>,
       default: null,
     },
     settings: {

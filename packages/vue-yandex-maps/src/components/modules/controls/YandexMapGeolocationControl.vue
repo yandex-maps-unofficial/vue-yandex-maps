@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapGeolocationControl',
   props: {
     value: {
-      type: Object as PropType<YMapGeolocationControl>,
+      type: Object as PropType<YMapGeolocationControl | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapGeolocationControl>,
+      type: Object as PropType<YMapGeolocationControl | null>,
       default: null,
     },
     settings: {

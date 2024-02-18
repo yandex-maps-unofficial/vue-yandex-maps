@@ -16,7 +16,10 @@ export default defineConfig({
   themeConfig: {
     sidebarMenuLabel: packageJson.version,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps' },
+      {
+        icon: 'github',
+        link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps',
+      },
     ],
     outline: {
       label: 'На этой странице',
@@ -50,16 +53,12 @@ export default defineConfig({
     i18nRouting: true,
     nav: [
       {
-        text: 'О проекте',
-        link: '/guide/about',
-      },
-      {
         text: 'Компоненты',
-        link: '/components/list'
+        link: '/components/list',
       },
       {
         text: 'API',
-        link: '/api/'
+        link: '/api/',
       },
       {
         text: 'Руководства',
@@ -81,30 +80,42 @@ export default defineConfig({
             link: '/components/',
           },
           {
-            text: 'Стартовый шаблон',
-            link: '/guide/quickstart',
-          },
-          {
             text: 'Переход с 0.x/1.x',
             link: '/guide/migration',
           },
         ],
       },
       {
-        text: 'Песочница',
-        link: '/examples/playground',
+        text: 'Примеры кода',
+        items: [
+          {
+            text: 'Список примеров',
+            link: '/examples/',
+          },
+          {
+            text: 'Стартовый шаблон',
+            link: '/guide/quickstart',
+          },
+          {
+            text: 'Песочница',
+            link: '/examples/playground',
+          },
+        ],
       },
       {
         text: packageJson.version,
         items: [
-          { text: 'Список изменений', link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/blob/master/CHANGELOG.md' },
+          {
+            text: 'Список изменений',
+            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/releases',
+          },
           {
             text: 'Создать новую Issue',
             link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/new/choose',
           },
           {
             text: 'Задать вопрос',
-            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/discussions'
+            link: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/discussions',
           },
           {
             text: 'Версия 0.x',
@@ -113,7 +124,7 @@ export default defineConfig({
           {
             text: 'Версия 1.x',
             link: 'https://vue-yandex-maps.github.io/new-docs/',
-          }
+          },
         ],
       },
     ],
@@ -131,7 +142,7 @@ export default defineConfig({
             link: '/guide/vue3',
             items: [
               {
-                text: 'Vue 3 / Nuxt 3',
+                text: 'Vue 3 / Nuxt 3 / Astro',
                 link: '/guide/vue3',
               },
               {
@@ -164,8 +175,8 @@ export default defineConfig({
               {
                 text: 'Переход с 1.x',
                 link: '/guide/migration/v1',
-              }
-            ]
+              },
+            ],
           },
         ],
       },
@@ -263,6 +274,10 @@ export default defineConfig({
                 text: 'YandexMapControlButton',
                 link: '/components/control-button',
               },
+              {
+                text: 'YandexMapScaleControl',
+                link: '/components/control-scale',
+              },
             ],
           },
           {
@@ -323,30 +338,39 @@ export default defineConfig({
         items: [
           {
             text: 'Список методов',
-            link: '/api/'
+            link: '/api/',
           },
           {
             text: 'Инстанс VueYandexMaps',
-            link: '/api/namespace'
-          },
-          {
-            text: 'initYmaps',
-            link: '/api/init-ymaps'
+            link: '/api/namespace',
           },
           {
             text: 'useYMapsLocationFromBounds',
-            link: '/api/location-from-bounds'
+            link: '/api/location-from-bounds',
+          },
+          {
+            text: 'initYmaps',
+            link: '/api/init-ymaps',
+          },
+          {
+            text: 'API ymaps3',
+            link: '/api/yandex',
           },
           {
             text: 'Yandex Maps API',
-            link: '/api/yandex-maps-api'
-          }
-        ]
+            link: '/api/yandex-maps-api',
+          },
+        ],
       },
       {
-        text: 'Примеры',
+        text: 'Примеры кода',
+        link: '/examples/',
         collapsed: false,
         items: [
+          {
+            text: 'Список примеров',
+            link: '/examples/',
+          },
           {
             text: 'Песочница',
             link: '/examples/playground',
@@ -357,97 +381,127 @@ export default defineConfig({
             items: [
               {
                 text: 'Создание карты',
-                link: '/examples/map-basics',
+                link: '/examples/map/basics',
               },
               {
-                text: 'Основные параметры',
-                link: '/examples/map-params',
+                text: 'Асинхронная подгрузка',
+                link: '/examples/map/async-api-load',
+              },
+              {
+                text: 'Изменение поведений',
+                link: '/examples/map/behaviors',
               },
               {
                 text: 'Изменение позиции камеры',
-                link: '/examples/camera',
+                link: '/examples/map/camera',
               },
               {
-                text: 'Изменение размера карты',
-                link: '/examples/fill-container',
+                text: 'Ограничение области просмотра',
+                link: '/examples/map/restrict-view-area',
               },
               {
-                text: 'Ограничение области просмотра карты',
-                link: '/examples/map-restrict-area',
+                text: 'Перемещение карты',
+                link: '/examples/map/moving',
               },
               {
-                text: 'Размещение в скрытом контейнере',
-                link: '/examples/hidden-div',
-              },
-            ],
-          },
-          {
-            text: 'Маркеры',
-            collapsed: true,
-            items: [
-              {
-                text: 'Добавление метки на карту',
-                link: '/examples/placemark',
+                text: 'Обработка событий карты',
+                link: '/examples/map/events',
               },
               {
-                text: 'Добавление метки с собственным изображением',
-                link: '/examples/marker-custom-image',
-              },
-              {
-                text: 'Попап при клике на маркер',
-                link: '/examples/marker-popup',
-              },
-              {
-                text: 'Скрывать маркеры вне вьюпорта',
-                link: '/examples/hide-markers'
-              }
-            ]
-          },
-          {
-            text: 'Линии и полигоны',
-            collapsed: true,
-            items: [
-              {
-                text: 'Ломаная',
-                link: '/examples/polyline',
-              },
-              {
-                text: 'Многоугольник',
-                link: '/examples/polygon',
-              },
-              {
-                text: 'Прямоугольник',
-                link: '/examples/rectangle',
-              },
-            ],
-          },
-          {
-            text: 'Прочее',
-            collapsed: true,
-            items: [
-              {
-                text: 'Перетаскивание объектов',
-                link: '/examples/draggable-objects',
-              },
-              {
-                text: 'Кастомные тайлы на canvas',
-                link: '/examples/canvas-tiles',
-              },
-              {
-                text: 'Собственная карта',
-                link: '/examples/custom-map',
+                text: 'Создание и удаление карты',
+                link: '/examples/map/create-and-delete',
               },
               {
                 text: 'Элементы управления',
-                link: '/examples/controls',
+                link: '/examples/map/controls',
+              },
+            ],
+          },
+          {
+            text: 'Объекты на карте',
+            collapsed: true,
+            items: [
+              {
+                text: 'Маркеры',
+                collapsed: false,
+                items: [
+                  {
+                    text: 'Общие примеры маркеров',
+                    link: '/examples/objects/placemark',
+                  },
+                  {
+                    text: 'Добавление маркера с пользовательским изображением',
+                    link: '/examples/objects/marker-custom-icon',
+                  },
+                  {
+                    text: 'Скрытие маркеров вне зоны видимости',
+                    link: '/examples/objects/hide-markers',
+                  },
+                  {
+                    text: 'Кластеризатор маркеров',
+                    link: '/examples/objects/clusterer',
+                  },
+                  {
+                    text: 'Маркер со всплывающим окном',
+                    link: '/examples/objects/marker-popup',
+                  },
+                  {
+                    text: 'Перетаскиваемый маркер',
+                    link: '/examples/objects/draggable-marker',
+                  },
+                  {
+                    text: 'Маркер с дизайном по умолчанию',
+                    link: '/examples/objects/default-marker',
+                  },
+                ],
               },
               {
-                text: 'Множество точек (Кластеризация)',
-                link: '/examples/many-points',
+                text: 'Линии и полигоны',
+                collapsed: false,
+                items: [
+                  {
+                    text: 'Линия',
+                    link: '/examples/objects/line',
+                  },
+                  {
+                    text: 'Прямоугольник',
+                    link: '/examples/objects/rectangle',
+                  },
+                  {
+                    text: 'Полигон',
+                    link: '/examples/objects/polygon',
+                  },
+                ],
               },
               {
-                text: 'Подсказки (Хинты)',
-                link: '/examples/hint',
+                text: 'Подсказка при наведении на элементы карты',
+                link: '/examples/objects/hints',
+              },
+            ],
+          },
+          {
+            text: 'Слои',
+            collapsed: true,
+            items: [
+              {
+                text: 'Кастомизация карты',
+                link: '/examples/layers/customization',
+              },
+              {
+                text: 'Кастомные тайлы на canvas',
+                link: '/examples/layers/canvas-tiles',
+              },
+              {
+                text: 'Свой источник данных',
+                link: '/examples/layers/custom-map-type',
+              },
+              {
+                text: 'Кастомная карта',
+                link: '/examples/layers/custom-map',
+              },
+              {
+                text: 'Спутниковый слой',
+                link: '/examples/layers/satellite',
               },
             ],
           },

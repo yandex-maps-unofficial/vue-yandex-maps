@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapSphericalMercatorProjection',
   props: {
     value: {
-      type: Object as PropType<Projection>,
+      type: Object as PropType<Projection | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<Projection>,
+      type: Object as PropType<Projection | null>,
       default: null,
     },
   },

@@ -10,7 +10,6 @@ import {
   provide,
   ref,
   shallowRef,
-  toRaw,
   watch,
 } from 'vue';
 import type {
@@ -20,10 +19,13 @@ import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../composables/init.ts';
 import { VueYandexMaps } from '../namespace.ts';
 import { diff } from 'deep-object-diff';
-import { throwException } from '../composables/utils/system.ts';
+import { copy, throwException } from '../composables/utils/system.ts';
 import { waitTillMapInit } from '../composables/utils/map.ts';
 
-export type YandexMapSettings = Omit<YMapProps, 'projection'>
+export type YandexMapSettings = Omit<YMapProps, 'projection'> & {
+  /** Show scale unit in copyrights section */
+  showScaleInCopyrights?: boolean
+}
 
 export default defineComponent({
   name: 'YandexMap',
@@ -176,11 +178,10 @@ export default defineComponent({
       const setupWatcher = () => {
         watcher?.();
 
-        let settings: YMapProps = JSON.parse(JSON.stringify(toRaw(getSettings.value)));
+        let settings = copy(getSettings);
         watcher = watch(getSettings, (val) => {
           if (!map.value) return;
-          const rawVal = toRaw(val);
-          const clonedSettings: YMapProps = JSON.parse(JSON.stringify(rawVal));
+          const clonedSettings = copy(val);
 
           // Handling location change
           if (props.realSettingsLocation && clonedSettings.location) {

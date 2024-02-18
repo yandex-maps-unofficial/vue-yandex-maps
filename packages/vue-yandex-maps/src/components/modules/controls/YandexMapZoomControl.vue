@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapZoomControl',
   props: {
     value: {
-      type: Object as PropType<YMapZoomControl>,
+      type: Object as PropType<YMapZoomControl | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapZoomControl>,
+      type: Object as PropType<YMapZoomControl | null>,
       default: null,
     },
     settings: {

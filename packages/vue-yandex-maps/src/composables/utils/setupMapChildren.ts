@@ -2,7 +2,7 @@ import type { YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import type { ComputedRef, Ref } from 'vue';
 import {
-  getCurrentInstance, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, toRaw, watch,
+  getCurrentInstance, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, watch,
 } from 'vue';
 import { copy, excludeKeys, throwException } from './system.ts';
 import {
@@ -128,7 +128,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
   }
 
   if (settings) {
-    let lastSettings = copy(toRaw(settings.value));
+    let lastSettings = copy(settings);
 
     watch(settings, (value) => {
       if (!value) return;
@@ -136,7 +136,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
       const settingsDiff = Object.keys(diff(lastSettings, value));
       if (settingsDiff.length === 0) return;
 
-      const updatedSettings = copy(toRaw(value));
+      const updatedSettings = copy(value);
       for (const key in updatedSettings) {
         if (!settingsDiff.includes(key)) delete (updatedSettings as any)[key];
       }
@@ -146,7 +146,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
 
       if (Object.keys(updatedSettings).length === 0) return;
 
-      lastSettings = toRaw(copy(value));
+      lastSettings = copy(value);
 
       if (children.value && 'update' in children.value) children.value.update(updatedSettings);
     }, { deep: true });

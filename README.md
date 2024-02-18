@@ -1,5 +1,5 @@
 [![npm](https://img.shields.io/github/package-json/v/yandex-maps-unofficial/vue-yandex-maps?label=npm&filename=packages%2Fvue-yandex-maps%2Fpackage.json
-)](https://www.npmjs.com/package/vue-yandex-maps/v/next)
+)](https://www.npmjs.com/package/vue-yandex-maps)
 [![GitHub issues](https://img.shields.io/github/issues/PNKBizz/vue-yandex-maps.svg)](https://github.com/PNKBizz/vue-yandex-maps/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/PNKBizz/vue-yandex-maps.svg)](https://github.com/PNKBizz/vue-yandex-maps)
 [![npm](https://img.shields.io/npm/dm/vue-yandex-maps.svg)](https://www.npmjs.com/package/vue-yandex-maps)

@@ -20,3 +20,6 @@ import { DomEventHandler } from '@yandex/ymaps3-types';
 const logMapClick: DomEventHandler = (object, event) => console.log(object, event);
 </script>
 ```
+## Примеры использования
+
+- [Обработка событий карты](/examples/map/events)

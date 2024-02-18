@@ -90,10 +90,7 @@
 
 ## Примеры использования
 
-- [Добавление метки на карту](/examples/placemark)
-- [Добавление метки с собственным изображением](/examples/marker-custom-image)
-- [Попап при клике на маркер](/examples/marker-popup)
-- [Скрывать маркеры вне вьюпорта](/examples/hide-markers)
+- [Маркеры](/examples/#%D0%BC%D0%B0%D1%80%D0%BA%D0%B5%D1%80%D1%8B)
 
 ```html
 <template>

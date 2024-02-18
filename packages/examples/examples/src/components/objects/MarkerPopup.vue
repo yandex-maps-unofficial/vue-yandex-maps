@@ -13,6 +13,7 @@
             zoom,
           },
           theme,
+          showScaleInCopyrights: true,
         }"
         :width="width"
         :height="height"
@@ -99,8 +100,9 @@ import {
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import { ref } from 'vue';
+import type { LngLat } from '@yandex/ymaps3-types';
 
-const markers = [
+const markers: {coordinates: LngLat}[] = [
   {
     coordinates: [37.188144, 55.733842],
   },

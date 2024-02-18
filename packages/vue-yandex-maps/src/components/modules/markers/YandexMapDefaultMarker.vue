@@ -6,18 +6,24 @@ import {
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
 import { throwException } from '../../../composables/utils/system.ts';
 import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import type { DefaultMarkerCustomProps } from '@yandex/ymaps3-types/packages/markers/YMapDefaultMarker';
 
-export type YandexMapDefaultMarkerSettings = ConstructorParameters<typeof YMapDefaultMarker>[0]
+type Settings = ConstructorParameters<typeof YMapDefaultMarker>[0]
+export type YandexMapDefaultMarkerSettings = Omit<Settings, 'popup'> & {
+  popup?: Omit<NonNullable<DefaultMarkerCustomProps['popup']>, 'content'> & {
+    content?: NonNullable<DefaultMarkerCustomProps['popup']>['content']
+  }
+}
 
 export default defineComponent({
   name: 'YandexMapDefaultMarker',
   props: {
     value: {
-      type: Object as PropType<YMapDefaultMarker>,
+      type: Object as PropType<YMapDefaultMarker | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapDefaultMarker>,
+      type: Object as PropType<YMapDefaultMarker | null>,
       default: null,
     },
     settings: {
@@ -73,7 +79,7 @@ export default defineComponent({
       }
 
       mapChildren = await setupMapChildren({
-        createFunction: ({ YMapDefaultMarker: Marker }) => new Marker(getSettings.value),
+        createFunction: ({ YMapDefaultMarker: Marker }) => new Marker(getSettings.value as Settings),
         requiredImport: () => ymaps3.import('@yandex/ymaps3-markers@0.0.1'),
         settings: getSettings,
       });

@@ -1,7 +1,9 @@
 import type {
   ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef,
 } from 'vue';
-import { computed, ref } from 'vue';
+import {
+  computed, ref, toRaw, unref,
+} from 'vue';
 import { VueYandexMaps } from '../../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
 
@@ -45,15 +47,22 @@ export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function copy<T>(target: T): T {
-  if (Array.isArray(target)) return target.map((i) => copy(i)) as T;
-  if (!target || typeof target !== 'object' || (target?.constructor !== undefined && target?.constructor !== Object)) return target;
+export function copy<T, K = UnwrapRef<T>>(target: T): K {
+  target = toRaw(unref(target));
+
+  // Array copy
+  if (Array.isArray(target)) return target.map((i) => copy(i)) as K;
+
+  // Ignore functions, classes, raw values
+  if (!target || typeof target !== 'object' || (target?.constructor !== undefined && target?.constructor !== Object)) return target as unknown as K;
+
+  // Objects copy
   return Object.keys(target)
     .reduce((carry, key) => {
       const val = (target as any)[key];
       (carry as any)[key] = copy(val);
       return carry;
-    }, {} as T);
+    }, {} as K);
 }
 
 export function isDev() {
@@ -66,7 +75,11 @@ interface ThrowExceptionSettings {
   warn?: boolean
 }
 
-export function getException({ text, isInternal, warn }: ThrowExceptionSettings): YandexMapException {
+export function getException({
+  text,
+  isInternal,
+  warn,
+}: ThrowExceptionSettings): YandexMapException {
   if (warn) {
     text = `Warning: ${text}`;
   }

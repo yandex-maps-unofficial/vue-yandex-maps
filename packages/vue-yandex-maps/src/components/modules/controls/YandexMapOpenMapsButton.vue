@@ -11,11 +11,11 @@ export default defineComponent({
   name: 'YandexMapOpenMapsButton',
   props: {
     value: {
-      type: Object as PropType<YMapOpenMapsButton>,
+      type: Object as PropType<YMapOpenMapsButton | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapOpenMapsButton>,
+      type: Object as PropType<YMapOpenMapsButton | null>,
       default: null,
     },
     settings: {

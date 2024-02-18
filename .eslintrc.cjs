@@ -80,6 +80,7 @@ module.exports = {
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
     'prefer-const': ['error', { destructuring: 'all' }],
     'vue/v-on-event-hyphenation': 'off',
+    'vuejs-accessibility/form-control-has-label': 'off',
     quotes: [
       'error',
       'single',

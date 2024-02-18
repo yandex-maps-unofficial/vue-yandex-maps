@@ -13,6 +13,7 @@
             zoom,
           },
           theme,
+          showScaleInCopyrights: true,
         }"
         :width="width"
         :height="height"
@@ -52,7 +53,7 @@
           <yandex-map-marker
             v-if="'element' in point"
             :settings="point"
-            :position="`${positionX} ${positionY}`"
+            :position="`${positionX} ${positionY}` as any"
             :style="{
               '--color': 'color' in point && point.color,
               '--image': 'colors' in point && diagramBackground(point.colors),
@@ -74,9 +75,9 @@
               class="circle"
               :style="{
                 '--radius': 'radius' in point ? point.radius : '20px',
-                '--color': 'color' in point && point.color,
+                '--color': 'color' in point ? point.color : undefined,
                 '--icon': 'icon' in point ? point.icon : '#fff',
-                '--image': 'icon' in point && point.icon,
+                '--image': 'icon' in point ? point.icon : undefined,
               }"
               :title="'title' in point && point.title"
             >
@@ -87,8 +88,8 @@
               class="icon"
               :style="{
                 '--size': 'size' in point ? point.size : '20px',
-                '--color': 'color' in point && point.color,
-                '--icon': 'icon' in point && `url(${point.icon})`,
+                '--color': 'color' in point ? point.color : undefined,
+                '--icon': 'icon' in point ? `url(${point.icon})` : undefined,
               }"
             >
               <div
@@ -125,13 +126,14 @@ import {
 } from 'vue-yandex-maps';
 import type { YandexMapMarkerPosition } from 'vue-yandex-maps';
 import { onMounted, onUnmounted, ref } from 'vue';
+import type { LngLat } from '@yandex/ymaps3-types';
 
 type PartialRecord<K extends keyof any, T> = {
   [P in K]?: T;
 };
 
 const INC_POINT = {
-  coordinates: [37.95, 55.9],
+  coordinates: [37.95, 55.9] as LngLat,
   title: 'Marker inc #0',
 };
 
@@ -188,7 +190,7 @@ const diagramBackground = (colors: { percentage: number, color: string }[]): str
   return `conic-gradient(${gradient.join(', ')})`;
 };
 
-const POINTS = [
+const POINTS: any[] = [
   { coordinates: [37.8, 55.8] },
   {
     coordinates: [37.6, 55.847],
