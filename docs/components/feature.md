@@ -9,6 +9,6 @@
 :::
 
 ## Примеры использования
-- [Ломаная](/examples/polyline)
-- [Прямоугольник](/examples/rectangle)
-- [Многоугольник](/examples/polygon)
+- [Ломаная](/examples/objects/line)
+- [Прямоугольник](/examples/objects/rectangle)
+- [Многоугольник](/examples/objects/polygon)

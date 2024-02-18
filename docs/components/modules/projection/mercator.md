@@ -11,8 +11,4 @@
 
 ## Примеры использования
 
-- [Основные параметры](/examples/map-params)
-
-::: tip Совет
-В [основных параметрах](/examples/map-params) нажмите "Change type and reset" - подставится проекция Меркатора.
-:::
+- [Свой источник данных](/examples/layers/custom-map-type)

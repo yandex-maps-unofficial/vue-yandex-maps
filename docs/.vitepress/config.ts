@@ -80,10 +80,6 @@ export default defineConfig({
             link: '/components/',
           },
           {
-            text: 'Стартовый шаблон',
-            link: '/guide/quickstart',
-          },
-          {
             text: 'Переход с 0.x/1.x',
             link: '/guide/migration',
           },
@@ -91,7 +87,20 @@ export default defineConfig({
       },
       {
         text: 'Примеры кода',
-        link: '/examples/',
+        items: [
+          {
+            text: 'Список примеров',
+            link: '/examples/',
+          },
+          {
+            text: 'Стартовый шаблон',
+            link: '/guide/quickstart',
+          },
+          {
+            text: 'Песочница',
+            link: '/examples/playground',
+          },
+        ],
       },
       {
         text: packageJson.version,
@@ -336,12 +345,16 @@ export default defineConfig({
             link: '/api/namespace',
           },
           {
+            text: 'useYMapsLocationFromBounds',
+            link: '/api/location-from-bounds',
+          },
+          {
             text: 'initYmaps',
             link: '/api/init-ymaps',
           },
           {
-            text: 'useYMapsLocationFromBounds',
-            link: '/api/location-from-bounds',
+            text: 'API ymaps3',
+            link: '/api/yandex',
           },
           {
             text: 'Yandex Maps API',
@@ -472,21 +485,25 @@ export default defineConfig({
             items: [
               {
                 text: 'Кастомизация карты',
-                link: '/examples/layers/customization'
+                link: '/examples/layers/customization',
               },
               {
                 text: 'Кастомные тайлы на canvas',
-                link: '/examples/layers/canvas-tiles'
+                link: '/examples/layers/canvas-tiles',
               },
               {
                 text: 'Свой источник данных',
-                link: '/examples/layers/custom-map-type'
+                link: '/examples/layers/custom-map-type',
               },
               {
                 text: 'Кастомная карта',
-                link: '/examples/layers/custom-map'
-              }
-            ]
+                link: '/examples/layers/custom-map',
+              },
+              {
+                text: 'Спутниковый слой',
+                link: '/examples/layers/satellite',
+              },
+            ],
           },
         ],
       },

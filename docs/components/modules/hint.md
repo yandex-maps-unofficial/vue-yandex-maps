@@ -52,4 +52,4 @@
 </style>
 ```
 
-### [Хинты](/examples/hint)
+### [Хинты](/examples/objects/hints)

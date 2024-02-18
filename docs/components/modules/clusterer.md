@@ -163,4 +163,4 @@
 </template>
 ```
 
-### См. также: [Множество точек](/examples/many-points)
+### См. также: [Кластеризатор маркеров](/examples/objects/clusterer)

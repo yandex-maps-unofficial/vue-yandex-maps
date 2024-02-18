@@ -14,4 +14,4 @@
 
 ## Примеры использования
 
-- [Собственная карта](/examples/custom-map)
+- [Собственная карта](/examples/layers/custom-map)

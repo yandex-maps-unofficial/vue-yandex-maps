@@ -12,5 +12,4 @@
 
 ## Примеры использования
 
-- [Добавление метки на карту](/examples/placemark)
-- [Попап при клике на маркер](/examples/marker-popup)
+- [Маркер с дизайном по умолчанию](/examples/objects/default-marker)
