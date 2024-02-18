@@ -4,7 +4,7 @@ next:
   link: '/guide/configuration'
 ---
 
-# Установка на Vue 3 / Nuxt 3
+# Установка на Vue 3 / Nuxt 3 / Astro
 
 ## Установите пакет
 
@@ -83,6 +83,33 @@ app.mount('#app');
 ```
 
 В Nuxt 3 это добавляется автоматически.
+
+### Astro
+
+1. Укажите `appEntrypoint` в Astro Config
+    ```typescript
+    import { defineConfig } from 'astro/config';
+    import vue from '@astrojs/vue';  // [!code focus]
+    //...
+    
+    // https://astro.build/config
+    export default defineConfig({
+      integrations: [vue({ appEntrypoint: '/src/init' })],  // [!code focus]
+      //...
+    });
+    ```
+2. В вашем файлике (в нашем случае: `src/init.ts`) подключите пакет по аналогии с указанным выше:
+    ```typescript
+    import type { App } from 'vue';
+    import { createYmaps } from 'vue-yandex-maps';
+    
+    export default (app: App) => {
+      app.use(createYmaps({
+        apikey: 'your-api-key',
+      }));
+    };
+    ```
+3. Опционально, выполните конфигурацию TS аналогично указанному выше
 
 ### Nuxt 3
 

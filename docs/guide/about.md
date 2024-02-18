@@ -1,6 +1,6 @@
 ---
 next:
-  text: 'Установка на Vue 3 / Nuxt 3'
+  text: 'Установка на Vue 3 / Nuxt 3 / Astro'
   link: '/guide/vue3'
 ---
 
@@ -12,7 +12,7 @@ next:
 
 ## Установка
 
-- [Vue 3 / Nuxt 3](/guide/vue3)
+- [Vue 3 / Nuxt 3 / Astro](/guide/vue3)
 - [Vue 2 / Nuxt 2 / Nuxt Bridge](/guide/vue2)
 - [Миграция с прошлых версий](/guide/migration)
 

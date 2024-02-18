@@ -142,7 +142,7 @@ export default defineConfig({
             link: '/guide/vue3',
             items: [
               {
-                text: 'Vue 3 / Nuxt 3',
+                text: 'Vue 3 / Nuxt 3 / Astro',
                 link: '/guide/vue3',
               },
               {
