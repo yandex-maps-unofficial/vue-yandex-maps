@@ -80,7 +80,7 @@
             <div class="marker" />
           </yandex-map-marker>
           <template #cluster="{ length }">
-            <div class="cluster">
+            <div class="cluster fade-in">
               {{ length }}
             </div>
           </template>
@@ -199,6 +199,19 @@ const getPointList = computed<LngLat[]>(() => {
 
 .padded {
   padding: 5px;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
 <!-- #endregion style -->

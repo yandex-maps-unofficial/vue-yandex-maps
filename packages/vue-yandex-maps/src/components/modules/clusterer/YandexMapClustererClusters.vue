@@ -65,15 +65,14 @@ export default defineComponent({
           'div',
           {
             ...containerProps.value.root,
-            key: `${clusterer.clusterId}_${index}_${clusterer.features.length}_${clusterer.lnglat.join(',')}`,
+            key: clusterer.clusterId,
             ref: async (item) => {
               if (!item) return;
+              if (element.children.length) return;
 
               await nextTick();
 
               try {
-                element.children.forEach((x) => element.removeChild(x as any));
-
                 element.addChild(new ymaps3.YMapMarker({
                   ...excludeYandexMarkerProps(props.clusterMarkerProps),
                   coordinates: clusterer.lnglat,
