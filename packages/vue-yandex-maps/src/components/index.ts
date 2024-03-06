@@ -1,16 +1,20 @@
 import type { YandexMapSettings } from './YandexMap.vue';
 import YandexMap from './YandexMap.vue';
-import YandexMapListener from './YandexMapListener.vue';
 import type { YandexMapListenerSettings } from './YandexMapListener.vue';
+import YandexMapListener from './YandexMapListener.vue';
 import YandexMapDefaultFeaturesLayer from './layers/YandexMapDefaultFeaturesLayer.vue';
 import YandexMapDefaultSchemeLayer from './layers/YandexMapDefaultSchemeLayer.vue';
+import type {
+  IYandexMapDefaultSatelliteLayer,
+  IYandexMapDefaultSatelliteLayerProps,
+} from './layers/YandexMapDefaultSatelliteLayer.vue';
 import YandexMapDefaultSatelliteLayer from './layers/YandexMapDefaultSatelliteLayer.vue';
 import YandexMapTileDataSource from './data-sources/YandexMapTileDataSource.vue';
 import YandexMapFeatureDataSource from './data-sources/YandexMapFeatureDataSource.vue';
 import YandexMapLayer from './layers/YandexMapLayer.vue';
 import YandexMapMarker from './YandexMapMarker.vue';
-import YandexMapDefaultMarker from './modules/markers/YandexMapDefaultMarker.vue';
 import type { YandexMapDefaultMarkerSettings } from './modules/markers/YandexMapDefaultMarker.vue';
+import YandexMapDefaultMarker from './modules/markers/YandexMapDefaultMarker.vue';
 import YandexMapFeature from './YandexMapFeature.vue';
 import YandexMapControls from './controls/YandexMapControls.vue';
 import YandexMapControl from './controls/YandexMapControl.vue';
@@ -80,4 +84,6 @@ export type {
   YandexMapClustererOptions,
   YandexMapDefaultMarkerSettings,
   YandexMapListenerSettings,
+  IYandexMapDefaultSatelliteLayer,
+  IYandexMapDefaultSatelliteLayerProps,
 };

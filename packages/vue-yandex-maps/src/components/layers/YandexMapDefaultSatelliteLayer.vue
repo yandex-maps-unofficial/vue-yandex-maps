@@ -1,33 +1,41 @@
 <script lang="ts">
-import type { YMapDefaultSatelliteLayer } from '@yandex/ymaps3-types';
+import type { YMapComplexEntity } from '@yandex/ymaps3-types';
 import type { PropType, Ref, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, inject, onMounted,
 } from 'vue';
 
 import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
+import type { ClassType } from '../../types';
+
+export type IYandexMapDefaultSatelliteLayerProps = {
+  /** Should show layer */
+  visible?: boolean;
+}
+
+export type IYandexMapDefaultSatelliteLayer = YMapComplexEntity<IYandexMapDefaultSatelliteLayerProps, {}>
 
 export default defineComponent({
   name: 'YandexMapDefaultSatelliteLayer',
   props: {
     value: {
-      type: Object as PropType<YMapDefaultSatelliteLayer | null>,
+      type: Object as PropType<IYandexMapDefaultSatelliteLayer | null>,
       default: null,
     },
     modelValue: {
-      type: Object as PropType<YMapDefaultSatelliteLayer | null>,
+      type: Object as PropType<IYandexMapDefaultSatelliteLayer | null>,
       default: null,
     },
     settings: {
-      type: Object as PropType<ConstructorParameters<typeof YMapDefaultSatelliteLayer>[0]>,
+      type: Object as PropType<{ visible?: boolean }>,
       default: () => ({}),
     },
   },
   emits: {
-    'input'(item: YMapDefaultSatelliteLayer): boolean {
+    'input'(item: IYandexMapDefaultSatelliteLayer): boolean {
       return true;
     },
-    'update:modelValue'(item: YMapDefaultSatelliteLayer): boolean {
+    'update:modelValue'(item: IYandexMapDefaultSatelliteLayer): boolean {
       return true;
     },
     hold(status: boolean) {
@@ -43,11 +51,13 @@ export default defineComponent({
   }) {
     const hold = inject<Ref<number>>('needsToHold')!;
     hold.value++;
-    let mapLayer: YMapDefaultSatelliteLayer | undefined;
+    let mapLayer: IYandexMapDefaultSatelliteLayer | undefined;
 
     onMounted(async () => {
       mapLayer = await setupMapChildren({
-        createFunction: () => new ymaps3.YMapDefaultSatelliteLayer(props.settings || {}),
+        createFunction: () => new (ymaps3 as unknown as {
+          YMapDefaultSatelliteLayer: ClassType<IYandexMapDefaultSatelliteLayer, [IYandexMapDefaultSatelliteLayerProps]>
+        }).YMapDefaultSatelliteLayer(props.settings || {}),
         settings: computed(() => props.settings),
         isLayer: true,
       });

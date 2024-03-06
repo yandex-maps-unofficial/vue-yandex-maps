@@ -22,10 +22,7 @@ import { diff } from 'deep-object-diff';
 import { copy, throwException } from '../composables/utils/system.ts';
 import { waitTillMapInit } from '../composables/utils/map.ts';
 
-export type YandexMapSettings = Omit<YMapProps, 'projection'> & {
-  /** Show scale unit in copyrights section */
-  showScaleInCopyrights?: boolean
-}
+export type YandexMapSettings = Omit<YMapProps, 'projection'>
 
 export default defineComponent({
   name: 'YandexMap',

@@ -67,6 +67,16 @@
               Button with element
             </div>
           </yandex-map-control-button>
+          <yandex-map-control>
+            <div class="button-element">
+              Control with element
+            </div>
+          </yandex-map-control>
+          <yandex-map-control :settings="{ transparent: true }">
+            <div class="button-element">
+              Control without bg/shadow
+            </div>
+          </yandex-map-control>
         </yandex-map-controls>
       </yandex-map>
       <!-- #endregion html -->
@@ -79,18 +89,19 @@ import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
   YandexMap,
+  YandexMapControl,
   YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultSchemeLayer,
+  YandexMapEntity,
   YandexMapGeolocationControl,
   YandexMapOpenMapsButton,
-  YandexMapZoomControl,
   YandexMapScaleControl,
-  YandexMapEntity,
+  YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import {
-  computed, onBeforeUnmount, onMounted, ref, shallowRef, isRef,
+  computed, isRef, onBeforeUnmount, onMounted, ref, shallowRef,
 } from 'vue';
 import type { YMap } from '@yandex/ymaps3-types';
 

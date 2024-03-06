@@ -5,11 +5,7 @@ import {
 } from 'vue';
 
 import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
-import type { YMapScaleControl } from '@yandex/ymaps3-types/modules/controls-extra/YMapScaleControl';
-
-interface ClassType<T, P extends any[]> extends Function {
-  new (...args: P): T;
-}
+import type { YMapScaleControl } from '@yandex/ymaps3-types';
 
 export default defineComponent({
   name: 'YandexMapScaleControl',
@@ -46,9 +42,7 @@ export default defineComponent({
 
     onMounted(async () => {
       mapChildren = await setupMapChildren({
-        createFunction: (controls) => new (ymaps3 as unknown as {
-          YMapScaleControl: ClassType<YMapScaleControl, ConstructorParameters<typeof YMapScaleControl>>
-        }).YMapScaleControl(props.settings),
+        createFunction: () => new ymaps3.YMapScaleControl(props.settings),
         settings: computed(() => props.settings),
         strictMapRoot: true,
       });

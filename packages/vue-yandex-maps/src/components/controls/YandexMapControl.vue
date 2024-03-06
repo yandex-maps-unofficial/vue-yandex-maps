@@ -1,8 +1,9 @@
 <script lang="ts">
-import type { PropType, SlotsType } from 'vue';
 import {
+  computed,
   defineComponent, h, onMounted, ref,
 } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import type { YMapControl } from '@yandex/ymaps3-types';
 
 import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
@@ -17,6 +18,10 @@ export default defineComponent({
     modelValue: {
       type: Object as PropType<YMapControl | null>,
       default: null,
+    },
+    settings: {
+      type: Object as PropType<NonNullable<ConstructorParameters<typeof YMapControl>[0]>>,
+      default: () => ({}),
     },
   },
   emits: {
@@ -40,7 +45,7 @@ export default defineComponent({
     onMounted(async () => {
       mapChildren = await setupMapChildren({
         createFunction: () => {
-          const control = new ymaps3.YMapControl();
+          const control = new ymaps3.YMapControl(props.settings);
 
           class YMapSomeController extends ymaps3.YMapEntity<any> {
             _onAttach() {
@@ -63,6 +68,7 @@ export default defineComponent({
           control.addChild(new YMapSomeController({}));
           return control;
         },
+        settings: computed(() => props.settings),
         strictMapRoot: true,
       });
       emit('input', mapChildren);
