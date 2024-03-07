@@ -499,10 +499,6 @@ export default defineConfig({
                 text: 'Кастомная карта',
                 link: '/examples/layers/custom-map',
               },
-              {
-                text: 'Спутниковый слой',
-                link: '/examples/layers/satellite',
-              },
             ],
           },
         ],

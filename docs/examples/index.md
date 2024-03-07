@@ -41,7 +41,6 @@
 ### [Кастомные тайлы на canvas](layers/canvas-tiles)
 ### [Свой источник данных](layers/custom-map-type)
 ### [Кастомная (своя) карта](layers/custom-map)
-### [Слой спутнка](layers/satellite)
 
 ## Прочее
 ### [Подсказка при наведении на объекты (Хинты)](objects/hints)
