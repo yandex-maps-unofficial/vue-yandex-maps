@@ -127,7 +127,7 @@ jobs:
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@v2
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           target_commitish: master
           token: ${{ secrets.GITHUB_TOKEN }}
