@@ -228,6 +228,26 @@ export default defineComponent({
           },
         }).catch(() => {});
 
+        const eventListener = (event: MouseEvent) => {
+          const target = event.target as HTMLDivElement;
+
+          // Just in case something else is triggered
+          if (!target || !('classList' in target)) return;
+
+          // Closest can be undefined in IE. Not sure if anybody uses it but just in case
+          if (target.classList.contains('ymaps3x0--button') || target.closest?.('.ymaps3x0--button')) event.preventDefault();
+        };
+
+        watch(ymapContainer, (container) => {
+          if (!container) return;
+
+          // If it suddenly had that and Vue double-triggered ref
+          container.removeEventListener('click', eventListener, { capture: true });
+          container.addEventListener('click', eventListener, { capture: true });
+        }, {
+          immediate: true,
+        });
+
         if (!map.value) return;
 
         if (val) {

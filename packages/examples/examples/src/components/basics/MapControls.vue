@@ -5,81 +5,83 @@
         coordinates: center, theme, zoom, width, height,
       }"
     >
-      <!-- #region html -->
-      <yandex-map
-        v-model="map"
-        :settings="{
-          location: {
-            center,
-            zoom,
-          },
-          theme,
-          showScaleInCopyrights: true,
-        }"
-        :width="width"
-        :height="isFullscreen ? '100dvh' : height"
-      >
-        <yandex-map-default-scheme-layer />
-        <yandex-map-default-features-layer />
-        <yandex-map-controls :settings="{ position: 'right' }">
-          <yandex-map-zoom-control />
-        </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'bottom' }">
-          <yandex-map-zoom-control />
-          <yandex-map-scale-control />
-        </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'top' }">
-          <yandex-map-control-button :settings="{ onClick: shiftRight }">
-            {{ '<' }}
-          </yandex-map-control-button>
-          <component
-            :is="component.component"
-            v-for="(component, index) in buttons.slice(0, 4)"
-            :key="index"
-            :settings="'props' in component ? component.props : {}"
-          >
-            {{ isRef(component.content) ? component.content.value : component.content }}
-          </component>
-          <yandex-map-control-button :settings="{ onClick: shiftLeft }">
+      <form>
+        <!-- #region html -->
+        <yandex-map
+          v-model="map"
+          :settings="{
+            location: {
+              center,
+              zoom,
+            },
+            theme,
+            showScaleInCopyrights: true,
+          }"
+          :width="width"
+          :height="isFullscreen ? '100dvh' : height"
+        >
+          <yandex-map-default-scheme-layer />
+          <yandex-map-default-features-layer />
+          <yandex-map-controls :settings="{ position: 'right' }">
+            <yandex-map-zoom-control />
+          </yandex-map-controls>
+          <yandex-map-controls :settings="{ position: 'bottom' }">
+            <yandex-map-zoom-control />
+            <yandex-map-scale-control />
+          </yandex-map-controls>
+          <yandex-map-controls :settings="{ position: 'top' }">
+            <yandex-map-control-button :settings="{ onClick: shiftRight }">
+              {{ '<' }}
+            </yandex-map-control-button>
+            <component
+              :is="component.component"
+              v-for="(component, index) in buttons.slice(0, 4)"
+              :key="index"
+              :settings="'props' in component ? component.props : {}"
             >
-          </yandex-map-control-button>
-        </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
-          <yandex-map-open-maps-button />
-          <yandex-map-open-maps-button :settings="{ title: 'Кастомный заголовок!' }" />
-        </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'left' }">
-          <yandex-map-geolocation-control />
-        </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'top left' }">
-          <yandex-map-entity>
-            <div class="counter" @click="updateCounter">
-              Entity counter #{{ counter }}
-            </div>
-          </yandex-map-entity>
-        </yandex-map-controls>
-        <yandex-map-controls :settings="{ position: 'top right', orientation: 'vertical' }">
-          <yandex-map-control-button :settings="{ onClick: toggleFullscreen }">
-            <div class="fullscreen" :class="{ 'exit-fullscreen': isFullscreen }" />
-          </yandex-map-control-button>
-          <yandex-map-control-button>
-            <div class="button-element">
-              Button with element
-            </div>
-          </yandex-map-control-button>
-          <yandex-map-control>
-            <div class="button-element">
-              Control with element
-            </div>
-          </yandex-map-control>
-          <yandex-map-control :settings="{ transparent: true }">
-            <div class="button-element">
-              Control without bg/shadow
-            </div>
-          </yandex-map-control>
-        </yandex-map-controls>
-      </yandex-map>
+              {{ isRef(component.content) ? component.content.value : component.content }}
+            </component>
+            <yandex-map-control-button :settings="{ onClick: shiftLeft }">
+              >
+            </yandex-map-control-button>
+          </yandex-map-controls>
+          <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
+            <yandex-map-open-maps-button />
+            <yandex-map-open-maps-button :settings="{ title: 'Кастомный заголовок!' }" />
+          </yandex-map-controls>
+          <yandex-map-controls :settings="{ position: 'left' }">
+            <yandex-map-geolocation-control />
+          </yandex-map-controls>
+          <yandex-map-controls :settings="{ position: 'top left' }">
+            <yandex-map-entity>
+              <div class="counter" @click="updateCounter">
+                Entity counter #{{ counter }}
+              </div>
+            </yandex-map-entity>
+          </yandex-map-controls>
+          <yandex-map-controls :settings="{ position: 'top right', orientation: 'vertical' }">
+            <yandex-map-control-button :settings="{ onClick: toggleFullscreen }">
+              <div class="fullscreen" :class="{ 'exit-fullscreen': isFullscreen }" />
+            </yandex-map-control-button>
+            <yandex-map-control-button>
+              <div class="button-element">
+                Button with element
+              </div>
+            </yandex-map-control-button>
+            <yandex-map-control>
+              <div class="button-element">
+                Control with element
+              </div>
+            </yandex-map-control>
+            <yandex-map-control :settings="{ transparent: true }">
+              <div class="button-element">
+                Control without bg/shadow
+              </div>
+            </yandex-map-control>
+          </yandex-map-controls>
+        </yandex-map>
       <!-- #endregion html -->
+      </form>
     </template>
   </common-wrapper>
 </template>
