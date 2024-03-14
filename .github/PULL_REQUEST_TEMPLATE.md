@@ -13,11 +13,11 @@
 - [ ] 🧹 Техническое изменение (обновление библиотек, CI/CD и прочие улучшения)
 - [ ] ⚠️ Breaking change
 
-### 📚 Description
+### 📚 Описание
 
 <!-- Опишите детали реквеста -->
 
-### 📝 Checklist
+### 📝 Чеклист
 
 <!-- Put an `x` in all the boxes that apply. -->
 <!-- If your change requires a documentation PR, please link it appropriately -->
