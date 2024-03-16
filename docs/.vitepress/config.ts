@@ -477,6 +477,14 @@ export default defineConfig({
                 text: 'Подсказка при наведении на элементы карты',
                 link: '/examples/objects/hints',
               },
+              {
+                text: 'Построение маршрута между точками',
+                link: '/examples/objects/route',
+              },
+              {
+                text: 'Поиск и Геосаджест',
+                link: '/examples/objects/search',
+              },
             ],
           },
           {
