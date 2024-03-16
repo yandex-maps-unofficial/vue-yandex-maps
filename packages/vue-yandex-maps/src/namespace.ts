@@ -62,7 +62,7 @@ export namespace VueYandexMaps {
     /**
      * @description You can choose where to initialize Yandex Maps library
      *
-     * - onPluginInit will load maps as soon as you call createYmapsOptions (on Client Side only)
+     * - onPluginInit will load maps on `vue-yandex-maps` plugin init (Client Side only)
      * - onComponentMount will load maps as soon as you load component (lazy option, default)
      * - never will require you to call initYmaps by yourself
      *

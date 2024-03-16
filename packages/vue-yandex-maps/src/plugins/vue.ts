@@ -1,4 +1,5 @@
 import type { App } from 'vue';
+import { initYmaps } from '..';
 import type { VueYandexMaps } from '..';
 import { createYmapsOptions } from '../composables/init.ts';
 
@@ -7,6 +8,9 @@ export function createYmaps(settings: VueYandexMaps.PluginSettings) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     install(app: App) {
       createYmapsOptions(settings);
+      if (settings.initializeOn === 'onPluginInit') {
+        initYmaps().catch(console.error);
+      }
     },
   };
 }
@@ -16,6 +20,9 @@ export function createYmapsVue2(settings: VueYandexMaps.PluginSettings) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     install(Vue: unknown) {
       createYmapsOptions(settings);
+      if (settings.initializeOn === 'onPluginInit') {
+        initYmaps().catch(console.error);
+      }
     },
   };
 }
