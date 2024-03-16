@@ -272,7 +272,12 @@ export default defineComponent({
             console.error(e);
             return;
           }
-        } else {
+        } else if (VueYandexMaps.loadStatus.value === 'loading' || VueYandexMaps.settings.value.initializeOn === 'onPluginInit') {
+          if (VueYandexMaps.settings.value.initializeOn === 'onPluginInit' && VueYandexMaps.loadStatus.value !== 'loading') await nextTick();
+          await initYmaps();
+        }
+
+        if (!VueYandexMaps.isLoaded.value) {
           throwException({
             text: 'You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.',
           });

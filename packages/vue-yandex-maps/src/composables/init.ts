@@ -17,10 +17,13 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
 
 export function initYmaps() {
   return new Promise<void>((res, rej) => {
-    if (typeof ymaps3 !== 'undefined') return res();
+    if (typeof ymaps3 !== 'undefined') {
+      if (VueYandexMaps.loadStatus.value !== 'loaded') VueYandexMaps.loadStatus.value = 'loaded';
+      return res();
+    }
     if (typeof window === 'undefined') return rej(new YandexMapException('You must call initYmaps on Client Side only'));
 
-    if (document.getElementById('vue-yandex-maps')) {
+    if (VueYandexMaps.loadStatus.value === 'loading') {
       const watcher = watch(VueYandexMaps.loadStatus, (val) => {
         if (!VueYandexMaps.isLoaded.value) return;
 
