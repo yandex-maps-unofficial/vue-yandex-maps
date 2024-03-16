@@ -1,6 +1,12 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
-import { createYmapsOptions } from '../composables/init.ts';
+import { createYmapsOptions, initYmaps } from '../composables/init.ts';
 
-export default defineNuxtPlugin(() => {
-  createYmapsOptions(useRuntimeConfig().public.yandexMaps);
+export default defineNuxtPlugin({
+  async setup() {
+    const settings = useRuntimeConfig().public.yandexMaps;
+    createYmapsOptions(settings);
+    if (import.meta.client && settings.initializeOn === 'onPluginInit') {
+      initYmaps().catch(console.error);
+    }
+  },
 });
