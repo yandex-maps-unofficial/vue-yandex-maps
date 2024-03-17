@@ -4,7 +4,7 @@ import {
   computed, defineComponent, h, onMounted,
 } from 'vue';
 
-import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../../utils/setupMapChildren.ts';
 import type { YMapScaleControl } from '@yandex/ymaps3-types';
 
 export default defineComponent({

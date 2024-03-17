@@ -6,8 +6,6 @@
       }"
     >
       <!-- #region html -->
-      {{ selectedSearch }}
-      {{ selectedSuggest }}
       <div class="inputs">
         <label>
           API Поиска по организациям
@@ -67,7 +65,7 @@
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-  YandexMap, YandexMapDefaultSchemeLayer, YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker,
+  YandexMap, YandexMapDefaultSchemeLayer, YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker, getBoundsFromCoords, getLocationFromBounds,
 } from 'vue-yandex-maps';
 import { ref, shallowRef, watch } from 'vue';
 import type { SearchResponse } from '@yandex/ymaps3-types/imperative/search';
@@ -130,7 +128,7 @@ watch(suggest, async (val) => {
   });
 });
 
-watch([selectedSuggest, selectedSearch], () => {
+watch([selectedSuggest, selectedSearch], async () => {
   if (selectedSuggest.value && !selectedSearch.value) {
     map.value?.setLocation({
       center: selectedSuggest.value,
@@ -143,6 +141,15 @@ watch([selectedSuggest, selectedSearch], () => {
       zoom: 15,
       duration: 300,
     });
+  } else if (selectedSuggest.value && selectedSearch.value) {
+    map.value?.setLocation({
+      ...await getLocationFromBounds({
+        bounds: getBoundsFromCoords([selectedSearch.value, selectedSuggest.value]),
+        map: map.value!,
+        comfortZoomLevel: true,
+      }),
+      duration: 300,
+    });
   }
 });
 // #endregion setup
@@ -150,6 +157,24 @@ watch([selectedSuggest, selectedSearch], () => {
 
 <!-- #region style -->
 <style scoped>
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 48%);
+  justify-content: space-between;
+  margin-bottom: 20px;
 
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    input {
+     padding: 10px;
+      border-radius: 5px;
+      color: var(--vp-button-alt-text);
+      background: var(--vp-button-alt-bg);
+    }
+  }
+}
 </style>
 <!-- #endregion style -->

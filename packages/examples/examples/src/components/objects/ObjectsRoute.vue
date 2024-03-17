@@ -64,7 +64,7 @@
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-  YandexMap, YandexMapDefaultSchemeLayer, YandexMapControls, YandexMapControl, YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker, YandexMapFeature, useYMapsLocationFromBounds,
+  YandexMap, YandexMapDefaultSchemeLayer, YandexMapControls, YandexMapControl, YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker, YandexMapFeature, getLocationFromBounds,
 } from 'vue-yandex-maps';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
 import type {
@@ -138,7 +138,7 @@ const routeHandler = async (newRoute?: RouteFeature) => {
 
   route.value = newRoute;
   if (newRoute.properties.bounds) {
-    const newLocation = await useYMapsLocationFromBounds({
+    const newLocation = await getLocationFromBounds({
       bounds: newRoute.properties.bounds,
       map: map.value!,
     });

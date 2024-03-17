@@ -4,7 +4,7 @@ import type {
 import {
   computed, ref, toRaw, unref,
 } from 'vue';
-import { VueYandexMaps } from '../../namespace.ts';
+import { VueYandexMaps } from '../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
 
 /**

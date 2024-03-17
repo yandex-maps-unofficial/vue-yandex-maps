@@ -1,4 +1,4 @@
-import type { HorizontalPosition, VerticalPosition, YandexMapMarkerCustomProps } from '../../types/marker.ts';
+import type { HorizontalPosition, VerticalPosition, YandexMapMarkerCustomProps } from '../types/marker.ts';
 
 export function getMarkerContainerProps({
   position,

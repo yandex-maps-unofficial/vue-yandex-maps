@@ -8,13 +8,13 @@ import type {
   ComputedRef, PropType, SlotsType, VNode,
 } from 'vue';
 import type { IYMapClusterFeature, YandexMapClustererZoomOptionsObject } from './YandexMapClusterer.vue';
-import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../composables/utils/marker.ts';
+import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../utils/marker.ts';
 import type { LngLatBounds, YMapMarker } from '@yandex/ymaps3-types';
-import { useYMapsLocationFromBounds } from '../../../composables';
-import { sleep } from '../../../composables/utils/system.ts';
+import { sleep } from '../../../utils/system.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { injectMap } from '../../../composables/utils/map.ts';
+import { injectMap } from '../../../utils/map.ts';
+import { getBoundsFromCoords, getLocationFromBounds } from '../../../functions';
 
 export default defineComponent({
   name: 'YandexMapClustererClusters',
@@ -80,30 +80,10 @@ export default defineComponent({
                     props.clusterMarkerProps.onClick?.(e);
 
                     if (clusterer.features.length >= 2) {
-                      const {
-                        minLongitude,
-                        minLatitude,
-                        maxLongitude,
-                        maxLatitude,
-                      } = clusterer.features.map((x) => x.geometry.coordinates)
-                        .reduce(
-                          (acc, [longitude, latitude]) => ({
-                            minLongitude: Math.min(acc.minLongitude, longitude),
-                            minLatitude: Math.min(acc.minLatitude, latitude),
-                            maxLongitude: Math.max(acc.maxLongitude, longitude),
-                            maxLatitude: Math.max(acc.maxLatitude, latitude),
-                          }),
-                          {
-                            minLongitude: Infinity,
-                            minLatitude: Infinity,
-                            maxLongitude: -Infinity,
-                            maxLatitude: -Infinity,
-                          },
-                        );
-
                       const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
 
-                      const bounds: LngLatBounds = [[minLongitude, maxLatitude], [maxLongitude, minLatitude]];
+                      const featuresCoords = clusterer.features.map((x) => x.geometry.coordinates);
+                      const bounds: LngLatBounds = getBoundsFromCoords(featuresCoords);
                       emit('trueBounds', bounds);
 
                       if (!props.zoomOnClusterClick) return;
@@ -111,6 +91,8 @@ export default defineComponent({
                       const defaultDuration = settings.duration ?? 500;
 
                       if (settings.strategy === 'boundsCorrect') {
+                        const [[minLongitude, maxLatitude], [maxLongitude, minLatitude]] = bounds;
+
                         const latDiff = maxLatitude - minLatitude;
                         const longDiff = maxLongitude - minLongitude;
 
@@ -123,19 +105,12 @@ export default defineComponent({
                           easing: settings.easing,
                         });
                       } else {
-                        let { center, zoom } = await useYMapsLocationFromBounds({
+                        const { center, zoom } = await getLocationFromBounds({
                           bounds,
                           map: map.value!,
+                          roundZoom: true,
+                          comfortZoomLevel: true,
                         });
-
-                        const originalZoom = zoom;
-                        zoom = Math.floor(zoom);
-                        const diff = originalZoom - zoom;
-
-                        if (!settings.disableMinimalZoomCorrectDiff && diff < 0.5) {
-                          // Set minimal zoom diff for user's comfort
-                          zoom -= 1;
-                        }
 
                         map.value?.setLocation({
                           center,

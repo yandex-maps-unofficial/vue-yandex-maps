@@ -1,11 +1,11 @@
 import { watch } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
-import { throwException } from './utils/system.ts';
+import { throwException } from '../utils/system.ts';
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   apikey: true,
-  defaultApikeys: true,
+  servicesApikeys: true,
   lang: true,
   initializeOn: true,
   importModules: true,
@@ -58,7 +58,7 @@ export function initYmaps() {
       try {
         await VueYandexMaps.ymaps().ready;
 
-        if (settings.defaultApikeys) VueYandexMaps.ymaps().getDefaultConfig().setApikeys(settings.defaultApikeys);
+        if (settings.servicesApikeys) VueYandexMaps.ymaps().getDefaultConfig().setApikeys(settings.servicesApikeys);
         if (typeof settings.strictMode === 'boolean') VueYandexMaps.ymaps().strictMode = settings.strictMode;
 
         if (settings.importModules) {
@@ -96,7 +96,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings): VueYa
     domain: 'https://api-maps.yandex.ru',
     mapsRenderWaitDuration: true,
     mapsScriptWaitDuration: true,
-    defaultApikeys: {},
+    servicesApikeys: {},
     ...options,
   };
   if (!optionsShallowClone.apikey) {

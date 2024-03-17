@@ -1,5 +1,5 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
-import { createYmapsOptions, initYmaps } from '../composables/init.ts';
+import { createYmapsOptions, initYmaps } from '../functions';
 
 export default defineNuxtPlugin({
   async setup() {

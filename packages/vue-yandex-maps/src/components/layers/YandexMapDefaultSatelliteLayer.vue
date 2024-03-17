@@ -5,7 +5,7 @@ import {
   computed, defineComponent, h, inject, onMounted,
 } from 'vue';
 
-import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../../utils/setupMapChildren.ts';
 import type { ClassType } from '../../types';
 
 export type IYandexMapDefaultSatelliteLayerProps = {

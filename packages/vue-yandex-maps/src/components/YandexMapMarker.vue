@@ -4,9 +4,9 @@ import {
   computed, defineComponent, h, onMounted, ref, watch,
 } from 'vue';
 import type { PropType, SlotsType } from 'vue';
-import { throwException } from '../composables/utils/system.ts';
-import { setupMapChildren } from '../composables/utils/setupMapChildren.ts';
-import { getMarkerContainerProps } from '../composables/utils/marker.ts';
+import { throwException } from '../utils/system.ts';
+import { setupMapChildren } from '../utils/setupMapChildren.ts';
+import { getMarkerContainerProps } from '../utils/marker.ts';
 
 import type { YandexMapMarkerPosition } from '../types/marker.ts';
 

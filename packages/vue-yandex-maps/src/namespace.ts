@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import type { OverloadParameters } from './types/overload-extract.ts';
-import { safeComputed, safeRef } from './composables/utils/system.ts';
+import { safeComputed, safeRef } from './utils/system.ts';
 import type { Apikeys } from '@yandex/ymaps3-types/imperative/config';
 
 export namespace VueYandexMaps {
@@ -32,13 +32,12 @@ export namespace VueYandexMaps {
      */
     apikey: string;
     /**
-     * @description Allows to set default apikeys.
+     * @description Allows to set apikeys for Yandex Services.
      *
-     * It has default in name prefix since it uses `ymaps3.getDefaultConfig` and also to prevent collision with existing `apikey`
      * @note You should only set those on first setup. Will have no effect afterward.
      * @example router for `ymaps3.route` and `suggest` for `ymaps3.suggest`
      */
-    defaultApikeys?: Apikeys;
+    servicesApikeys?: Apikeys;
     /**
      * @see https://yandex.ru/dev/maps/jsapi/doc/3.0/dg/concepts/load.html#parms
      * @see https://yandex.com/dev/maps/jsapi/doc/3.0/dg/concepts/load.html#parms

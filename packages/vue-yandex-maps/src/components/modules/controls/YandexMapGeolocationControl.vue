@@ -5,7 +5,7 @@ import {
 } from 'vue';
 import type { YMapGeolocationControl } from '@yandex/ymaps3-types/packages/controls';
 
-import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapGeolocationControl',

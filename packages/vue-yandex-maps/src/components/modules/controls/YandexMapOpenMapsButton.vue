@@ -5,7 +5,7 @@ import {
 } from 'vue';
 import type { YMapOpenMapsButton } from '@yandex/ymaps3-types/modules/controls-extra';
 
-import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapOpenMapsButton',

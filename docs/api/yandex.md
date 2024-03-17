@@ -1,8 +1,8 @@
 # API ymaps3
 
-> [!IMPORTANT]
+> [!IMPORTANT] Примечание
 > Учтите: данный раздел является альтернативой практически отсутствующей у Яндекса документацией и может не содержать на 100% актуальных данных.
-> 
+>
 > Актуальные данные от самого Яндекса находятся `@yandex/ymaps3-types`. Данный раздел будет поддерживаться настолько актуальным, насколько возможно.
 
 ## geolocation.getPosition
@@ -14,6 +14,7 @@
 ### Возвращает
 
 Promise, в случае успеха, содержащим объект с полями:
+
 - `coords`: координаты в Яндексовом порядке (lon, потом lat). Возвращается всегда
 - `accuracy`: точность местоположения. Возвращается только в том случае, если пользователь разрешил определять геолокацию
 
@@ -41,7 +42,8 @@ await ymaps3.ready;
 import { VueYandexMaps } from 'vue-yandex-maps';
 
 //VueYandexMaps.isLoaded - реактивный ref
-watch(VueYandexMaps.isLoaded, () => {});
+watch(VueYandexMaps.isLoaded, () => {
+});
 const isLoaded = computed(() => VueYandexMaps.isLoaded.value);
 ```
 
@@ -61,22 +63,42 @@ Promise, в случае успеха: массив [Feature](https://yandex.ru/
 
 ### Пример использования
 
-```javascript
-const search = await ymaps3.search({ text: 'Москва' });
-
-console.log(search); //Feature[]
-```
+- [Поиск и Геосаджест](/examples/objects/search.html)
 
 ## suggest
 
-Это [геосаджест](https://yandex.ru/dev/geosuggest/doc/ru/).
+Это [аналог геосаджеста](https://yandex.ru/dev/geosuggest/doc/ru/).
 
-Для работы требуется задать ключ в API, но Яндекс не дает это сделать с ошибкой `ymaps3: can't set up apikeys`.
+Для работы этой функции необходимо указать `suggest` в `servicesApikeys` в настройках инициализации `vue-yandex-maps`. Ключ можно создать в вашем [Кабинете разработчика](https://developer.tech.yandex.ru/services).
+
+### Параметры
+
+[SuggestOptions](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#SuggestOptions). Среди них вы обязаны передать `text` и, по хорошему, `types`.
+
+### Возвращает
+
+Promise, в случае успеха: массив [SuggestResponseItem](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#SuggestResponseItem).
+
+### Пример использования
+
+- [Поиск и Геосаджест](/examples/objects/search.html)
 
 ## route
 
-О предназначении этой функции можно только догадываться: при попытке вызова всегда приходит ошибка "Route requests is not allowed". Надеемся, когда-нибудь она заработает.
+Это [аналог построения маршрута](https://yandex.ru/dev/geosuggest/doc/ru/).
+
+Для работы этой функции необходимо указать `router` в `servicesApikeys` в настройках инициализации `vue-yandex-maps`. Ключ можно создать в вашем [Кабинете разработчика](https://developer.tech.yandex.ru/services).
 
 ### Параметры
 
 [RouteOptions](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#interface-routeoptions). Среди них обязательные: `points` и `type`
+
+### Возвращает
+
+Массив [BaseRouteResponse](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#interface-baserouteresponse), содержащий единственную функцию `toRoute`, которая в свою очередь возвращает [RouteFeature](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#interface-routefeature).
+
+По сути, с помощью этого вы можете использовать `<yandex-map-feature>` для построения линии маршрута.
+
+### Пример использования
+
+- [Построение маршрута между двумя точками](/examples/objects/route.html)
