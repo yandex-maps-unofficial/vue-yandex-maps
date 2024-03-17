@@ -27,6 +27,10 @@ const coordinates: LngLat = [37.617644, 55.755819];
 if (!VueYandexMaps.settings.value.apikey) {
   createYmapsOptions({
     apikey: '9fa90fbc-ce5f-4dc9-ae6d-433e0ec7338b',
+    servicesApikeys: {
+      suggest: '78bc9294-13ad-4d98-b092-220daa9e3373',
+      router: '074076a7-d9eb-488a-9061-1c6ba6e011aa',
+    },
   });
 }
 </script>

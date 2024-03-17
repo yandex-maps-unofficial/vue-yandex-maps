@@ -1,10 +1,11 @@
 import { watch } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
-import { throwException } from './utils/system.ts';
+import { throwException } from '../utils/system.ts';
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   apikey: true,
+  servicesApikeys: true,
   lang: true,
   initializeOn: true,
   importModules: true,
@@ -57,11 +58,8 @@ export function initYmaps() {
       try {
         await VueYandexMaps.ymaps().ready;
 
-        // @ts-expect-error
-        ymaps3.getDefaultConfig().setApikeys({ router: 'test123' });
-
-        // @ts-ignore Yandex forgot to specify strictMode in types
-        if (settings.strictMode) VueYandexMaps.ymaps().strictMode = true;
+        if (settings.servicesApikeys) VueYandexMaps.ymaps().getDefaultConfig().setApikeys(settings.servicesApikeys);
+        if (typeof settings.strictMode === 'boolean') VueYandexMaps.ymaps().strictMode = settings.strictMode;
 
         if (settings.importModules) {
           await Promise.all(
@@ -98,6 +96,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings): VueYa
     domain: 'https://api-maps.yandex.ru',
     mapsRenderWaitDuration: true,
     mapsScriptWaitDuration: true,
+    servicesApikeys: {},
     ...options,
   };
   if (!optionsShallowClone.apikey) {

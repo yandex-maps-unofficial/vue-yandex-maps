@@ -6,7 +6,7 @@ import {
 import type { Cartesian } from '@yandex/ymaps3-types/packages/cartesian-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
-import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapCartesianProjection',

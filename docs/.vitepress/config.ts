@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress';
 import packageJson from '../../packages/vue-yandex-maps/package.json' assert { type: 'json' };
+import { getLocationFromBounds } from '../../packages/vue-yandex-maps/src/functions';
 
 export default defineConfig({
   base: '/vue-yandex-maps/',
@@ -341,25 +342,48 @@ export default defineConfig({
             link: '/api/',
           },
           {
-            text: 'Инстанс VueYandexMaps',
-            link: '/api/namespace',
+            text: 'Инициализация карты',
+            items: [
+              {
+                text: 'Инстанс VueYandexMaps',
+                link: '/api/namespace',
+              },
+              {
+                text: 'initYmaps',
+                link: '/api/init-ymaps',
+              },
+            ]
           },
           {
-            text: 'useYMapsLocationFromBounds',
-            link: '/api/location-from-bounds',
+            text: 'Вспомогательные методы',
+            items: [
+              {
+                text: 'getLocationFromBounds',
+                link: '/api/location-from-bounds',
+              },
+              {
+                text: 'getCenterFromCoords',
+                link: '/api/center-from-coords',
+              },
+              {
+                text: 'getBoundsFromCoords',
+                link: '/api/bounds-from-coords',
+              },
+            ]
           },
           {
-            text: 'initYmaps',
-            link: '/api/init-ymaps',
-          },
-          {
-            text: 'API ymaps3',
-            link: '/api/yandex',
-          },
-          {
-            text: 'Yandex Maps API',
-            link: '/api/yandex-maps-api',
-          },
+            text: 'Внешние методы',
+            items: [
+              {
+                text: 'API ymaps3',
+                link: '/api/yandex',
+              },
+              {
+                text: 'Yandex Maps API',
+                link: '/api/yandex-maps-api',
+              },
+            ]
+          }
         ],
       },
       {
@@ -476,6 +500,14 @@ export default defineConfig({
               {
                 text: 'Подсказка при наведении на элементы карты',
                 link: '/examples/objects/hints',
+              },
+              {
+                text: 'Построение маршрута между точками',
+                link: '/examples/objects/route',
+              },
+              {
+                text: 'Поиск и Геосаджест',
+                link: '/examples/objects/search',
               },
             ],
           },

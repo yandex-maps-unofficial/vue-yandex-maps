@@ -3,7 +3,7 @@ import {
   getCurrentInstance, inject, isRef, watch,
 } from 'vue';
 import { throwException } from './system.ts';
-import { VueYandexMaps } from '../../namespace.ts';
+import { VueYandexMaps } from '../namespace.ts';
 import type { YMap, YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 

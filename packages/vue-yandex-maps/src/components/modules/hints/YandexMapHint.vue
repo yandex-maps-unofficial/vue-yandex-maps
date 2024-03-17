@@ -5,7 +5,7 @@ import {
 } from 'vue';
 import type { YMapHint } from '@yandex/ymaps3-types/packages/hint';
 
-import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapHint',

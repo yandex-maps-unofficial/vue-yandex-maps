@@ -6,7 +6,7 @@ import {
 import type { PropType, SlotsType } from 'vue';
 import type { YMapControl } from '@yandex/ymaps3-types';
 
-import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../../utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapControl',

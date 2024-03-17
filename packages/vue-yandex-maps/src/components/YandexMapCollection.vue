@@ -5,7 +5,7 @@ import {
   defineComponent, h, onMounted, shallowRef,
 } from 'vue';
 
-import { setupMapChildren } from '../composables/utils/setupMapChildren.ts';
+import { setupMapChildren } from '../utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapCollection',

@@ -4,8 +4,8 @@ import {
   computed, defineComponent, h, onMounted, ref,
 } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
-import { throwException } from '../../../composables/utils/system.ts';
-import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import { throwException } from '../../../utils/system.ts';
+import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 import type { DefaultMarkerCustomProps } from '@yandex/ymaps3-types/packages/markers/YMapDefaultMarker';
 
 type Settings = ConstructorParameters<typeof YMapDefaultMarker>[0]

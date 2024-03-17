@@ -1,7 +1,7 @@
 import type {
   LngLat, LngLatBounds, Margin, YMap, ZoomRange,
 } from '@yandex/ymaps3-types';
-import { getException, throwException } from './utils/system.ts';
+import { getException, throwException } from '../utils/system.ts';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
 interface Coords {
@@ -106,10 +106,46 @@ function findCenter(projection: Projection, bounds: LngLatBounds, zoom: number) 
   }, zoom);
 }
 
-export async function useYMapsLocationFromBounds({
+type YandexMapGetLocationFromBoundsRoundStrategy = 'floor' | 'round' | 'ceil'
+
+export interface YandexMapGetLocationFromBoundsOptions {
+  bounds: LngLatBounds
+  map: YMap
+  /**
+   * @description If true, defaults to floor
+   * @note also used in comfortZoomLevel
+   */
+  roundZoom?: boolean | YandexMapGetLocationFromBoundsRoundStrategy
+  /**
+   * @description If true, corrects zoom by 1 level if diff from closest Math[roundZoom || 'floor'] value is less than 0.5
+   * @example 16.8 -> 16.8
+   * @example 16.5 -> 16.5
+   * @example 16.4 -> 16
+   */
+  comfortZoomLevel?: boolean | {
+    /**
+     * @description max diff from closest Math[roundZoom || 'floor'] value to start correction
+     * @default 0.5
+     */
+    diff?: number
+    /**
+     * @description how much to correct zoom
+     * @default 1
+     */
+    correction?: number
+    /**
+     * @default roundZoom is string, 'floor' otherwise
+     */
+    roundStrategy?: YandexMapGetLocationFromBoundsRoundStrategy
+  }
+}
+
+export async function getLocationFromBounds({
   bounds,
   map,
-}: { bounds: LngLatBounds, map: YMap }) {
+  roundZoom,
+  comfortZoomLevel,
+}: YandexMapGetLocationFromBoundsOptions) {
   const ctxMap = Object.keys(map)
     .find((x) => x.endsWith('CtxMap'));
   if (!ctxMap) {
@@ -160,10 +196,40 @@ export async function useYMapsLocationFromBounds({
   const isSnap = ctxItemMap.effectiveZoomRounding === 'snap';
   const zoomRange = ctxItemMap.zoomRange;
 
-  const zoom = findZoom(projection, bounds, applyMarginToCoords(size, margin), isSnap, zoomRange);
+  let zoom = findZoom(projection, bounds, applyMarginToCoords(size, margin), isSnap, zoomRange);
+  const center = findCenter(projection, bounds, zoom);
+
+  if (roundZoom || comfortZoomLevel) {
+    const originalZoom = zoom;
+    let roundedZoom = Math[typeof roundZoom === 'string' ? roundZoom : 'floor'](zoom);
+
+    if (roundZoom) zoom = roundedZoom;
+
+    if (comfortZoomLevel) {
+      const userSettings = typeof comfortZoomLevel === 'object' ? comfortZoomLevel : {};
+      if (userSettings.roundStrategy) roundedZoom = Math[userSettings.roundStrategy](originalZoom);
+
+      const diff = originalZoom - roundedZoom;
+
+      const settings = {
+        diff: 0.5,
+        correction: 1,
+        ...userSettings,
+      } satisfies typeof userSettings;
+
+      if (diff < settings.diff) {
+        zoom -= settings.correction;
+      }
+    }
+  }
 
   return {
     zoom,
-    center: findCenter(projection, bounds, zoom),
+    center,
   };
 }
+
+/**
+ * @deprecated Use getLocationFromBounds instead
+ */
+export const useYMapsLocationFromBounds = getLocationFromBounds;

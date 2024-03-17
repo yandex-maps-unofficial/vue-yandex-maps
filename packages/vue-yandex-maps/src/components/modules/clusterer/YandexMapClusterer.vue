@@ -8,8 +8,8 @@ import type {
   LngLatBounds, YMapCollection, YMapEntity, YMapMarker,
 } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { throwException } from '../../../composables/utils/system.ts';
-import { setupMapChildren } from '../../../composables/utils/setupMapChildren.ts';
+import { throwException } from '../../../utils/system.ts';
+import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/types';
 import YandexMapClustererClusters from './YandexMapClustererClusters.vue';

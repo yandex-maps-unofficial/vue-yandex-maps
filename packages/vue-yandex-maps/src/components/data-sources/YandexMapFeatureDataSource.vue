@@ -4,8 +4,8 @@ import type { PropType, Ref, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, inject, onMounted,
 } from 'vue';
-import { throwException } from '../../composables/utils/system.ts';
-import { setupMapChildren } from '../../composables/utils/setupMapChildren.ts';
+import { throwException } from '../../utils/system.ts';
+import { setupMapChildren } from '../../utils/setupMapChildren.ts';
 
 export default defineComponent({
   name: 'YandexMapFeatureDataSource',
