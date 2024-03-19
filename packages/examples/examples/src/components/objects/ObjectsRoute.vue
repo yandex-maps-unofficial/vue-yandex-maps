@@ -64,13 +64,23 @@
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-  YandexMap, YandexMapDefaultSchemeLayer, YandexMapControls, YandexMapControl, YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker, YandexMapFeature, getLocationFromBounds,
+  YandexMap,
+  YandexMapDefaultSchemeLayer,
+  YandexMapControls,
+  YandexMapControl,
+  YandexMapDefaultFeaturesLayer,
+  YandexMapDefaultMarker,
+  YandexMapFeature,
+  getLocationFromBounds,
+  VueYandexMaps,
 } from 'vue-yandex-maps';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
 import type {
   DrawingStyle, LngLat, RouteFeature, YMap, YMapMarkerEventHandler,
 } from '@yandex/ymaps3-types';
-import { ref, onMounted, shallowRef } from 'vue';
+import {
+  ref, shallowRef, watch,
+} from 'vue';
 
 const location = ref<YMapLocationRequest>({
   center: [37.623082, 55.75254], // starting position [lng, lat]
@@ -91,14 +101,21 @@ const lineStyle: DrawingStyle = {
   fill: '#333',
   fillOpacity: 0.9,
   stroke: [
-    { width: 6, color: '#007afce6' },
-    { width: 10, color: '#fff' },
+    {
+      width: 6,
+      color: '#007afce6',
+    },
+    {
+      width: 10,
+      color: '#fff',
+    },
   ],
 };
 
 // Converting [Lng, Lat] coordinates to string format
 function getPointStr(point: LngLat) {
-  return point.map((c) => c!.toFixed(4)).join('; ');
+  return point.map((c) => c!.toFixed(4))
+    .join('; ');
 }
 
 const pointASubtitle = ref(getPointStr(INITIAL_ROUTE_POINTS[0]));
@@ -144,14 +161,21 @@ const routeHandler = async (newRoute?: RouteFeature) => {
     });
 
     // Чтобы маршрут всегда помещался на экран
-    location.value = { center: newLocation.center, zoom: Math.floor(newLocation.zoom) - 1, duration: 300 };
+    location.value = {
+      center: newLocation.center,
+      zoom: Math.floor(newLocation.zoom) - 1,
+      duration: 300,
+    };
   }
 };
 
-// Get and process route data during the first rendering
-onMounted(async () => {
+watch(VueYandexMaps.loadStatus, async (status) => {
+  if (status !== 'loaded') return;
+
   const fetchedRoute = await fetchRoute(pointACoordinates.value, pointBCoordinates.value);
-  routeHandler(fetchedRoute);
+  await routeHandler(fetchedRoute);
+}, {
+  immediate: true,
 });
 
 // The handler functions for updating the coordinates and subtitle of the marker when dragging
@@ -166,7 +190,8 @@ const onDragMovePointBHandler: YMapMarkerEventHandler = (coordinates: LngLat) =>
 
 // The handler function for updating route data after dragging the marker
 const onDragEndHandler: YMapMarkerEventHandler = () => {
-  fetchRoute(pointACoordinates.value, pointBCoordinates.value).then(routeHandler);
+  fetchRoute(pointACoordinates.value, pointBCoordinates.value)
+    .then(routeHandler);
 };
 // #endregion setup
 </script>
