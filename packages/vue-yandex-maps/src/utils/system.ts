@@ -88,7 +88,7 @@ export function getException({
     text += ' This is likely Vue Yandex Maps internal bug.';
 
     if (isDev()) {
-      text += ' You can report this bug here: https://github.com/PNKBizz/vue-yandex-maps/issues/new/choose';
+      text += ' You can report this bug here: https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/new/choose';
     }
   }
 
