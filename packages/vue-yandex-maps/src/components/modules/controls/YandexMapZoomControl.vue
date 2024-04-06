@@ -6,6 +6,7 @@ import {
 import type { YMapZoomControl } from '@yandex/ymaps3-types/packages/controls';
 
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { hVue2 } from '../../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapZoomControl',
@@ -51,7 +52,7 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

@@ -6,6 +6,7 @@ import {
 import type { YMapOpenMapsButton } from '@yandex/ymaps3-types/modules/controls-extra';
 
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { hVue2 } from '../../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapOpenMapsButton',
@@ -52,7 +53,7 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

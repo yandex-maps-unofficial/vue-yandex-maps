@@ -5,9 +5,11 @@ import {
 } from 'vue';
 import type { YMapEntity } from '@yandex/ymaps3-types';
 import { setupMapChildren } from '../utils/setupMapChildren.ts';
+import { getAttrsForVueVersion, hF } from '../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapEntity',
+  inheritAttrs: false,
   props: {
     value: {
       type: Object as PropType<YMapEntity<any> | null>,
@@ -32,6 +34,7 @@ export default defineComponent({
   setup(props, {
     slots,
     emit,
+    attrs,
   }) {
     let mapChildren: YMapEntity<any> | undefined;
     const element = ref<null | HTMLDivElement>(null);
@@ -64,9 +67,12 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', {
-      ref: element,
-    }, slots.default?.({}));
+    return () => hF([
+      h('div', {
+        ref: element,
+        ...getAttrsForVueVersion(attrs),
+      }, slots.default?.({})),
+    ]);
   },
 });
 </script>

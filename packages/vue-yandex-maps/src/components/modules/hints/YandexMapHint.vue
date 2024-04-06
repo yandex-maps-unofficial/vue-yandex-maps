@@ -6,6 +6,7 @@ import {
 import type { YMapHint } from '@yandex/ymaps3-types/packages/hint';
 
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { getAttrsForVueVersion, hF } from '../../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapHint',
@@ -40,6 +41,7 @@ export default defineComponent({
   setup(props, {
     slots,
     emit,
+    attrs,
   }) {
     let mapChildren: YMapHint | undefined;
     const element = shallowRef<null | HTMLDivElement>(null);
@@ -84,9 +86,12 @@ export default defineComponent({
       emit('update:modelValue', mapChildren!);
     });
 
-    return () => h('div', {
-      ref: element,
-    }, slots.default?.({ content: hintContent.value }));
+    return () => hF([
+      h('div', {
+        ref: element,
+        ...getAttrsForVueVersion(attrs),
+      }, slots.default?.({ content: hintContent.value })),
+    ]);
   },
 });
 </script>

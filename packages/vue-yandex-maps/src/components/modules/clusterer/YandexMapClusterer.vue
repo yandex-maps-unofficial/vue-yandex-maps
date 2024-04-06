@@ -8,7 +8,7 @@ import type {
   LngLatBounds, YMapCollection, YMapEntity, YMapMarker,
 } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { throwException } from '../../../utils/system.ts';
+import { isVue2, throwException } from '../../../utils/system.ts';
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/types';
@@ -237,7 +237,7 @@ export default defineComponent({
     return () => {
       if (!mapChildren.value) return h('div');
 
-      if (version.startsWith('2')) {
+      if (isVue2()) {
         return h('div', [
           ...slots.default?.({}) || [],
           h(YandexMapClustererClusters, {

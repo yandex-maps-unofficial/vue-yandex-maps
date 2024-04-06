@@ -56,7 +56,7 @@ export default defineComponent({
       hold.value--;
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => slots.default?.({});
   },
 });
 </script>

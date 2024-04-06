@@ -10,7 +10,7 @@ import type {
 import type { IYMapClusterFeature, YandexMapClustererZoomOptionsObject } from './YandexMapClusterer.vue';
 import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../utils/marker.ts';
 import type { LngLatBounds, YMapMarker } from '@yandex/ymaps3-types';
-import { sleep } from '../../../utils/system.ts';
+import { hF, isVue2, sleep } from '../../../utils/system.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
 import { injectMap } from '../../../utils/map.ts';
@@ -61,90 +61,94 @@ export default defineComponent({
         .map(({
           clusterer,
           element,
-        }, index) => h(
-          'div',
-          {
-            ...containerProps.value.root,
-            key: clusterer.clusterId,
-            ref: async (item) => {
-              if (!item) return;
-              if (element.children.length) return;
+        }, index) => hF([
+          h(
+            'div',
+            {
+              ...containerProps.value.root,
+              key: clusterer.clusterId,
+              ref: async (_item) => {
+                if (!_item) return;
+                const item = _item as HTMLDivElement;
 
-              await nextTick();
+                if (element.children.length && !isVue2()) {
+                  item.parentNode?.removeChild(item);
+                  return;
+                }
 
-              try {
-                element.addChild(new ymaps3.YMapMarker({
-                  ...excludeYandexMarkerProps(props.clusterMarkerProps),
-                  coordinates: clusterer.lnglat,
-                  onClick: async (e) => {
-                    props.clusterMarkerProps.onClick?.(e);
+                await nextTick();
 
-                    if (clusterer.features.length >= 2) {
-                      const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
+                try {
+                  element.addChild(new ymaps3.YMapMarker({
+                    ...excludeYandexMarkerProps(props.clusterMarkerProps),
+                    coordinates: clusterer.lnglat,
+                    onClick: async (e) => {
+                      props.clusterMarkerProps.onClick?.(e);
 
-                      const featuresCoords = clusterer.features.map((x) => x.geometry.coordinates);
-                      const bounds: LngLatBounds = getBoundsFromCoords(featuresCoords);
-                      emit('trueBounds', bounds);
+                      if (clusterer.features.length >= 2) {
+                        const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
 
-                      if (!props.zoomOnClusterClick) return;
+                        const featuresCoords = clusterer.features.map((x) => x.geometry.coordinates);
+                        const bounds: LngLatBounds = getBoundsFromCoords(featuresCoords);
+                        emit('trueBounds', bounds);
 
-                      const defaultDuration = settings.duration ?? 500;
+                        if (!props.zoomOnClusterClick) return;
 
-                      if (settings.strategy === 'boundsCorrect') {
-                        const [[minLongitude, maxLatitude], [maxLongitude, minLatitude]] = bounds;
+                        const defaultDuration = settings.duration ?? 500;
 
-                        const latDiff = maxLatitude - minLatitude;
-                        const longDiff = maxLongitude - minLongitude;
+                        if (settings.strategy === 'boundsCorrect') {
+                          const [[minLongitude, maxLatitude], [maxLongitude, minLatitude]] = bounds;
 
-                        const updatedBounds: LngLatBounds = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
-                        emit('updatedBounds', updatedBounds);
+                          const latDiff = maxLatitude - minLatitude;
+                          const longDiff = maxLongitude - minLongitude;
 
-                        map.value?.setLocation({
-                          bounds: updatedBounds,
-                          duration: defaultDuration,
-                          easing: settings.easing,
-                        });
-                      } else {
-                        const { center, zoom } = await getLocationFromBounds({
-                          bounds,
-                          map: map.value!,
-                          roundZoom: true,
-                          comfortZoomLevel: true,
-                        });
+                          const updatedBounds: LngLatBounds = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
+                          emit('updatedBounds', updatedBounds);
 
-                        map.value?.setLocation({
-                          center,
-                          zoom,
-                          duration: defaultDuration,
-                          easing: settings.easing,
-                        });
+                          map.value?.setLocation({
+                            bounds: updatedBounds,
+                            duration: defaultDuration,
+                            easing: settings.easing,
+                          });
+                        } else {
+                          const { center, zoom } = await getLocationFromBounds({
+                            bounds,
+                            map: map.value!,
+                            roundZoom: true,
+                            comfortZoomLevel: true,
+                          });
 
-                        await sleep(defaultDuration + 50);
-                        if (map.value) emit('updatedBounds', map.value.bounds);
+                          map.value?.setLocation({
+                            center,
+                            zoom,
+                            duration: defaultDuration,
+                            easing: settings.easing,
+                          });
+
+                          await sleep(defaultDuration + 50);
+                          if (map.value) emit('updatedBounds', map.value.bounds);
+                        }
                       }
-                    }
-                  },
-                }, item as HTMLDivElement));
-              } catch (e) {
-                console.error(e);
-              }
+                    },
+                  }, item as HTMLDivElement));
+                } catch (e) {
+                  console.error(e);
+                }
+              },
             },
-          },
-          [
-            h('div', {
-              ...containerProps.value.children,
-            }, slots.default?.({
-              clusterer,
-              coordinates: clusterer.lnglat,
-              length: clusterer.features.length,
-            })),
-          ],
-        ));
+            [
+              h('div', {
+                ...containerProps.value.children,
+              }, slots.default?.({
+                clusterer,
+                coordinates: clusterer.lnglat,
+                length: clusterer.features.length,
+              })),
+            ],
+          ),
+        ]));
 
-      return h('div', {
-        key: features!.value.map((x) => x.clusterer.clusterId)
-          .join(','),
-      }, [clusterSlots]);
+      return hF(clusterSlots);
     };
   },
 });

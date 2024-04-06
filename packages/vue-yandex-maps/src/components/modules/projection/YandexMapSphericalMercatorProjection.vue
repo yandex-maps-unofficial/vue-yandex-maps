@@ -6,6 +6,7 @@ import {
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { hVue2 } from '../../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapSphericalMercatorProjection',
@@ -60,7 +61,7 @@ export default defineComponent({
       hold.value--;
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

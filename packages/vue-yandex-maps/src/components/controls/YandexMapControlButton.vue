@@ -6,6 +6,7 @@ import {
 import type { YMapControlButton } from '@yandex/ymaps3-types';
 
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { getAttrsForVueVersion, hF } from '../../utils/system.ts';
 
 export type YandexMapControlButtonSettings = Omit<ConstructorParameters<typeof YMapControlButton>[0], 'element' | 'text'>
 
@@ -39,6 +40,7 @@ export default defineComponent({
   setup(props, {
     slots,
     emit,
+    attrs,
   }) {
     let mapChildren: YMapControlButton | undefined;
     const element = ref<null | HTMLDivElement>(null);
@@ -60,9 +62,12 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', {
-      ref: element,
-    }, slots.default?.({}));
+    return () => hF([
+      h('div', {
+        ref: element,
+        ...getAttrsForVueVersion(attrs),
+      }, slots.default?.({})),
+    ]);
   },
 });
 </script>

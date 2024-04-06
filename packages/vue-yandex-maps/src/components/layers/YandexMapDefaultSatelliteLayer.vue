@@ -7,6 +7,7 @@ import {
 
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';
 import type { ClassType } from '../../types';
+import { hVue2 } from '../../utils/system.ts';
 
 export type IYandexMapDefaultSatelliteLayerProps = {
   /** Should show layer */
@@ -66,7 +67,7 @@ export default defineComponent({
       hold.value--;
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

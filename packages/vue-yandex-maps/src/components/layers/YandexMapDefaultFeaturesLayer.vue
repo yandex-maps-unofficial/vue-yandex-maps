@@ -6,6 +6,7 @@ import {
 } from 'vue';
 
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { hVue2 } from '../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapDefaultFeaturesLayer',
@@ -56,7 +57,7 @@ export default defineComponent({
       hold.value--;
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

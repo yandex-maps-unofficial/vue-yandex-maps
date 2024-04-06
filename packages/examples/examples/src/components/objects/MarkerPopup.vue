@@ -38,7 +38,7 @@
               class="marker-popup"
               @click="close()"
             >
-              Click me to close popup
+              Click me to close popup {{ reactivityTestCounter }}
             </div>
           </template>
         </yandex-map-default-marker>
@@ -99,7 +99,7 @@ import {
   YandexMapMarker,
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
-import { ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import type { LngLat } from '@yandex/ymaps3-types';
 
 const markers: {coordinates: LngLat}[] = [
@@ -115,6 +115,11 @@ const markers: {coordinates: LngLat}[] = [
 ];
 
 const openMarker = ref<null | number>(null);
+const reactivityTestCounter = ref(0);
+onMounted(() => {
+  const interval = setInterval(() => reactivityTestCounter.value++, 1000);
+  onBeforeUnmount(() => clearInterval(interval));
+});
 // #endregion setup
 </script>
 
