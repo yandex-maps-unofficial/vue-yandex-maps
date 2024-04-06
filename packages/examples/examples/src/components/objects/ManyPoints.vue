@@ -101,12 +101,12 @@ import {
   YandexMapControlButton,
   YandexMapControls,
   YandexMapDefaultFeaturesLayer,
-  YandexMapDefaultSchemeLayer,
   YandexMapMarker,
+  YandexMapDefaultSchemeLayer,
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import {
-  computed, onMounted, ref, shallowRef, version, watch,
+  computed, onMounted, ref, shallowRef, watch, version,
 } from 'vue';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
 import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';

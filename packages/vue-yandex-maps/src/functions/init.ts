@@ -1,7 +1,7 @@
 import { watch } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
-import YandexMapException = VueYandexMaps.YandexMapException;
 import { throwException } from '../utils/system.ts';
+import YandexMapException = VueYandexMaps.YandexMapException;
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
   apikey: true,
@@ -42,6 +42,11 @@ export function initYmaps() {
     VueYandexMaps.loadStatus.value = 'loading';
 
     const settings = VueYandexMaps.settings.value;
+    if (!settings.apikey) {
+      throwException({
+        text: 'apikey was not set for Yandex Maps initialization. Ensure you have attached needed plugins or called createYmapsOptions with apikey. If you need delayed init, please use VueYandexMaps.isReadyToInit computed as v-if.',
+      });
+    }
 
     const yandexMapScript = document.createElement('SCRIPT');
     const url = new URL(`${settings.domain}/${settings.version}/`);
@@ -58,7 +63,11 @@ export function initYmaps() {
       try {
         await VueYandexMaps.ymaps().ready;
 
-        if (settings.servicesApikeys) VueYandexMaps.ymaps().getDefaultConfig().setApikeys(settings.servicesApikeys);
+        if (settings.servicesApikeys) {
+          VueYandexMaps.ymaps()
+            .getDefaultConfig()
+            .setApikeys(settings.servicesApikeys);
+        }
         if (typeof settings.strictMode === 'boolean') VueYandexMaps.ymaps().strictMode = settings.strictMode;
 
         if (settings.importModules) {
@@ -85,7 +94,10 @@ export function initYmaps() {
   });
 }
 
-export function createYmapsOptions(options: VueYandexMaps.PluginSettings): VueYandexMaps.PluginSettings {
+export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignoreNoCurrentInstance = false): VueYandexMaps.PluginSettings {
+  // Only init once
+  if (VueYandexMaps.isReadyToInit.value) return VueYandexMaps.settings.value;
+
   // Using DefProductSettings to ensure all non-required fields will always have default value
   const optionsShallowClone: VueYandexMaps.DefProductSettings = {
     lang: 'ru_RU',
@@ -113,6 +125,9 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings): VueYa
         .join(', ')} are allowed.`,
     });
   }
+
+  // Don't modify ref on SSR
+  if (typeof window === 'undefined') return optionsShallowClone;
 
   VueYandexMaps.settings.value = optionsShallowClone;
 
