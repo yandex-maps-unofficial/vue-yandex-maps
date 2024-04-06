@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted,
+  computed, defineComponent, onMounted,
 } from 'vue';
 
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';
 import type { YMapScaleControl } from '@yandex/ymaps3-types';
-import { hF, hVue2 } from '../../utils/system.ts';
+import { hVue2 } from '../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapScaleControl',

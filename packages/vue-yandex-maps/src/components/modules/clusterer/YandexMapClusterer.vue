@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, nextTick, onMounted, provide, shallowRef, watch, version,
+  computed, defineComponent, h, nextTick, onMounted, provide, shallowRef, watch,
 } from 'vue';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 import type {

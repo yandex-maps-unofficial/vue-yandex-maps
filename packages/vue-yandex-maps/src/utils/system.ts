@@ -138,7 +138,7 @@ export async function setFragment() {
     return;
   }
 
-  fragment = (await import('@vue/runtime-core')).Fragment;
+  fragment = (await import('vue')).Fragment;
 }
 
 export function hF(children: VNodeArrayChildren, props?: (VNodeProps & Record<string, any>) | null) {

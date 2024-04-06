@@ -2,7 +2,7 @@
 import type { YMapFeature } from '@yandex/ymaps3-types';
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted,
+  computed, defineComponent, onMounted,
 } from 'vue';
 import { hVue2, throwException } from '../utils/system.ts';
 import { setupMapChildren } from '../utils/setupMapChildren.ts';

@@ -2,7 +2,7 @@
 import type { YMapTileDataSource } from '@yandex/ymaps3-types';
 import type { PropType, Ref, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, inject, onMounted,
+  computed, defineComponent, inject, onMounted,
 } from 'vue';
 import { hVue2, throwException } from '../../utils/system.ts';
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';

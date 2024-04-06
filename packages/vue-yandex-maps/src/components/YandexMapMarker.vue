@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import {
-  nextTick, watch,
+  watch,
   computed, defineComponent, h, onMounted, ref,
 } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import {
-  getAttrsForVueVersion, hF, sleep, throwException,
+  getAttrsForVueVersion, hF, throwException,
 } from '../utils/system.ts';
 import { setupMapChildren } from '../utils/setupMapChildren.ts';
 import { getMarkerContainerProps } from '../utils/marker.ts';

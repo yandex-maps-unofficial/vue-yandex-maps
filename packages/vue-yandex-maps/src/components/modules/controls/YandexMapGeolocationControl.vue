@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted,
+  computed, defineComponent, onMounted,
 } from 'vue';
 import type { YMapGeolocationControl } from '@yandex/ymaps3-types/packages/controls';
 

@@ -2,7 +2,7 @@
 import type { YMapDefaultSchemeLayer } from '@yandex/ymaps3-types';
 import type { PropType, Ref, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, inject, onMounted,
+  computed, defineComponent, inject, onMounted,
 } from 'vue';
 
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';

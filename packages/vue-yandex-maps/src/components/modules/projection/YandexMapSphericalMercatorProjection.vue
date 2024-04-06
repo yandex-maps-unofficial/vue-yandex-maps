@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PropType, Ref, SlotsType } from 'vue';
 import {
-  defineComponent, h, inject, onMounted,
+  defineComponent, inject, onMounted,
 } from 'vue';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
