@@ -98,10 +98,6 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    watch(element, () => {
-      if (element.value) element.value.parentNode?.removeChild(element.value);
-    });
-
     const rootProps = computed(() => getMarkerContainerProps({
       position: props.position,
       containerAttrs: props.containerAttrs,
