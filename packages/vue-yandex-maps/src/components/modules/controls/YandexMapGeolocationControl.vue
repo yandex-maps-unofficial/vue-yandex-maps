@@ -1,11 +1,12 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted,
+  computed, defineComponent, onMounted,
 } from 'vue';
 import type { YMapGeolocationControl } from '@yandex/ymaps3-types/packages/controls';
 
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { hVue2 } from '../../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapGeolocationControl',
@@ -52,7 +53,7 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

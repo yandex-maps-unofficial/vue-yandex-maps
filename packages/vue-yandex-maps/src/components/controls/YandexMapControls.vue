@@ -4,7 +4,7 @@ import type { PropType, Ref, SlotsType } from 'vue';
 import {
   computed, defineComponent, h, onMounted, shallowRef,
 } from 'vue';
-import { throwException } from '../../utils/system.ts';
+import { hVue2, throwException } from '../../utils/system.ts';
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';
 
 export default defineComponent({
@@ -57,7 +57,7 @@ export default defineComponent({
       emit('update:modelValue', mapChildren.value);
     });
 
-    return () => (mapChildren.value ? h('div', slots.default?.({})) : h('div'));
+    return () => (mapChildren.value ? hVue2(slots.default?.({})) : h('div'));
   },
 });
 </script>

@@ -1,10 +1,13 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import {
-  computed, defineComponent, h, onMounted, ref, watch,
+  watch,
+  computed, defineComponent, h, onMounted, ref,
 } from 'vue';
 import type { PropType, SlotsType } from 'vue';
-import { throwException } from '../utils/system.ts';
+import {
+  getAttrsForVueVersion, hF, throwException,
+} from '../utils/system.ts';
 import { setupMapChildren } from '../utils/setupMapChildren.ts';
 import { getMarkerContainerProps } from '../utils/marker.ts';
 
@@ -12,6 +15,7 @@ import type { YandexMapMarkerPosition } from '../types/marker.ts';
 
 export default defineComponent({
   name: 'YandexMapMarker',
+  inheritAttrs: false,
   props: {
     value: {
       type: Object as PropType<YMapMarker | null>,
@@ -78,6 +82,7 @@ export default defineComponent({
   setup(props, {
     slots,
     emit,
+    attrs,
   }) {
     let mapChildren: YMapMarker | undefined;
 
@@ -109,13 +114,16 @@ export default defineComponent({
       zeroSizes: props.zeroSizes,
     }));
 
-    return () => h('div', {
-      ...rootProps.value.root,
-      ref: element,
-    }, [
+    return () => hF([
       h('div', {
-        ...rootProps.value.children,
-      }, slots.default?.({})),
+        ...rootProps.value.root,
+        ref: element,
+        ...getAttrsForVueVersion(attrs),
+      }, [
+        h('div', {
+          ...rootProps.value.children,
+        }, slots.default?.({})),
+      ]),
     ]);
   },
 });

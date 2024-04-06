@@ -1,12 +1,13 @@
 <script lang="ts">
 import type { PropType, Ref, SlotsType } from 'vue';
 import {
-  defineComponent, h, inject, onMounted,
+  defineComponent, inject, onMounted,
 } from 'vue';
 import type { Cartesian } from '@yandex/ymaps3-types/packages/cartesian-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { hVue2 } from '../../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapCartesianProjection',
@@ -64,7 +65,7 @@ export default defineComponent({
       hold.value--;
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

@@ -13,7 +13,12 @@ Namespace с настройками Vue Yandex Maps.
 См. гайды по установке.
 
 ### [initYmaps](/api/init-ymaps)
+
 Функция инициализации скрипта Яндекс Карт.
+
+### [createYmapsOptions](/api/create-options)
+
+Ручная инициализация библиотеки.
 
 ## Вспомогательные методы
 

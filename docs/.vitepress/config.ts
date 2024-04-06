@@ -73,6 +73,10 @@ export default defineConfig({
             link: '/guide/vue2',
           },
           {
+            text: 'Установка вручную',
+            link: '/guide/manual',
+          },
+          {
             text: 'Конфигурация',
             link: '/guide/configuration',
           },
@@ -141,6 +145,7 @@ export default defineConfig({
           {
             text: 'Установка',
             link: '/guide/vue3',
+            collapsed: false,
             items: [
               {
                 text: 'Vue 3 / Nuxt 3 / Astro',
@@ -149,6 +154,10 @@ export default defineConfig({
               {
                 text: 'Vue 2 / Nuxt 2 / Nuxt Bridge',
                 link: '/guide/vue2',
+              },
+              {
+                text: 'Установка вручную',
+                link: '/guide/manual',
               },
             ],
           },
@@ -351,6 +360,10 @@ export default defineConfig({
               {
                 text: 'initYmaps',
                 link: '/api/init-ymaps',
+              },
+              {
+                text: 'createYmapsOptions',
+                link: '/api/create-options',
               },
             ]
           },

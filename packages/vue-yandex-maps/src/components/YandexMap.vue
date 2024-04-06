@@ -19,7 +19,7 @@ import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../functions';
 import { VueYandexMaps } from '../namespace.ts';
 import { diff } from 'deep-object-diff';
-import { copy, throwException } from '../utils/system.ts';
+import { copy, setFragment, throwException } from '../utils/system.ts';
 import { waitTillMapInit } from '../utils/map.ts';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>
@@ -223,10 +223,14 @@ export default defineComponent({
         await waitTillMapInit({
           map,
           timeoutCallback: (_timeout, isDelete) => {
-            if (isDelete) cursorGrabTimeout = null;
-            else cursorGrabTimeout = _timeout;
+            if (isDelete) {
+              cursorGrabTimeout = null;
+            } else {
+              cursorGrabTimeout = _timeout;
+            }
           },
-        }).catch(() => {});
+        }).catch(() => {
+        });
 
         if (!map.value) return;
 
@@ -262,6 +266,8 @@ export default defineComponent({
       }, {
         immediate: true,
       });
+
+      await setFragment();
 
       if (!VueYandexMaps.isLoaded.value) {
         if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
@@ -348,7 +354,7 @@ export default defineComponent({
 }
 
 .__ymap_container {
-width: 100%;
+  width: 100%;
   height: 100%;
 }
 

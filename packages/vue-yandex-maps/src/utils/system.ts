@@ -1,8 +1,15 @@
 import type {
-  ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef,
+  ComputedGetter,
+  ComputedRef,
+  DebuggerOptions,
+  Fragment,
+  Ref,
+  UnwrapRef,
+  VNodeArrayChildren,
+  VNodeProps,
 } from 'vue';
 import {
-  computed, ref, toRaw, unref,
+  computed, h, ref, toRaw, unref, version,
 } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
@@ -115,4 +122,46 @@ export function excludeKeys(item: Record<string, any>, ignoreKeys: string[]) {
       if (!Object.keys(value).length) delete item[key];
     }
   }
+}
+
+export function isVue2() {
+  return version.startsWith('2');
+}
+
+let fragment: typeof Fragment | null | undefined;
+
+export async function setFragment() {
+  if (fragment !== undefined) return;
+
+  if (isVue2()) {
+    fragment = null;
+    return;
+  }
+
+  fragment = (await import('vue')).Fragment;
+}
+
+export function hF(children: VNodeArrayChildren, props?: (VNodeProps & Record<string, any>) | null) {
+  if (isVue2()) {
+    return h('div', props, children);
+  }
+  return h(fragment!, props, children);
+}
+
+/**
+ * @description You can't render multiple root nodes in vue2
+ */
+export function hVue2(children: VNodeArrayChildren) {
+  if (isVue2() && children?.length > 1) {
+    return h('div', children);
+  }
+
+  return children;
+}
+
+export function getAttrsForVueVersion(attrs: Record<string, unknown>) {
+  if (isVue2()) {
+    return { attrs };
+  }
+  return attrs;
 }

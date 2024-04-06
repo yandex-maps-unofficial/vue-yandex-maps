@@ -6,6 +6,7 @@ import {
 } from 'vue';
 
 import { setupMapChildren } from '../utils/setupMapChildren.ts';
+import { hVue2 } from '../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapCollection',
@@ -49,7 +50,7 @@ export default defineComponent({
     return () => {
       if (!mapChildren.value) return h('div');
 
-      return h('div', slots.default?.({}));
+      return () => hVue2(slots.default?.({}));
     };
   },
 });

@@ -2,10 +2,11 @@
 import type { YMapDefaultFeaturesLayer } from '@yandex/ymaps3-types';
 import type { PropType, Ref, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, inject, onMounted,
+  computed, defineComponent, inject, onMounted,
 } from 'vue';
 
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { hVue2 } from '../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapDefaultFeaturesLayer',
@@ -56,7 +57,7 @@ export default defineComponent({
       hold.value--;
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

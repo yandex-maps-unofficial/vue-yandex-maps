@@ -1,13 +1,14 @@
 <script lang="ts">
 import type { PropType, SlotsType } from 'vue';
 import {
-  computed, defineComponent, h, onMounted,
+  computed, defineComponent, onMounted,
 } from 'vue';
 import type {
   BehaviorEvents, DomEvents, MapEvents, YMapListener,
 } from '@yandex/ymaps3-types';
 
 import { setupMapChildren } from '../utils/setupMapChildren.ts';
+import { hVue2 } from '../utils/system.ts';
 
 export type YandexMapListenerSettings = Partial<DomEvents & MapEvents & BehaviorEvents>
 
@@ -53,7 +54,7 @@ export default defineComponent({
       emit('update:modelValue', mapListener);
     });
 
-    return () => h('div', slots.default?.({}));
+    return () => hVue2(slots.default?.({}));
   },
 });
 </script>

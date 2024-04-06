@@ -1,10 +1,11 @@
 <script lang="ts">
-import type { PropType, SlotsType } from 'vue';
 import {
+  watch,
   computed, defineComponent, h, onMounted, ref,
 } from 'vue';
+import type { PropType, SlotsType } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
-import { throwException } from '../../../utils/system.ts';
+import { hF, throwException } from '../../../utils/system.ts';
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 import type { DefaultMarkerCustomProps } from '@yandex/ymaps3-types/packages/markers/YMapDefaultMarker';
 
@@ -17,6 +18,7 @@ export type YandexMapDefaultMarkerSettings = Omit<Settings, 'popup'> & {
 
 export default defineComponent({
   name: 'YandexMapDefaultMarker',
+  inheritAttrs: false,
   props: {
     value: {
       type: Object as PropType<YMapDefaultMarker | null>,
@@ -47,6 +49,7 @@ export default defineComponent({
   setup(props, {
     slots,
     emit,
+    attrs,
   }) {
     let mapChildren: YMapDefaultMarker | undefined;
     const popup = ref<HTMLDivElement | null>(null);
@@ -87,9 +90,21 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', {
-      ref: popup,
-    }, slots.popup?.({ close: closeFunc.value }));
+    watch(popup, () => {
+      if (popup.value) popup.value.parentNode?.removeChild(popup.value);
+    });
+
+    return () => {
+      if (slots.popup) {
+        return hF([
+          h('div', {
+            ref: popup,
+          }, slots.popup?.({ close: closeFunc.value })),
+        ]);
+      }
+
+      return undefined;
+    };
   },
 });
 </script>

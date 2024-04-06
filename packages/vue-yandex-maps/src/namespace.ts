@@ -8,6 +8,12 @@ export namespace VueYandexMaps {
     apikey: '',
   });
 
+  /**
+   * @description True when `createYmapsOptions` was called and settings were set
+   * @note Useful if there's a change your map may be initialized earlier than you will set settings
+   */
+  export const isReadyToInit = safeComputed(() => !!settings.value.apikey);
+
   // Type-safe ymaps3 to avoid "never" problems with undefined checks
   export const ymaps = () => ymaps3;
 

@@ -54,7 +54,7 @@
           </yandex-map-controls>
           <yandex-map-controls :settings="{ position: 'top left' }">
             <yandex-map-entity>
-              <div class="counter" @click="updateCounter">
+              <div class="counter" :data-value="counter" @click="updateCounter">
                 Entity counter #{{ counter }}
               </div>
             </yandex-map-entity>

@@ -106,7 +106,7 @@ import {
   YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import {
-  computed, onMounted, ref, shallowRef, watch,
+  computed, onMounted, ref, shallowRef, watch, version,
 } from 'vue';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
 import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
@@ -122,6 +122,7 @@ const bounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
 const trueBounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
 
 onMounted(() => {
+  if (version.startsWith('2')) return;
   setInterval(() => {
     if (map.value) {
       zoom.value = map.value.zoom;

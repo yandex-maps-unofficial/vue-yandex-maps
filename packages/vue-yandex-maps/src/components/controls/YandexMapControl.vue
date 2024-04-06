@@ -1,12 +1,12 @@
 <script lang="ts">
-import {
-  computed,
-  defineComponent, h, onMounted, ref,
-} from 'vue';
 import type { PropType, SlotsType } from 'vue';
+import {
+  computed, defineComponent, h, onMounted, ref,
+} from 'vue';
 import type { YMapControl } from '@yandex/ymaps3-types';
 
 import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { getAttrsForVueVersion, hF } from '../../utils/system.ts';
 
 export default defineComponent({
   name: 'YandexMapControl',
@@ -38,6 +38,7 @@ export default defineComponent({
   setup(props, {
     slots,
     emit,
+    attrs,
   }) {
     let mapChildren: YMapControl | undefined;
     const element = ref<null | HTMLDivElement>(null);
@@ -75,9 +76,12 @@ export default defineComponent({
       emit('update:modelValue', mapChildren);
     });
 
-    return () => h('div', {
-      ref: element,
-    }, slots.default?.({}));
+    return () => hF([
+      h('div', {
+        ref: element,
+        ...getAttrsForVueVersion(attrs),
+      }, slots.default?.({})),
+    ]);
   },
 });
 </script>
