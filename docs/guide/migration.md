@@ -249,13 +249,9 @@ console.log(position); //{ accuracy: 12345, coords: [12.345, 54.321] }
 
 ### ymaps.route
 
-По сути функционал отсутствует.
+Функционал сохранён, возвращает feature для отрисовки. См. [Документацию](/api/yandex.html#route)
 
-У Яндекса есть новые API, позволяющие вам реализовать этот функционал самостоятельно: https://yandex.ru/maps-api/docs#routes-navi
-
-::: warning Внимание
-На момент написания гайда при попытке использовать `ymaps3.route` Яндекс выдавал ошибку `Route requests is not allowed`.
-:::
+Также Яндекса есть новые API, позволяющие вам реализовать этот функционал самостоятельно: https://yandex.ru/maps-api/docs#routes-navi
 
 ## Что дальше?
 
