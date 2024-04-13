@@ -3530,21 +3530,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/composition-api@npm:^0.33.1":
-  version: 0.33.1
-  resolution: "@nuxtjs/composition-api@npm:0.33.1"
+"@nuxtjs/composition-api@npm:^0.34.0":
+  version: 0.34.0
+  resolution: "@nuxtjs/composition-api@npm:0.34.0"
   dependencies:
-    defu: "npm:^6.0.0"
+    defu: "npm:^6.1.4"
     estree-walker: "npm:^2.0.2"
-    fs-extra: "npm:^9.1.0"
-    magic-string: "npm:^0.26.2"
-    pathe: "npm:^0.3.3"
-    ufo: "npm:^0.8.5"
+    fs-extra: "npm:^11.2.0"
+    magic-string: "npm:^0.30.9"
+    pathe: "npm:^1.1.2"
+    ufo: "npm:^1.5.3"
   peerDependencies:
-    "@nuxt/vue-app": ^2.15
-    nuxt: ^2.15
-    vue: ^2.7.8
-  checksum: 10/fc485a98d821c9870fbfc194e74e52f1bd29e6dc87528a9673c25758f09b0b00e27b87cffc9504608564b4baca016f77c162338d7cca36862df1f3469bbea0b2
+    nuxt: ^2.17.3
+    vue: ^2.7.16
+  checksum: 10/5fff5824f2644df658134c557e8ed2020704cfd7fa52b5c3cd583bc69101ff7acac55f3b7856d5f4fe9b8724b440bf9a71ad0a2f5428dcc397fc3ee84c9493a0
   languageName: node
   linkType: hard
 
@@ -10437,7 +10436,7 @@ __metadata:
   dependencies:
     "@nuxt/types": "npm:^2.17.3"
     "@nuxt/typescript-build": "npm:^3.0.2"
-    "@nuxtjs/composition-api": "npm:^0.33.1"
+    "@nuxtjs/composition-api": "npm:^0.34.0"
     core-js: "npm:^3.36.1"
     examples: "workspace:*"
     nuxt: "npm:^2.17.3"
@@ -13839,15 +13838,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.26.2":
-  version: 0.26.7
-  resolution: "magic-string@npm:0.26.7"
-  dependencies:
-    sourcemap-codec: "npm:^1.4.8"
-  checksum: 10/2bb371d956bec4f0ae5725dab1a1a47eeb76b00bd01c37afc6a3363713d262e531208bbcc60cea1a00de604fa60d437409c870acecc9536ea77005683191ef5c
-  languageName: node
-  linkType: hard
-
 "magic-string@npm:^0.30.0, magic-string@npm:^0.30.2, magic-string@npm:^0.30.3, magic-string@npm:^0.30.4, magic-string@npm:^0.30.5, magic-string@npm:^0.30.7, magic-string@npm:^0.30.8, magic-string@npm:^0.30.9":
   version: 0.30.9
   resolution: "magic-string@npm:0.30.9"
@@ -15955,13 +15945,6 @@ __metadata:
   version: 5.0.0
   resolution: "path-type@npm:5.0.0"
   checksum: 10/15ec24050e8932c2c98d085b72cfa0d6b4eeb4cbde151a0a05726d8afae85784fc5544f733d8dfc68536587d5143d29c0bd793623fad03d7e61cc00067291cd5
-  languageName: node
-  linkType: hard
-
-"pathe@npm:^0.3.3":
-  version: 0.3.9
-  resolution: "pathe@npm:0.3.9"
-  checksum: 10/39485cdbb175665bb991ed751c4c47563a63c4153c4b6027a8059603855bbaa1ba17cdcdb2c2076190d9916741fd7a69bf9a9cf6340f4e2d0e898146818968f7
   languageName: node
   linkType: hard
 
@@ -19004,13 +18987,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sourcemap-codec@npm:^1.4.8":
-  version: 1.4.8
-  resolution: "sourcemap-codec@npm:1.4.8"
-  checksum: 10/6fc57a151e982b5c9468362690c6d062f3a0d4d8520beb68a82f319c79e7a4d7027eeb1e396de0ecc2cd19491e1d602b2d06fd444feac9b63dd43fea4c55a857
-  languageName: node
-  linkType: hard
-
 "spdx-correct@npm:^3.0.0":
   version: 3.2.0
   resolution: "spdx-correct@npm:3.2.0"
@@ -20158,13 +20134,6 @@ __metadata:
   version: 1.0.37
   resolution: "ua-parser-js@npm:1.0.37"
   checksum: 10/56508f2428ebac64382c4d41da14189e5013e3e2a5f5918aff4bee3ba77df1f4eaad6f81f90c24999f1cf12cc1596764684497fec07e0ff5182ce9a323a8c05b
-  languageName: node
-  linkType: hard
-
-"ufo@npm:^0.8.5":
-  version: 0.8.6
-  resolution: "ufo@npm:0.8.6"
-  checksum: 10/b4294d8f938ad205a6e44bf55fa9134e75655f10fd3f49e587e0b7511ed308ba80bb87159a3e9d0fa1a0c7edbdf4000c64c558eb88cf3c09df7ffdd976ada7a5
   languageName: node
   linkType: hard
 
