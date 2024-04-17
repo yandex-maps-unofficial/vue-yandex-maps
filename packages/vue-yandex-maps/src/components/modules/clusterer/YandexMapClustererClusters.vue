@@ -10,7 +10,7 @@ import type {
 import type { IYMapClusterFeature, YandexMapClustererZoomOptionsObject } from './YandexMapClusterer.vue';
 import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../utils/marker.ts';
 import type { LngLatBounds, YMapMarker } from '@yandex/ymaps3-types';
-import { hF, isVue2, sleep } from '../../../utils/system.ts';
+import { hF, sleep } from '../../../utils/system.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
 import { injectMap } from '../../../utils/map.ts';
