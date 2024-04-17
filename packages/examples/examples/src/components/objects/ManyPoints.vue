@@ -18,9 +18,6 @@
         :width="width"
         :height="height"
         cursor-grab
-        :style="{
-          '--background': background,
-        }"
       >
         <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
@@ -75,6 +72,9 @@
             :settings="{
               coordinates,
               onClick: () => background = background === 'red' ? 'green' : 'red',
+            }"
+            :style="{
+              '--background': background,
             }"
           >
             <div class="marker" />

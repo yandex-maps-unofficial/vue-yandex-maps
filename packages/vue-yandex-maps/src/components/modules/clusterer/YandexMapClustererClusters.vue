@@ -66,15 +66,10 @@ export default defineComponent({
             'div',
             {
               ...containerProps.value.root,
-              key: clusterer.clusterId,
               ref: async (_item) => {
                 if (!_item) return;
                 const item = _item as HTMLDivElement;
-
-                if (element.children.length && !isVue2()) {
-                  item.parentNode?.removeChild(item);
-                  return;
-                }
+                if (element.children.length) return;
 
                 await nextTick();
 
@@ -146,7 +141,9 @@ export default defineComponent({
               })),
             ],
           ),
-        ]));
+        ], {
+          key: clusterer.clusterId + clusterer.features.length,
+        }));
 
       return hF(clusterSlots);
     };
