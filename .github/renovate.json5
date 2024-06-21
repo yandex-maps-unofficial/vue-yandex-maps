@@ -20,6 +20,13 @@
       "allowedVersions": "<=2"
     },
     {
+      "matchPackageNames": [
+        "typescript"
+      ],
+      matchCurrentVersion: "<5.5",
+      "allowedVersions": "<5.5"
+    },
+    {
       matchDepTypes: [
         "peerDependencies",
         "engines"
