@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import type { PropType, SlotsType } from 'vue';
-import { computed, defineComponent, h, onMounted, ref, watch } from 'vue';
+import { computed, defineComponent, h, onMounted, ref, onUpdated } from 'vue';
 import { getAttrsForVueVersion, hF, throwException } from '../utils/system.ts';
 import { setupMapChildren } from '../utils/setupMapChildren.ts';
 import { getMarkerContainerProps } from '../utils/marker.ts';
@@ -98,8 +98,11 @@ export default defineComponent({
             emit('update:modelValue', mapChildren);
         });
 
-        watch(element, () => {
-            if (element.value) element.value.parentNode?.removeChild(element.value);
+        let mapParent: HTMLElement | undefined = undefined;
+
+        onUpdated(() => {
+            if (!mapParent && element.value?.parentElement?.closest('ymaps')) mapParent = element.value.parentElement;
+            else if (mapParent && element.value && !element.value?.parentElement?.closest('ymaps')) mapParent.appendChild(element.value);
         });
 
         const rootProps = computed(() => getMarkerContainerProps({

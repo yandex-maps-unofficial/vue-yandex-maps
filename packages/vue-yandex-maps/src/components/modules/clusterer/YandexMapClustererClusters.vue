@@ -63,7 +63,16 @@ export default defineComponent({
                             ref: async _item => {
                                 if (!_item) return;
                                 const item = _item as HTMLDivElement;
-                                if (element.children.length) return;
+                                if (element.children.length) {
+                                    element.children.forEach(x => {
+                                        try {
+                                            element.removeChild(x);
+                                        }
+                                        catch (e) {
+                                            console.warn('Non-fatal error occurred when updating Map clusterer', e);
+                                        }
+                                    });
+                                }
 
                                 await nextTick();
 
