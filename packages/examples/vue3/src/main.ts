@@ -5,8 +5,8 @@ import App from './App.vue';
 const app = createApp(App);
 
 const ymaps = createYmaps({
-  apikey: '9fa90fbc-ce5f-4dc9-ae6d-433e0ec7338b',
-  initializeOn: 'onPluginInit',
+    apikey: '9fa90fbc-ce5f-4dc9-ae6d-433e0ec7338b',
+    initializeOn: 'onPluginInit',
 });
 
 app.use(ymaps);

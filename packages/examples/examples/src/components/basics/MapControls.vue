@@ -1,110 +1,115 @@
 <template>
-  <common-wrapper>
-    <template
-      #default="{
-        coordinates: center, theme, zoom, width, height,
-      }"
-    >
-      <form>
-        <!-- #region html -->
-        <yandex-map
-          v-model="map"
-          :settings="{
-            location: {
-              center,
-              zoom,
-            },
-            theme,
-            showScaleInCopyrights: true,
-          }"
-          :width="width"
-          :height="isFullscreen ? '100dvh' : height"
+    <common-wrapper>
+        <template
+            #default="{
+                coordinates: center, theme, zoom, width, height,
+            }"
         >
-          <yandex-map-default-scheme-layer />
-          <yandex-map-default-features-layer />
-          <yandex-map-controls :settings="{ position: 'right' }">
-            <yandex-map-zoom-control />
-          </yandex-map-controls>
-          <yandex-map-controls :settings="{ position: 'bottom' }">
-            <yandex-map-zoom-control />
-            <yandex-map-scale-control />
-          </yandex-map-controls>
-          <yandex-map-controls :settings="{ position: 'top' }">
-            <yandex-map-control-button :settings="{ onClick: shiftRight }">
-              {{ '<' }}
-            </yandex-map-control-button>
-            <component
-              :is="component.component"
-              v-for="(component, index) in buttons.slice(0, 4)"
-              :key="index"
-              :settings="'props' in component ? component.props : {}"
-            >
-              {{ isRef(component.content) ? component.content.value : component.content }}
-            </component>
-            <yandex-map-control-button :settings="{ onClick: shiftLeft }">
-              >
-            </yandex-map-control-button>
-          </yandex-map-controls>
-          <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
-            <yandex-map-open-maps-button />
-            <yandex-map-open-maps-button :settings="{ title: 'Кастомный заголовок!' }" />
-          </yandex-map-controls>
-          <yandex-map-controls :settings="{ position: 'left' }">
-            <yandex-map-geolocation-control />
-          </yandex-map-controls>
-          <yandex-map-controls :settings="{ position: 'top left' }">
-            <yandex-map-entity>
-              <div class="counter" :data-value="counter" @click="updateCounter">
-                Entity counter #{{ counter }}
-              </div>
-            </yandex-map-entity>
-          </yandex-map-controls>
-          <yandex-map-controls :settings="{ position: 'top right', orientation: 'vertical' }">
-            <yandex-map-control-button :settings="{ onClick: toggleFullscreen }">
-              <div class="fullscreen" :class="{ 'exit-fullscreen': isFullscreen }" />
-            </yandex-map-control-button>
-            <yandex-map-control-button>
-              <div class="button-element">
-                Button with element
-              </div>
-            </yandex-map-control-button>
-            <yandex-map-control>
-              <div class="button-element">
-                Control with element
-              </div>
-            </yandex-map-control>
-            <yandex-map-control :settings="{ transparent: true }">
-              <div class="button-element">
-                Control without bg/shadow
-              </div>
-            </yandex-map-control>
-          </yandex-map-controls>
-        </yandex-map>
-      <!-- #endregion html -->
-      </form>
-    </template>
-  </common-wrapper>
+            <form>
+                <!-- #region html -->
+                <yandex-map
+                    v-model="map"
+                    :height="isFullscreen ? '100dvh' : height"
+                    :settings="{
+                        location: {
+                            center,
+                            zoom,
+                        },
+                        theme,
+                        showScaleInCopyrights: true,
+                    }"
+                    :width="width"
+                >
+                    <yandex-map-default-scheme-layer/>
+                    <yandex-map-default-features-layer/>
+                    <yandex-map-controls :settings="{ position: 'right' }">
+                        <yandex-map-zoom-control/>
+                    </yandex-map-controls>
+                    <yandex-map-controls :settings="{ position: 'bottom' }">
+                        <yandex-map-zoom-control/>
+                        <yandex-map-scale-control/>
+                    </yandex-map-controls>
+                    <yandex-map-controls :settings="{ position: 'top' }">
+                        <yandex-map-control-button :settings="{ onClick: shiftRight }">
+                            &lt;
+                        </yandex-map-control-button>
+                        <component
+                            :is="component.component"
+                            v-for="(component, index) in buttons.slice(0, 4)"
+                            :key="index"
+                            :settings="'props' in component ? component.props : {}"
+                        >
+                            {{ isRef(component.content) ? component.content.value : component.content }}
+                        </component>
+                        <yandex-map-control-button :settings="{ onClick: shiftLeft }">
+                            >
+                        </yandex-map-control-button>
+                    </yandex-map-controls>
+                    <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
+                        <yandex-map-open-maps-button/>
+                        <yandex-map-open-maps-button :settings="{ title: 'Кастомный заголовок!' }"/>
+                    </yandex-map-controls>
+                    <yandex-map-controls :settings="{ position: 'left' }">
+                        <yandex-map-geolocation-control/>
+                    </yandex-map-controls>
+                    <yandex-map-controls :settings="{ position: 'top left' }">
+                        <yandex-map-entity>
+                            <div
+                                class="counter"
+                                :data-value="counter"
+                                @click="updateCounter"
+                            >
+                                Entity counter #{{ counter }}
+                            </div>
+                        </yandex-map-entity>
+                    </yandex-map-controls>
+                    <yandex-map-controls :settings="{ position: 'top right', orientation: 'vertical' }">
+                        <yandex-map-control-button :settings="{ onClick: toggleFullscreen }">
+                            <div
+                                class="fullscreen"
+                                :class="{ 'exit-fullscreen': isFullscreen }"
+                            />
+                        </yandex-map-control-button>
+                        <yandex-map-control-button>
+                            <div class="button-element">
+                                Button with element
+                            </div>
+                        </yandex-map-control-button>
+                        <yandex-map-control>
+                            <div class="button-element">
+                                Control with element
+                            </div>
+                        </yandex-map-control>
+                        <yandex-map-control :settings="{ transparent: true }">
+                            <div class="button-element">
+                                Control without bg/shadow
+                            </div>
+                        </yandex-map-control>
+                    </yandex-map-controls>
+                </yandex-map>
+                <!-- #endregion html -->
+            </form>
+        </template>
+    </common-wrapper>
 </template>
 
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-  YandexMap,
-  YandexMapControl,
-  YandexMapControlButton,
-  YandexMapControls,
-  YandexMapDefaultFeaturesLayer,
-  YandexMapDefaultSchemeLayer,
-  YandexMapEntity,
-  YandexMapGeolocationControl,
-  YandexMapOpenMapsButton,
-  YandexMapScaleControl,
-  YandexMapZoomControl,
+    YandexMap,
+    YandexMapControl,
+    YandexMapControlButton,
+    YandexMapControls,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapDefaultSchemeLayer,
+    YandexMapEntity,
+    YandexMapGeolocationControl,
+    YandexMapOpenMapsButton,
+    YandexMapScaleControl,
+    YandexMapZoomControl,
 } from 'vue-yandex-maps';
-import {
-  computed, isRef, onBeforeUnmount, onMounted, ref, shallowRef,
-} from 'vue';
+import { computed, isRef, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue';
 import type { YMap } from '@yandex/ymaps3-types';
 
 const counter = ref(1);
@@ -114,109 +119,110 @@ const isFullscreen = ref(false);
 const map = shallowRef<YMap | null>(null);
 
 const buttons = shallowRef([
-  {
-    component: YandexMapControlButton,
-    content: 'first',
-    props: {
-      onClick: () => console.log('first'),
+    {
+        component: YandexMapControlButton,
+        content: 'first',
+        props: {
+            onClick: () => console.log('first'),
+        },
     },
-  },
-  {
-    component: YandexMapControlButton,
-    content: 'foo #1',
-    props: {
-      color: '#196dff',
-      background: '#f3f6fc',
-      onClick: () => console.log('foo #1'),
+    {
+        component: YandexMapControlButton,
+        content: 'foo #1',
+        props: {
+            color: '#196dff',
+            background: '#f3f6fc',
+            onClick: () => console.log('foo #1'),
+        },
     },
-  },
-  {
-    component: YandexMapControlButton,
-    content: 'foo #2',
-    props: {
-      color: '#196dff',
-      background: '#f3f6fc',
-      onClick: () => console.log('foo #2'),
+    {
+        component: YandexMapControlButton,
+        content: 'foo #2',
+        props: {
+            color: '#196dff',
+            background: '#f3f6fc',
+            onClick: () => console.log('foo #2'),
+        },
     },
-  },
-  {
-    component: YandexMapControlButton,
-    content: 'foo #3',
-    props: {
-      color: '#196dff',
-      background: '#f3f6fc',
-      onClick: () => console.log('foo #3'),
+    {
+        component: YandexMapControlButton,
+        content: 'foo #3',
+        props: {
+            color: '#196dff',
+            background: '#f3f6fc',
+            onClick: () => console.log('foo #3'),
+        },
     },
-  },
-  {
-    component: YandexMapControlButton,
-    content: 'second',
-    props: {
-      onClick: () => console.log('second'),
+    {
+        component: YandexMapControlButton,
+        content: 'second',
+        props: {
+            onClick: () => console.log('second'),
+        },
     },
-  },
-  {
-    component: YandexMapControlButton,
-    content: 'bar #1',
-    props: {
-      color: '#fff',
-      background: '#196dff',
-      onClick: () => console.log('bar #1'),
+    {
+        component: YandexMapControlButton,
+        content: 'bar #1',
+        props: {
+            color: '#fff',
+            background: '#196dff',
+            onClick: () => console.log('bar #1'),
+        },
     },
-  },
-  {
-    component: YandexMapControlButton,
-    content: 'bar #2',
-    props: {
-      color: '#fff',
-      background: '#196dff',
-      onClick: () => console.log('bar #2'),
+    {
+        component: YandexMapControlButton,
+        content: 'bar #2',
+        props: {
+            color: '#fff',
+            background: '#196dff',
+            onClick: () => console.log('bar #2'),
+        },
     },
-  },
-  {
-    component: YandexMapControlButton,
-    content: computed(() => `Control! ${timedCounter.value}`),
-  },
+    {
+        component: YandexMapControlButton,
+        content: computed(() => `Control! ${ timedCounter.value }`),
+    },
 ]);
 
 const shiftLeft = () => {
-  buttons.value = [...buttons.value.slice(1), buttons.value[0]];
+    buttons.value = [...buttons.value.slice(1), buttons.value[0]];
 };
 const shiftRight = () => {
-  buttons.value = [...buttons.value.slice(-1), ...buttons.value.slice(0, -1)];
+    buttons.value = [...buttons.value.slice(-1), ...buttons.value.slice(0, -1)];
 };
 
 const updateCounter = () => {
-  counter.value++;
+    counter.value++;
 };
 
 const toggleFullscreen = () => {
-// The document.fullscreenElement returns the Element that is currently being presented in fullscreen mode in this document, or null if fullscreen mode is not currently in use
-  if (isFullscreen.value) {
-    // The document.exitFullscreen() requests that the element on this document which is currently being presented in fullscreen mode be taken out of fullscreen mode
-    document.exitFullscreen();
-  } else {
-    // The element.requestFullscreen() method issues an asynchronous request to make the element be displayed in fullscreen mode
-    map.value!.container.requestFullscreen();
-  }
+    // The document.fullscreenElement returns the Element that is currently being presented in fullscreen mode in this document, or null if fullscreen mode is not currently in use
+    if (isFullscreen.value) {
+        // The document.exitFullscreen() requests that the element on this document which is currently being presented in fullscreen mode be taken out of fullscreen mode
+        document.exitFullscreen();
+    }
+    else {
+        // The element.requestFullscreen() method issues an asynchronous request to make the element be displayed in fullscreen mode
+        map.value!.container.requestFullscreen();
+    }
 };
 
 onMounted(() => {
-  const handleFullscreenChange = async () => {
-    isFullscreen.value = !!document.fullscreenElement;
-  };
+    const handleFullscreenChange = async () => {
+        isFullscreen.value = !!document.fullscreenElement;
+    };
 
-  document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
 
-  const interval = setInterval(() => {
-    timedCounter.value++;
-    if (timedCounter.value > 99) timedCounter.value = 0;
-  }, 1000);
+    const interval = setInterval(() => {
+        timedCounter.value++;
+        if (timedCounter.value > 99) timedCounter.value = 0;
+    }, 1000);
 
-  onBeforeUnmount(() => {
-    clearInterval(interval);
-    document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  });
+    onBeforeUnmount(() => {
+        clearInterval(interval);
+        document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    });
 });
 // #endregion setup
 </script>

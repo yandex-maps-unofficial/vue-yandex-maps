@@ -1,74 +1,78 @@
 <template>
-  <div class="customization-control">
-    <div class="customization-control_title">
-      {{ title }}
+    <div class="customization-control">
+        <div class="customization-control_title">
+            {{ title }}
+        </div>
+        <div
+            v-for="section in getSections"
+            :key="section.title"
+            class="customization-control_section"
+        >
+            <div class="customization-control_section_title">
+                {{ section.title }}
+            </div>
+            <div
+                v-for="(btn, btnIndex) in section.buttons"
+                :key="btn"
+                class="customization-control_section_btn"
+                @click="section.handlers[btnIndex]()"
+            >
+                {{ btn }}
+            </div>
+        </div>
     </div>
-    <div v-for="section in getSections" :key="section.title" class="customization-control_section">
-      <div class="customization-control_section_title">
-        {{ section.title }}
-      </div>
-      <div
-        v-for="(btn, btnIndex) in section.buttons"
-        :key="btn"
-        class="customization-control_section_btn"
-        @click="section.handlers[btnIndex]()"
-      >
-        {{ btn }}
-      </div>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 
-export type CustomizationControls = 'color' | 'opacity' | 'scale'
+export type CustomizationControls = 'color' | 'opacity' | 'scale';
 
 interface CustomizationControlProps {
-  title: string;
-  enabledControls: CustomizationControls[];
-  changeHandler: (control: CustomizationControls, diff?: number) => void;
+    title: string;
+    enabledControls: CustomizationControls[];
+    changeHandler: (control: CustomizationControls, diff?: number) => void;
 }
 
-type CustomizationControlSection = { title: string, } & (
+type CustomizationControlSection = { title: string } & (
     {
-      buttons: [string],
-      handlers: [() => void]
+        buttons: [string];
+        handlers: [() => void];
     } | {
-  buttons: [string, string],
-  handlers: [() => void, () => void]
-});
+        buttons: [string, string];
+        handlers: [() => void, () => void];
+    });
 
 const props = defineProps<CustomizationControlProps>();
 
 const getSections = computed(() => {
-  const sections: CustomizationControlSection[] = [];
+    const sections: CustomizationControlSection[] = [];
 
-  if (props.enabledControls.includes('color')) {
-    sections.push({
-      title: 'Цвет:',
-      buttons: ['Случайный'],
-      handlers: [() => props.changeHandler('color')],
-    });
-  }
+    if (props.enabledControls.includes('color')) {
+        sections.push({
+            title: 'Цвет:',
+            buttons: ['Случайный'],
+            handlers: [() => props.changeHandler('color')],
+        });
+    }
 
-  if (props.enabledControls.includes('opacity')) {
-    sections.push({
-      title: 'Прозрачность:',
-      buttons: ['-', '+'],
-      handlers: [() => props.changeHandler('opacity', -0.1), () => props.changeHandler('opacity', 0.1)],
-    });
-  }
+    if (props.enabledControls.includes('opacity')) {
+        sections.push({
+            title: 'Прозрачность:',
+            buttons: ['-', '+'],
+            handlers: [() => props.changeHandler('opacity', -0.1), () => props.changeHandler('opacity', 0.1)],
+        });
+    }
 
-  if (props.enabledControls.includes('scale')) {
-    sections.push({
-      title: 'Увеличение:',
-      buttons: ['-', '+'],
-      handlers: [() => props.changeHandler('scale', -1), () => props.changeHandler('scale', 1)],
-    });
-  }
+    if (props.enabledControls.includes('scale')) {
+        sections.push({
+            title: 'Увеличение:',
+            buttons: ['-', '+'],
+            handlers: [() => props.changeHandler('scale', -1), () => props.changeHandler('scale', 1)],
+        });
+    }
 
-  return sections;
+    return sections;
 });
 </script>
 

@@ -1,19 +1,19 @@
 <template>
-  <common-wrapper>
-    <yandex-map
-      v-model="map"
-      :settings="{
-        location: {
-          center: [37.617644, 55.755819],
-          zoom: 9,
-        },
-      }"
-      width="100%"
-      height="500px"
-    >
-      <yandex-map-default-scheme-layer :settings="{ theme: isDarkTheme ? 'dark' : 'light' }" />
-    </yandex-map>
-  </common-wrapper>
+    <common-wrapper>
+        <yandex-map
+            v-model="map"
+            height="500px"
+            :settings="{
+                location: {
+                    center: [37.617644, 55.755819],
+                    zoom: 9,
+                },
+            }"
+            width="100%"
+        >
+            <yandex-map-default-scheme-layer :settings="{ theme: isDarkTheme ? 'dark' : 'light' }"/>
+        </yandex-map>
+    </common-wrapper>
 </template>
 
 <script setup lang="ts">
@@ -24,10 +24,10 @@ import CommonWrapper from './CommonWrapper.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
-  isDarkTheme: {
-    type: Boolean,
-    default: false,
-  },
+    isDarkTheme: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const map = shallowRef<null | YMap>(null);

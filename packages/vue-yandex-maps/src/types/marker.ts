@@ -4,19 +4,19 @@ export type HorizontalPosition = 'left' | 'right' | 'left-center' | 'right-cente
  * Describes controls position.
  */
 export type Position =
-  VerticalPosition
-  | HorizontalPosition
-  | `${VerticalPosition} ${HorizontalPosition}`
-  | `${HorizontalPosition} ${VerticalPosition}`;
+    VerticalPosition
+    | HorizontalPosition
+    | `${ VerticalPosition } ${ HorizontalPosition }`
+    | `${ HorizontalPosition } ${ VerticalPosition }`;
 export type YandexMapMarkerPosition =
-  Position
-  | 'default'
-  | 'default default'
-  | `translate${string}`
+    Position
+    | 'default'
+    | 'default default'
+    | `translate${ string }`;
 
 export interface YandexMapMarkerCustomProps {
-  position?: YandexMapMarkerPosition;
-  containerAttrs?: Record<string, any>;
-  wrapperAttrs?: Record<string, any>;
-  zeroSizes?: boolean | null;
+    position?: YandexMapMarkerPosition;
+    containerAttrs?: Record<string, any>;
+    wrapperAttrs?: Record<string, any>;
+    zeroSizes?: boolean | null;
 }

@@ -1,77 +1,90 @@
 <template>
-  <common-wrapper>
-    <template
-      #default="{
-        coordinates: center, theme, zoom, width, height,
-      }"
-    >
-      <!-- #region html -->
-      <div class="tabs">
-        <div class="tabs_header">
-          <div
-            class="tabs_header_tab"
-            :class="{ 'tabs_header_tab--active': tab === 'description' }"
-            @click="tab = 'description'"
-          >
-            Описание
-          </div>
-          <div class="tabs_header_tab" :class="{ 'tabs_header_tab--active': tab === 'map' }" @click="tab = 'map'">
-            Карта
-          </div>
-        </div>
-        <div class="tabs_content">
-          <div v-if="tab === 'description'" class="tabs_content_description">
-            Скрипты Яндекса подгрузятся, когда вы переключите вкладки сверху - и не секундой раньше!
-          </div>
-          <yandex-map
-            v-else-if="tab === 'map'"
-            :settings="{
-              location: {
-                center,
-                zoom,
-              },
-              theme,
-              showScaleInCopyrights: true,
+    <common-wrapper>
+        <template
+            #default="{
+                coordinates: center, theme, zoom, width, height,
             }"
-            :width="width"
-            :height="height"
-          >
-            <yandex-map-default-scheme-layer />
-            <yandex-map-default-features-layer />
+        >
+            <!-- #region html -->
+            <div class="tabs">
+                <div class="tabs_header">
+                    <div
+                        class="tabs_header_tab"
+                        :class="{ 'tabs_header_tab--active': tab === 'description' }"
+                        @click="tab = 'description'"
+                    >
+                        Описание
+                    </div>
+                    <div
+                        class="tabs_header_tab"
+                        :class="{ 'tabs_header_tab--active': tab === 'map' }"
+                        @click="tab = 'map'"
+                    >
+                        Карта
+                    </div>
+                </div>
+                <div class="tabs_content">
+                    <div
+                        v-if="tab === 'description'"
+                        class="tabs_content_description"
+                    >
+                        Скрипты Яндекса подгрузятся, когда вы переключите вкладки сверху - и не секундой раньше!
+                    </div>
+                    <yandex-map
+                        v-else-if="tab === 'map'"
+                        :height="height"
+                        :settings="{
+                            location: {
+                                center,
+                                zoom,
+                            },
+                            theme,
+                            showScaleInCopyrights: true,
+                        }"
+                        :width="width"
+                    >
+                        <yandex-map-default-scheme-layer/>
+                        <yandex-map-default-features-layer/>
 
-            <yandex-map-controls :settings="{ position: 'top right' }">
-              <yandex-map-control-button :settings="{ onClick: () => showMarker1 = !showMarker1 }">
-                Показать маркер 1
-              </yandex-map-control-button>
-              <yandex-map-control-button :settings="{ onClick: () => showMarker2 = !showMarker2 }">
-                Показать маркер 2
-              </yandex-map-control-button>
-            </yandex-map-controls>
+                        <yandex-map-controls :settings="{ position: 'top right' }">
+                            <yandex-map-control-button :settings="{ onClick: () => showMarker1 = !showMarker1 }">
+                                Показать маркер 1
+                            </yandex-map-control-button>
+                            <yandex-map-control-button :settings="{ onClick: () => showMarker2 = !showMarker2 }">
+                                Показать маркер 2
+                            </yandex-map-control-button>
+                        </yandex-map-controls>
 
-            <yandex-map-marker v-if="showMarker1" :settings="{ coordinates: [center[0] + 0.1, center[1] + 0.1] }">
-              Маркер 1
-            </yandex-map-marker>
-            <yandex-map-marker v-if="showMarker2" :settings="{ coordinates: center }">
-              Маркер 2
-            </yandex-map-marker>
-          </yandex-map>
-        </div>
-      </div>
-      <!-- #endregion html -->
-    </template>
-  </common-wrapper>
+                        <yandex-map-marker
+                            v-if="showMarker1"
+                            :settings="{ coordinates: [center[0] + 0.1, center[1] + 0.1]}"
+                        >
+                            Маркер 1
+                        </yandex-map-marker>
+                        <yandex-map-marker
+                            v-if="showMarker2"
+                            :settings="{ coordinates: center }"
+                        >
+                            Маркер 2
+                        </yandex-map-marker>
+                    </yandex-map>
+                </div>
+            </div>
+            <!-- #endregion html -->
+        </template>
+    </common-wrapper>
 </template>
 
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-  YandexMap,
-  YandexMapControlButton,
-  YandexMapControls,
-  YandexMapDefaultFeaturesLayer,
-  YandexMapDefaultSchemeLayer,
-  YandexMapMarker,
+    YandexMap,
+    YandexMapControlButton,
+    YandexMapControls,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapDefaultSchemeLayer,
+    YandexMapMarker,
 } from 'vue-yandex-maps';
 import { ref } from 'vue';
 

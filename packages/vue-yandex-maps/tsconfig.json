@@ -1,11 +1,13 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src"],
+  "include": [
+    "./src"
+  ],
   "compilerOptions": {
     "paths": {
       "#app": [
         "./node_modules/nuxt/app",
-        "../../node_modules/nuxt/app",
+        "../../node_modules/nuxt/app"
       ]
     }
   }

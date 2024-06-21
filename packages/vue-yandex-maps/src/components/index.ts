@@ -5,8 +5,8 @@ import YandexMapListener from './YandexMapListener.vue';
 import YandexMapDefaultFeaturesLayer from './layers/YandexMapDefaultFeaturesLayer.vue';
 import YandexMapDefaultSchemeLayer from './layers/YandexMapDefaultSchemeLayer.vue';
 import type {
-  IYandexMapDefaultSatelliteLayer,
-  IYandexMapDefaultSatelliteLayerProps,
+    IYandexMapDefaultSatelliteLayer,
+    IYandexMapDefaultSatelliteLayerProps,
 } from './layers/YandexMapDefaultSatelliteLayer.vue';
 import YandexMapDefaultSatelliteLayer from './layers/YandexMapDefaultSatelliteLayer.vue';
 import YandexMapTileDataSource from './data-sources/YandexMapTileDataSource.vue';
@@ -34,56 +34,56 @@ import YandexMapEntity from './YandexMapEntity.vue';
 import type { YandexMapMarkerCustomProps, YandexMapMarkerPosition } from '../types/marker.ts';
 
 export {
-  YandexMap,
-  YandexMapListener,
-  YandexMapMarker,
-  YandexMapFeature,
-  YandexMapCollection,
-  YandexMapEntity,
+    YandexMap,
+    YandexMapListener,
+    YandexMapMarker,
+    YandexMapFeature,
+    YandexMapCollection,
+    YandexMapEntity,
 
-  // Data Sources
-  YandexMapTileDataSource,
-  YandexMapFeatureDataSource,
+    // Data Sources
+    YandexMapTileDataSource,
+    YandexMapFeatureDataSource,
 
-  // Layers
-  YandexMapDefaultFeaturesLayer,
-  YandexMapDefaultSchemeLayer,
-  YandexMapDefaultSatelliteLayer,
-  YandexMapLayer,
+    // Layers
+    YandexMapDefaultFeaturesLayer,
+    YandexMapDefaultSchemeLayer,
+    YandexMapDefaultSatelliteLayer,
+    YandexMapLayer,
 
-  // Controls
-  YandexMapControls,
-  YandexMapControl,
-  YandexMapControlButton,
-  YandexMapScaleControl,
+    // Controls
+    YandexMapControls,
+    YandexMapControl,
+    YandexMapControlButton,
+    YandexMapScaleControl,
 
-  // Controls Module
-  YandexMapGeolocationControl,
-  YandexMapZoomControl,
-  YandexMapOpenMapsButton,
+    // Controls Module
+    YandexMapGeolocationControl,
+    YandexMapZoomControl,
+    YandexMapOpenMapsButton,
 
-  // Projections Modules
-  YandexMapCartesianProjection,
-  YandexMapSphericalMercatorProjection,
+    // Projections Modules
+    YandexMapCartesianProjection,
+    YandexMapSphericalMercatorProjection,
 
-  // Clusterer Module
-  YandexMapClusterer,
+    // Clusterer Module
+    YandexMapClusterer,
 
-  // Markers Module
-  YandexMapDefaultMarker,
+    // Markers Module
+    YandexMapDefaultMarker,
 
-  // Hint Module
-  YandexMapHint,
+    // Hint Module
+    YandexMapHint,
 };
 
 export type {
-  YandexMapMarkerPosition,
-  YandexMapMarkerCustomProps,
-  YandexMapSettings,
-  YandexMapControlButtonSettings,
-  YandexMapClustererOptions,
-  YandexMapDefaultMarkerSettings,
-  YandexMapListenerSettings,
-  IYandexMapDefaultSatelliteLayer,
-  IYandexMapDefaultSatelliteLayerProps,
+    YandexMapMarkerPosition,
+    YandexMapMarkerCustomProps,
+    YandexMapSettings,
+    YandexMapControlButtonSettings,
+    YandexMapClustererOptions,
+    YandexMapDefaultMarkerSettings,
+    YandexMapListenerSettings,
+    IYandexMapDefaultSatelliteLayer,
+    IYandexMapDefaultSatelliteLayerProps,
 };
