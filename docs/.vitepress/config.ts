@@ -129,6 +129,10 @@ export default defineConfig({
                         text: 'Версия 1.x',
                         link: 'https://vue-yandex-maps.github.io/new-docs/',
                     },
+                    {
+                        text: 'План на 3.0',
+                        link: '/guide/v3',
+                    },
                 ],
             },
         ],
@@ -186,6 +190,10 @@ export default defineConfig({
                                 link: '/guide/migration/v1',
                             },
                         ],
+                    },
+                    {
+                        text: 'План на версию 3.0',
+                        link: '/guide/v3',
                     },
                 ],
             },
