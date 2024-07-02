@@ -11497,7 +11497,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import-x@npm:^0.5.0, eslint-plugin-import-x@npm:^0.5.2":
+"eslint-plugin-import-x@npm:^0.5.0":
   version: 0.5.2
   resolution: "eslint-plugin-import-x@npm:0.5.2"
   dependencies:
@@ -11513,6 +11513,26 @@ __metadata:
   peerDependencies:
     eslint: ^8.56.0 || ^9.0.0-0
   checksum: 10/a58eb0fbc8fdb2c165bf26299a1c7daf781b067a1658a3a171f9e5b56e7fc244dc0a05f7059cbec66093afb1173d3a1ec25c3ed31a2699e9020104558dc80051
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-import-x@npm:^0.5.3":
+  version: 0.5.3
+  resolution: "eslint-plugin-import-x@npm:0.5.3"
+  dependencies:
+    "@typescript-eslint/utils": "npm:^7.4.0"
+    debug: "npm:^4.3.4"
+    doctrine: "npm:^3.0.0"
+    eslint-import-resolver-node: "npm:^0.3.9"
+    get-tsconfig: "npm:^4.7.3"
+    is-glob: "npm:^4.0.3"
+    minimatch: "npm:^9.0.3"
+    semver: "npm:^7.6.0"
+    stable-hash: "npm:^0.0.4"
+    tslib: "npm:^2.6.2"
+  peerDependencies:
+    eslint: ^8.56.0 || ^9.0.0-0
+  checksum: 10/def1b5de6844f34bf718ec452631a3cb89697f0001a436e1e27818f39c1bad6268fa967d3c5cf1d0a0d8449fdf480f5135c0b0c4cbf41365dcdf718b904a1a86
   languageName: node
   linkType: hard
 
@@ -20784,6 +20804,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stable-hash@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "stable-hash@npm:0.0.4"
+  checksum: 10/21c039d21c1cb739cf8342561753a5e007cb95ea682ccd452e76310bbb9c6987a89de8eda023e320b019f3e4691aabda75079cdbb7dadf7ab9013e931f2f23cd
+  languageName: node
+  linkType: hard
+
 "stable@npm:^0.1.8":
   version: 0.1.8
   resolution: "stable@npm:0.1.8"
@@ -22919,7 +22946,7 @@ __metadata:
     "@yandex/ymaps3-types": "npm:^0.0.27"
     eslint: "npm:^9.6.0"
     eslint-import-resolver-typescript: "npm:^3.6.1"
-    eslint-plugin-import-x: "npm:^0.5.2"
+    eslint-plugin-import-x: "npm:^0.5.3"
     eslint-plugin-vue: "npm:^9.27.0"
     examples: "workspace:^"
     puppeteer: "npm:^22.12.1"
