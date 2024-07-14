@@ -157,11 +157,15 @@ export default defineComponent({
                 h('div', {
                     ...containerProps.value.root,
                     ref: element,
-                }, slots.default?.({
-                    clusterer: props.feature.clusterer,
-                    coordinates: props.feature.clusterer.lnglat,
-                    length: props.feature.clusterer.features.length,
-                })),
+                }, [
+                    h('div', {
+                        ...containerProps.value.children,
+                    }, slots.default?.({
+                        clusterer: props.feature.clusterer,
+                        coordinates: props.feature.clusterer.lnglat,
+                        length: props.feature.clusterer.features.length,
+                    })),
+                ]),
             ]);
         };
     },
