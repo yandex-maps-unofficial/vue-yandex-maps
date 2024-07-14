@@ -5024,6 +5024,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rtsao/scc@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@rtsao/scc@npm:1.1.0"
+  checksum: 10/17d04adf404e04c1e61391ed97bca5117d4c2767a76ae3e879390d6dec7b317fcae68afbf9e98badee075d0b64fa60f287729c4942021b4d19cd01db77385c01
+  languageName: node
+  linkType: hard
+
 "@rushstack/eslint-patch@npm:^1.10.3":
   version: 1.10.3
   resolution: "@rushstack/eslint-patch@npm:1.10.3"
@@ -11632,10 +11639,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import-x@npm:^0.5.3":
-  version: 0.5.3
-  resolution: "eslint-plugin-import-x@npm:0.5.3"
+"eslint-plugin-import-x@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "eslint-plugin-import-x@npm:3.0.1"
   dependencies:
+    "@rtsao/scc": "npm:^1.1.0"
     "@typescript-eslint/utils": "npm:^7.4.0"
     debug: "npm:^4.3.4"
     doctrine: "npm:^3.0.0"
@@ -11648,7 +11656,7 @@ __metadata:
     tslib: "npm:^2.6.2"
   peerDependencies:
     eslint: ^8.56.0 || ^9.0.0-0
-  checksum: 10/def1b5de6844f34bf718ec452631a3cb89697f0001a436e1e27818f39c1bad6268fa967d3c5cf1d0a0d8449fdf480f5135c0b0c4cbf41365dcdf718b904a1a86
+  checksum: 10/f39edf32f63e6b6bcd43f6929a2d20c1830f076b739a0a3bdaf032b7d84f8035a34811380557a763c7a9a69e81c14dd9ae9f0d60dbffa72118d060b1878b402e
   languageName: node
   linkType: hard
 
@@ -23103,7 +23111,7 @@ __metadata:
     "@yandex/ymaps3-types": "npm:^0.0.27"
     eslint: "npm:^9.7.0"
     eslint-import-resolver-typescript: "npm:^3.6.1"
-    eslint-plugin-import-x: "npm:^0.5.3"
+    eslint-plugin-import-x: "npm:^3.0.1"
     eslint-plugin-vue: "npm:^9.27.0"
     examples: "workspace:^"
     puppeteer: "npm:^22.13.0"
