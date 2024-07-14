@@ -5597,7 +5597,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.14.10":
+"@types/node@npm:^20.14.10, @types/node@npm:^20.14.9":
   version: 20.14.10
   resolution: "@types/node@npm:20.14.10"
   dependencies:
@@ -12139,6 +12139,20 @@ __metadata:
     examples: "workspace:*"
     nuxt: "npm:^3.12.3"
     vue-tsc: "npm:^2.0.26"
+    vue-yandex-maps: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
+"example-nuxt4@workspace:packages/examples/nuxt4":
+  version: 0.0.0-use.local
+  resolution: "example-nuxt4@workspace:packages/examples/nuxt4"
+  dependencies:
+    "@nuxt/devtools": "npm:^1.3.9"
+    "@nuxt/webpack-builder": "npm:^3.12.3"
+    "@types/node": "npm:^20.14.9"
+    examples: "workspace:*"
+    nuxt: "npm:^3.12.3"
+    vue-tsc: "npm:^2.0.24"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -23082,7 +23096,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:^2.0.26":
+"vue-tsc@npm:^2.0.24, vue-tsc@npm:^2.0.26":
   version: 2.0.26
   resolution: "vue-tsc@npm:2.0.26"
   dependencies:

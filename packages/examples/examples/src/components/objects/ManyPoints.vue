@@ -5,8 +5,13 @@
                 coordinates: center, theme, width, height,
             }"
         >
+            <button @click="visible = !visible">
+                Destroy map
+            </button>
+
             <!-- #region html -->
             <yandex-map
+                v-if="visible"
                 v-model="map"
                 cursor-grab
                 :height="height"
@@ -73,14 +78,21 @@
                             coordinates,
                             onClick: () => background = background === 'red' ? 'green' : 'red',
                         }"
-                        :style="{
-                            '--background': background,
-                        }"
                     >
-                        <div class="marker"/>
+                        <div
+                            class="marker"
+                            :style="{
+                                '--background': background,
+                            }"
+                        />
                     </yandex-map-marker>
                     <template #cluster="{ length }">
-                        <div class="cluster fade-in">
+                        <div
+                            class="cluster fade-in"
+                            :style="{
+                                'background': background,
+                            }"
+                        >
                             {{ length }}
                         </div>
                     </template>
@@ -111,6 +123,7 @@ import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
 const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);
+const visible = ref(true);
 const count = ref(500);
 const savedCount = ref(500);
 const gridSize = ref(6);
@@ -197,6 +210,7 @@ const getPointList = computed<LngLat[]>(() => {
   cursor: pointer;
   border: 2px solid limegreen;
   outline: 2px solid green;
+  text-align: center;
 }
 
 .padded {

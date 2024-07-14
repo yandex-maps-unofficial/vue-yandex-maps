@@ -1,4 +1,5 @@
 <script lang="ts">
+import { ref } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, h, nextTick, onMounted, provide, shallowRef, watch } from 'vue';
 import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
@@ -52,6 +53,10 @@ export default defineComponent({
         settings: {
             type: Object as PropType<YandexMapClustererOptions>,
             default: () => ({}),
+        },
+        disableClustersReactivity: {
+            type: Boolean,
+            default: false,
         },
         /**
      * @description All custom (non-settings) props are also supported
@@ -111,6 +116,7 @@ export default defineComponent({
         const mapChildren = shallowRef<(Pick<YMapClusterer, 'update'> & Record<string, any>) | null>(null);
         const entities = shallowRef<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]>([]);
         const clusterFeatures = shallowRef<IYMapClusterFeature[]>([]);
+        const revision = ref(0);
 
         const filteredFeatures = computed(() => clusterFeatures.value.filter(x => x.clusterer.features.length > 1));
         provide('clusterFeatures', filteredFeatures);
@@ -176,10 +182,16 @@ export default defineComponent({
             });
 
             settings.onRender = clustersList => {
-                clusterFeatures.value = clustersList.map(clusterer => ({
-                    clusterer,
-                    element: clusterFeatures.value.find(x => x.clusterer.clusterId === clusterer.clusterId)?.element || new ymaps3.YMapCollection({}),
-                }));
+                if (clustersList.length <= 1) revision.value++;
+
+                clusterFeatures.value = clustersList.map(clusterer => {
+                    clusterer.clusterId = `cluster-${ revision.value }-${ clusterer.features.map(x => x.id).join(',') }`;
+
+                    return {
+                        clusterer,
+                        element: clusterFeatures.value.find(x => x.clusterer.clusterId === clusterer.clusterId)?.element || new ymaps3.YMapCollection({}),
+                    };
+                });
 
                 if (props.settings.onRender) return props.settings.onRender(clustersList);
             };
@@ -193,6 +205,7 @@ export default defineComponent({
         };
 
         const update = async () => {
+            clusterFeatures.value = [];
             await nextTick();
             mapChildren.value?.update(getSettings());
             mapChildren.value?._render();
@@ -245,6 +258,7 @@ export default defineComponent({
                         on: {
                             trueBounds: (e: LngLatBounds) => emit('trueBounds', e),
                             updatedBounds: (e: LngLatBounds) => emit('updatedBounds', e),
+                            updatedCluster: () => revision.value++,
                         },
                         scopedSlots: {
                             default: (options: any) => h('div', {}, [slots.cluster?.(options)]),
@@ -259,6 +273,7 @@ export default defineComponent({
                     zoomOnClusterClick: props.zoomOnClusterClick,
                     onTrueBounds: (e: LngLatBounds) => emit('trueBounds', e),
                     onUpdatedBounds: (e: LngLatBounds) => emit('updatedBounds', e),
+                    onUpdatedCluster: e => revision.value++,
                 }, {
                     default: (options: any) => slots.cluster?.(options),
                 }),

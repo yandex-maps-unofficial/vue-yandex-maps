@@ -83,6 +83,10 @@ export default defineComponent({
 
         const element = ref<null | HTMLDivElement>(null);
 
+        function clearElement() {
+            if (!element.value?.parentElement?.closest('ymaps')) element.value?.remove();
+        }
+
         onMounted(async () => {
             if (!props.settings.coordinates) {
                 throwException({
@@ -94,6 +98,7 @@ export default defineComponent({
                 settings: computed(() => props.settings),
                 createFunction: () => new ymaps3.YMapMarker(props.settings, element.value!),
             });
+            clearElement();
             emit('input', mapChildren);
             emit('update:modelValue', mapChildren);
         });
@@ -103,6 +108,7 @@ export default defineComponent({
         onUpdated(() => {
             if (!mapParent && element.value?.parentElement?.closest('ymaps')) mapParent = element.value.parentElement;
             else if (mapParent && element.value && !element.value?.parentElement?.closest('ymaps')) mapParent.appendChild(element.value);
+            clearElement();
         });
 
         const rootProps = computed(() => getMarkerContainerProps({
