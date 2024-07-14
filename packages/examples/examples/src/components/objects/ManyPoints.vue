@@ -5,7 +5,10 @@
                 coordinates: center, theme, width, height,
             }"
         >
-            <button @click="visible = !visible">
+            <button
+                type="button"
+                @click="visible = !visible"
+            >
                 Destroy map
             </button>
 
