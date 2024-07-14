@@ -60,10 +60,7 @@ export default defineComponent({
 
         function updateElement() {
             const _element = element.value;
-            if (!_element) {
-                console.log('element is gone');
-                return;
-            }
+            if (!_element) return;
 
             const clusterElement = props.feature.element;
             const clusterer = props.feature.clusterer;
