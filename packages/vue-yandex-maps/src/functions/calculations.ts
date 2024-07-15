@@ -8,7 +8,7 @@ export function getCenterFromCoords(coordinates: Array<LngLat | Readonly<LngLat>
     if (coordinates.length === 1) return coordinates[0] as LngLat;
     if (!coordinates.length) {
         throwException({
-            text: 'Invalid parameters in useYMapsCenterFromCoords: you must pass at least one LngLat',
+            text: 'Invalid parameters in getCenterFromCoords: you must pass at least one LngLat',
         });
     }
 
@@ -29,7 +29,7 @@ export function getCenterFromCoords(coordinates: Array<LngLat | Readonly<LngLat>
 export function getBoundsFromCoords(coordinates: Array<LngLat | Readonly<LngLat>>): LngLatBounds {
     if (coordinates.length < 2) {
         throwException({
-            text: 'Invalid parameters in useYMapsBoundsFromCoords: you must pass at least two LngLat',
+            text: 'Invalid parameters in getBoundsFromCoords: you must pass at least two LngLat',
         });
     }
 
@@ -53,5 +53,5 @@ export function getBoundsFromCoords(coordinates: Array<LngLat | Readonly<LngLat>
         },
     );
 
-    return [[minLongitude, maxLatitude], [maxLongitude, minLatitude]];
+    return [[minLongitude, minLatitude], [maxLongitude, maxLatitude]];
 }
