@@ -54,10 +54,6 @@ export default defineComponent({
             type: Object as PropType<YandexMapClustererOptions>,
             default: () => ({}),
         },
-        disableClustersReactivity: {
-            type: Boolean,
-            default: false,
-        },
         /**
      * @description All custom (non-settings) props are also supported
      */
