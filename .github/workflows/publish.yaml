@@ -112,7 +112,7 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/vue-yandex-maps
           provenance: true
-          tag: next
+          #tag: next
   github-release:
     name: Release tag to Github
     needs: npm-publish
@@ -135,7 +135,7 @@ jobs:
           tag_name: ${{ steps.tagName.outputs.version }}
           name: ${{ steps.release.outputs.title }}
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
-          prerelease: true
+          #prerelease: true
   docs-deploy:
     name: Docs Deploy
     continue-on-error: true
