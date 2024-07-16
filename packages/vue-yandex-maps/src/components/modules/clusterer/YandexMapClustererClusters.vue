@@ -29,7 +29,7 @@ export default defineComponent({
         updatedBounds(bounds: LngLatBounds): boolean {
             return bounds.length === 2;
         },
-        updatedCluster(cluserId: string) {
+        updatedCluster(clusterId: string) {
             return true;
         },
     },
