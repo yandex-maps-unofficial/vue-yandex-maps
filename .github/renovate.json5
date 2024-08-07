@@ -62,5 +62,8 @@
   rangeStrategy: "bump",
   "npm": {
     "commitMessageTopic": "{{prettyDepType}} {{depName}}"
+  },
+  "vulnerabilityAlerts": {
+    rangeStrategy: "bump"
   }
 }
