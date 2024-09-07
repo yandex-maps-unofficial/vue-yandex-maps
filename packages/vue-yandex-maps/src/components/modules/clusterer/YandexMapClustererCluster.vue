@@ -80,8 +80,8 @@ export default defineComponent({
                 clusterElement.addChild(new ymaps3.YMapMarker({
                     ...excludeYandexMarkerProps(props.clusterMarkerProps),
                     coordinates: clusterer.lnglat,
-                    onClick: async e => {
-                        props.clusterMarkerProps.onClick?.(e);
+                    onClick: async (event, mapEvent) => {
+                        props.clusterMarkerProps.onClick?.(event, mapEvent);
 
                         if (clusterer.features.length >= 2) {
                             const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
