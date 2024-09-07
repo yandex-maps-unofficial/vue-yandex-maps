@@ -24,7 +24,7 @@ export function safeRef<T = any>(value: T): Ref<UnwrapRef<T>> {
         };
     }
 
-    return ref<T>(value);
+    return ref<T>(value) as Ref<UnwrapRef<T>>;
 }
 
 /**
