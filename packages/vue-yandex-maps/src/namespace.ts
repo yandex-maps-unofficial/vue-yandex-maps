@@ -2,7 +2,7 @@ import type { Ref } from 'vue';
 import type { OverloadParameters } from './types/overload-extract.ts';
 import { safeComputed, safeRef } from './utils/system.ts';
 import type { Apikeys } from '@yandex/ymaps3-types/imperative/config';
-import type { YMapCarparksLayer, YMapPanoramaLayer, YMapTrafficEventsLayer, YMapTrafficLayer } from '@yandex/ymaps3-types/modules/layers-extra';
+import type { YMapCarparksLayer } from '@yandex/ymaps3-types/modules/layers-extra';
 
 export namespace VueYandexMaps {
     export const settings: Ref<VueYandexMaps.PluginSettings> = safeRef({

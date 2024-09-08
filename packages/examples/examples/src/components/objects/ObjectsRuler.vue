@@ -60,14 +60,14 @@
                             onUpdate: setTotalLabel,
                         }"
                     >
-                        <template #point="{ state, onDelete }">
+                        <template #point="{ state: pointState, onDelete }">
                             <div
                                 class="point"
-                                :class="{ 'point--last': state.index === state.totalCount - 1 }"
+                                :class="{ 'point--last': pointState.index === pointState.totalCount - 1 }"
                                 @click="($event.target as HTMLElement).classList.toggle('point--active')"
                             >
                                 <div class="point_popup">
-                                    {{ getLabel(state) }}
+                                    {{ getLabel(pointState) }}
 
                                     <div
                                         class="point_popup_delete"
