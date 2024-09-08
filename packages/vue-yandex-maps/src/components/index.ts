@@ -32,6 +32,8 @@ import YandexMapClusterer from './modules/clusterer/YandexMapClusterer.vue';
 import YandexMapCollection from './YandexMapCollection.vue';
 import YandexMapEntity from './YandexMapEntity.vue';
 import type { YandexMapMarkerCustomProps, YandexMapMarkerPosition } from '../types/marker.ts';
+import type { YandexMapRulerSettings } from './modules/ruler/YandexMapRuler.vue';
+import YandexMapRuler from './modules/ruler/YandexMapRuler.vue';
 
 export {
     YandexMap,
@@ -74,6 +76,9 @@ export {
 
     // Hint Module
     YandexMapHint,
+
+    // Ruler Module
+    YandexMapRuler,
 };
 
 export type {
@@ -84,6 +89,7 @@ export type {
     YandexMapClustererOptions,
     YandexMapDefaultMarkerSettings,
     YandexMapListenerSettings,
+    YandexMapRulerSettings,
     IYandexMapDefaultSatelliteLayer,
     IYandexMapDefaultSatelliteLayerProps,
 };

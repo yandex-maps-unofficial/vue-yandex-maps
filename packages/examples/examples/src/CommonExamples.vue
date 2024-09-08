@@ -43,6 +43,7 @@ const pages = {
 
     'objects/ObjectsPlacemark': 'Общие примеры маркеров',
     'objects/ObjectsCustomImage': 'Добавление метки с собственным изображением',
+    'objects/ObjectsRuler': 'Рулетка',
     'objects/HideMarkers': 'Скрытие маркеров вне зоны видимости',
     'objects/ManyPoints': 'Кластеризатор маркеров',
     'objects/MarkerPopup': 'Маркер со всплывающим окном',

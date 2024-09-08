@@ -56,6 +56,8 @@
 - Кнопка открытия Карт
 - Кастомные элементы
 
+### [Рулетка](objects/ruler)
+
 <style>
 a {
     text-decoration: none !important;

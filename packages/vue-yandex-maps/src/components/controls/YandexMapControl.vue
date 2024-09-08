@@ -43,30 +43,7 @@ export default defineComponent({
 
         onMounted(async () => {
             mapChildren = await setupMapChildren({
-                createFunction: () => {
-                    const control = new ymaps3.YMapControl(props.settings);
-
-                    class YMapSomeController extends ymaps3.YMapEntity<any> {
-                        _onAttach() {
-                            // @ts-expect-error restricted key
-                            this._element = element.value;
-                            // @ts-expect-error restricted key
-                            this._detachDom = ymaps3.useDomContext(this, this._element);
-                        }
-
-                        _onDetach() {
-                            // @ts-expect-error restricted key
-                            this._detachDom();
-                            // @ts-expect-error restricted key
-                            this._detachDom = null;
-                            // @ts-expect-error restricted key
-                            this._element = null;
-                        }
-                    }
-
-                    control.addChild(new YMapSomeController({}));
-                    return control;
-                },
+                createFunction: () => new ymaps3.YMapControl(props.settings, element.value!),
                 settings: computed(() => props.settings),
                 strictMapRoot: true,
             });

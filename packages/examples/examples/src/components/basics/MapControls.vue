@@ -78,6 +78,8 @@
                         <yandex-map-control>
                             <div class="button-element">
                                 Control with element
+
+                                #{{ counter }}
                             </div>
                         </yandex-map-control>
                         <yandex-map-control :settings="{ transparent: true }">

@@ -155,9 +155,7 @@ export default defineComponent({
                     ...containerProps.value.root,
                     ref: element,
                 }, [
-                    h('div', {
-                        ...containerProps.value.children,
-                    }, slots.default?.({
+                    h('div', containerProps.value.children, slots.default?.({
                         clusterer: props.feature.clusterer,
                         coordinates: props.feature.clusterer.lnglat,
                         length: props.feature.clusterer.features.length,

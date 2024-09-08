@@ -100,6 +100,9 @@
 ### [YandexMapDefaultMarker](modules/default-marker)
 Маркер со стилями по умолчанию.
 
+### [YandexMapRuler](modules/ruler)
+Компонент измерения расстояний.
+
 ## Модуль Controls
 
 ### [YandexMapGeolocationControl](modules/controls/geolocation)

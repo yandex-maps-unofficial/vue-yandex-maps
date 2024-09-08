@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress';
-import packageJson from '../../packages/vue-yandex-maps/package.json' assert { type: 'json' };
+import packageJson from '../../packages/vue-yandex-maps/package.json' with { type: 'json' };
 
 export default defineConfig({
     base: '/vue-yandex-maps/',
@@ -332,6 +332,10 @@ export default defineConfig({
                                 link: '/components/modules/default-marker',
                             },
                             {
+                                text: 'YandexMapRuler',
+                                link: '/components/modules/ruler',
+                            },
+                            {
                                 text: 'Projection',
                                 collapsed: true,
                                 items: [
@@ -448,12 +452,12 @@ export default defineConfig({
                                 link: '/examples/map/moving',
                             },
                             {
-                                text: 'Обработка событий карты',
-                                link: '/examples/map/events',
-                            },
-                            {
                                 text: 'Создание и удаление карты',
                                 link: '/examples/map/create-and-delete',
+                            },
+                            {
+                                text: 'Обработка событий карты',
+                                link: '/examples/map/events',
                             },
                             {
                                 text: 'Элементы управления',
@@ -462,72 +466,58 @@ export default defineConfig({
                         ],
                     },
                     {
-                        text: 'Объекты на карте',
+                        text: 'Маркеры',
                         collapsed: true,
                         items: [
                             {
-                                text: 'Маркеры',
-                                collapsed: false,
-                                items: [
-                                    {
-                                        text: 'Общие примеры маркеров',
-                                        link: '/examples/objects/placemark',
-                                    },
-                                    {
-                                        text: 'Добавление маркера с пользовательским изображением',
-                                        link: '/examples/objects/marker-custom-icon',
-                                    },
-                                    {
-                                        text: 'Скрытие маркеров вне зоны видимости',
-                                        link: '/examples/objects/hide-markers',
-                                    },
-                                    {
-                                        text: 'Кластеризатор маркеров',
-                                        link: '/examples/objects/clusterer',
-                                    },
-                                    {
-                                        text: 'Маркер со всплывающим окном',
-                                        link: '/examples/objects/marker-popup',
-                                    },
-                                    {
-                                        text: 'Перетаскиваемый маркер',
-                                        link: '/examples/objects/draggable-marker',
-                                    },
-                                    {
-                                        text: 'Маркер с дизайном по умолчанию',
-                                        link: '/examples/objects/default-marker',
-                                    },
-                                ],
+                                text: 'Общие примеры маркеров',
+                                link: '/examples/objects/placemark',
                             },
                             {
-                                text: 'Линии и полигоны',
-                                collapsed: false,
-                                items: [
-                                    {
-                                        text: 'Линия',
-                                        link: '/examples/objects/line',
-                                    },
-                                    {
-                                        text: 'Прямоугольник',
-                                        link: '/examples/objects/rectangle',
-                                    },
-                                    {
-                                        text: 'Полигон',
-                                        link: '/examples/objects/polygon',
-                                    },
-                                ],
+                                text: 'Добавление маркера с пользовательским изображением',
+                                link: '/examples/objects/marker-custom-icon',
                             },
                             {
                                 text: 'Подсказка при наведении на элементы карты',
                                 link: '/examples/objects/hints',
                             },
                             {
-                                text: 'Построение маршрута между точками',
-                                link: '/examples/objects/route',
+                                text: 'Скрытие маркеров вне зоны видимости',
+                                link: '/examples/objects/hide-markers',
                             },
                             {
-                                text: 'Поиск и Геосаджест',
-                                link: '/examples/objects/search',
+                                text: 'Кластеризатор маркеров',
+                                link: '/examples/objects/clusterer',
+                            },
+                            {
+                                text: 'Маркер со всплывающим окном',
+                                link: '/examples/objects/marker-popup',
+                            },
+                            {
+                                text: 'Перетаскиваемый маркер',
+                                link: '/examples/objects/draggable-marker',
+                            },
+                            {
+                                text: 'Маркер с дизайном по умолчанию',
+                                link: '/examples/objects/default-marker',
+                            },
+                        ],
+                    },
+                    {
+                        text: 'Линии и полигоны',
+                        collapsed: true,
+                        items: [
+                            {
+                                text: 'Линия',
+                                link: '/examples/objects/line',
+                            },
+                            {
+                                text: 'Прямоугольник',
+                                link: '/examples/objects/rectangle',
+                            },
+                            {
+                                text: 'Полигон',
+                                link: '/examples/objects/polygon',
                             },
                         ],
                     },
@@ -550,6 +540,24 @@ export default defineConfig({
                             {
                                 text: 'Кастомная карта',
                                 link: '/examples/layers/custom-map',
+                            },
+                        ],
+                    },
+                    {
+                        text: 'Дополнения',
+                        collapsed: true,
+                        items: [
+                            {
+                                text: 'Построение маршрута между точками',
+                                link: '/examples/objects/route',
+                            },
+                            {
+                                text: 'Поиск и Геосаджест',
+                                link: '/examples/objects/search',
+                            },
+                            {
+                                text: 'Линейка',
+                                link: '/examples/objects/ruler',
                             },
                         ],
                     },
