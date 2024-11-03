@@ -2,13 +2,16 @@
   "assignees": [
     "daniluk4000"
   ],
+  "prConcurrentLimit": 0,
+  "semanticCommits": "disabled",
+  "dependencyDashboardOSVVulnerabilitySummary": "all",
+  "osvVulnerabilityAlerts": true,
   rebaseWhen: "behind-base-branch",
   "packageRules": [
     {
       "matchPackageNames": [
         "@yandex/ymaps3-types"
       ],
-      automerge: false,
       groupName: "Yandex",
     },
     {
@@ -33,10 +36,46 @@
         "*"
       ],
       "matchUpdateTypes": [
-        "minor",
-        "patch"
+        "minor"
       ],
-      "matchCurrentVersion": "!/^0/",
+      "matchCurrentVersion": "!/^0/"
+    },
+    {
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "vue"
+      ],
+      "rangeStrategy": "bump",
+      "groupName": "Vue",
+      "separateMultipleMinor": true,
+      "separateMinorPatch": true
+    },
+    {
+      "matchPackageNames": [
+        "@vue/language-server",
+        "vue-tsc"
+      ],
+      "rangeStrategy": "pin",
+      "groupName": "Volar"
+    },
+    {
+      "matchPackageNames": [
+        "nuxt",
+        "@nuxt/kit"
+      ],
+      "rangeStrategy": "bump",
+      "groupName": "Nuxt",
+      "separateMultipleMinor": true,
+      "separateMinorPatch": true
     }
   ],
   "labels": [
@@ -45,13 +84,18 @@
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["before 4am on friday"],
+    "commitMessageAction": "chore(deps): Lockfile Maintenance",
+    "schedule": [
+      "before 4am on friday"
+    ]
   },
+  "separateMultipleMajor": true,
   "updateInternalDeps": true,
   "baseBranches": [
     "master"
   ],
   extends: [
+    ":automergeDisabled",
     ":dependencyDashboard",
     "group:monorepos",
     "group:recommended",
@@ -64,6 +108,9 @@
   "vulnerabilityAlerts": {
     //TODO: enable in v3
     enabled: false,
-    rangeStrategy: "bump"
+    "commitMessageSuffix": "chore(deps-security)",
+  },
+  "constraints": {
+    "node": "^20 || ^22"
   }
 }

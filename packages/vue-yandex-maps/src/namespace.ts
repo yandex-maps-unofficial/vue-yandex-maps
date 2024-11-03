@@ -2,7 +2,6 @@ import type { Ref } from 'vue';
 import type { OverloadParameters } from './types/overload-extract.ts';
 import { safeComputed, safeRef } from './utils/system.ts';
 import type { Apikeys } from '@yandex/ymaps3-types/imperative/config';
-import type { YMapCarparksLayer } from '@yandex/ymaps3-types/modules/layers-extra';
 
 export namespace VueYandexMaps {
     export const settings: Ref<VueYandexMaps.PluginSettings> = safeRef({
@@ -31,16 +30,6 @@ export namespace VueYandexMaps {
     export const loadStatus = safeRef<LoadStatus>('pending');
     export const isLoaded = safeComputed(() => loadStatus.value === 'loaded' || loadStatus.value === 'error');
     export const loadError = safeRef<null | Error | Parameters<OnErrorEventHandlerNonNull>[0]>(null);
-
-    /**
-     * @internal
-     */
-    export interface LayersExtra {
-        YMapTrafficLayer: typeof YMapCarparksLayer;
-        YMapTrafficEventsLayer: typeof YMapCarparksLayer;
-        YMapCarparksLayer: typeof YMapCarparksLayer;
-        YMapPanoramaLayer: typeof YMapCarparksLayer;
-    }
 
     /**
      * @description type-safe import for layers-extra module
