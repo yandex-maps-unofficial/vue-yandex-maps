@@ -5051,12 +5051,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.16.5":
-  version: 20.16.5
-  resolution: "@types/node@npm:20.16.5"
+"@types/node@npm:^22.8.7":
+  version: 22.8.7
+  resolution: "@types/node@npm:22.8.7"
   dependencies:
-    undici-types: "npm:~6.19.2"
-  checksum: 10/39a8457149dc17cdea57afc90d4da53182fdb8b958d5bb065a15d123d81d4efa6b51a0de92428d05ead2e63ce07195586f71083401b99cdbcd04662344fbf7a1
+    undici-types: "npm:~6.19.8"
+  checksum: 10/9c73d4cbcbf9773a5986421025c26d6139d8ab960317b3062fbb449c00dbe8197230334be550ffcdb6059bd25f4cb903546bace905155628537283a80c2075d5
   languageName: node
   linkType: hard
 
@@ -11442,7 +11442,7 @@ __metadata:
   dependencies:
     "@nuxt/devtools": "npm:^1.4.1"
     "@nuxt/webpack-builder": "npm:^3.13.1"
-    "@types/node": "npm:^20.16.5"
+    "@types/node": "npm:^22.8.7"
     examples: "workspace:*"
     nuxt: "npm:^3.13.1"
     vue-tsc: "npm:^2.1.6"
@@ -11470,7 +11470,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-vue3@workspace:packages/examples/vue3"
   dependencies:
-    "@types/node": "npm:^20.16.5"
+    "@types/node": "npm:^22.8.7"
     "@vitejs/plugin-vue": "npm:^5.1.3"
     "@vue/tsconfig": "npm:^0.5.1"
     examples: "workspace:*"
@@ -11487,7 +11487,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples@workspace:packages/examples/examples"
   dependencies:
-    "@types/node": "npm:^20.16.5"
+    "@types/node": "npm:^22.8.7"
     "@vitejs/plugin-vue": "npm:^5.1.3"
     "@vue/tsconfig": "npm:^0.5.1"
     "@yandex/ymaps3-types": "npm:^0.0.28"
@@ -21317,7 +21317,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~6.19.2":
+"undici-types@npm:~6.19.2, undici-types@npm:~6.19.8":
   version: 6.19.8
   resolution: "undici-types@npm:6.19.8"
   checksum: 10/cf0b48ed4fc99baf56584afa91aaffa5010c268b8842f62e02f752df209e3dea138b372a60a963b3b2576ed932f32329ce7ddb9cb5f27a6c83040d8cd74b7a70
@@ -22299,7 +22299,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.25.1"
     "@nuxt/eslint": "npm:^0.5.6"
     "@stylistic/eslint-plugin": "npm:^2.7.2"
-    "@types/node": "npm:^20.16.5"
+    "@types/node": "npm:^22.8.7"
     "@typescript-eslint/eslint-plugin": "npm:^8.4.0"
     "@typescript-eslint/parser": "npm:^8.4.0"
     "@vue/eslint-config-airbnb": "npm:^8.0.0"
