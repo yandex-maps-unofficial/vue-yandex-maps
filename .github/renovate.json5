@@ -10,12 +10,6 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "@yandex/**"
-      ],
-      groupName: "Yandex",
-    },
-    {
-      "matchPackageNames": [
         "vue",
         "nuxt"
       ],
@@ -76,6 +70,12 @@
       "groupName": "Nuxt",
       "separateMultipleMinor": true,
       "separateMinorPatch": true
+    },
+    {
+      "matchPackageNames": [
+        "@yandex/**"
+      ],
+      groupName: "Yandex",
     }
   ],
   "labels": [
