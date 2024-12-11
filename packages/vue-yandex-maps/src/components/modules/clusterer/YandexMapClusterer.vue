@@ -12,7 +12,7 @@ import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/type
 import YandexMapClustererClusters from './YandexMapClustererClusters.vue';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0];
-export type YandexMapClustererOptions = Partial<Omit<Settings, 'features' | 'marker' | 'cluster'>>;
+export type YandexMapClustererOptions = Partial<Omit<Settings,  'cluster'>>;
 
 export type YandexMapClustererZoomOptionsObject = {
     duration?: number;
@@ -126,20 +126,24 @@ export default defineComponent({
             if (!settings.method && _clusterByGrid) settings.method = _clusterByGrid?.({ gridSize: props.gridSize });
             if (tickTimeout.value) settings.tickTimeout = tickTimeout.value;
 
-            const marker: Settings['marker'] = (feature: Feature) => {
-                const entity = entities.value.find((x: Record<string, any>) => x._props.id === feature.id);
+            let marker: Settings['marker'] | undefined = settings.marker;
+            
+            if (!marker) {
+                marker = (feature: Feature) => {
+                    const entity = entities.value.find((x: Record<string, any>) => x._props.id === feature.id);
 
-                if (!entity) {
-                    throwException({
-                        text: `No entity with id ${ feature.id } (coordinates: ${ feature.geometry.coordinates.join(', ') }) were found in YandexMapClusterer.`,
-                        isInternal: true,
-                        warn: true,
-                    });
-                    return new ymaps3.YMapMarker({ coordinates: feature.geometry.coordinates });
-                }
+                    if (!entity) {
+                        throwException({
+                            text: `No entity with id ${ feature.id } (coordinates: ${ feature.geometry.coordinates.join(', ') }) were found in YandexMapClusterer.`,
+                            isInternal: true,
+                            warn: true,
+                        });
+                        return new ymaps3.YMapMarker({ coordinates: feature.geometry.coordinates });
+                    }
 
-                return entity;
-            };
+                    return entity;
+                };
+            }
 
             const cluster: Settings['cluster'] = coordinates => {
                 const foundCluster = clusterFeatures.value.find(x => x.clusterer.lnglat[0] === coordinates[0] && x.clusterer.lnglat[1] === coordinates[1]);
@@ -156,26 +160,30 @@ export default defineComponent({
                 return foundCluster.element as YMapMarker;
             };
 
-            const features: Settings['features'] = entities.value.map((entity: Record<string, any>, i) => {
-                if (!entity._props.id) {
-                    entity.update({
-                        id: Math
-                            .random()
-                            .toString() +
-                            Date.now().toString(),
-                    });
-                }
+            let features: Settings['features'] | undefined = settings.features;
 
-                return {
-                    type: 'Feature',
-                    id: entity._props.id,
-                    geometry: {
-                        type: 'Point',
-                        coordinates: entity._props.coordinates,
-                    },
-                    properties: 'properties' in entity._props ? entity._props.properties : {},
-                };
-            });
+            if (!features) {
+                features = entities.value.map((entity: Record<string, any>, i) => {
+                    if (!entity._props.id) {
+                        entity.update({
+                            id: Math
+                                .random()
+                                .toString() +
+                                Date.now().toString(),
+                        });
+                    }
+
+                    return {
+                        type: 'Feature',
+                        id: entity._props.id,
+                        geometry: {
+                            type: 'Point',
+                            coordinates: entity._props.coordinates,
+                        },
+                        properties: 'properties' in entity._props ? entity._props.properties : {},
+                    };
+                });
+            }
 
             settings.onRender = clustersList => {
                 if (clustersList.length <= 1) revision.value++;
@@ -220,7 +228,16 @@ export default defineComponent({
                     clusterByGrid: _clusterByGrid_,
                 }) => {
                     _clusterByGrid = _clusterByGrid_;
-                    return new Clusterer(getSettings());
+
+                    const settings = getSettings();
+
+                    if (settings.features.length > 0) {
+                        // When rendering with `YandexMapMarker` components, initially features are empty.
+                        // When passing features from settings, initially features are not empty. This causes clusters not to be rendered until the map is zoomed in
+                        settings.features = []
+                    }
+
+                    return new Clusterer(settings);
                 },
                 requiredImport: () => ymaps3.import('@yandex/ymaps3-clusterer@0.0.1'),
                 isMapRoot: true,
