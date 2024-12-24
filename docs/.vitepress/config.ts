@@ -490,6 +490,10 @@ export default defineConfig({
                                 link: '/examples/objects/clusterer',
                             },
                             {
+                                text: 'Программный кластеризатор',
+                                link: '/examples/objects/clusterer-program',
+                            },
+                            {
                                 text: 'Маркер со всплывающим окном',
                                 link: '/examples/objects/marker-popup',
                             },

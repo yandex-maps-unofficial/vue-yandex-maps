@@ -105,7 +105,7 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapZoomControl,
 } from 'vue-yandex-maps';
-import { computed, onMounted, ref, shallowRef, useCssModule, version, watch } from 'vue';
+import { computed, onMounted, ref, shallowRef, useCssModule, watch } from 'vue';
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
 import type { Feature as ClustererFeature } from '@yandex/ymaps3-types/packages/clusterer';
@@ -123,7 +123,6 @@ const bounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
 const trueBounds = ref<LngLatBounds>([[0, 0], [0, 0]]);
 
 onMounted(() => {
-    if (version.startsWith('2')) return;
     setInterval(() => {
         if (map.value) {
             zoom.value = map.value.zoom;

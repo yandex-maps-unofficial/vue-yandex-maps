@@ -1,6 +1,6 @@
 {
   "name": "vue-yandex-maps",
-  "version": "2.2.0-beta.1",
+  "version": "2.1.5",
   "description": "Yandex Maps 3.0 components library for VueJS.",
   "main": "./dist/vue-yandex-maps.js",
   "types": "./dist/index.d.ts",
@@ -76,23 +76,22 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@yandex/ymaps3-default-ui-theme": ">=0.0.15",
-    "@yandex/ymaps3-types": ">=1.0.15194938"
+    "@yandex/ymaps3-types": ">=1.0.15542062"
   },
   "devDependencies": {
-    "@nuxt/kit": "^3.13.2",
+    "@nuxt/kit": "^3.14.1592",
     "@nuxt/types": "^2.18.1",
-    "@vitejs/plugin-vue": "^5.1.4",
+    "@vitejs/plugin-vue": "^5.2.1",
     "deep-object-diff": "^1.1.9",
-    "nuxt": "^3.13.2",
+    "nuxt": "^3.14.1592",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-delete": "^2.1.0",
-    "typescript": "5.6.3",
-    "vite": "^5.4.10",
-    "vite-plugin-dts": "^4.3.0",
+    "typescript": "5.7.2",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.4.0",
     "vite-plugin-lib-inject-css": "^2.1.1",
-    "vue": "^3.5.12",
-    "vue-tsc": "2.1.10"
+    "vue": "^3.5.13",
+    "vue-tsc": "2.2.0"
   },
   "peerDependencies": {
     "@vue/composition-api": ">=1",

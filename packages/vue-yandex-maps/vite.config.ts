@@ -19,7 +19,7 @@ export default defineConfig({
             formats: ['es'],
         },
         rollupOptions: {
-            external: ['vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit'],
+            external: ['vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit', '@yandex/ymaps3-default-ui-theme'],
             input: {
                 'vue-yandex-maps': resolve(__dirname, 'src/index.ts'),
                 'plugins/nuxt2-module': resolve(__dirname, 'src/plugins/nuxt2-module'),
