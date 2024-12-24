@@ -12,7 +12,7 @@ import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/type
 import YandexMapClustererClusters from './YandexMapClustererClusters.vue';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0];
-export type YandexMapClustererOptions = Partial<Omit<Settings,  'cluster'>>;
+export type YandexMapClustererOptions = Partial<Omit<Settings, 'cluster'>>;
 
 export type YandexMapClustererZoomOptionsObject = {
     duration?: number;
@@ -127,7 +127,7 @@ export default defineComponent({
             if (tickTimeout.value) settings.tickTimeout = tickTimeout.value;
 
             let marker: Settings['marker'] | undefined = settings.marker;
-            
+
             if (!marker) {
                 marker = (feature: Feature) => {
                     const entity = entities.value.find((x: Record<string, any>) => x._props.id === feature.id);
@@ -234,7 +234,7 @@ export default defineComponent({
                     if (settings.features.length > 0) {
                         // When rendering with `YandexMapMarker` components, initially features are empty.
                         // When passing features from settings, initially features are not empty. This causes clusters not to be rendered until the map is zoomed in
-                        settings.features = []
+                        settings.features = [];
                     }
 
                     return new Clusterer(settings);

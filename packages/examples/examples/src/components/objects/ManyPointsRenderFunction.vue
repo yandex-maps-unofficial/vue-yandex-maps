@@ -73,14 +73,13 @@
                 <yandex-map-clusterer
                     v-model="clusterer"
                     :grid-size="2 ** gridSize"
-                    zoom-on-cluster-click
                     :settings="{
                         features: getPointList,
-                        marker: createMarker
+                        marker: createMarker,
                     }"
+                    zoom-on-cluster-click
                     @trueBounds="trueBounds = $event"
                 >
-                    
                     <template #cluster="{ length }">
                         <div class="cluster fade-in">
                             {{ length }}
@@ -107,7 +106,8 @@ import {
     YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import { computed, onMounted, ref, shallowRef, useCssModule, version, watch } from 'vue';
-import { YMapMarker, type LngLat, type LngLatBounds, type YMap } from '@yandex/ymaps3-types';
+import type { YMapMarker } from '@yandex/ymaps3-types';
+import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
 import type { Feature as ClustererFeature } from '@yandex/ymaps3-types/packages/clusterer';
 import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
 
@@ -171,11 +171,11 @@ const getPointList = computed(() => {
 
         result.push({
             type: 'Feature',
-            id: `${i}`,
+            id: `${ i }`,
             geometry: {
-                type: "Point",
-                coordinates: lngLat
-            }
+                type: 'Point',
+                coordinates: lngLat,
+            },
         });
     }
 
@@ -183,7 +183,7 @@ const getPointList = computed(() => {
 });
 
 
-const allMarkers: Map<string, YMapMarker> = new Map()
+const allMarkers: Map<string, YMapMarker> = new Map();
 const selectedMarkerId = ref<string | null>(null);
 
 const updateMarker = (feature: ClustererFeature) => {
@@ -198,13 +198,13 @@ const updateMarker = (feature: ClustererFeature) => {
 
     const newMarker = createMarker(feature);
     map.value?.addChild(newMarker);
-}
+};
 
 const cssModule = useCssModule();
 const createMarker = (feature: ClustererFeature) => {
     const featureCircle = document.createElement('div');
     featureCircle.classList.add(cssModule['feature-circle']);
-    featureCircle.innerHTML = `<span>#${feature.id}</span>`
+    featureCircle.innerHTML = `<span>#${ feature.id }</span>`;
 
     if (feature.id == selectedMarkerId.value) {
         featureCircle.style.background = '#AC0707';
@@ -220,23 +220,23 @@ const createMarker = (feature: ClustererFeature) => {
                 selectedMarkerId.value = feature.id;
 
                 if (prevSelectedId) {
-                    const previousFeature = getPointList.value.find((f) => f.id == prevSelectedId);
+                    const previousFeature = getPointList.value.find(f => f.id == prevSelectedId);
 
                     if (previousFeature) {
                         updateMarker(previousFeature);
                     }
                 }
-                
+
                 updateMarker(feature);
-            }
+            },
         },
-        featureCircle
+        featureCircle,
     );
 
     allMarkers.set(feature.id, yMapMarker);
 
     return yMapMarker;
-}
+};
 // #endregion setup
 </script>
 
