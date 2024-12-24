@@ -6264,10 +6264,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/tsconfig@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@vue/tsconfig@npm:0.5.1"
-  checksum: 10/1f8e51eae0aae92ea518f0713394135bf1f8a80decd486417fb3701851e903a4c18bc12db6c8d3223e1e0bd1dc01c70668bd7703382a130fd250867b772002ce
+"@vue/tsconfig@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@vue/tsconfig@npm:0.7.0"
+  peerDependencies:
+    typescript: 5.x
+    vue: ^3.4.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+    vue:
+      optional: true
+  checksum: 10/29b5dd11cc179de707dfd549d0e80e220f4a0f6f7d90b9a52769bc655e599b9166b28af1218819245fbdd30a74d80fdd484538cdda6876d9d369ae623f234834
   languageName: node
   linkType: hard
 
@@ -11559,7 +11567,7 @@ __metadata:
   dependencies:
     "@types/node": "npm:^22.8.7"
     "@vitejs/plugin-vue": "npm:^5.1.4"
-    "@vue/tsconfig": "npm:^0.5.1"
+    "@vue/tsconfig": "npm:^0.7.0"
     examples: "workspace:*"
     npm-run-all2: "npm:^7.0.1"
     typescript: "npm:5.6.3"
@@ -11576,7 +11584,7 @@ __metadata:
   dependencies:
     "@types/node": "npm:^22.8.7"
     "@vitejs/plugin-vue": "npm:^5.1.4"
-    "@vue/tsconfig": "npm:^0.5.1"
+    "@vue/tsconfig": "npm:^0.7.0"
     "@yandex/ymaps3-types": "npm:^1.0.15194938"
     npm-run-all2: "npm:^7.0.1"
     typescript: "npm:5.6.3"
