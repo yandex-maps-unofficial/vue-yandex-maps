@@ -46,6 +46,7 @@ const pages = {
     'objects/ObjectsRuler': 'Рулетка',
     'objects/HideMarkers': 'Скрытие маркеров вне зоны видимости',
     'objects/ManyPoints': 'Кластеризатор маркеров',
+    'objects/ManyPointsRenderFunction': 'Кластеризатор маркеров с features из settings',
     'objects/MarkerPopup': 'Маркер со всплывающим окном',
     'objects/DraggableMarker': 'Перетаскиваемый маркер',
     'objects/DefaultMarker': 'Перетаскиваемый маркер',
