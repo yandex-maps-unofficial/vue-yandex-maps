@@ -445,6 +445,6 @@ export default [
         },
     },
     {
-        ignores: ['**/nuxt2-plugin.js', '**/dist', '**/.nuxt'],
+        ignores: ['**/nuxt2-plugin.js', '**/dist', '**/.nuxt', '**/docs/.vitepress'],
     },
 ];
