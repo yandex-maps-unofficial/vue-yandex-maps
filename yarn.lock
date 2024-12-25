@@ -3625,6 +3625,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nuxt/kit@npm:3.15.0":
+  version: 3.15.0
+  resolution: "@nuxt/kit@npm:3.15.0"
+  dependencies:
+    "@nuxt/schema": "npm:3.15.0"
+    c12: "npm:^2.0.1"
+    consola: "npm:^3.3.1"
+    defu: "npm:^6.1.4"
+    destr: "npm:^2.0.3"
+    globby: "npm:^14.0.2"
+    ignore: "npm:^7.0.0"
+    jiti: "npm:^2.4.2"
+    klona: "npm:^2.0.6"
+    knitwork: "npm:^1.2.0"
+    mlly: "npm:^1.7.3"
+    ohash: "npm:^1.1.4"
+    pathe: "npm:^1.1.2"
+    pkg-types: "npm:^1.2.1"
+    scule: "npm:^1.3.0"
+    semver: "npm:^7.6.3"
+    ufo: "npm:^1.5.4"
+    unctx: "npm:^2.4.1"
+    unimport: "npm:^3.14.5"
+    untyped: "npm:^1.5.2"
+  checksum: 10/0c4ac7a8cac7e260150825c5f6337b45cdf4a36a249336f3b6296d2415b7a9338fc42c3b9d6c069330c36caf65abf04ba2977209f6d05bc6da2d6287626aa4f2
+  languageName: node
+  linkType: hard
+
 "@nuxt/loading-screen@npm:^2.0.4":
   version: 2.0.4
   resolution: "@nuxt/loading-screen@npm:2.0.4"
@@ -3667,6 +3695,27 @@ __metadata:
     unimport: "npm:^3.13.2"
     untyped: "npm:^1.5.1"
   checksum: 10/ab8dac947fb9c35deb0be693d2a4a39afd561a9547d4b542d4040846a453b82571137d5267c18651bf272b6f5adc68f36a5d845cb6c50459f7f96aa26c89fdd5
+  languageName: node
+  linkType: hard
+
+"@nuxt/schema@npm:3.15.0":
+  version: 3.15.0
+  resolution: "@nuxt/schema@npm:3.15.0"
+  dependencies:
+    c12: "npm:^2.0.1"
+    compatx: "npm:^0.1.8"
+    consola: "npm:^3.3.1"
+    defu: "npm:^6.1.4"
+    hookable: "npm:^5.5.3"
+    pathe: "npm:^1.1.2"
+    pkg-types: "npm:^1.2.1"
+    scule: "npm:^1.3.0"
+    std-env: "npm:^3.8.0"
+    ufo: "npm:^1.5.4"
+    uncrypto: "npm:^0.1.3"
+    unimport: "npm:^3.14.5"
+    untyped: "npm:^1.5.2"
+  checksum: 10/58d5b26b5aadfe7a7b0b0d1f7c0f92f15abafe3a12853cc7fa2542db32a4d7870d6959e26c65e41c4df6b1ae5eaa9e6a21909166b57b607e75b724ac3634ae6f
   languageName: node
   linkType: hard
 
@@ -3885,12 +3934,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/webpack-builder@npm:^3.14.1592":
-  version: 3.14.1592
-  resolution: "@nuxt/webpack-builder@npm:3.14.1592"
+"@nuxt/webpack-builder@npm:^3.15.0":
+  version: 3.15.0
+  resolution: "@nuxt/webpack-builder@npm:3.15.0"
   dependencies:
     "@nuxt/friendly-errors-webpack-plugin": "npm:^2.6.0"
-    "@nuxt/kit": "npm:3.14.1592"
+    "@nuxt/kit": "npm:3.15.0"
     autoprefixer: "npm:^10.4.20"
     css-loader: "npm:^7.1.2"
     css-minimizer-webpack-plugin: "npm:^7.0.0"
@@ -3898,17 +3947,14 @@ __metadata:
     defu: "npm:^6.1.4"
     esbuild-loader: "npm:^4.2.2"
     escape-string-regexp: "npm:^5.0.0"
-    estree-walker: "npm:^3.0.3"
     file-loader: "npm:^6.2.0"
     fork-ts-checker-webpack-plugin: "npm:^9.0.2"
     h3: "npm:^1.13.0"
-    hash-sum: "npm:^2.0.0"
-    jiti: "npm:^2.4.0"
+    jiti: "npm:^2.4.2"
     lodash-es: "npm:4.17.21"
-    magic-string: "npm:^0.30.13"
-    memfs: "npm:^4.14.0"
+    magic-string: "npm:^0.30.17"
+    memfs: "npm:^4.14.1"
     mini-css-extract-plugin: "npm:^2.9.2"
-    mlly: "npm:^1.7.3"
     ohash: "npm:^1.1.4"
     pathe: "npm:^1.1.2"
     pify: "npm:^6.1.0"
@@ -3922,7 +3968,7 @@ __metadata:
     time-fix-plugin: "npm:^2.0.7"
     ufo: "npm:^1.5.4"
     unenv: "npm:^1.10.0"
-    unplugin: "npm:^1.16.0"
+    unplugin: "npm:^2.1.0"
     url-loader: "npm:^4.1.1"
     vue-bundle-renderer: "npm:^2.1.1"
     vue-loader: "npm:^17.4.2"
@@ -3933,7 +3979,7 @@ __metadata:
     webpackbar: "npm:^7.0.0"
   peerDependencies:
     vue: ^3.3.4
-  checksum: 10/042f34b3625d0caed0f150b21b9adaec909e075c2b4d4712dc06fb60ae6a77cb9531633839c33e723071bfd56af135b8d9e4b3f80658dec2e65b9510eb67bbcb
+  checksum: 10/2290a9691395d007e17ca7a10314d6ac4d3f8537807f4fb5349bff7100a63100be87b871aca87d85db05e9f4a77391b73ce924b67e79d5c8e1061c321209716c
   languageName: node
   linkType: hard
 
@@ -8853,7 +8899,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"consola@npm:^3.0.0, consola@npm:^3.2.3, consola@npm:^3.3.0":
+"consola@npm:^3.0.0, consola@npm:^3.2.3, consola@npm:^3.3.0, consola@npm:^3.3.1":
   version: 3.3.1
   resolution: "consola@npm:3.3.1"
   checksum: 10/59a9470e07c591c407fb072500fd05b6851334b7685db73fdcbe93b8b18b0c5737f1f1340f9e0c1b8d10f077bd9d1f0f9769fbbe0bdc40feb1f75ce1da92c591
@@ -11501,7 +11547,7 @@ __metadata:
   resolution: "example-nuxt3@workspace:packages/examples/nuxt3"
   dependencies:
     "@nuxt/devtools": "npm:^1.6.4"
-    "@nuxt/webpack-builder": "npm:^3.14.1592"
+    "@nuxt/webpack-builder": "npm:^3.15.0"
     "@types/node": "npm:^22.10.2"
     examples: "workspace:*"
     nuxt: "npm:^3.14.1592"
@@ -13428,6 +13474,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ignore@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "ignore@npm:7.0.0"
+  checksum: 10/4033102404784e8f8e53e737021996d25d8d41b0abf021645ad50699c531cc176e91addf703231f43583b00cfa8b87bec363ea8e2f21602d75909c5b957b3acd
+  languageName: node
+  linkType: hard
+
 "image-meta@npm:^0.2.1":
   version: 0.2.1
   resolution: "image-meta@npm:0.2.1"
@@ -15171,7 +15224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memfs@npm:^4.14.0, memfs@npm:^4.6.0, memfs@npm:^4.9.3":
+"memfs@npm:^4.14.1, memfs@npm:^4.6.0, memfs@npm:^4.9.3":
   version: 4.15.1
   resolution: "memfs@npm:4.15.1"
   dependencies:
@@ -21664,7 +21717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unctx@npm:^2.3.1":
+"unctx@npm:^2.3.1, unctx@npm:^2.4.1":
   version: 2.4.1
   resolution: "unctx@npm:2.4.1"
   dependencies:
@@ -22046,7 +22099,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"untyped@npm:^1.5.1":
+"untyped@npm:^1.5.1, untyped@npm:^1.5.2":
   version: 1.5.2
   resolution: "untyped@npm:1.5.2"
   dependencies:
