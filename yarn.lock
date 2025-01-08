@@ -239,80 +239,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-darwin-arm64@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-darwin-arm64@npm:0.22.6"
+"@ast-grep/napi-darwin-arm64@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-darwin-arm64@npm:0.32.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-darwin-x64@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-darwin-x64@npm:0.22.6"
+"@ast-grep/napi-darwin-x64@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-darwin-x64@npm:0.32.3"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-linux-arm64-gnu@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-linux-arm64-gnu@npm:0.22.6"
+"@ast-grep/napi-linux-arm64-gnu@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-linux-arm64-gnu@npm:0.32.3"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-linux-x64-gnu@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-linux-x64-gnu@npm:0.22.6"
+"@ast-grep/napi-linux-arm64-musl@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-linux-arm64-musl@npm:0.32.3"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@ast-grep/napi-linux-x64-gnu@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-linux-x64-gnu@npm:0.32.3"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-linux-x64-musl@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-linux-x64-musl@npm:0.22.6"
+"@ast-grep/napi-linux-x64-musl@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-linux-x64-musl@npm:0.32.3"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-win32-arm64-msvc@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-win32-arm64-msvc@npm:0.22.6"
+"@ast-grep/napi-win32-arm64-msvc@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-win32-arm64-msvc@npm:0.32.3"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-win32-ia32-msvc@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-win32-ia32-msvc@npm:0.22.6"
+"@ast-grep/napi-win32-ia32-msvc@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-win32-ia32-msvc@npm:0.32.3"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@ast-grep/napi-win32-x64-msvc@npm:0.22.6":
-  version: 0.22.6
-  resolution: "@ast-grep/napi-win32-x64-msvc@npm:0.22.6"
+"@ast-grep/napi-win32-x64-msvc@npm:0.32.3":
+  version: 0.32.3
+  resolution: "@ast-grep/napi-win32-x64-msvc@npm:0.32.3"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@ast-grep/napi@npm:^0.22.3":
-  version: 0.22.6
-  resolution: "@ast-grep/napi@npm:0.22.6"
+"@ast-grep/napi@npm:^0.32.2":
+  version: 0.32.3
+  resolution: "@ast-grep/napi@npm:0.32.3"
   dependencies:
-    "@ast-grep/napi-darwin-arm64": "npm:0.22.6"
-    "@ast-grep/napi-darwin-x64": "npm:0.22.6"
-    "@ast-grep/napi-linux-arm64-gnu": "npm:0.22.6"
-    "@ast-grep/napi-linux-x64-gnu": "npm:0.22.6"
-    "@ast-grep/napi-linux-x64-musl": "npm:0.22.6"
-    "@ast-grep/napi-win32-arm64-msvc": "npm:0.22.6"
-    "@ast-grep/napi-win32-ia32-msvc": "npm:0.22.6"
-    "@ast-grep/napi-win32-x64-msvc": "npm:0.22.6"
+    "@ast-grep/napi-darwin-arm64": "npm:0.32.3"
+    "@ast-grep/napi-darwin-x64": "npm:0.32.3"
+    "@ast-grep/napi-linux-arm64-gnu": "npm:0.32.3"
+    "@ast-grep/napi-linux-arm64-musl": "npm:0.32.3"
+    "@ast-grep/napi-linux-x64-gnu": "npm:0.32.3"
+    "@ast-grep/napi-linux-x64-musl": "npm:0.32.3"
+    "@ast-grep/napi-win32-arm64-msvc": "npm:0.32.3"
+    "@ast-grep/napi-win32-ia32-msvc": "npm:0.32.3"
+    "@ast-grep/napi-win32-x64-msvc": "npm:0.32.3"
   dependenciesMeta:
     "@ast-grep/napi-darwin-arm64":
       optional: true
     "@ast-grep/napi-darwin-x64":
       optional: true
     "@ast-grep/napi-linux-arm64-gnu":
+      optional: true
+    "@ast-grep/napi-linux-arm64-musl":
       optional: true
     "@ast-grep/napi-linux-x64-gnu":
       optional: true
@@ -324,7 +334,7 @@ __metadata:
       optional: true
     "@ast-grep/napi-win32-x64-msvc":
       optional: true
-  checksum: 10/d69e745d68847efe0f8193562afb67cd98562a53e395f0acea42e6b9f513f05ee5b2f0c4600e0f16bd6c4f7bf01d6a8578b75c9fab84bf5dba4e071598a2abfc
+  checksum: 10/284e94e430e6a9400c8a83677a134695b99c736710437d49432473a8b05bcefbda54d324e746fc58ffd744f1a5c989bfb358647b69e7d149fdcb666d194613c4
   languageName: node
   linkType: hard
 
@@ -15043,7 +15053,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.10, magic-string@npm:^0.30.11, magic-string@npm:^0.30.12, magic-string@npm:^0.30.13, magic-string@npm:^0.30.14, magic-string@npm:^0.30.17, magic-string@npm:^0.30.3, magic-string@npm:^0.30.4, magic-string@npm:^0.30.8, magic-string@npm:^0.30.9":
+"magic-string@npm:^0.30.11, magic-string@npm:^0.30.12, magic-string@npm:^0.30.13, magic-string@npm:^0.30.14, magic-string@npm:^0.30.17, magic-string@npm:^0.30.3, magic-string@npm:^0.30.4, magic-string@npm:^0.30.8, magic-string@npm:^0.30.9":
   version: 0.30.17
   resolution: "magic-string@npm:0.30.17"
   dependencies:
@@ -22437,15 +22447,15 @@ __metadata:
   linkType: hard
 
 "vite-plugin-lib-inject-css@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "vite-plugin-lib-inject-css@npm:2.1.1"
+  version: 2.2.1
+  resolution: "vite-plugin-lib-inject-css@npm:2.2.1"
   dependencies:
-    "@ast-grep/napi": "npm:^0.22.3"
-    magic-string: "npm:^0.30.10"
-    picocolors: "npm:^1.0.0"
+    "@ast-grep/napi": "npm:^0.32.2"
+    magic-string: "npm:^0.30.17"
+    picocolors: "npm:^1.1.1"
   peerDependencies:
     vite: "*"
-  checksum: 10/5741e85cf01c13a0f5aab6a70390ae6e0271ec5d9edde84f7f85c9ddf27e1b7cbe069987a61703d355a171ec000f723969e8155e60b293a82682d581ce99ed33
+  checksum: 10/9cbe1f7131509c4cc9f7132652c5de8ebc4aecfd3113519281fd610d8221f4d4f8704abdd56e924627356404e12285ebc8a5b4f2b7756f6a39a168b87929d5aa
   languageName: node
   linkType: hard
 

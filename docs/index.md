@@ -29,9 +29,3 @@ features:
     title: Доступная
     details: Поддержаны Vue 3 и Nuxt 3 - на Webpack и Vite. Реализована, пусть с особенностями, даже поддержка Vue 2 с Nuxt 2!<br><br>Библиотека поставляется с полным набором компонентов Карт 3.0.
 ---
-
-<style>
-:root {
-  --vp-home-hero-name-color: #FF5B4D;
-}
-</style>

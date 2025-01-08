@@ -34,6 +34,8 @@ import YandexMapEntity from './YandexMapEntity.vue';
 import type { YandexMapMarkerCustomProps, YandexMapMarkerPosition } from '../types/marker.ts';
 import type { YandexMapRulerSettings } from './modules/ruler/YandexMapRuler.vue';
 import YandexMapRuler from './modules/ruler/YandexMapRuler.vue';
+import YandexMapTrafficLayer from './modules/layers-extra/YandexMapTrafficLayer.vue';
+import YandexMapTrafficEventsLayer from './modules/layers-extra/YandexMapTrafficEventsLayer.vue';
 
 export {
     YandexMap,
@@ -79,6 +81,10 @@ export {
 
     // Ruler Module
     YandexMapRuler,
+
+    // Layers Extra Module
+    YandexMapTrafficLayer,
+    YandexMapTrafficEventsLayer,
 };
 
 export type {

@@ -76,6 +76,10 @@ export default defineConfig({
                         link: '/guide/manual',
                     },
                     {
+                        text: 'Решение проблем',
+                        link: '/guide/issues',
+                    },
+                    {
                         text: 'Конфигурация',
                         link: '/guide/configuration',
                     },
@@ -171,6 +175,10 @@ export default defineConfig({
                     {
                         text: 'Начало работы',
                         link: '/guide/quickstart',
+                    },
+                    {
+                        text: 'Решение проблем',
+                        link: '/guide/issues',
                     },
                     {
                         text: 'Переход с 0.x/1.x',
@@ -324,6 +332,20 @@ export default defineConfig({
                                 ],
                             },
                             {
+                                text: 'Дополнительные слои (layers-extra)',
+                                collapsed: true,
+                                items: [
+                                    {
+                                        text: 'YandexMapTrafficLayer',
+                                        link: '/components/modules/layers-extra/traffic',
+                                    },
+                                    {
+                                        text: 'YandexMapTrafficEventsLayer',
+                                        link: '/components/modules/layers-extra/events',
+                                    },
+                                ],
+                            },
+                            {
                                 text: 'YandexMapHint',
                                 link: '/components/modules/hint',
                             },
@@ -402,10 +424,10 @@ export default defineConfig({
                                 text: 'API ymaps3',
                                 link: '/api/yandex',
                             },
-                            {
+                            /*{
                                 text: 'Yandex Maps API',
                                 link: '/api/yandex-maps-api',
-                            },
+                            },*/
                         ],
                     },
                 ],
@@ -545,6 +567,10 @@ export default defineConfig({
                                 text: 'Кастомная карта',
                                 link: '/examples/layers/custom-map',
                             },
+                            {
+                                text: 'Пробки',
+                                link: '/examples/layers/traffic',
+                            },
                         ],
                     },
                     {
@@ -572,6 +598,11 @@ export default defineConfig({
             prev: 'Предыдущая страница',
             next: 'Далее',
         },
+        darkModeSwitchLabel: 'Тема',
+        lightModeSwitchTitle: 'Переключиться на светлую',
+        darkModeSwitchTitle: 'Переключиться на тёмную',
+        externalLinkIcon: true,
+        returnToTopLabel: 'Вернуться наверх',
         editLink: {
             pattern: 'https://github.com/yandex-maps-unofficial/vue-yandex-maps/tree/master/docs/:path',
             text: 'Редактировать на GitHub',

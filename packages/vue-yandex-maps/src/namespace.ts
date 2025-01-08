@@ -2,6 +2,22 @@ import type { Ref } from 'vue';
 import type { OverloadParameters } from './types/overload-extract.ts';
 import { safeComputed, safeRef } from './utils/system.ts';
 import type { Apikeys } from '@yandex/ymaps3-types/imperative/config';
+import type { YMapEntity } from '@yandex/ymaps3-types';
+
+export interface IYandexMapTrafficLayerProps {
+    visible: boolean;
+    [key: string]: any;
+}
+
+export declare class IYandexMapTrafficLayer extends YMapEntity<IYandexMapTrafficLayerProps> {
+
+}
+
+export interface IYandexMapTrafficEventsLayerProps extends IYandexMapTrafficLayerProps {}
+
+export declare class IYandexMapTrafficEventsLayer extends YMapEntity<IYandexMapTrafficEventsLayerProps> {
+
+}
 
 export namespace VueYandexMaps {
     export const settings: Ref<VueYandexMaps.PluginSettings> = safeRef({
@@ -31,13 +47,18 @@ export namespace VueYandexMaps {
     export const isLoaded = safeComputed(() => loadStatus.value === 'loaded' || loadStatus.value === 'error');
     export const loadError = safeRef<null | Error | Parameters<OnErrorEventHandlerNonNull>[0]>(null);
 
+    export interface LayersExtra {
+        YMapTrafficLayer: typeof IYandexMapTrafficLayer;
+        YMapTrafficEventsLayer: typeof IYandexMapTrafficEventsLayer;
+    }
+
     /**
      * @description type-safe import for layers-extra module
      * @internal
      */
     export function importLayersExtra() {
         // @ts-expect-error Missing module in types
-        return ymaps3.import('@yandex/ymaps3-layers-extra') as Promise<LayersExtra>;
+        return ymaps3.import('@yandex/ymaps3-layers-extra') as Promise<VueYandexMaps.LayersExtra>;
     }
 
     export interface PluginSettings {
