@@ -188,15 +188,13 @@ const selectedMarkerId = ref<string | null>(null);
 const updateMarker = (feature: ClustererFeature) => {
     const marker = allMarkers.get(feature.id);
 
-    if (marker) {
-        map.value?.removeChild(marker);
-        marker.element.remove();
-
-        allMarkers.delete(feature.id);
+    if (!marker) {
+        return;
     }
 
-    const newMarker = createMarker(feature);
-    map.value?.addChild(newMarker);
+    const bg = selectedMarkerId.value == feature.id ? '#AC0707' : '';
+
+    marker.element.style.background = bg;
 };
 
 const cssModule = useCssModule();
