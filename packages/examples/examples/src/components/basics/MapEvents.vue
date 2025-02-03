@@ -190,18 +190,15 @@ const createEvent = <T extends keyof typeof events, E = keyof typeof events[T]>(
   --color: #eee;
 }
 
-.events-container, .events-block {
+.events-block {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.events-container {
+.events-block {
   pointer-events: all;
-
-  + .events-container {
-    margin-left: 10px;
-  }
+  margin-right: 10px;
 }
 
 .events-block {
