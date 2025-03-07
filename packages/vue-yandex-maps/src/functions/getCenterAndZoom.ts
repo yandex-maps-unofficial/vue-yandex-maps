@@ -155,6 +155,7 @@ export async function getLocationFromBounds({
 
     // @ts-expect-error dynamic restricted key
     const ctx = map[ctxMap];
+    const mapZoom = map.zoom;
 
     const ctxItem = await new Promise<any>((resolve, reject) => {
         ctx.forEach((item: any, { name }: { name: string }) => {
@@ -217,6 +218,10 @@ export async function getLocationFromBounds({
 
             if (diff < settings.diff) {
                 zoom -= settings.correction;
+            }
+
+            if (zoom <= mapZoom) {
+                zoom = originalZoom;
             }
         }
     }
