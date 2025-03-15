@@ -21,7 +21,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 22.14.0
       - uses: ./.github/actions/codecheck
   test-vue2:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 22.14.0
       - uses: ./.github/actions/test
         with:
           type: vue3
@@ -63,7 +63,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 22.14.0
       - uses: ./.github/actions/test
         with:
           type: nuxt3
@@ -76,7 +76,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 22.14.0
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build main package
