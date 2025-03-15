@@ -29,7 +29,7 @@ const map = shallowRef<null | YMap>(null); //map передать в v-model
 Принимает обязательный параметр `location`, в котором вы должны указать начальное состояние карты, а также остальные
 параметры карты [(YMapProps)](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapProps).
 
-[См. документацию на сайте Яндекса.](https://yandex.ru/dev/maps/jsapi/doc/3.0/dg/concepts/map.html#map-parms)
+[См. документацию на сайте Яндекса.](https://yandex.ru/maps-api/docs/js-api/map/YMap.html#props)
 
 ::: info Примечание
 Параметры `settings` не синхронизируются автоматически с Картами - они работают только на "вход".
@@ -97,4 +97,4 @@ const map = shallowRef<null | YMap>(null); //map передать в v-model
 
 Задавать слои рекомендуется через `template`, а после создания компонента - через `addChild` к инстансу карты.
 
-[См. документацию на сайте Яндекса.](https://yandex.ru/dev/jsapi30/doc/ru/dg/concepts/map#layers)
+[См. документацию на сайте Яндекса.](https://yandex.ru/maps-api/docs/js-api/object/layers/index.html)
