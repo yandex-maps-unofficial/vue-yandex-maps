@@ -21,7 +21,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.14.0
       - uses: ./.github/actions/test
         with:
           type: vue2
@@ -43,7 +43,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.14.0
       - uses: ./.github/actions/test
         with:
           type: nuxt2
