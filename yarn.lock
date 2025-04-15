@@ -3342,13 +3342,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nolyfill/is-core-module@npm:1.0.39":
-  version: 1.0.39
-  resolution: "@nolyfill/is-core-module@npm:1.0.39"
-  checksum: 10/0d6e098b871eca71d875651288e1f0fa770a63478b0b50479c99dc760c64175a56b5b04f58d5581bbcc6b552b8191ab415eada093d8df9597ab3423c8cac1815
-  languageName: node
-  linkType: hard
-
 "@npmcli/agent@npm:^3.0.0":
   version: 3.0.0
   resolution: "@npmcli/agent@npm:3.0.0"
@@ -11444,17 +11437,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:^3.10.0":
-  version: 3.10.0
-  resolution: "eslint-import-resolver-typescript@npm:3.10.0"
+"eslint-import-resolver-typescript@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "eslint-import-resolver-typescript@npm:4.3.2"
   dependencies:
-    "@nolyfill/is-core-module": "npm:1.0.39"
     debug: "npm:^4.4.0"
     get-tsconfig: "npm:^4.10.0"
     is-bun-module: "npm:^2.0.0"
     stable-hash: "npm:^0.0.5"
     tinyglobby: "npm:^0.2.12"
-    unrs-resolver: "npm:^1.3.2"
+    unrs-resolver: "npm:^1.4.1"
   peerDependencies:
     eslint: "*"
     eslint-plugin-import: "*"
@@ -11464,7 +11456,7 @@ __metadata:
       optional: true
     eslint-plugin-import-x:
       optional: true
-  checksum: 10/f289b9279e7a6c63700d05d0712b335113651c6501f01e00918b3731ad17cae0208c9ae034fb72e73078517bb10b62c4e500539da22728293fa88e11522ba101
+  checksum: 10/40f4d4a888b2e139943338e064ec080d6b1bb85426bcd7197e0a0d505bd34b08dfb4e0fc10620d773063325039212549c7913edbb6beed28e7ea1de62ad271d1
   languageName: node
   linkType: hard
 
@@ -22605,7 +22597,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unrs-resolver@npm:^1.3.2, unrs-resolver@npm:^1.5.0":
+"unrs-resolver@npm:^1.4.1, unrs-resolver@npm:^1.5.0":
   version: 1.5.0
   resolution: "unrs-resolver@npm:1.5.0"
   dependencies:
@@ -23532,7 +23524,7 @@ __metadata:
     "@vue/eslint-config-airbnb": "npm:^8.0.0"
     "@yandex/ymaps3-types": "npm:^1.0.16311465"
     eslint: "npm:^9.24.0"
-    eslint-import-resolver-typescript: "npm:^3.10.0"
+    eslint-import-resolver-typescript: "npm:^4.3.2"
     eslint-plugin-import-x: "npm:^4.10.3"
     eslint-plugin-vue: "npm:^10.0.0"
     examples: "workspace:^"
