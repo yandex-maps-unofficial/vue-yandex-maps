@@ -125,6 +125,12 @@ export namespace VueYandexMaps {
          * @default true (5000)
          */
         mapsRenderWaitDuration?: number | boolean;
+        /**
+         * @description Sets script tag attributes
+         * @default async defer referrerpolicy=strict-origin-when-cross-origin type=text/javascript
+         * @note src will be ignored
+         */
+        scriptAttributes?: Record<Lowercase<string>, string | false>;
     }
 
     /**

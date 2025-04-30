@@ -14,6 +14,7 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
     domain: true,
     mapsRenderWaitDuration: true,
     mapsScriptWaitDuration: true,
+    scriptAttributes: true,
 };
 
 export function initYmaps() {
@@ -53,11 +54,21 @@ export function initYmaps() {
         url.searchParams.set('lang', settings.lang || 'ru_RU');
         url.searchParams.set('apikey', settings.apikey);
 
-        yandexMapScript.setAttribute('src', url.toString());
-        yandexMapScript.setAttribute('async', '');
-        yandexMapScript.setAttribute('defer', '');
-        yandexMapScript.setAttribute('type', 'text/javascript');
-        yandexMapScript.setAttribute('id', 'vue-yandex-maps');
+        const scriptAttributes: Record<string, string | false> = {
+            async: '',
+            defer: '',
+            referrerpolicy: 'strict-origin-when-cross-origin',
+            type: 'text/javascript',
+            id: 'vue-yandex-maps',
+            src: url.toString(),
+            ...(settings.scriptAttributes || {}),
+        };
+
+        for (const key in scriptAttributes) {
+            if (scriptAttributes[key] === false) continue;
+            yandexMapScript.setAttribute(key, scriptAttributes[key]);
+        }
+
         document.head.appendChild(yandexMapScript);
         yandexMapScript.onload = async () => {
             try {
@@ -110,6 +121,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignore
         mapsRenderWaitDuration: true,
         mapsScriptWaitDuration: true,
         servicesApikeys: null,
+        scriptAttributes: {},
         ...options,
     };
     if (!optionsShallowClone.apikey) {

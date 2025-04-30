@@ -3,6 +3,9 @@ export default defineNuxtConfig({
     modules: ['vue-yandex-maps/nuxt'],
     yandexMaps: {
         apikey: '9fa90fbc-ce5f-4dc9-ae6d-433e0ec7338b',
+        scriptAttributes: {
+            referrerpolicy: false,
+        },
     },
     typescript: {
         typeCheck: true,
