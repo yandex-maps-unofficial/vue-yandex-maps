@@ -12947,7 +12947,7 @@ __metadata:
     "@vitejs/plugin-vue": "npm:^5.2.4"
     "@vue/tsconfig": "npm:^0.7.0"
     examples: "workspace:*"
-    npm-run-all2: "npm:^7.0.2"
+    npm-run-all2: "npm:^8.0.3"
     typescript: "npm:5.8.3"
     vite: "npm:^6.3.5"
     vue: "npm:^3.5.14"
@@ -12964,7 +12964,7 @@ __metadata:
     "@vitejs/plugin-vue": "npm:^5.2.4"
     "@vue/tsconfig": "npm:^0.7.0"
     "@yandex/ymaps3-types": "npm:^1.0.16530300"
-    npm-run-all2: "npm:^7.0.2"
+    npm-run-all2: "npm:^8.0.3"
     typescript: "npm:5.8.3"
     vite: "npm:^6.3.5"
     vue: "npm:^3.5.14"
@@ -17062,6 +17062,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimatch@npm:^10.0.1, minimatch@npm:^9.0.3 || ^10.0.1":
+  version: 10.0.1
+  resolution: "minimatch@npm:10.0.1"
+  dependencies:
+    brace-expansion: "npm:^2.0.1"
+  checksum: 10/082e7ccbc090d5f8c4e4e029255d5a1d1e3af37bda837da2b8b0085b1503a1210c91ac90d9ebfe741d8a5f286ece820a1abb4f61dc1f82ce602a055d461d93f3
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:^3.0.4, minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
@@ -17086,15 +17095,6 @@ __metadata:
   dependencies:
     brace-expansion: "npm:^2.0.1"
   checksum: 10/dd6a8927b063aca6d910b119e1f2df6d2ce7d36eab91de83167dd136bb85e1ebff97b0d3de1cb08bd1f7e018ca170b4962479fefab5b2a69e2ae12cb2edc8348
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^9.0.3 || ^10.0.1":
-  version: 10.0.1
-  resolution: "minimatch@npm:10.0.1"
-  dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: 10/082e7ccbc090d5f8c4e4e029255d5a1d1e3af37bda837da2b8b0085b1503a1210c91ac90d9ebfe741d8a5f286ece820a1abb4f61dc1f82ce602a055d461d93f3
   languageName: node
   linkType: hard
 
@@ -17906,14 +17906,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-run-all2@npm:^7.0.2":
-  version: 7.0.2
-  resolution: "npm-run-all2@npm:7.0.2"
+"npm-run-all2@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "npm-run-all2@npm:8.0.3"
   dependencies:
     ansi-styles: "npm:^6.2.1"
     cross-spawn: "npm:^7.0.6"
     memorystream: "npm:^0.3.1"
-    minimatch: "npm:^9.0.0"
+    minimatch: "npm:^10.0.1"
     pidtree: "npm:^0.6.0"
     read-package-json-fast: "npm:^4.0.0"
     shell-quote: "npm:^1.7.3"
@@ -17923,7 +17923,7 @@ __metadata:
     npm-run-all2: bin/npm-run-all/index.js
     run-p: bin/run-p/index.js
     run-s: bin/run-s/index.js
-  checksum: 10/46d3f7a9117d6af2463285a02909ecc92bde31fc5cd9d8a7c4cc66157e639481eed13d5553dda62b9def6df36b8a5c748393ea65233aea97ee0e615033595266
+  checksum: 10/0d381ae684c41f78f607e2a55826e480bda1b8e489bbebf4aa3f89c393e12f97a4f5cbc94a9653702497b6ae1f45b8ec01dd5f70fa6b1881c0696bbb451f0fe5
   languageName: node
   linkType: hard
 
