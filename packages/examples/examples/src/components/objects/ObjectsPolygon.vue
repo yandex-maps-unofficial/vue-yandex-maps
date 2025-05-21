@@ -338,3 +338,9 @@ const features: YMapFeatureProps[] = [
 ];
 // #endregion setup
 </script>
+
+<style>
+.vue-yandex-maps-wrapper {
+  text-align: center;
+}
+</style>

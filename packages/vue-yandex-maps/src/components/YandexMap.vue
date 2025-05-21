@@ -353,4 +353,8 @@ export default defineComponent({
 .__ymap--grabbing:focus [class$="main-engine-container"] canvas, .__ymap--grabbing:active [class$="main-engine-container"] canvas {
   cursor: grabbing;
 }
+
+.__ymap [class$="graphics-layer"] {
+  text-align: left;
+}
 </style>
