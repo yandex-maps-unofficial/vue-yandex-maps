@@ -5176,7 +5176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^22.15.21":
+"@types/node@npm:*":
   version: 22.15.21
   resolution: "@types/node@npm:22.15.21"
   dependencies:
@@ -5189,6 +5189,15 @@ __metadata:
   version: 16.18.126
   resolution: "@types/node@npm:16.18.126"
   checksum: 10/33e0fa9209a4a96459a8fdf6b078ca9590eb67a8d51899180cfac8afecb9aa133c755d1c38a8b947b9f384f2faa184cabf4e567f5f6dded285be1b31588ec199
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^24.0.3":
+  version: 24.0.3
+  resolution: "@types/node@npm:24.0.3"
+  dependencies:
+    undici-types: "npm:~7.8.0"
+  checksum: 10/6cce0afa9b0ff7f8eab7cb0339909c1e4ef480b824b8de5adc9cee05dac63ee3d8c7a46e1f95f13ecc94e84608118741f9949527a92fbf3f0e1f7714b37a7b61
   languageName: node
   linkType: hard
 
@@ -11903,7 +11912,7 @@ __metadata:
   resolution: "example-nuxt3@workspace:packages/examples/nuxt3"
   dependencies:
     "@nuxt/devtools": "npm:^2.4.1"
-    "@types/node": "npm:^22.15.21"
+    "@types/node": "npm:^24.0.3"
     examples: "workspace:*"
     nuxt: "npm:^3.17.4"
     vue-tsc: "npm:2.2.10"
@@ -11931,7 +11940,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-vue3@workspace:packages/examples/vue3"
   dependencies:
-    "@types/node": "npm:^22.15.21"
+    "@types/node": "npm:^24.0.3"
     "@vitejs/plugin-vue": "npm:^5.2.4"
     "@vue/tsconfig": "npm:^0.7.0"
     examples: "workspace:*"
@@ -11948,7 +11957,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples@workspace:packages/examples/examples"
   dependencies:
-    "@types/node": "npm:^22.15.21"
+    "@types/node": "npm:^24.0.3"
     "@vitejs/plugin-vue": "npm:^5.2.4"
     "@vue/tsconfig": "npm:^0.7.0"
     "@yandex/ymaps3-types": "npm:^1.0.16530300"
@@ -22619,6 +22628,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici-types@npm:~7.8.0":
+  version: 7.8.0
+  resolution: "undici-types@npm:7.8.0"
+  checksum: 10/fcff3fbab234f067fbd69e374ee2c198ba74c364ceaf6d93db7ca267e784457b5518cd01d0d2329b075f412574205ea3172a9a675facb49b4c9efb7141cd80b7
+  languageName: node
+  linkType: hard
+
 "unenv@npm:^2.0.0-rc.17":
   version: 2.0.0-rc.17
   resolution: "unenv@npm:2.0.0-rc.17"
@@ -23773,7 +23789,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.27.1"
     "@nuxt/eslint": "npm:^1.4.1"
     "@stylistic/eslint-plugin": "npm:^4.2.0"
-    "@types/node": "npm:^22.15.21"
+    "@types/node": "npm:^24.0.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.32.1"
     "@typescript-eslint/parser": "npm:^8.32.1"
     "@vue/eslint-config-airbnb": "npm:^8.0.0"
