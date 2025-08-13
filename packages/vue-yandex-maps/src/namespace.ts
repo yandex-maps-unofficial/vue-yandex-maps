@@ -1,3 +1,4 @@
+import { shallowRef } from 'vue';
 import type { Ref } from 'vue';
 import type { OverloadParameters } from './types/overload-extract.ts';
 import { safeComputed, safeRef } from './utils/system.ts';
@@ -32,6 +33,7 @@ export namespace VueYandexMaps {
 
     // Type-safe ymaps3 to avoid "never" problems with undefined checks
     export const ymaps = () => ymaps3;
+    export const script = shallowRef<HTMLElement | null>(null);
 
     export class YandexMapException extends Error {
         constructor(message: string) {

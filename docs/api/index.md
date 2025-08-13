@@ -20,6 +20,14 @@ Namespace с настройками Vue Yandex Maps.
 
 Ручная инициализация библиотеки.
 
+### [reloadYmaps](/api/reload-maps)
+
+Перезагрузка карты.
+
+### [changeYmapsLanguage](/api/change-language)
+
+Смена локали.
+
 ## Вспомогательные методы
 
 ### [getLocationFromBounds](/api/location-from-bounds)
@@ -37,8 +45,3 @@ Namespace с настройками Vue Yandex Maps.
 ## Внешние методы
 
 ### [API ymaps3](yandex)
-
-### [Yandex Maps API (TODO)](/api/yandex-maps-api)
-
-Узнать об идее проекта Yandex Maps API.
-

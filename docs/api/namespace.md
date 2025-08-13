@@ -16,6 +16,10 @@ import { VueYandexMaps } from 'vue-yandex-maps';
 
 computed с информацией о готовности настроек к инициализации карты. Полезно кинуть карту на `v-if`, если вы инициализируете её вручную через `createYmapsOptions` позже, чем она монтируется.
 
+### script
+
+`<script>` карт в DOM дереве.
+
 ### ymaps
 
 `type-safe` функция, возвращает `ymaps3`. Полезно, если у вас есть проблемы с possible-undefined в TS.

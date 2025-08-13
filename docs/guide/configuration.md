@@ -32,6 +32,8 @@ Referer". [Подробнее об ограничениях](https://yandex.ru/d
 
 По умолчанию: `ru_RU`
 
+Для изменения локали см. [changeYmapsLanguage](/api/change-language).
+
 ### servicesApikeys
 
 Объект, передаётся в `ymaps3.getDefaultConfig().setApikeys(...)` сразу после инициализации Карт. В частности, позволяет использовать `ymaps3.route` и `ymaps3.suggest`.

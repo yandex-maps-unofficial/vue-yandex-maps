@@ -398,6 +398,14 @@ export default defineConfig({
                                 text: 'createYmapsOptions',
                                 link: '/api/create-options',
                             },
+                            {
+                                text: 'reloadYmaps',
+                                link: '/api/reload-maps',
+                            },
+                            {
+                                text: 'changeYmapsLanguage',
+                                link: '/api/change-language',
+                            },
                         ],
                     },
                     {

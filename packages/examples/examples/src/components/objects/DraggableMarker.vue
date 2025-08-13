@@ -20,6 +20,7 @@
             >
                 <yandex-map-default-scheme-layer/>
                 <yandex-map-default-features-layer/>
+                <!-- @vue-ignore -->
                 <yandex-map-default-marker
                     v-model="defaultMarker"
                     :settings="{

@@ -1,4 +1,4 @@
-import { watch } from 'vue';
+import { nextTick, watch } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import { throwException } from '../utils/system.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
@@ -50,6 +50,7 @@ export function initYmaps() {
         }
 
         const yandexMapScript = document.createElement('SCRIPT');
+        VueYandexMaps.script.value = yandexMapScript;
         const url = new URL(`${ settings.domain }/${ settings.version }/`);
         url.searchParams.set('lang', settings.lang || 'ru_RU');
         url.searchParams.set('apikey', settings.apikey);
@@ -145,4 +146,20 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignore
     VueYandexMaps.settings.value = optionsShallowClone;
 
     return optionsShallowClone;
+}
+
+/**
+ * @description Unloads script and loads it again
+ */
+export async function reloadYmaps() {
+    VueYandexMaps.loadStatus.value = 'pending';
+    VueYandexMaps.loadError.value = null;
+    await nextTick();
+    VueYandexMaps.script.value?.remove();
+    return initYmaps();
+}
+
+export function changeYmapsLanguage(lang: string) {
+    VueYandexMaps.settings.value.lang = lang;
+    return reloadYmaps();
 }

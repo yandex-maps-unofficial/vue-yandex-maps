@@ -31,6 +31,16 @@
       enabled: false
     },
     {
+      "matchPackageNames": [
+        "@yandex/ymaps3-types"
+      ],
+      matchDepTypes: [
+        "peerDependencies",
+        "engines"
+      ],
+      "enabled": true,
+    },
+    {
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "matchPackagePatterns": [

@@ -4,6 +4,8 @@
 
 - @yandex/ymaps3-types добавлена в peerDependencies для фикса pnpm
 - Поднята версия nuxt в peerDependencies
+- Добавлены методы `changeYmapsLanguage` и `reloadYmaps`
+- В неймспейс `VueYandexMaps` добавлена рефка скрипта карт в доме (`script`)
 
 ## [2.1.9]
 
