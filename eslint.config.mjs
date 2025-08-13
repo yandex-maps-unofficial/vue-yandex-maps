@@ -57,7 +57,7 @@ const baseRules = {
     'import/no-mutable-exports': 'off',
     'prefer-const': ['error', { destructuring: 'all' }],
     camelcase: ['off'],
-    'stylistic/func-call-spacing': 'error',
+    'stylistic/function-call-spacing': 'error',
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
     'import/exports-last': 'off',
     'import/first': 'error',
