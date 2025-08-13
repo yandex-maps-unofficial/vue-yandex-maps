@@ -17,6 +17,13 @@
       "allowedVersions": "<=2"
     },
     {
+      "matchPackageNames": [
+        "nuxt"
+      ],
+      matchCurrentVersion: "<=3",
+      "allowedVersions": "<=3"
+    },
+    {
       matchDepTypes: [
         "peerDependencies",
         "engines"

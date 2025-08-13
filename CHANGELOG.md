@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - @yandex/ymaps3-types добавлена в peerDependencies для фикса pnpm
+- Поднята версия nuxt в peerDependencies
 
 ## [2.1.9]
 
