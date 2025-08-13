@@ -1,11 +1,31 @@
 # Список изменений
 
-## [Unreleased]
+## [2.2.0]
+
+### Общие изменения
 
 - @yandex/ymaps3-types добавлена в peerDependencies для фикса pnpm
-- Поднята версия nuxt в peerDependencies
-- Добавлены методы `changeYmapsLanguage` и `reloadYmaps`
+- Добавлены новые библиотеки в качестве зависимостей (нужны исключительно для типизации)
+- Поднята версия nuxt в peerDependencies для поддержки v4
 - В неймспейс `VueYandexMaps` добавлена рефка скрипта карт в доме (`script`)
+- Добавлена поддержка импорта библиотек Яндекса через CDN. CDN можно указать свой, ровно как и добавить туда библиотеки - или вообще выключить эту фичу, если страшно
+  - Данный способ загрузки используется как костыль для указанных ниже новых компонентов
+- Исправлена утечка памяти при анмаунте `<yandex-map>`. Спасибо kovalevsckaya за находку
+- Обновлены ссылки на типы во всей документации через страшную боль и страдания
+
+### Новые компоненты
+
+- Мини карта: маленькая карта там, где вы это захотите (YandexMapMiniMap)
+- Управление поворотом/наклоном (YandexMapRotateControl, YandexMapTiltControl, YandexMapRotateTiltControl)
+- Нативный поиск маршрута (YandexMapRouteControl)
+- Нативный поиск адресов/организаций (YandexMapSearchControl)
+- Компонент всплывашки (YandexMapPopupMarker)
+- Альтернативный дефолтный маркер (YandexMapUiMarker)
+- Контекстное меню (YandexMapContextMenu)
+- Боковое меню (YandexMapDrawerControl)
+- Указатель на точки вне вьюпорта (YandexMapSignpost)
+- Ресайзер (YandexMapResizer)
+- Индикатор загрузки (YandexMapSpinner)
 
 ## [2.1.9]
 

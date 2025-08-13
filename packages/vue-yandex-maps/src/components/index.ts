@@ -36,6 +36,20 @@ import type { YandexMapRulerSettings } from './modules/ruler/YandexMapRuler.vue'
 import YandexMapRuler from './modules/ruler/YandexMapRuler.vue';
 import YandexMapTrafficLayer from './modules/layers-extra/YandexMapTrafficLayer.vue';
 import YandexMapTrafficEventsLayer from './modules/layers-extra/YandexMapTrafficEventsLayer.vue';
+import YandexMapRotateControl from './modules/controls/YandexMapRotateControl.vue';
+import YandexMapTiltControl from './modules/controls/YandexMapTiltControl.vue';
+import YandexMapRotateTiltControl from './modules/controls/YandexMapRotateTiltControl.vue';
+import YandexMapResizer from './modules/ui/YandexMapResizer.vue';
+import YandexMapMiniMap from './modules/controls/YandexMapMiniMap.vue';
+import YandexMapContextMenu from './modules/ui/YandexMapContextMenu.vue';
+import YandexMapContextMenuItem from './modules/ui/YandexMapContextMenuItem.vue';
+import YandexMapDrawerControl from './modules/ui/YandexMapDrawerControl.vue';
+import YandexMapSignpost from './modules/ui/YandexMapSignpost.vue';
+import YandexMapSpinner from './modules/ui/YandexMapSpinner.vue';
+import YandexMapUiMarker from './modules/markers/YandexMapUiMarker.vue';
+import YandexMapSearchControl from './modules/controls/YandexMapSearchControl.vue';
+import YandexMapRouteControl from './modules/controls/YandexMapRouteControl.vue';
+import YandexMapPopupMarker from './modules/markers/YandexMapPopupMarker.vue';
 
 export {
     YandexMap,
@@ -60,6 +74,22 @@ export {
     YandexMapControl,
     YandexMapControlButton,
     YandexMapScaleControl,
+    YandexMapRotateControl,
+    YandexMapTiltControl,
+    YandexMapRotateTiltControl,
+    YandexMapSearchControl,
+    YandexMapRouteControl,
+
+    // UI
+    YandexMapDrawerControl,
+    YandexMapSignpost,
+    YandexMapSpinner,
+    YandexMapResizer,
+    YandexMapMiniMap,
+    YandexMapContextMenu,
+    YandexMapContextMenuItem,
+    YandexMapUiMarker,
+    YandexMapPopupMarker,
 
     // Controls Module
     YandexMapGeolocationControl,

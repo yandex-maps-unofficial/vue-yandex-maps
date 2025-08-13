@@ -29,7 +29,7 @@ const baseRules = {
         'error',
         'single',
         {
-            allowTemplateLiterals: true,
+            allowTemplateLiterals: 'always',
             avoidEscape: true,
         },
     ],
@@ -100,7 +100,9 @@ const baseRules = {
         },
     ],
     'stylistic/one-var-declaration-per-line': 'error',
-    'stylistic/operator-linebreak': 'error',
+    'stylistic/operator-linebreak': ['error', 'after', {
+        overrides: { '|': 'before', '?': 'before', ':': 'before' },
+    }],
     'stylistic/padded-blocks': ['error', 'never'],
     'stylistic/quote-props': ['error', 'as-needed'],
     'stylistic/rest-spread-spacing': 'error',

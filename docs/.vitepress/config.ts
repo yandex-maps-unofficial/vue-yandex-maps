@@ -314,7 +314,7 @@ export default defineConfig({
                                 link: '/components/modules/clusterer',
                             },
                             {
-                                text: 'Управление картой (controls)',
+                                text: 'Управление картой',
                                 collapsed: true,
                                 items: [
                                     {
@@ -329,6 +329,26 @@ export default defineConfig({
                                         text: 'YandexMapOpenMapsButton',
                                         link: '/components/modules/controls/open-maps',
                                     },
+                                    {
+                                        text: 'YandexMapRotateControl',
+                                        link: '/components/modules/controls/rotate-tilt',
+                                    },
+                                    {
+                                        text: 'YandexMapTiltControl',
+                                        link: '/components/modules/controls/rotate-tilt',
+                                    },
+                                    {
+                                        text: 'YandexMapRotateTiltControl',
+                                        link: '/components/modules/controls/rotate-tilt',
+                                    },
+                                    {
+                                        text: 'YandexMapSearchControl',
+                                        link: '/components/modules/controls/search',
+                                    },
+                                    {
+                                        text: 'YandexMapRouteControl',
+                                        link: '/components/modules/controls/route',
+                                    }
                                 ],
                             },
                             {
@@ -346,12 +366,56 @@ export default defineConfig({
                                 ],
                             },
                             {
+                                text: 'Интерфейс',
+                                collapsed: true,
+                                items: [
+                                    {
+                                        text: 'YandexMapContextMenu',
+                                        link: '/components/modules/ui/context-menu',
+                                    },
+                                    {
+                                        text: 'YandexMapDrawerControl',
+                                        link: '/components/modules/ui/drawer',
+                                    },
+                                    {
+                                        text: 'YandexMapResizer',
+                                        link: '/components/modules/ui/resizer',
+                                    },
+                                    {
+                                        text: 'YandexMapSignpost',
+                                        link: '/components/modules/ui/signpost',
+                                    },
+                                    {
+                                        text: 'YandexMapSpinner',
+                                        link: '/components/modules/ui/spinner',
+                                    },
+                                    {
+                                        text: 'YandexMapMiniMap',
+                                        link: '/components/modules/controls/mini-map',
+                                    },
+                                ],
+                            },
+                            {
                                 text: 'YandexMapHint',
                                 link: '/components/modules/hint',
                             },
                             {
-                                text: 'YandexMapDefaultMarker',
-                                link: '/components/modules/default-marker',
+                                text: 'Маркеры',
+                                collapsed: true,
+                                items: [
+                                    {
+                                        text: 'YandexMapDefaultMarker',
+                                        link: '/components/modules/default-marker',
+                                    },
+                                    {
+                                        text: 'YandexMapUiMarker',
+                                        link: '/components/modules/ui-marker',
+                                    },
+                                    {
+                                        text: 'YandexMapPopupMarker',
+                                        link: '/components/modules/popup-marker',
+                                    },
+                                ],
                             },
                             {
                                 text: 'YandexMapRuler',
@@ -397,14 +461,6 @@ export default defineConfig({
                             {
                                 text: 'createYmapsOptions',
                                 link: '/api/create-options',
-                            },
-                            {
-                                text: 'reloadYmaps',
-                                link: '/api/reload-maps',
-                            },
-                            {
-                                text: 'changeYmapsLanguage',
-                                link: '/api/change-language',
                             },
                         ],
                     },
@@ -493,7 +549,33 @@ export default defineConfig({
                                 text: 'Элементы управления',
                                 link: '/examples/map/controls',
                             },
+                            {
+                                text: 'Мини карта',
+                                link: '/examples/map/mini-map',
+                            },
                         ],
+                    },
+                    {
+                        text: 'Интерфейс',
+                        collapsed: true,
+                        items: [
+                            {
+                                text: 'Боковое меню',
+                                link: '/examples/map/drawer',
+                            },
+                            {
+                                text: 'Контекстное меню',
+                                link: '/examples/map/context-menu',
+                            },
+                            {
+                                text: 'Указатель на маркеры',
+                                link: '/examples/map/signpost',
+                            },
+                            {
+                                text: 'Загрузчик',
+                                link: '/examples/map/spinner',
+                            },
+                        ]
                     },
                     {
                         text: 'Маркеры',
@@ -582,11 +664,12 @@ export default defineConfig({
                         ],
                     },
                     {
-                        text: 'Дополнения',
+                        text: 'Прочее',
                         collapsed: true,
                         items: [
                             {
-                                text: 'Построение маршрута между точками',
+                                text: 'Построение маршрЭти компоненты уже встроены в карту и ничего не догружают.\n' +
+                                    '\nута между точками',
                                 link: '/examples/objects/route',
                             },
                             {

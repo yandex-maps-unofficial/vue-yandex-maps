@@ -124,7 +124,7 @@
 
 В слот передаются:
 
-- `clusterer`: [ClustererObject](https://yandex.ru/dev/jsapi30/doc/ru/ref/packages/clusterer/#ClustererObject)
+- `clusterer`: `ClustererObject`
 - `coordinates`: `clusterer.coordinates`
 - `length`: `clusterer.features.length` (число элементов в кластере)
 

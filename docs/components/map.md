@@ -27,7 +27,7 @@ const map = shallowRef<null | YMap>(null); //map передать в v-model
 Реактивный объект настроек. Поддерживается всё, кроме `projection` - его нужно передавать как компонент.
 
 Принимает обязательный параметр `location`, в котором вы должны указать начальное состояние карты, а также остальные
-параметры карты [(YMapProps)](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapProps).
+параметры карты [(YMapProps)](https://yandex.ru/maps-api/docs/js-api/map/YMap.html#props).
 
 [См. документацию на сайте Яндекса.](https://yandex.ru/maps-api/docs/js-api/map/YMap.html#props)
 

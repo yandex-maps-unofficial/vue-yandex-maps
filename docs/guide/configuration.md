@@ -19,7 +19,7 @@ prev: false
 Ключ будет активирован в течение 15 минут после получения.
 
 JS API 3.0 работает только с ключами, у которых заполнено поле "Ограничение по HTTP
-Referer". [Подробнее об ограничениях](https://yandex.ru/dev/jsapi30/doc/ru/limit)
+Referer". [Подробнее об ограничениях](https://yandex.ru/maps-api/docs/js-api/limit.html)
 :::
 
 ### lang
@@ -28,11 +28,9 @@ Referer". [Подробнее об ограничениях](https://yandex.ru/d
 
 - `language` — двузначный код языка. Указывается в формате [ISO 639-1](https://ru.wikipedia.org/wiki/ISO_639-1).
 - `region` — двузначный код страны. Указывается в
-  формате [ISO 3166-1](https://ru.wikipedia.org/wiki/ISO_3166-1). [Подробнее про локализацию](https://yandex.ru/dev/jsapi30/doc/ru/dg/concepts/localization)
+  формате [ISO 3166-1](https://ru.wikipedia.org/wiki/ISO_3166-1). [Подробнее про локализацию](https://yandex.ru/maps-api/docs/js-api/map/localization.html)
 
 По умолчанию: `ru_RU`
-
-Для изменения локали см. [changeYmapsLanguage](/api/change-language).
 
 ### servicesApikeys
 
@@ -40,7 +38,7 @@ Referer". [Подробнее об ограничениях](https://yandex.ru/d
 
 Принимает ключи с токенами из Кабинета разработчика.
 
-Список ключей: [интерфейс `Apikeys`](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#interface-apikeys).
+Список ключей: [интерфейс `Apikeys`](https://yandex.ru/maps-api/docs/js-api/ref/index.html#interface-apikeys).
 
 ::: info Будьте внимательны
 `ymaps3.getDefaultConfig().setApikeys` не работает после того, как был смонтирован компонент `<yandex-map>` и/или подключена карта.
@@ -97,10 +95,17 @@ app.use(createYmaps({
 }));
 ```
 
-`importModules` принимает всё то же, что принимает ymaps3.import, а именно:
+`importModules` принимает всё то же, что [принимает ymaps3.import](https://yandex.ru/maps-api/docs/js-api/reference-guide/packages.html#dostupnye-pakety).
 
-- [Пакеты JS API](https://yandex.ru/dev/jsapi30/doc/ru/ref/packages/)
-- [Модули JS API](https://yandex.ru/dev/jsapi30/doc/ru/ref/modules/)
+### cdnLibraryLoading
+
+[Подгрузка через CDN](https://yandex.ru/maps-api/docs/js-api/reference-guide/packages.html) ряда компонентов карты, объект.
+
+- enabled (true) - выключить эту фичу. Некоторые компоненты будут при этом падать
+- url (`https://cdn.jsdelivr.net/npm/{package}`) - откуда грузить пакеты
+- extendLibraries - дополнительные пакеты, которые надо грузить (для ручного использования библиотек, которые не поддерживаются vue-yandex-maps)
+
+Для загрузки модулей, которые встроены в `vue-yandex-maps`, можно использовать метод `importYmapsCDNModule` (добавляет поддержку типизации и больше ничего)
 
 ### mapsScriptWaitDuration
 

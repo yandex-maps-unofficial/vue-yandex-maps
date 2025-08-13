@@ -53,11 +53,11 @@ const isLoaded = computed(() => VueYandexMaps.isLoaded.value);
 
 ### Параметры
 
-[SearchOptions](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#SearchOptions). Среди них вы обязаны передать `text`.
+[SearchOptions](https://yandex.ru/maps-api/docs/js-api/ref/index.html#SearchOptions). Среди них вы обязаны передать `text`.
 
 ### Возвращает
 
-Promise, в случае успеха: массив [Feature](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#Feature).
+Promise, в случае успеха: массив [Feature](https://yandex.ru/maps-api/docs/js-api/ref/index.html#Feature).
 
 Данные сильно урезаны по сравнению с отдельным [API поиска по организациям](https://yandex.ru/dev/geosearch/doc/ru/).
 
@@ -73,11 +73,11 @@ Promise, в случае успеха: массив [Feature](https://yandex.ru/
 
 ### Параметры
 
-[SuggestOptions](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#SuggestOptions). Среди них вы обязаны передать `text` и, по хорошему, `types`.
+[SuggestOptions](https://yandex.ru/maps-api/docs/js-api/ref/index.html#SuggestOptions). Среди них вы обязаны передать `text` и, по хорошему, `types`.
 
 ### Возвращает
 
-Promise, в случае успеха: массив [SuggestResponseItem](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#SuggestResponseItem).
+Promise, в случае успеха: массив [SuggestResponseItem](https://yandex.ru/maps-api/docs/js-api/ref/index.html#SuggestResponseItem).
 
 ### Пример использования
 
@@ -91,11 +91,11 @@ Promise, в случае успеха: массив [SuggestResponseItem](https:
 
 ### Параметры
 
-[RouteOptions](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#interface-routeoptions). Среди них обязательные: `points` и `type`
+[RouteOptions](https://yandex.ru/maps-api/docs/js-api/ref/index.html#interface-routeoptions). Среди них обязательные: `points` и `type`
 
 ### Возвращает
 
-Массив [BaseRouteResponse](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#interface-baserouteresponse), содержащий единственную функцию `toRoute`, которая в свою очередь возвращает [RouteFeature](https://yandex.ru/dev/jsapi30/doc/ru/ref/index#interface-routefeature).
+Массив [BaseRouteResponse](https://yandex.ru/maps-api/docs/js-api/ref/index.html#interface-baserouteresponse), содержащий единственную функцию `toRoute`, которая в свою очередь возвращает [RouteFeature](https://yandex.ru/maps-api/docs/js-api/ref/index.html#interface-routefeature).
 
 По сути, с помощью этого вы можете использовать `<yandex-map-feature>` для построения линии маршрута.
 

@@ -24,12 +24,20 @@
                             Перетаскивайте маркеры, чтобы изменить маршрут
                         </div>
                     </yandex-map-control>
+                    <yandex-map-route-control
+                        :settings="{
+                            onRouteResult,
+                            onUpdateWaypoints: (result) => {
+                                pointAName = result[0]?.properties.name ?? 'Точка А'
+                                pointBName = result[1]?.properties.name ?? 'Точка B'
+                            } }"
+                    />
                 </yandex-map-controls>
 
                 <yandex-map-default-marker
                     :settings="{
                         coordinates: pointACoordinates,
-                        title: 'Точка A',
+                        title: pointAName,
                         subtitle: pointASubtitle,
                         draggable: true,
                         onDragMove: onDragMovePointAHandler,
@@ -39,7 +47,7 @@
                 <yandex-map-default-marker
                     :settings="{
                         coordinates: pointBCoordinates,
-                        title: 'Точка Б',
+                        title: pointBName,
                         subtitle: pointBSubtitle,
                         draggable: true,
                         onDragMove: onDragMovePointBHandler,
@@ -73,8 +81,11 @@ import {
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
     YandexMapFeature,
+    YandexMapRouteControl,
 } from 'vue-yandex-maps';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
+import type { AvailableTypes } from '@yandex/ymaps3-default-ui-theme';
+import type { BaseRouteResponse } from '@yandex/ymaps3-types';
 import type { DrawingStyle, LngLat, RouteFeature, YMap, YMapMarkerEventHandler } from '@yandex/ymaps3-types';
 import { ref, shallowRef, watch } from 'vue';
 
@@ -114,6 +125,8 @@ function getPointStr(point: LngLat) {
         .join('; ');
 }
 
+const pointAName = ref('Точка A');
+const pointBName = ref('Точка B');
 const pointASubtitle = ref(getPointStr(INITIAL_ROUTE_POINTS[0]));
 const pointBSubtitle = ref(getPointStr(INITIAL_ROUTE_POINTS[1]));
 const pointACoordinates = ref(INITIAL_ROUTE_POINTS[0]);
@@ -165,6 +178,20 @@ const routeHandler = async (newRoute?: RouteFeature) => {
     }
 };
 
+const onRouteResult = (result: BaseRouteResponse, type: AvailableTypes) => {
+    const points = result.toRoute();
+    console.log(points);
+    routeHandler(points);
+
+    const startCoords = points.geometry.coordinates[0];
+    const endCoords = points.geometry.coordinates[points.geometry.coordinates.length - 1];
+
+    pointASubtitle.value = getPointStr(startCoords);
+    pointBSubtitle.value = getPointStr(endCoords);
+    pointACoordinates.value = startCoords;
+    pointBCoordinates.value = endCoords;
+};
+
 watch(VueYandexMaps.loadStatus, async status => {
     if (status !== 'loaded') return;
 
@@ -176,10 +203,12 @@ watch(VueYandexMaps.loadStatus, async status => {
 
 // The handler functions for updating the coordinates and subtitle of the marker when dragging
 const onDragMovePointAHandler: YMapMarkerEventHandler = (coordinates: LngLat) => {
+    pointAName.value = 'Точка А';
     pointASubtitle.value = getPointStr(coordinates);
     pointACoordinates.value = coordinates;
 };
 const onDragMovePointBHandler: YMapMarkerEventHandler = (coordinates: LngLat) => {
+    pointAName.value = 'Точка B';
     pointBSubtitle.value = getPointStr(coordinates);
     pointBCoordinates.value = coordinates;
 };

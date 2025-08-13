@@ -1,7 +1,7 @@
 # YandexMapScaleControl
 
 Компонент принимает
-в `settings` [YMapScaleControlProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapScaleControlProps) и
+в `settings` [YMapScaleControlProps](https://yandex.ru/maps-api/docs/js-api/object/controls/measurement-elements/YMapScaleControl.html#parametry) и
 добавляет линейку с масштабом карты.
 
 ::: warning Внимание

@@ -6,9 +6,9 @@ export function getMarkerContainerProps({
     wrapperAttrs,
     zeroSizes,
 }: YandexMapMarkerCustomProps): {
-        root: Record<string, any>;
-        children: Record<string, any>;
-    } {
+    root: Record<string, any>;
+    children: Record<string, any>;
+} {
     const root: Record<string, any> = {
         class: ['__ymap-marker'],
         style: {},

@@ -38,7 +38,7 @@
                             class="marker-popup"
                             @click="close()"
                         >
-                            Click me to close popup {{ reactivityTestCounter }}
+                            Click me to close popup
                         </div>
                     </template>
                 </yandex-map-default-marker>
@@ -61,6 +61,23 @@
                         </div>
                     </template>
                 </yandex-map-default-marker>
+
+                <yandex-map-ui-marker
+                    :settings="{
+                        coordinates: [37.688144, 55.933842],
+                        title: 'UI Marker',
+                        subtitle: 'Click to open popup',
+                        color: 'green',
+                        onClick: () => show = !show,
+                        popup: { position: 'top', show },
+                    }"
+                >
+                    <template #popup>
+                        <div class="marker-popup">
+                            Click me to close popup {{ reactivityTestCounter }}
+                        </div>
+                    </template>
+                </yandex-map-ui-marker>
 
                 <yandex-map-marker
                     v-for="(marker, index) in markers"
@@ -98,10 +115,12 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapMarker,
     YandexMapZoomControl,
+    YandexMapUiMarker,
 } from 'vue-yandex-maps';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import type { LngLat } from '@yandex/ymaps3-types';
 
+const show = ref(false);
 const markers: { coordinates: LngLat }[] = [
     {
         coordinates: [37.188144, 55.733842],

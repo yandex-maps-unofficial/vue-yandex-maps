@@ -1,10 +1,10 @@
 # YandexMapMarker
 
-Компонент принимает в `settings` [YMapMarkerProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapMarkerProps) и позволяет добавлять произвольную верстку на карту.
+Компонент принимает в `settings` [YMapMarkerProps](https://yandex.ru/maps-api/docs/js-api/object/markers/YMapMarker.html#props) и позволяет добавлять произвольную верстку на карту.
 
 Кроме того, он содержит доп. настройку `position` и принимает в себя полностью реактивное содержимое (default-слот).
 
-В нём также доступны события типа `onClick` и пр., см. [FeatureClickEvents](https://yandex.ru/dev/jsapi30/doc/ru/ref/#interface-featureclickevents).
+В нём также доступны события типа `onClick` и пр., см. [FeatureClickEvents](https://yandex.ru/maps-api/docs/js-api/ref/index.html#interface-featureclickevents).
 
 ::: info Важно
 Параметр в `settings` `coordinates` является обязательным к указанию.

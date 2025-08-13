@@ -20,13 +20,9 @@ Namespace с настройками Vue Yandex Maps.
 
 Ручная инициализация библиотеки.
 
-### [reloadYmaps](/api/reload-maps)
+### importYmapsCDNModule
 
-Перезагрузка карты.
-
-### [changeYmapsLanguage](/api/change-language)
-
-Смена локали.
+Подгрузка поддерживаемых CDN модулей с типизацией (других отличий от обычного `ymaps3.import` нет).
 
 ## Вспомогательные методы
 

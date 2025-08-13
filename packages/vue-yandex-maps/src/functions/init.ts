@@ -1,7 +1,14 @@
-import { nextTick, watch } from 'vue';
+import { watch } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import { throwException } from '../utils/system.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
+import type DefaultUiTheme from '@yandex/ymaps3-default-ui-theme';
+import type ContextMenu from '@yandex/ymaps3-context-menu';
+import type DrawerControl from '@yandex/ymaps3-drawer-control';
+import type Minimap from '@yandex/ymaps3-minimap';
+import type Resizer from '@yandex/ymaps3-resizer';
+import type Signpost from '@yandex/ymaps3-signpost';
+import type Spinner from '@yandex/ymaps3-spinner';
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
     apikey: true,
@@ -15,6 +22,7 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
     mapsRenderWaitDuration: true,
     mapsScriptWaitDuration: true,
     scriptAttributes: true,
+    cdnLibraryLoading: true,
 };
 
 export function initYmaps() {
@@ -91,6 +99,21 @@ export function initYmaps() {
                     );
                 }
 
+                if (settings.cdnLibraryLoading?.enabled !== false) {
+                    VueYandexMaps.ymaps().import.registerCdn(settings.cdnLibraryLoading?.url || 'https://cdn.jsdelivr.net/npm/{package}', [
+                        ...[
+                            '@yandex/ymaps3-default-ui-theme@latest',
+                            '@yandex/ymaps3-resizer@latest',
+                            '@yandex/ymaps3-minimap@latest',
+                            '@yandex/ymaps3-context-menu@latest',
+                            '@yandex/ymaps3-drawer-control@latest',
+                            '@yandex/ymaps3-signpost@latest',
+                            '@yandex/ymaps3-spinner@latest',
+                        ].filter(x => !(settings.cdnLibraryLoading?.extendLibraries ?? []).includes(x)),
+                        ...settings.cdnLibraryLoading?.extendLibraries ?? [],
+                    ]);
+                }
+
                 VueYandexMaps.loadStatus.value = 'loaded';
                 res();
             }
@@ -123,6 +146,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignore
         mapsScriptWaitDuration: true,
         servicesApikeys: null,
         scriptAttributes: {},
+        cdnLibraryLoading: {},
         ...options,
     };
     if (!optionsShallowClone.apikey) {
@@ -148,18 +172,16 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignore
     return optionsShallowClone;
 }
 
-/**
- * @description Unloads script and loads it again
- */
-export async function reloadYmaps() {
-    VueYandexMaps.loadStatus.value = 'pending';
-    VueYandexMaps.loadError.value = null;
-    await nextTick();
-    VueYandexMaps.script.value?.remove();
-    return initYmaps();
+interface CDNModules {
+    '@yandex/ymaps3-default-ui-theme': typeof DefaultUiTheme;
+    '@yandex/ymaps3-context-menu': typeof ContextMenu;
+    '@yandex/ymaps3-drawer-control': typeof DrawerControl;
+    '@yandex/ymaps3-spinner': typeof Spinner;
+    '@yandex/ymaps3-minimap': typeof Minimap;
+    '@yandex/ymaps3-signpost': typeof Signpost;
+    '@yandex/ymaps3-resizer': typeof Resizer;
 }
 
-export function changeYmapsLanguage(lang: string) {
-    VueYandexMaps.settings.value.lang = lang;
-    return reloadYmaps();
+export function importYmapsCDNModule<T extends keyof CDNModules>(module: T): Promise<CDNModules[T]> {
+    return ymaps3.import(module as any) as any;
 }

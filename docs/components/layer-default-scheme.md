@@ -1,7 +1,7 @@
 # YandexMapDefaultSchemeLayer
 
 Компонент принимает
-в `settings` [YMapDefaultSchemeLayerProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapDefaultSchemeLayerProps) и
+в `settings` [YMapDefaultSchemeLayerProps](https://yandex.ru/maps-api/docs/js-api/object/layers/YMapDefaultSchemeLayer.html#props) и
 добавляет на карту источник данных и слой схемы карт.
 
 ### `type` в настройках

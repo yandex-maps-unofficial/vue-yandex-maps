@@ -66,8 +66,7 @@ export default defineComponent({
      *
      * Used in settings.method via Yandex clusterByGrid method
      *
-     * @see https://yandex.ru/dev/jsapi30/doc/ru/ref/packages/clusterer/
-     * @see https://yandex.ru/dev/jsapi30/doc/en/ref/packages/clusterer/
+     * @see https://yandex.ru/maps-api/docs/js-api/object/markers/YMapClusterer.html
      */
         gridSize: {
             type: Number,

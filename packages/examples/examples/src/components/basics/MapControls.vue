@@ -28,6 +28,7 @@
                     <yandex-map-controls :settings="{ position: 'bottom' }">
                         <yandex-map-zoom-control/>
                         <yandex-map-scale-control/>
+                        <yandex-map-rotate-tilt-control/>
                     </yandex-map-controls>
                     <yandex-map-controls :settings="{ position: 'top' }">
                         <yandex-map-control-button :settings="{ onClick: shiftRight }">
@@ -48,11 +49,13 @@
                     <yandex-map-controls :settings="{ position: 'bottom left', orientation: 'vertical' }">
                         <yandex-map-open-maps-button/>
                         <yandex-map-open-maps-button :settings="{ title: 'Кастомный заголовок!' }"/>
+                        <yandex-map-rotate-control/>
+                        <yandex-map-tilt-control/>
                     </yandex-map-controls>
                     <yandex-map-controls :settings="{ position: 'left' }">
                         <yandex-map-geolocation-control/>
                     </yandex-map-controls>
-                    <yandex-map-controls :settings="{ position: 'top left' }">
+                    <yandex-map-controls :settings="{ position: 'top left', orientation: 'vertical' }">
                         <yandex-map-entity>
                             <div
                                 class="counter"
@@ -88,6 +91,7 @@
                             </div>
                         </yandex-map-control>
                     </yandex-map-controls>
+                    <yandex-map-resizer/>
                 </yandex-map>
                 <!-- #endregion html -->
             </form>
@@ -110,6 +114,10 @@ import {
     YandexMapOpenMapsButton,
     YandexMapScaleControl,
     YandexMapZoomControl,
+    YandexMapRotateTiltControl,
+    YandexMapTiltControl,
+    YandexMapRotateControl,
+    YandexMapResizer,
 } from 'vue-yandex-maps';
 import { computed, isRef, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue';
 import type { YMap } from '@yandex/ymaps3-types';
@@ -230,6 +238,12 @@ onMounted(() => {
 </script>
 
 <!-- #region style -->
+<style>
+.ymaps3x0-resize-control {
+  --ymaps3x0-resize-control-color: white;
+}
+</style>
+
 <style scoped>
 .counter {
   color: #fff;

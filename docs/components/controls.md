@@ -1,6 +1,6 @@
 # YandexMapControls
 
-Компонент принимает в `settings` [YMapControlsProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapControlsProps) и
+Компонент принимает в `settings` [YMapControlsProps](https://yandex.ru/maps-api/docs/js-api/object/controls/containers/YMapControls.html#parametry) и
 служит контейнером для элементов управления картой.
 
 ::: info Важно

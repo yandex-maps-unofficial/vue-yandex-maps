@@ -92,6 +92,20 @@ export namespace VueYandexMaps {
          * @default false
          */
         strictMode?: boolean;
+        cdnLibraryLoading?: {
+            /**
+             * @default true
+             */
+            enabled?: boolean;
+            /**
+             * @default https://cdn.jsdelivr.net/npm/{package}
+             */
+            url?: string;
+            /**
+             * @description Libraries to add to CDN loading list
+             */
+            extendLibraries?: string[];
+        };
         /**
          * @default https://api-maps.yandex.ru
          */

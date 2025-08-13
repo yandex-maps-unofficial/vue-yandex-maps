@@ -61,6 +61,9 @@
             >
                 <yandex-map-default-scheme-layer/>
                 <yandex-map-default-features-layer/>
+                <yandex-map-controls :settings="{ position: 'top left' }">
+                    <yandex-map-search-control :settings="{ placeholder: 'Я - нативный поиск!', searchResult: (val) => selectedInput = val[0]?.geometry?.coordinates ?? null }"/>
+                </yandex-map-controls>
                 <yandex-map-default-marker
                     v-if="selectedSearch"
                     :settings="{ coordinates: selectedSearch, title: 'Результат поиска' }"
@@ -68,6 +71,10 @@
                 <yandex-map-default-marker
                     v-if="selectedSuggest"
                     :settings="{ coordinates: selectedSuggest, title: 'Результат геосаджеста' }"
+                />
+                <yandex-map-default-marker
+                    v-if="selectedInput"
+                    :settings="{ coordinates: selectedInput, title: 'Результат поиска' }"
                 />
             </yandex-map>
             <!-- #endregion html -->
@@ -85,6 +92,8 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
+    YandexMapSearchControl,
+    YandexMapControls,
 } from 'vue-yandex-maps';
 import { ref, shallowRef, watch } from 'vue';
 import type { SearchResponse } from '@yandex/ymaps3-types/imperative/search';
@@ -93,6 +102,7 @@ import type { LngLat, YMap } from '@yandex/ymaps3-types';
 
 const selectedSearch = ref<LngLat | null>(null);
 const selectedSuggest = ref<LngLat | null>(null);
+const selectedInput = ref<LngLat | null>(null);
 
 const search = ref('');
 const searchResponse = shallowRef<null | SearchResponse>(null);

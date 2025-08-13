@@ -1,6 +1,6 @@
 # YandexMapDefaultSatelliteLayer
 
-Компонент принимает в `settings` [YandexMapDefaultSatelliteLayer](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapDefaultSatelliteLayerProps) и меняет слой карты на спутник.
+Компонент меняет слой карты на спутник.
 
 Использовать `<yandex-map-default-scheme-layer>` при использовании этого компонента, кажется, не обязательно.
 

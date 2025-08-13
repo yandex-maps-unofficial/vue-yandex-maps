@@ -2,7 +2,7 @@
 previewPointProps
 Компонент подгружает модуль `@yandex/ymaps3-ruler` и позволяет измерять расстояния на карте почти как рулеткой.
 
-Компонент принимает в `settings` [YMapRulerProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapRulerProps) и позволяет
+Компонент принимает в `settings` [YMapRulerProps](https://yandex.ru/maps-api/docs/js-api/object/controls/measurement-elements/YMapRuler.html#ruler-api) и позволяет
 измерять расстояния на карте почти как рулеткой.
 
 ::: info Внимание!

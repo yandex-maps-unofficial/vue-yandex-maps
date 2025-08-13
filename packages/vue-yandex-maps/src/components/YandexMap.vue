@@ -161,13 +161,68 @@ export default defineComponent({
             emit('update:modelValue', map.value);
         };
 
-        onMounted(async () => {
-            let listener: YMapListener | undefined;
-            let watcher: WatchStopHandle | undefined;
-            let cursorGrabTimeout: NodeJS.Timeout | null = null;
+        let listener: YMapListener | undefined;
+        let watcher: WatchStopHandle | undefined;
+        let cursorGrabTimeout: NodeJS.Timeout | null = null;
 
+        async function setupCursorGrab() {
+            await waitTillMapInit({
+                map,
+                timeoutCallback: (_timeout, isDelete) => {
+                    if (isDelete) {
+                        cursorGrabTimeout = null;
+                    }
+                    else {
+                        cursorGrabTimeout = _timeout;
+                    }
+                },
+            }).catch(() => {
+            });
+
+            if (!map.value) return;
+
+            if (props.cursorGrab) {
+                listener = new ymaps3.YMapListener({
+                    onActionStart: e => {
+                        if (e.type === 'drag' && props.cursorGrab) mapRef.value?.classList.add('__ymap--grabbing');
+                    },
+                    onActionEnd: e => {
+                        if (e.type === 'drag') mapRef.value?.classList.remove('__ymap--grabbing');
+                    },
+                });
+                map.value.addChild(listener);
+            }
+            else if (listener) map.value.removeChild(listener);
+        }
+
+        let reInit = false;
+
+        watch(VueYandexMaps.loadStatus, async val => {
+            if (val === 'pending') {
+                reInit = true;
+                mounted.value = false;
+                return;
+            }
+            if (val !== 'loaded' && !reInit) return;
+
+            mounted.value = true;
+            await nextTick();
+
+            if (needsToHold.value) {
+                await new Promise<void>(resolve => watch(needsToHold, () => {
+                    if (!needsToHold.value) resolve();
+                }, {
+                    immediate: true,
+                }));
+            }
+
+            await init();
+        });
+
+        onMounted(async () => {
             onBeforeUnmount(() => {
                 if (cursorGrabTimeout) clearTimeout(cursorGrabTimeout);
+                if (map.value) map.value.destroy();
             });
 
             const setupWatcher = () => {
@@ -219,35 +274,7 @@ export default defineComponent({
                 }
             });
 
-            watch(() => props.cursorGrab, async val => {
-                await waitTillMapInit({
-                    map,
-                    timeoutCallback: (_timeout, isDelete) => {
-                        if (isDelete) {
-                            cursorGrabTimeout = null;
-                        }
-                        else {
-                            cursorGrabTimeout = _timeout;
-                        }
-                    },
-                }).catch(() => {
-                });
-
-                if (!map.value) return;
-
-                if (val) {
-                    listener = new ymaps3.YMapListener({
-                        onActionStart: e => {
-                            if (e.type === 'drag' && props.cursorGrab) mapRef.value?.classList.add('__ymap--grabbing');
-                        },
-                        onActionEnd: e => {
-                            if (e.type === 'drag') mapRef.value?.classList.remove('__ymap--grabbing');
-                        },
-                    });
-                    map.value.addChild(listener);
-                }
-                else if (listener) map.value.removeChild(listener);
-            }, { immediate: true });
+            watch(() => props.cursorGrab, setupCursorGrab, { immediate: true });
 
             await setFragment();
 

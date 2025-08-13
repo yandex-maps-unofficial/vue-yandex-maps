@@ -1,7 +1,7 @@
 # YandexMapZoomControl
 
 Компонент подгружает модуль `@yandex/ymaps3-controls@0.0.1`, принимает
-в `settings` [YMapZoomControlProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapZoomControlProps) и
+в `settings` [YMapZoomControlProps](https://yandex.ru/maps-api/docs/js-api/object/controls/zoom/YMapZoomControl.html#props) и
 добавляет управление масштабированием карты.
 
 ::: warning Внимание

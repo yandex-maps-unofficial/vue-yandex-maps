@@ -114,6 +114,10 @@
                         v-else
                         :settings="point"
                     />
+                    <yandex-map-ui-marker :settings="{ coordinates: center, title: 'UI-маркер!' }"/>
+                    <yandex-map-popup-marker :settings="{ coordinates: center }">
+                        Нативный попап!
+                    </yandex-map-popup-marker>
                 </template>
                 <yandex-map-default-marker :settings="{ coordinates: INC_POINT.coordinates, title: markerTitle }"/>
             </yandex-map>
@@ -134,6 +138,8 @@ import {
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
     YandexMapMarker,
+    YandexMapUiMarker,
+    YandexMapPopupMarker,
     YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import { onMounted, onUnmounted, ref } from 'vue';

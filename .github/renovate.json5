@@ -18,7 +18,8 @@
     },
     {
       "matchPackageNames": [
-        "nuxt"
+        "nuxt",
+        "@nuxt/kit"
       ],
       matchCurrentVersion: "<=3",
       "allowedVersions": "<=3"
@@ -31,8 +32,8 @@
       enabled: false
     },
     {
-      "matchPackageNames": [
-        "@yandex/ymaps3-types"
+      "matchPackagePatterns": [
+        "@yandex/*"
       ],
       matchDepTypes: [
         "peerDependencies",

@@ -18,10 +18,22 @@
                 <yandex-map-default-scheme-layer/>
                 <yandex-map-default-features-layer/>
                 <yandex-map-default-marker
-                    v-for="marker in markersGeoJsonSource"
+                    v-for="marker in markersGeoJsonSource.slice(0,2)"
                     :key="marker.title"
                     :settings="marker"
                 />
+                <yandex-map-ui-marker
+                    v-for="marker in markersGeoJsonSource.slice(2,8)"
+                    :key="marker.title"
+                    :settings="{ ...marker, color: { day: marker.color, night: marker.color } }"
+                />
+                <yandex-map-popup-marker
+                    v-for="marker in markersGeoJsonSource"
+                    :key="marker.title"
+                    :settings="{ coordinates: marker.coordinates, position: 'bottom', offset: 20 }"
+                >
+                    {{ marker.title }}
+                </yandex-map-popup-marker>
             </yandex-map>
             <!-- #endregion html -->
         </template>
@@ -36,6 +48,8 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
+    YandexMapUiMarker,
+    YandexMapPopupMarker,
 } from 'vue-yandex-maps';
 import type { LngLat } from '@yandex/ymaps3-types';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';

@@ -1,3 +1,7 @@
+---
+outline: [2, 3]
+---
+
 # Список компонентов
 
 ::: tip Примечание
@@ -10,76 +14,74 @@
 [[toc]]
 :::
 
-----
-
-# Встроенные
+## Встроенные
 Эти компоненты уже встроены в карту и ничего не догружают.
 
-## Основные компоненты
+### Основные компоненты
 
-### [YandexMap](map)
+#### [YandexMap](map)
 Основной компонент карты.
 
-### [YandexMapCollection](collection)
+#### [YandexMapCollection](collection)
 Объединение элементов в коллекции.
 
-### [YandexMapFeature](feature)
+#### [YandexMapFeature](feature)
 Ломаные линии, полигоны.
 
-### [YandexMapListener](listener)
+#### [YandexMapListener](listener)
 Отслеживание событий карты (`click` и пр.).
 
-### [YandexMapMarker](marker)
+#### [YandexMapMarker](marker)
 Маркеры со своим содержимым.
 
-### [YandexMapEntity](entity)
+#### [YandexMapEntity](entity)
 Простейший Entity Яндекса.
 
 ::: tip Совет
 Также смотрите маркеры со встроенным дизайном [ниже на странице](#yandexmapdefaultmarker)
 :::
 
-## Слои
-### [YandexMapLayer](layer)
+### Слои
+#### [YandexMapLayer](layer)
 Возможность делать свои слои. Часть функционала доступна только на платных тарифах.
 
-### [YandexMapDefaultSchemeLayer](layer-default-scheme)
+#### [YandexMapDefaultSchemeLayer](layer-default-scheme)
 Компонент, включающий отображение карты.
 
 ::: info Важно
 В большинстве случаев компонент является обязательным к наличию на карте.
 ::: 
 
-### [YandexMapDefaultFeaturesLayer](layer-default-features)
+#### [YandexMapDefaultFeaturesLayer](layer-default-features)
 Компонент, включающий поддержку маркеров, ломаных линий, полигонов и прочих объектов.
 
 ::: info Важно
 В большинстве случаев компонент является обязательным к наличию на карте.
 ::: 
 
-### [YandexMapDefaultSatelliteLayer](layer-default-satellite)
+#### [YandexMapDefaultSatelliteLayer](layer-default-satellite)
 Компонент меняет слой Карты на Спутник.
 
-## Источники данных
+### Источники данных
 
-### [YandexMapFeatureDataSource](feature-data-source)
+#### [YandexMapFeatureDataSource](feature-data-source)
 Источник данных геообъектов.
 
-### [YandexMapTileDataSource](tile-data-source)
+#### [YandexMapTileDataSource](tile-data-source)
 Загрузка тайлов карт (например, с других источников, кроме Яндекса).
 
-## Управление картой
+### Управление картой
 
-### [YandexMapControls](controls)
+#### [YandexMapControls](controls)
 Контейнер для всех элементов управления картой.
 
-### [YandexMapControl](control)
+#### [YandexMapControl](control)
 Элемент управления со своим содержимым практически без стилей.
 
-### [YandexMapControlButton](control-button)
+#### [YandexMapControlButton](control-button)
 Кнопка-элемент управления со своим содержимым.
 
-### [YandexMapScaleControl](control-scale)
+#### [YandexMapScaleControl](control-scale)
 Линейка, отображающая масштаб.
 
 ::: tip Совет
@@ -91,35 +93,23 @@
 
 Эти модули вы также можете грузить сразу при подключении Карт, см. раздел [Конфигурация](/guide/configuration).
 
-### [YandexMapClusterer](modules/clusterer)
-Кластеризация, объединение маркеров по группам. Полезно при большом числе объектов.
+### Модуль Controls
 
-### [YandexMapHint](modules/hint)
-Подсказки при наведении на объекты.
-
-### [YandexMapDefaultMarker](modules/default-marker)
-Маркер со стилями по умолчанию.
-
-### [YandexMapRuler](modules/ruler)
-Компонент измерения расстояний.
-
-## Модуль Controls
-
-### [YandexMapGeolocationControl](modules/controls/geolocation)
+#### [YandexMapGeolocationControl](modules/controls/geolocation)
 Кнопка геопозиции.
 
-### [YandexMapZoomControl](modules/controls/zoom)
+#### [YandexMapZoomControl](modules/controls/zoom)
 Кнопки управления масштабированием.
 
-### [YandexMapOpenMapsButton](modules/controls/open-maps)
+#### [YandexMapOpenMapsButton](modules/controls/open-maps)
 Кнопка открытия Яндекс Карт.
 
-## Модуль Projection
+### Модуль Projection
 
-### [YandexMapCartesianProjection](modules/projection/cartesian)
+#### [YandexMapCartesianProjection](modules/projection/cartesian)
 Декартовая проекция карты.
 
-### [YandexMapSphericalMercatorProjection](modules/projection/mercator)
+#### [YandexMapSphericalMercatorProjection](modules/projection/mercator)
 Проекция Меркатора для карты.
 
 <style>
@@ -127,3 +117,68 @@ a {
     text-decoration: none !important;
 }
 </style>
+
+### Прочее
+
+#### [YandexMapClusterer](modules/clusterer)
+Кластеризация, объединение маркеров по группам. Полезно при большом числе объектов.
+
+#### [YandexMapHint](modules/hint)
+Подсказки при наведении на объекты.
+
+#### [YandexMapDefaultMarker](modules/default-marker)
+Маркер со стилями по умолчанию.
+
+#### [YandexMapRuler](modules/ruler)
+Компонент измерения расстояний.
+
+## CDN-модули
+
+[Узнать больше про CDN](/guide/configuration#cdnlibraryloading)
+
+### Элементы управления
+
+#### [YandexMapRotateControl](modules/controls/rotate-tilt)
+Управление поворотом карты
+
+#### [YandexMapTiltControl](modules/controls/rotate-tilt)
+Управление наклоном карты
+
+#### [YandexMapRotateTiltControl](modules/controls/rotate-tilt)
+Управление наклоном и поворотом карты
+
+#### [YandexMapSearchControl](modules/controls/search)
+Контрол поиска адресов и организаций
+
+#### [YandexMapRouteControl](modules/controls/route)
+Интерфейс построения маршрутов
+
+### Элементы интерфейса
+
+#### [YandexMapContextMenu](modules/ui/context-menu)
+Контекстное меню
+
+#### [YandexMapMiniMap](modules/controls/mini-map)
+Отображение мини-карты с определенной областью и возможностью управлять основной картой
+
+#### [YandexMapDrawerControl](modules/ui/drawer)
+Боковое меню
+
+#### [YandexMapResizer](modules/ui/resizer)
+Ресайзер карты
+
+#### [YandexMapSignpost](modules/ui/signpost)
+Отображение указателей на маркеры (координаты) вне вьюпорта
+
+#### [YandexMapSpinner](modules/ui/spinner)
+Загрузчик
+
+### Маркеры
+
+#### [YandexMapUiMarker](modules/ui-marker)
+
+Альтернатива дефолтному маркеру
+
+#### [YandexMapPopupMarker](modules/popup-marker)
+
+Маркер-всплывашка

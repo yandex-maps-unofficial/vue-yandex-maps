@@ -1,7 +1,7 @@
 # YandexMapControlButton
 
 Компонент принимает
-в `settings` [YMapControlButtonProps](https://yandex.ru/dev/jsapi30/doc/ru/ref/#YMapControlButtonProps) 
+в `settings` [YMapControlButtonProps](https://yandex.ru/maps-api/docs/js-api/object/controls/buttons/YMapControlButton.html#props) 
 (кроме `element` - его вы, по сути, передаёте внутрь в default-слот) и позволяет вставить на карту кнопку управления с любым содержимым.
 
 ::: warning Внимание
