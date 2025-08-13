@@ -8,7 +8,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: install node
         uses: actions/setup-node@v4
         with:
@@ -17,7 +17,7 @@ jobs:
   test-vue2:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: install node
         uses: actions/setup-node@v4
         with:
@@ -28,7 +28,7 @@ jobs:
   test-vue3:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: install node
         uses: actions/setup-node@v4
         with:
@@ -39,7 +39,7 @@ jobs:
   test-nuxt2:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: install node
         uses: actions/setup-node@v4
         with:
@@ -50,7 +50,7 @@ jobs:
   test-nuxt3:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: install node
         uses: actions/setup-node@v4
         with:
