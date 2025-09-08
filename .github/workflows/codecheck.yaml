@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22.18.0
       - uses: ./.github/actions/codecheck
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22.18.0
       - uses: ./.github/actions/test
@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22.18.0
       - uses: ./.github/actions/test
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22.18.0
       - uses: ./.github/actions/test
@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22.18.0
       - uses: ./.github/actions/test
