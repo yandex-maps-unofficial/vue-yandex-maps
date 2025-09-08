@@ -12,7 +12,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
+          node-version: 22.19.0
       - uses: ./.github/actions/codecheck
   test-vue2:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
+          node-version: 22.19.0
       - uses: ./.github/actions/test
         with:
           type: vue2
@@ -32,7 +32,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
+          node-version: 22.19.0
       - uses: ./.github/actions/test
         with:
           type: vue3
@@ -43,7 +43,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
+          node-version: 22.19.0
       - uses: ./.github/actions/test
         with:
           type: nuxt2
@@ -54,7 +54,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.0
+          node-version: 22.19.0
       - uses: ./.github/actions/test
         with:
           type: nuxt3
