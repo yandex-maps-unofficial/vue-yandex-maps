@@ -133,12 +133,15 @@ const markers: { coordinates: LngLat }[] = [
     },
 ];
 
+let interval: NodeJS.Timeout | undefined;
+
 const openMarker = ref<null | number>(null);
 const reactivityTestCounter = ref(0);
 onMounted(() => {
-    const interval = setInterval(() => reactivityTestCounter.value++, 1000);
-    onBeforeUnmount(() => clearInterval(interval));
+    interval = setInterval(() => reactivityTestCounter.value++, 1000);
 });
+
+onBeforeUnmount(() => clearInterval(interval));
 // #endregion setup
 </script>
 

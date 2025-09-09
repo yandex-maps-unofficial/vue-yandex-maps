@@ -217,6 +217,12 @@ const toggleFullscreen = () => {
     }
 };
 
+const handleFullscreenChange = async () => {
+    isFullscreen.value = !!document.fullscreenElement;
+};
+
+let interval: NodeJS.Timeout | undefined;
+
 onMounted(() => {
     const handleFullscreenChange = async () => {
         isFullscreen.value = !!document.fullscreenElement;
@@ -224,15 +230,15 @@ onMounted(() => {
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
 
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
         timedCounter.value++;
         if (timedCounter.value > 99) timedCounter.value = 0;
     }, 1000);
+});
 
-    onBeforeUnmount(() => {
-        clearInterval(interval);
-        document.removeEventListener('fullscreenchange', handleFullscreenChange);
-    });
+onBeforeUnmount(() => {
+    clearInterval(interval);
+    document.removeEventListener('fullscreenchange', handleFullscreenChange);
 });
 // #endregion setup
 </script>

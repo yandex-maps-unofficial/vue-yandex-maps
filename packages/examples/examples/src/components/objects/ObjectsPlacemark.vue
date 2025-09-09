@@ -181,6 +181,8 @@ const positionsY = {
 const positionX = ref<keyof typeof positionsX>('default');
 const positionY = ref<keyof typeof positionsY>('default');
 
+let timer: NodeJS.Timeout | undefined;
+
 onMounted(() => {
     let inc = 0;
     const updateTitle = () => {
@@ -188,10 +190,11 @@ onMounted(() => {
         markerTitle.value = `Marker inc #${ inc }`;
     };
     updateTitle();
-    const timer = setInterval(updateTitle, 1000);
-    onUnmounted(() => {
-        clearInterval(timer);
-    });
+    timer = setInterval(updateTitle, 1000);
+});
+
+onUnmounted(() => {
+    clearInterval(timer);
 });
 
 const diagramBackground = (colors: { percentage: number; color: string }[]): string => {

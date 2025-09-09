@@ -220,11 +220,6 @@ export default defineComponent({
         });
 
         onMounted(async () => {
-            onBeforeUnmount(() => {
-                if (cursorGrabTimeout) clearTimeout(cursorGrabTimeout);
-                if (map.value) map.value.destroy();
-            });
-
             const setupWatcher = () => {
                 watcher?.();
 
@@ -316,6 +311,9 @@ export default defineComponent({
         });
 
         onBeforeUnmount(() => {
+            if (cursorGrabTimeout) clearTimeout(cursorGrabTimeout);
+            if (map.value) map.value.destroy();
+
             map.value = null;
             emit('input', map.value);
             emit('update:modelValue', map.value);

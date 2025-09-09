@@ -1,5 +1,9 @@
 # Список изменений
 
+## [2.2.2]
+
+- onBeforeUnmount/onUnmounted вынесены из-под onMounted, чтобы исправить ошибку сборки в Nuxt 4.1.1
+
 ## [2.2.1]
 
 - Исправлены версии в peerDependencies
