@@ -107,7 +107,7 @@ jobs:
           node-version: 22.19.0
       - run: yarn
       - run: yarn lint && yarn build
-      - uses: JS-DevTools/npm-publish@v3
+      - uses: JS-DevTools/npm-publish@v4
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/vue-yandex-maps
