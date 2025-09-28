@@ -6634,7 +6634,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/language-core@npm:3.0.6, @vue/language-core@npm:^3.0.1":
+"@vue/language-core@npm:3.0.8":
+  version: 3.0.8
+  resolution: "@vue/language-core@npm:3.0.8"
+  dependencies:
+    "@volar/language-core": "npm:2.4.23"
+    "@vue/compiler-dom": "npm:^3.5.0"
+    "@vue/compiler-vue2": "npm:^2.7.16"
+    "@vue/shared": "npm:^3.5.0"
+    alien-signals: "npm:^2.0.5"
+    muggle-string: "npm:^0.4.1"
+    path-browserify: "npm:^1.0.1"
+    picomatch: "npm:^4.0.2"
+  peerDependencies:
+    typescript: "*"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/c2253cf8ba5258e335226083ba874495b71acb233f2ba542052bd37fcd50a39fff63113bdd557358f8c0bc84cd84689440bfa79b8e2a119693f8a9f56fb84cb7
+  languageName: node
+  linkType: hard
+
+"@vue/language-core@npm:^3.0.1":
   version: 3.0.6
   resolution: "@vue/language-core@npm:3.0.6"
   dependencies:
@@ -11991,7 +12012,7 @@ __metadata:
     "@types/node": "npm:^24.3.1"
     examples: "workspace:*"
     nuxt: "npm:^4.1.1"
-    vue-tsc: "npm:3.0.6"
+    vue-tsc: "npm:3.0.8"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -12024,7 +12045,7 @@ __metadata:
     typescript: "npm:5.9.2"
     vite: "npm:^7.1.5"
     vue: "npm:^3.5.22"
-    vue-tsc: "npm:3.0.6"
+    vue-tsc: "npm:3.0.8"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -12048,7 +12069,7 @@ __metadata:
     typescript: "npm:5.9.2"
     vite: "npm:^7.1.5"
     vue: "npm:^3.5.22"
-    vue-tsc: "npm:3.0.6"
+    vue-tsc: "npm:3.0.8"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -23528,17 +23549,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:3.0.6":
-  version: 3.0.6
-  resolution: "vue-tsc@npm:3.0.6"
+"vue-tsc@npm:3.0.8":
+  version: 3.0.8
+  resolution: "vue-tsc@npm:3.0.8"
   dependencies:
     "@volar/typescript": "npm:2.4.23"
-    "@vue/language-core": "npm:3.0.6"
+    "@vue/language-core": "npm:3.0.8"
   peerDependencies:
     typescript: ">=5.0.0"
   bin:
     vue-tsc: ./bin/vue-tsc.js
-  checksum: 10/4e88b842f8e69df3e14fb06478df2f6a32bbd14d0e8c25467d5ea10a851429d089d2a45d1beb066620556c16e640541e5fbc1b4e7b4af575eb4ce7c5429f613e
+  checksum: 10/761e1d1f6c2ba7ea4c0423fa08d13ec0933aca11519ddc991b6a1433c22b425c93836e50ae97e975feac670875cee7c63e414158348df6cb8c4652a57bf1d360
   languageName: node
   linkType: hard
 
@@ -23590,7 +23611,7 @@ __metadata:
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-lib-inject-css: "npm:^2.2.2"
     vue: "npm:^3.5.22"
-    vue-tsc: "npm:3.0.6"
+    vue-tsc: "npm:3.0.8"
   peerDependencies:
     "@vue/composition-api": ">=1"
     "@yandex/ymaps3-context-menu": ">=0.0.2"
