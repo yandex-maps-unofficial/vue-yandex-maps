@@ -668,8 +668,7 @@ export default defineConfig({
                         collapsed: true,
                         items: [
                             {
-                                text: 'Построение маршрЭти компоненты уже встроены в карту и ничего не догружают.\n' +
-                                    '\nута между точками',
+                                text: 'Построение маршрута между точками',
                                 link: '/examples/objects/route',
                             },
                             {

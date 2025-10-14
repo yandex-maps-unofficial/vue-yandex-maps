@@ -179,15 +179,6 @@ export async function getLocationFromBounds({
     }
 
     const ctxItemMap = ctxItem[ctxItemMapKey].map;
-    const boundsFunc = ctxItemMap.setBounds.toString() as string;
-
-    const funcKey = boundsFunc.split('const{center:e,zoom:i}=')[1]?.split('(')[0];
-    if (!funcKey) {
-        throwException({
-            text: 'funcKey was not found in useYMapsGetCenterAndZoomFromBounds',
-            isInternal: true,
-        });
-    }
 
     const projection = ctxItemMap.projection;
     const size = ctxItemMap.size;
