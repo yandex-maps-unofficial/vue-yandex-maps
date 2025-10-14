@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22.20.0
       - uses: ./.github/actions/codecheck
@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22.20.0
       - uses: ./.github/actions/test
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22.20.0
       - uses: ./.github/actions/test
@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22.20.0
       - uses: ./.github/actions/test
@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22.20.0
       - uses: ./.github/actions/test
@@ -74,7 +74,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: install node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22.20.0
       - name: Setup Pages
@@ -102,7 +102,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 22.20.0
       - run: yarn
