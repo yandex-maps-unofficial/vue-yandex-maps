@@ -1,4 +1,5 @@
 <script lang="ts">
+import { toRef } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { defineComponent, h, onMounted, ref } from 'vue';
 import type { YMapEntity } from '@yandex/ymaps3-types';
@@ -17,6 +18,7 @@ export default defineComponent({
             type: Object as PropType<YMapEntity<any> | null>,
             default: null,
         },
+        index: Number,
     },
     emits: {
         'input'(item: YMapEntity<any>): boolean {
@@ -60,6 +62,7 @@ export default defineComponent({
 
                     return new Entity({}) as YMapEntity<any>;
                 },
+                index: toRef(props, 'index'),
             }) as YMapEntity<any>;
             emit('input', mapChildren);
             emit('update:modelValue', mapChildren);
