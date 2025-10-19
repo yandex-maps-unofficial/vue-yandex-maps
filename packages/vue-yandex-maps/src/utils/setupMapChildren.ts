@@ -1,9 +1,8 @@
 import type { YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import { toValue } from 'vue';
 import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue';
 import { getCurrentInstance, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, watch } from 'vue';
-import { copy, excludeKeys, throwException } from './system.ts';
+import { copy, excludeKeys, throwException, toValue } from './system.ts';
 import { deleteMapChild, injectLayers, injectMap, waitTillMapInit, waitTillYmapInit } from './map.ts';
 import { diff } from 'deep-object-diff';
 
