@@ -85,6 +85,14 @@
                                 #{{ counter }}
                             </div>
                         </yandex-map-control>
+                        <yandex-map-control-button
+                            :index="dynamicIndex"
+                            :settings="{ onClick: updateDynamicIndex }"
+                        >
+                            <div class="button-element">
+                                Button with dynamic index #{{ dynamicIndex }} (click)
+                            </div>
+                        </yandex-map-control-button>
                         <yandex-map-control :settings="{ transparent: true }">
                             <div class="button-element">
                                 Control without bg/shadow
@@ -219,6 +227,27 @@ const toggleFullscreen = () => {
 
 const handleFullscreenChange = async () => {
     isFullscreen.value = !!document.fullscreenElement;
+};
+
+const dynamicIndex = ref(0);
+const dynamicIndexIsInverted = ref(false);
+
+const updateDynamicIndex = () => {
+    if (dynamicIndexIsInverted.value) {
+        dynamicIndex.value = Math.max(dynamicIndex.value - 1, 0);
+    }
+    else {
+        dynamicIndex.value = Math.min(dynamicIndex.value + 1, 4);
+    }
+
+    if (dynamicIndex.value === 4) {
+        dynamicIndexIsInverted.value = true;
+        return;
+    }
+
+    if (dynamicIndex.value === 0) {
+        dynamicIndexIsInverted.value = false;
+    }
 };
 
 let interval: NodeJS.Timeout | undefined;

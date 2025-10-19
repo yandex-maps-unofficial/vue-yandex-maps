@@ -1,4 +1,5 @@
 <script lang="ts">
+import { toRef } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, h, onMounted, ref } from 'vue';
 import type { YMapControlButton } from '@yandex/ymaps3-types';
@@ -23,6 +24,7 @@ export default defineComponent({
             type: Object as PropType<YandexMapControlButtonSettings>,
             default: () => ({}),
         },
+        index: Number,
     },
     emits: {
         'input'(item: YMapControlButton): boolean {
@@ -54,6 +56,7 @@ export default defineComponent({
                     element: element.value!,
                 })),
                 strictMapRoot: true,
+                index: toRef(props, 'index'),
             });
 
             emit('input', mapChildren);
