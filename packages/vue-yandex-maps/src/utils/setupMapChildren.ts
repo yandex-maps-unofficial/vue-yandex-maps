@@ -232,14 +232,13 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
                 if (!requiredImport) await nextTick();
             }
 
+            const indexValue = toValue(index);
+
             if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
-                mapRoot.value = [
-                    ...mapRoot.value,
-                    children.value,
-                ];
+                mapRoot.value = [...mapRoot.value].splice(indexValue ?? mapRoot.value.length, 0, children.value);
             }
             else {
-                (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>, toValue(index));
+                (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>, indexValue);
             }
         }
         else if (isLayer) {
