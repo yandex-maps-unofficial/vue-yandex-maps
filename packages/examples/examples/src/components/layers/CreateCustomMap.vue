@@ -102,7 +102,6 @@ const mapParameters: YMapProps = {
     mode: 'raster',
     restrictMapArea: RESTRICT_AREA,
     // Do not copy the world along the axes
-    // @ts-expect-error Яндекс забыли про cycledY в типах
     worldOptions: { cycledX: false, cycledY: false },
 };
 // #endregion setup
