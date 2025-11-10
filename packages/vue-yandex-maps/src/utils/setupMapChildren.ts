@@ -235,7 +235,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
             const indexValue = toValue(index);
 
             if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
-                mapRoot.value = [...mapRoot.value].splice(indexValue ?? mapRoot.value.length, 0, children.value);
+                mapRoot.value.splice(indexValue ?? mapRoot.value.length, 0, children.value);
             }
             else {
                 (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>, indexValue);
