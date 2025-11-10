@@ -1,5 +1,6 @@
 import type { YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
+import { triggerRef } from 'vue';
 import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue';
 import { getCurrentInstance, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, watch } from 'vue';
 import { copy, excludeKeys, throwException, toValue } from './system.ts';
@@ -236,6 +237,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
 
             if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
                 mapRoot.value.splice(indexValue ?? mapRoot.value.length, 0, children.value);
+                triggerRef(mapRoot);
             }
             else {
                 (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>, indexValue);
