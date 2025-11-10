@@ -1,4 +1,5 @@
 <script lang="ts">
+import { toRef } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, h, onMounted, ref } from 'vue';
 import type { YMapControl } from '@yandex/ymaps3-types';
@@ -21,6 +22,7 @@ export default defineComponent({
             type: Object as PropType<NonNullable<ConstructorParameters<typeof YMapControl>[0]>>,
             default: () => ({}),
         },
+        index: Number,
     },
     emits: {
         'input'(item: YMapControl): boolean {
@@ -46,6 +48,7 @@ export default defineComponent({
                 createFunction: () => new ymaps3.YMapControl(props.settings, element.value!),
                 settings: computed(() => props.settings),
                 strictMapRoot: true,
+                index: toRef(props, 'index'),
             });
             emit('input', mapChildren);
             emit('update:modelValue', mapChildren);

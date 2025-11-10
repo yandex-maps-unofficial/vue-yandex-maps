@@ -1,8 +1,9 @@
 import type { YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import type { ComputedRef, Ref } from 'vue';
+import { triggerRef } from 'vue';
+import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue';
 import { getCurrentInstance, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, watch } from 'vue';
-import { copy, excludeKeys, throwException } from './system.ts';
+import { copy, excludeKeys, throwException, toValue } from './system.ts';
 import { deleteMapChild, injectLayers, injectMap, waitTillMapInit, waitTillYmapInit } from './map.ts';
 import { diff } from 'deep-object-diff';
 
@@ -20,6 +21,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     isMapRoot,
     mapRootRef,
     duplicateInit,
+    index,
 }: {
     /**
      * @description Prevents duplicate provide injections
@@ -82,6 +84,10 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
      * @description Specifies that entity is a layer children. Will be injected to layer ref instead of root and will skip YandexMap initialization, and will be added in special way to YandexMap
      */
     isMercator?: boolean;
+    /**
+     * @description Index of the child for map collection. If not passed, will be added to the end
+     */
+    index?: MaybeRefOrGetter<number | undefined>;
 }) {
     if (!getCurrentInstance()) {
         throwException({
@@ -160,6 +166,31 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
             }, { deep: true });
         }
 
+
+        if (!returnOnly && !isMercator) {
+            watch(() => toValue(index), indexValue => {
+                if (!children.value || !map.value) {
+                    return;
+                }
+
+                deleteMapChild({
+                    children: children.value,
+                    isMercator,
+                    root: mapRoot?.value ? mapRoot : map,
+                });
+
+                if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
+                    mapRoot.value = [
+                        ...mapRoot.value,
+                        children.value,
+                    ];
+                }
+                else {
+                    (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>, indexValue);
+                }
+            });
+        }
+
         if (!isLayer && !isMercator) {
             await waitTillMapInit({ timeoutCallback });
             if (!map.value) {
@@ -202,14 +233,14 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
                 if (!requiredImport) await nextTick();
             }
 
+            const indexValue = toValue(index);
+
             if (typeof mapRoot?.value === 'object' && Array.isArray(mapRoot.value)) {
-                mapRoot.value = [
-                    ...mapRoot.value,
-                    children.value,
-                ];
+                mapRoot.value.splice(indexValue ?? mapRoot.value.length, 0, children.value);
+                triggerRef(mapRoot);
             }
             else {
-                (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>);
+                (mapRoot?.value || map.value).addChild(children.value as YMapEntity<unknown>, indexValue);
             }
         }
         else if (isLayer) {

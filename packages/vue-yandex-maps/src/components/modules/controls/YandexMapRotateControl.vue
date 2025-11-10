@@ -1,4 +1,5 @@
 <script lang="ts">
+import { toRef } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, onMounted } from 'vue';
 
@@ -22,6 +23,7 @@ export default defineComponent({
             type: Object as PropType<ConstructorParameters<typeof YMapRotateControl>[0]>,
             default: () => ({}),
         },
+        index: Number,
     },
     emits: {
         'input'(item: YMapRotateControl): boolean {
@@ -46,6 +48,7 @@ export default defineComponent({
                 requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-default-ui-theme'),
                 settings: computed(() => props.settings),
                 strictMapRoot: true,
+                index: toRef(props, 'index'),
             });
             emit('input', mapChildren);
             emit('update:modelValue', mapChildren);

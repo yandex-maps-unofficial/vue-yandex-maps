@@ -1,4 +1,5 @@
 <script lang="ts">
+import { toRef } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, onMounted } from 'vue';
 import type { YMapOpenMapsButton } from '@yandex/ymaps3-types/modules/controls-extra';
@@ -21,6 +22,7 @@ export default defineComponent({
             type: Object as PropType<ConstructorParameters<typeof YMapOpenMapsButton>[0]>,
             default: () => ({}),
         },
+        index: Number,
     },
     emits: {
         'input'(item: YMapOpenMapsButton): boolean {
@@ -45,6 +47,7 @@ export default defineComponent({
                 requiredImport: () => ymaps3.import('@yandex/ymaps3-controls-extra'),
                 settings: computed(() => props.settings),
                 strictMapRoot: true,
+                index: toRef(props, 'index'),
             });
 
             emit('input', mapChildren);

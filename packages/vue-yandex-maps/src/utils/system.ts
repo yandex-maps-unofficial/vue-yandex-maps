@@ -2,7 +2,7 @@ import type {
     ComputedGetter,
     ComputedRef,
     DebuggerOptions,
-    Fragment,
+    Fragment, MaybeRefOrGetter,
     Ref,
     UnwrapRef,
     VNodeArrayChildren,
@@ -162,4 +162,10 @@ export function getAttrsForVueVersion(attrs: Record<string, unknown>) {
         return { attrs };
     }
     return attrs;
+}
+
+export function toValue<T>(r: MaybeRefOrGetter<T>): T {
+    return typeof r === 'function'
+        ? (r as Function)()
+        : unref(r);
 }
