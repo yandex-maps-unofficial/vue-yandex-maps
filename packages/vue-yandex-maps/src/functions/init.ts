@@ -6,6 +6,7 @@ import type DefaultUiTheme from '@yandex/ymaps3-default-ui-theme';
 import type ContextMenu from '@yandex/ymaps3-context-menu';
 import type DrawerControl from '@yandex/ymaps3-drawer-control';
 import type Minimap from '@yandex/ymaps3-minimap';
+import type * as WorldUtils from '@yandex/ymaps3-world-utils';
 import type Resizer from '@yandex/ymaps3-resizer';
 import type Signpost from '@yandex/ymaps3-signpost';
 import type Spinner from '@yandex/ymaps3-spinner';
@@ -109,7 +110,11 @@ export function initYmaps() {
                             '@yandex/ymaps3-drawer-control@latest',
                             '@yandex/ymaps3-signpost@latest',
                             '@yandex/ymaps3-spinner@latest',
-                        ].filter(x => !(settings.cdnLibraryLoading?.extendLibraries ?? []).includes(x)),
+                            '@yandex/ymaps3-world-utils@latest',
+                        ].filter(x => !(settings.cdnLibraryLoading?.extendLibraries ?? []).some(y => {
+                            if (!y.startsWith('@yandex')) return false;
+                            return y.split('@')[1] === x.split('@')[1];
+                        })),
                         ...settings.cdnLibraryLoading?.extendLibraries ?? [],
                     ]);
                 }
@@ -180,6 +185,7 @@ interface CDNModules {
     '@yandex/ymaps3-minimap': typeof Minimap;
     '@yandex/ymaps3-signpost': typeof Signpost;
     '@yandex/ymaps3-resizer': typeof Resizer;
+    '@yandex/ymaps3-world-utils': typeof WorldUtils;
 }
 
 export function importYmapsCDNModule<T extends keyof CDNModules>(module: T): Promise<CDNModules[T]> {

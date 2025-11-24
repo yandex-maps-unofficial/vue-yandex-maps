@@ -441,7 +441,7 @@ export default defineConfig({
             },
             {
                 text: 'API',
-                collapsed: true,
+                collapsed: false,
                 items: [
                     {
                         text: 'Список методов',
@@ -449,6 +449,7 @@ export default defineConfig({
                     },
                     {
                         text: 'Инициализация карты',
+                        collapsed: true,
                         items: [
                             {
                                 text: 'Инстанс VueYandexMaps',
@@ -466,6 +467,7 @@ export default defineConfig({
                     },
                     {
                         text: 'Вспомогательные методы',
+                        collapsed: true,
                         items: [
                             {
                                 text: 'getLocationFromBounds',
@@ -483,10 +485,15 @@ export default defineConfig({
                     },
                     {
                         text: 'Внешние методы',
+                        collapsed: false,
                         items: [
                             {
                                 text: 'API ymaps3',
                                 link: '/api/yandex',
+                            },
+                            {
+                                text: 'World Utils',
+                                link: '/api/world-utils',
                             },
                             /*{
                                 text: 'Yandex Maps API',
