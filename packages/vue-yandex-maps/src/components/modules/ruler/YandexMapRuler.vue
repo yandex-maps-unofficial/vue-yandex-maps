@@ -116,7 +116,8 @@ export default defineComponent({
 
             if (state.points.length >= entities.value.length) return;
 
-            entities.value = entities.value.filter(({ state: x }, index) => String(state.points[index]) === String(x?.state.coordinates));
+            const actualPoints = new Set(state.points.map(p => String(p)));
+            entities.value = entities.value.filter(({ state: entityState }) => actualPoints.has(String(entityState?.state.coordinates)));
         };
 
         const settings = computed<YMapRulerSettings>(() => {
