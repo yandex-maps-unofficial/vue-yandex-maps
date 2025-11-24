@@ -1,6 +1,6 @@
 # Список изменений
 
-## [Unreleased]
+## [2.2.5]
 
 - Добавлены методы `worldToPixels` и `pixelsToWorld` из новой библиотеки `@yandex/ymaps3-world-utils`. Импорт идет так же через CDN - на всякий случай, из-за чего функции асинхронные (но вы можете установить библиотеку отдельно или импортнуть заранее через importYmapsCDNModule)
 - Теперь, добавив в `cdnLibraryLoading.extendLibraries`, например, `@yandex/ymaps3-resizer@0.1`, библиотека уберет `@yandex/ymaps3-resizer@latest` - ранее оставался дубликат
