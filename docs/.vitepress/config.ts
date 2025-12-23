@@ -4,7 +4,7 @@ import packageJson from '../../packages/vue-yandex-maps/package.json' with { typ
 export default defineConfig({
     base: '/vue-yandex-maps/',
     lang: 'ru-RU',
-    title: 'Vue Yandex Maps',
+    title: 'Vue Yandex Maps v2.x',
     description: 'Откройте для себя Яндекс карты для Vue',
     lastUpdated: false,
     locales: {
@@ -111,6 +111,10 @@ export default defineConfig({
                 ],
             },
             {
+                text: 'План на 3.0',
+                link: '/guide/v3',
+            },
+            {
                 text: packageJson.version,
                 items: [
                     {
@@ -132,10 +136,6 @@ export default defineConfig({
                     {
                         text: 'Версия 1.x',
                         link: 'https://vue-yandex-maps.github.io/new-docs/',
-                    },
-                    {
-                        text: 'План на 3.0',
-                        link: '/guide/v3',
                     },
                 ],
             },
@@ -200,7 +200,7 @@ export default defineConfig({
                         ],
                     },
                     {
-                        text: 'План на версию 3.0',
+                        text: 'План на 3.0',
                         link: '/guide/v3',
                     },
                 ],
