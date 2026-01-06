@@ -7,6 +7,24 @@ import { copy, excludeKeys, throwException, toValue } from './system.ts';
 import { deleteMapChild, injectLayers, injectMap, waitTillMapInit, waitTillYmapInit } from './map.ts';
 import { diff } from 'deep-object-diff';
 
+export function provideMapRoot<T extends YMapEntity<any> = YMapEntity<any>>({ mapRootRef }: {
+    /**
+     * @description Allows to use array instead of addChild mapRoot injection
+     */
+    mapRootRef?: Ref<T[]>;
+} = {}) {
+    const children = mapRootRef ?? shallowRef<any>();
+    provide('mapRoot', children);
+
+    const childrenPromises = shallowRef([]);
+    provide('mapRootInitPromises', childrenPromises);
+
+    return {
+        mapRootRef: children,
+        mapRootInitPromises: childrenPromises,
+    };
+}
+
 export async function setupMapChildren<T extends YMapEntity<unknown> | Projection, R extends (() => Promise<unknown>)>({
     returnOnly,
     willDeleteByHand,
@@ -18,16 +36,10 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     settingsUpdateFull,
     isLayer,
     isMercator,
-    isMapRoot,
     mapRootRef,
-    duplicateInit,
+    mapRootInitPromises,
     index,
 }: {
-    /**
-     * @description Prevents duplicate provide injections
-     */
-    duplicateInit?: boolean;
-
     /**
      * @description Disables onBeforeUnmount hook
      */
@@ -43,15 +55,17 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
      */
     strictMapRoot?: boolean;
 
-    /**
-     * @description Sets injected component to be root of children components (array.push/.addChild will be called)
-     */
     isMapRoot?: boolean;
 
     /**
-     * @description Allows to use array instead of addChild mapRoot injection
+     * @description result of provideMapRoot
      */
     mapRootRef?: Ref<YMapEntity<any>[]>;
+
+    /**
+     * @description result of provideMapRoot
+     */
+    mapRootInitPromises?: Ref<any[]>;
 
     /**
      * @description Promise to call before calling createFunction. Executes only after Yandex script has been injected
@@ -89,6 +103,8 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
      */
     index?: MaybeRefOrGetter<number | undefined>;
 }) {
+    const instance = getCurrentInstance();
+
     if (!getCurrentInstance()) {
         throwException({
             text: 'setupMapChildren must be only called on runtime.',
@@ -100,7 +116,6 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         const children = shallowRef<T | undefined>();
         const mapRoot = inject<Ref<YMapGroupEntity<any> | any[]> | null>('mapRoot', null);
         const initPromises = inject<Ref<PromiseLike<any>[]> | null>('mapRootInitPromises', null);
-        let childrenPromises;
         const map = injectMap();
         const layers = injectLayers();
         let timeouts: Set<NodeJS.Timeout> | null = null;
@@ -110,13 +125,6 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
             if (!isDelete) timeouts.add(timeout);
             else timeouts.delete(timeout);
         };
-
-        if (isMapRoot && !duplicateInit) {
-            provide('mapRoot', mapRootRef || children);
-
-            childrenPromises = shallowRef([]);
-            provide('mapRootInitPromises', childrenPromises);
-        }
 
         if (!returnOnly && !willDeleteByHand) {
             onBeforeUnmount(() => {
@@ -142,7 +150,6 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
                 if (!value) return;
 
                 if (settingsUpdateFull) {
-                    console.log(value);
                     if (children.value && 'update' in children.value) children.value.update(value);
                     return;
                 }
@@ -165,7 +172,6 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
                 if (children.value && 'update' in children.value) children.value.update(updatedSettings);
             }, { deep: true });
         }
-
 
         if (!returnOnly && !isMercator) {
             watch(() => toValue(index), indexValue => {
@@ -206,15 +212,16 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         if (strictMapRoot) {
             if (!mapRoot?.value) await nextTick();
             if (!mapRoot?.value) {
+                console.log(mapRoot, instance);
                 throwException({
                     text: `mapRoot is undefined in setupMapChildren. Please verify that you are using component inside it's root: for example, don't use Controls outside <yandex-map-controls>.`,
                 });
             }
         }
 
-        if (isMapRoot) {
+        if (mapRootInitPromises) {
             await nextTick();
-            await Promise.all(childrenPromises?.value || []);
+            await Promise.all(mapRootInitPromises.value);
         }
 
         let importData;
@@ -226,6 +233,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         }
 
         children.value = createFunction(importData as Awaited<ReturnType<R>>);
+        if (mapRootRef && !mapRootRef.value) mapRootRef.value = children.value as any;
 
         if (!returnOnly && map.value && !isMercator) {
             if (initPromises?.value) {

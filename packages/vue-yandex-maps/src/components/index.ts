@@ -51,6 +51,8 @@ import YandexMapSearchControl from './modules/controls/YandexMapSearchControl.vu
 import YandexMapRouteControl from './modules/controls/YandexMapRouteControl.vue';
 import YandexMapPopupMarker from './modules/markers/YandexMapPopupMarker.vue';
 import YandexMapOverlay from './modules/overlay/YandexMapOverlay.vue';
+import YandexMapImageOverlay from './modules/overlay/YandexMapImageOverlay.vue';
+import YandexMapVideoOverlay from './modules/overlay/YandexMapVideoOverlay.vue';
 import type { YandexMapOverlayCustomProps } from './modules/overlay/YandexMapOverlay.vue';
 
 export {
@@ -120,6 +122,8 @@ export {
 
     // Overlays
     YandexMapOverlay,
+    YandexMapImageOverlay,
+    YandexMapVideoOverlay,
 };
 
 export type {

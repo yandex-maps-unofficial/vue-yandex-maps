@@ -3,7 +3,8 @@
 ## [Unreleased]
 
 - Добавлены новые компоненты: `YandexMapOverlay`, `YandexMapImageOverlay`, `YandexMapVideoOverlay`, `YandexMapHotspot`
-- Проверка `getCurrentInstance` заменена на `getCurrentScope` для поддержки Vapor Mode
+- Проверка `getCurrentInstance` заменена на `getCurrentScope` для поддержки Vapor Mode 
+- Исправлено предупреждение `provide() can only be used inside setup()`
 
 ## [2.2.5]
 

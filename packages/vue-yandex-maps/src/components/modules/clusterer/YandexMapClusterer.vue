@@ -6,7 +6,7 @@ import type { clusterByGrid, Feature, YMapClusterer } from '@yandex/ymaps3-types
 import type { LngLatBounds, YMapCollection, YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
 import { isVue2, throwException } from '../../../utils/system.ts';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { provideMapRoot, setupMapChildren } from '../../../utils/setupMapChildren.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/types';
 import YandexMapClustererClusters from './YandexMapClustererClusters.vue';
@@ -220,6 +220,8 @@ export default defineComponent({
             deep: true,
         });
 
+        const { mapRootInitPromises } = provideMapRoot({ mapRootRef: entities });
+
         const init = async () => {
             mapChildren.value = await setupMapChildren({
                 createFunction: ({
@@ -239,8 +241,7 @@ export default defineComponent({
                     return new Clusterer(settings);
                 },
                 requiredImport: () => ymaps3.import('@yandex/ymaps3-clusterer@0.0.1'),
-                isMapRoot: true,
-                mapRootRef: entities,
+                mapRootInitPromises,
             });
 
             emit('input', mapChildren.value as YMapClusterer);

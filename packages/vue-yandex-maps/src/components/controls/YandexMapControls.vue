@@ -3,7 +3,7 @@ import type { YMapControls } from '@yandex/ymaps3-types';
 import type { PropType, Ref, SlotsType } from 'vue';
 import { computed, defineComponent, h, onMounted, shallowRef } from 'vue';
 import { hVue2, throwException } from '../../utils/system.ts';
-import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { provideMapRoot, setupMapChildren } from '../../utils/setupMapChildren.ts';
 
 export default defineComponent({
     name: 'YandexMapControls',
@@ -38,6 +38,8 @@ export default defineComponent({
     }) {
         const mapChildren: Ref<YMapControls | null> = shallowRef(null);
 
+        const { mapRootRef, mapRootInitPromises } = provideMapRoot();
+
         onMounted(async () => {
             if (!props.settings.position) {
                 throwException({
@@ -47,7 +49,8 @@ export default defineComponent({
 
             mapChildren.value = await setupMapChildren({
                 createFunction: () => new ymaps3.YMapControls(props.settings),
-                isMapRoot: true,
+                mapRootRef,
+                mapRootInitPromises,
                 settings: computed(() => props.settings),
             });
 
