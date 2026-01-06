@@ -50,6 +50,8 @@ import YandexMapUiMarker from './modules/markers/YandexMapUiMarker.vue';
 import YandexMapSearchControl from './modules/controls/YandexMapSearchControl.vue';
 import YandexMapRouteControl from './modules/controls/YandexMapRouteControl.vue';
 import YandexMapPopupMarker from './modules/markers/YandexMapPopupMarker.vue';
+import YandexMapOverlay from './modules/overlay/YandexMapOverlay.vue';
+import type { YandexMapOverlayCustomProps } from './modules/overlay/YandexMapOverlay.vue';
 
 export {
     YandexMap,
@@ -115,6 +117,9 @@ export {
     // Layers Extra Module
     YandexMapTrafficLayer,
     YandexMapTrafficEventsLayer,
+
+    // Overlays
+    YandexMapOverlay,
 };
 
 export type {
@@ -128,4 +133,5 @@ export type {
     YandexMapRulerSettings,
     IYandexMapDefaultSatelliteLayer,
     IYandexMapDefaultSatelliteLayerProps,
+    YandexMapOverlayCustomProps,
 };

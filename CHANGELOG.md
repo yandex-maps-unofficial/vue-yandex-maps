@@ -1,5 +1,10 @@
 # Список изменений
 
+## [Unreleased]
+
+- Добавлены новые компоненты: `YandexMapOverlay`, `YandexMapImageOverlay`, `YandexMapVideoOverlay`, `YandexMapHotspot`
+- Проверка `getCurrentInstance` заменена на `getCurrentScope` для поддержки Vapor Mode
+
 ## [2.2.5]
 
 - Добавлены методы `worldToPixels` и `pixelsToWorld` из новой библиотеки `@yandex/ymaps3-world-utils`. Импорт идет так же через CDN - на всякий случай, из-за чего функции асинхронные (но вы можете установить библиотеку отдельно или импортнуть заранее через importYmapsCDNModule)
