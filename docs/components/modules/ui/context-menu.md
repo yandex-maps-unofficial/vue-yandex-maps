@@ -1,6 +1,6 @@
 # YandexMapContextMenu
 
-Компонент подгружает [CDN](/guide/configuration#cdnlibraryloading)-модуль `@yandex/ymaps3-context-menu`, принимает
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-context-menu`, принимает
 в `settings` [YMapContextMenuProps](https://yandex.ru/maps-api/docs/js-api/object/controls/menu/YMapContextMenu.html#props) и
 позволяет добавить на карту контекстное меню.
 

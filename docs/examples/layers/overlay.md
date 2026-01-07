@@ -1,4 +1,4 @@
-# Создание наложения HTML элемента на карту
+# Оверлеи
 
 <script lang="ts" setup>
 import MapComponent from 'examples/src/components/layers/BasicOverlay.vue';

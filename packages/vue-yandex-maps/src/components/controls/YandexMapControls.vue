@@ -38,7 +38,7 @@ export default defineComponent({
     }) {
         const mapChildren: Ref<YMapControls | null> = shallowRef(null);
 
-        const { mapRootRef, mapRootInitPromises } = provideMapRoot();
+        const mapRoot = provideMapRoot();
 
         onMounted(async () => {
             if (!props.settings.position) {
@@ -49,8 +49,7 @@ export default defineComponent({
 
             mapChildren.value = await setupMapChildren({
                 createFunction: () => new ymaps3.YMapControls(props.settings),
-                mapRootRef,
-                mapRootInitPromises,
+                mapRoot,
                 settings: computed(() => props.settings),
             });
 

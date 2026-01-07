@@ -1,10 +1,15 @@
 # Список изменений
 
-## [Unreleased]
+## [2.3.0]
 
-- Добавлены новые компоненты: `YandexMapOverlay`, `YandexMapImageOverlay`, `YandexMapVideoOverlay`, `YandexMapHotspot`
+В случае, если в этом релизе не найдется новых проблем, это последний релиз версии `2.x`. [Узнать про версию `3.0`](https://yandex-maps-unofficial.github.io/vue-yandex-maps/guide/v3.html)
+
+- Добавлены новые компоненты: `YandexMapOverlay`, `YandexMapImageOverlay`, `YandexMapVideoOverlay`
 - Проверка `getCurrentInstance` заменена на `getCurrentScope` для поддержки Vapor Mode 
 - Исправлено предупреждение `provide() can only be used inside setup()`
+- Реорганизован раздел "Компоненты" в документации. Добавлен отдельный раздел "Модули и CDN" с пояснениями
+- Реанимирована песочница
+- Добавлены пакеты `@yandex/ymaps3-web-mercator-projection` и `@yandex/ymaps3-cartesian-projection` с возможностью использовать методы из классов внутри
 
 ## [2.2.5]
 

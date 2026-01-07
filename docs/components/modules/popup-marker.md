@@ -1,6 +1,6 @@
 # YandexMapPopupMarker
 
-Компонент подгружает [CDN](/guide/configuration#cdnlibraryloading)-модуль `@yandex/ymaps3-default-ui-theme`, принимает
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-default-ui-theme`, принимает
 в `settings` [YMapPopupMarkerProps](https://yandex.ru/maps-api/docs/js-api/object/information-objects/YMapPopupMarker.html#props) и
 и является попап-маркером с предустановленными стилями.
 

@@ -41,6 +41,7 @@
 ### [Кастомные тайлы на canvas](layers/canvas-tiles)
 ### [Свой источник данных](layers/custom-map-type)
 ### [Кастомная (своя) карта](layers/custom-map)
+### [Оверлеи (наложение на карту)](layers/overlay)
 
 ## Элементы интерфейса
 ### [Боковое меню](map/drawer)

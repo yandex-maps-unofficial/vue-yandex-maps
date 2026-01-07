@@ -2,7 +2,7 @@ import type { YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { triggerRef } from 'vue';
 import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue';
-import { getCurrentInstance, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, watch } from 'vue';
+import { getCurrentScope, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, watch } from 'vue';
 import { copy, excludeKeys, throwException, toValue } from './system.ts';
 import { deleteMapChild, injectLayers, injectMap, waitTillMapInit, waitTillYmapInit } from './map.ts';
 import { diff } from 'deep-object-diff';
@@ -36,8 +36,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     settingsUpdateFull,
     isLayer,
     isMercator,
-    mapRootRef,
-    mapRootInitPromises,
+    mapRoot: _mapRoot,
     index,
 }: {
     /**
@@ -55,17 +54,10 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
      */
     strictMapRoot?: boolean;
 
-    isMapRoot?: boolean;
-
     /**
      * @description result of provideMapRoot
      */
-    mapRootRef?: Ref<YMapEntity<any>[]>;
-
-    /**
-     * @description result of provideMapRoot
-     */
-    mapRootInitPromises?: Ref<any[]>;
+    mapRoot?: ReturnType<typeof provideMapRoot>;
 
     /**
      * @description Promise to call before calling createFunction. Executes only after Yandex script has been injected
@@ -103,9 +95,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
      */
     index?: MaybeRefOrGetter<number | undefined>;
 }) {
-    const instance = getCurrentInstance();
-
-    if (!getCurrentInstance()) {
+    if (!getCurrentScope()) {
         throwException({
             text: 'setupMapChildren must be only called on runtime.',
             isInternal: true,
@@ -113,6 +103,8 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     }
 
     try {
+        const mapRootRef = _mapRoot?.mapRootRef;
+        const mapRootInitPromises = _mapRoot?.mapRootInitPromises;
         const children = shallowRef<T | undefined>();
         const mapRoot = inject<Ref<YMapGroupEntity<any> | any[]> | null>('mapRoot', null);
         const initPromises = inject<Ref<PromiseLike<any>[]> | null>('mapRootInitPromises', null);
@@ -212,7 +204,6 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         if (strictMapRoot) {
             if (!mapRoot?.value) await nextTick();
             if (!mapRoot?.value) {
-                console.log(mapRoot, instance);
                 throwException({
                     text: `mapRoot is undefined in setupMapChildren. Please verify that you are using component inside it's root: for example, don't use Controls outside <yandex-map-controls>.`,
                 });

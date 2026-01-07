@@ -7562,6 +7562,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yandex/ymaps3-cartesian-projection@npm:>=0.0.6":
+  version: 0.0.6
+  resolution: "@yandex/ymaps3-cartesian-projection@npm:0.0.6"
+  checksum: 10/ed245f88fc285ce6550e02af561775aaee7df37c8739e685fde4f20818a1e2146bb808e2eee111971308aa5ff49db61240e943cb4996e529320cc16c7f070b64
+  languageName: node
+  linkType: hard
+
 "@yandex/ymaps3-context-menu@npm:>=0.0.2, @yandex/ymaps3-context-menu@npm:^0.0.2":
   version: 0.0.2
   resolution: "@yandex/ymaps3-context-menu@npm:0.0.2"
@@ -7628,6 +7635,13 @@ __metadata:
     "@vue/runtime-core":
       optional: true
   checksum: 10/18af328acd6323bc961f206732ac018adc1af11e900fec173045ee274cbcc47dfe3779b42d5ca6c578210e6395cb65a9dc7d144446f0b6b890802d41d45a575b
+  languageName: node
+  linkType: hard
+
+"@yandex/ymaps3-web-mercator-projection@npm:>=0.0.5":
+  version: 0.0.5
+  resolution: "@yandex/ymaps3-web-mercator-projection@npm:0.0.5"
+  checksum: 10/c79bab2ef08a432cd202f488206d2df8273a29fe7b513b6a6164b84d09669ba0f23a438856bf3ce81af1158b27fed3cd566b0880eb1c27fc99b05ecba1da3c29
   languageName: node
   linkType: hard
 
@@ -24144,6 +24158,7 @@ __metadata:
     "@nuxt/kit": "npm:^3.20.2"
     "@nuxt/types": "npm:^2.18.1"
     "@vitejs/plugin-vue": "npm:^6.0.3"
+    "@yandex/ymaps3-cartesian-projection": "npm:>=0.0.6"
     "@yandex/ymaps3-context-menu": "npm:>=0.0.2"
     "@yandex/ymaps3-default-ui-theme": "npm:>=0.0.24"
     "@yandex/ymaps3-drawer-control": "npm:>=0.0.2"
@@ -24152,6 +24167,7 @@ __metadata:
     "@yandex/ymaps3-signpost": "npm:>=0.0.2"
     "@yandex/ymaps3-spinner": "npm:>=0.0.2"
     "@yandex/ymaps3-types": "npm:>=1.0.18413413"
+    "@yandex/ymaps3-web-mercator-projection": "npm:>=0.0.5"
     "@yandex/ymaps3-world-utils": "npm:>=0.0.18413413"
     deep-object-diff: "npm:^1.1.9"
     nuxt: "npm:^3.20.2"
@@ -24165,6 +24181,7 @@ __metadata:
     vue-tsc: "npm:3.2.2"
   peerDependencies:
     "@vue/composition-api": ">=1"
+    "@yandex/ymaps3-cartesian-projection": ">=0.0.6"
     "@yandex/ymaps3-context-menu": ">=0.0.2"
     "@yandex/ymaps3-default-ui-theme": ">=0.0.24"
     "@yandex/ymaps3-drawer-control": ">=0.0.2"
@@ -24173,6 +24190,7 @@ __metadata:
     "@yandex/ymaps3-signpost": ">=0.0.2"
     "@yandex/ymaps3-spinner": ">=0.0.2"
     "@yandex/ymaps3-types": ">=1.0.18413413"
+    "@yandex/ymaps3-web-mercator-projection": ">=0.0.5"
     "@yandex/ymaps3-world-utils": ">=0.0.18413413"
     nuxt: ">=2.16 || >=3"
     vue: ">=2.7 || >=3.3"

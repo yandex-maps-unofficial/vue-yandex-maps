@@ -134,7 +134,7 @@ a {
 
 ## CDN-модули
 
-[Узнать больше про CDN](/guide/configuration#cdnlibraryloading)
+[Узнать больше про CDN](/components/cdn)
 
 ### Элементы управления
 
@@ -182,3 +182,17 @@ a {
 #### [YandexMapPopupMarker](modules/popup-marker)
 
 Маркер-всплывашка
+
+### Оверлеи
+
+#### [YandexMapOverlay](modules/ui/overlay)
+
+Компонент добавляет HTML-оверлей в указанной области на карту
+
+#### [YandexMapImageOverlay](modules/ui/overlay-image)
+
+Компонент добавляет картинку в указанной области на карту
+
+#### [YandexMapVideoOverlay](modules/ui/overlay-image)
+
+Компонент добавляет видео в указанной области на карту

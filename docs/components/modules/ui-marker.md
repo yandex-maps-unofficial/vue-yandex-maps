@@ -4,7 +4,7 @@
 Потому что иначе автокомплит будет писать `<yandex-maps-u-i-marker>`, а это не весело
 :::
 
-Компонент подгружает [CDN](/guide/configuration#cdnlibraryloading)-модуль `@yandex/ymaps3-default-ui-theme`, принимает
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-default-ui-theme`, принимает
 в `settings` [YMapDefaultMarkerProps](https://yandex.ru/maps-api/docs/js-api/object/markers/YMapDefaultMarker.html#props) и
 и является маркером с предустановленными стилями.
 

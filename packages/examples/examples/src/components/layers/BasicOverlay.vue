@@ -2,7 +2,7 @@
     <common-wrapper>
         <template
             #default="{
-                coordinates: center, theme, zoom, width, height,
+                theme, zoom, width, height,
             }"
         >
             <!-- #region html -->
@@ -13,6 +13,7 @@
                     location: {
                         center,
                         zoom,
+                        duration: 300,
                     },
                     theme,
                     showScaleInCopyrights: true,
@@ -119,10 +120,28 @@ import {
     YandexMapControls,
     YandexMapControlButton,
 } from 'vue-yandex-maps';
-import { ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
+import type { LngLat } from '@yandex/ymaps3-types';
 
 const toggle = ref(false);
-const overlay = ref<'html' | 'image' | 'video'>('video');
+const overlay = ref<'html' | 'image' | 'video'>('html');
+
+const center = ref<LngLat>([37.617644, 55.755819]);
+
+onMounted(() => {
+    const hash = document.location.hash;
+
+    if (hash === '#image' || hash === '#video') {
+        overlay.value = hash.slice(1, hash.length) as any;
+        if (hash === '#image') center.value = [49.1, 55.77];
+    }
+
+    watch(overlay, val => {
+        document.location.hash = val;
+
+        center.value = val === 'image' ? [49.1, 55.77] : [37.617644, 55.755819];
+    });
+});
 // #endregion setup
 </script>
 

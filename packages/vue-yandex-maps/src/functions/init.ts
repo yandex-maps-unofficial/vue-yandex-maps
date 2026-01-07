@@ -10,6 +10,8 @@ import type * as WorldUtils from '@yandex/ymaps3-world-utils';
 import type Resizer from '@yandex/ymaps3-resizer';
 import type Signpost from '@yandex/ymaps3-signpost';
 import type Spinner from '@yandex/ymaps3-spinner';
+import type WebMercator from '@yandex/ymaps3-web-mercator-projection';
+import type Cartesian from '@yandex/ymaps3-cartesian-projection';
 
 const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
     apikey: true,
@@ -111,6 +113,8 @@ export function initYmaps() {
                             '@yandex/ymaps3-signpost@latest',
                             '@yandex/ymaps3-spinner@latest',
                             '@yandex/ymaps3-world-utils@latest',
+                            '@yandex/ymaps3-web-mercator-projection@latest',
+                            '@yandex/ymaps3-cartesian-projection@latest',
                         ].filter(x => !(settings.cdnLibraryLoading?.extendLibraries ?? []).some(y => {
                             if (!y.startsWith('@yandex')) return false;
                             return y.split('@')[1] === x.split('@')[1];
@@ -186,6 +190,8 @@ interface CDNModules {
     '@yandex/ymaps3-signpost': typeof Signpost;
     '@yandex/ymaps3-resizer': typeof Resizer;
     '@yandex/ymaps3-world-utils': typeof WorldUtils;
+    '@yandex/ymaps3-web-mercator-projection': typeof WebMercator;
+    '@yandex/ymaps3-cartesian-projection': typeof Cartesian;
 }
 
 export function importYmapsCDNModule<T extends keyof CDNModules>(module: T): Promise<CDNModules[T]> {

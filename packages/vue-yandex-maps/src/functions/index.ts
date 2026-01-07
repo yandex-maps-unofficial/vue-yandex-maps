@@ -2,4 +2,4 @@ export { useYMapsLocationFromBounds, getLocationFromBounds } from './getCenterAn
 export type { YandexMapGetLocationFromBoundsOptions } from './getCenterAndZoom.ts';
 export { getCenterFromCoords, getBoundsFromCoords } from './calculations.ts';
 export { createYmapsOptions, initYmaps, importYmapsCDNModule } from './init.ts';
-export { worldToPixels, pixelsToWorld } from './yandex.ts';
+export { worldToPixels, pixelsToWorld, WebMercator, Cartesian } from './yandex.ts';

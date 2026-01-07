@@ -99,7 +99,7 @@ app.use(createYmaps({
 
 ### cdnLibraryLoading
 
-[Подгрузка через CDN](https://yandex.ru/maps-api/docs/js-api/reference-guide/packages.html) ряда компонентов карты, объект.
+[Подгрузка через CDN](/components/cdn) ряда компонентов карты, объект.
 
 - enabled (true) - выключить эту фичу. Некоторые компоненты будут при этом падать
 - url (`https://cdn.jsdelivr.net/npm/{package}`) - откуда грузить пакеты

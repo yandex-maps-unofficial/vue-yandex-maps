@@ -1,12 +1,12 @@
 import type { Ref, WatchStopHandle } from 'vue';
-import { getCurrentInstance, inject, isRef, watch } from 'vue';
+import { getCurrentScope, inject, isRef, watch } from 'vue';
 import { throwException } from './system.ts';
 import { VueYandexMaps } from '../namespace.ts';
 import type { YMap, YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
 export function injectMap(): Ref<YMap | null> {
-    if (!getCurrentInstance()) {
+    if (!getCurrentScope()) {
         throwException({
             text: 'injectMap must be only called on runtime.',
             isInternal: true,
@@ -25,7 +25,7 @@ export function injectMap(): Ref<YMap | null> {
 }
 
 export function injectLayers(): Ref<any[]> {
-    if (!getCurrentInstance()) {
+    if (!getCurrentScope()) {
         throwException({
             text: 'injectLayers must be only called on runtime.',
             isInternal: true,
@@ -103,7 +103,7 @@ export async function waitTillMapInit({
     timeoutCallback?: (timeout: NodeJS.Timeout, isDelete: boolean) => any;
     waitDuration?: number | boolean;
 } = {}): Promise<void> {
-    if (!_map && !getCurrentInstance()) {
+    if (!_map && !getCurrentScope()) {
         throwException({
             text: 'onMapInit must be only called on runtime.',
             isInternal: true,

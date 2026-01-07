@@ -210,12 +210,22 @@ export default defineConfig({
                 collapsed: false,
                 items: [
                     {
-                        text: 'Общие принципы работы',
+                        text: 'Про компоненты',
                         link: '/components/',
-                    },
-                    {
-                        text: 'Список компонентов',
-                        link: '/components/list',
+                        items: [
+                            {
+                                text: 'Общие принципы работы',
+                                link: '/components/',
+                            },
+                            {
+                                text: 'Модули и CDN',
+                                link: '/components/cdn',
+                            },
+                            {
+                                text: 'Список компонентов',
+                                link: '/components/list',
+                            },
+                        ],
                     },
                     {
                         text: 'Основные компоненты',
@@ -238,12 +248,12 @@ export default defineConfig({
                                 link: '/components/listener',
                             },
                             {
-                                text: 'YandexMapMarker',
-                                link: '/components/marker',
-                            },
-                            {
                                 text: 'YandexMapEntity',
                                 link: '/components/entity',
+                            },
+                            {
+                                text: 'YandexMapHint',
+                                link: '/components/modules/hint',
                             },
                         ],
                     },
@@ -267,10 +277,56 @@ export default defineConfig({
                                 text: 'YandexMapDefaultSatelliteLayer',
                                 link: '/components/layer-default-satellite',
                             },
+                            {
+                                text: 'YandexMapTrafficLayer',
+                                link: '/components/modules/layers-extra/traffic',
+                            },
+                            {
+                                text: 'YandexMapTrafficEventsLayer',
+                                link: '/components/modules/layers-extra/events',
+                            },
+                            {
+                                text: 'YandexMapOverlay',
+                                link: '/components/modules/ui/overlay',
+                            },
+                            {
+                                text: 'YandexMapImageOverlay',
+                                link: '/components/modules/ui/overlay-image',
+                            },
+                            {
+                                text: 'YandexMapVideoOverlay',
+                                link: '/components/modules/ui/overlay-video',
+                            },
                         ],
                     },
                     {
-                        text: 'Источники данных',
+                        text: 'Маркеры',
+                        collapsed: true,
+                        items: [
+                            {
+                                text: 'YandexMapMarker',
+                                link: '/components/marker',
+                            },
+                            {
+                                text: 'YandexMapDefaultMarker',
+                                link: '/components/modules/default-marker',
+                            },
+                            {
+                                text: 'YandexMapUiMarker',
+                                link: '/components/modules/ui-marker',
+                            },
+                            {
+                                text: 'YandexMapPopupMarker',
+                                link: '/components/modules/popup-marker',
+                            },
+                            {
+                                text: 'YandexMapClusterer',
+                                link: '/components/modules/clusterer',
+                            },
+                        ],
+                    },
+                    {
+                        text: 'Источники данных и проекции',
                         collapsed: true,
                         items: [
                             {
@@ -281,6 +337,14 @@ export default defineConfig({
                                 text: 'YandexMapTileDataSource',
                                 link: '/components/tile-data-source',
                             },
+                                    {
+                                        text: 'YandexMapCartesianProjection',
+                                        link: '/components/modules/projection/cartesian',
+                                    },
+                                    {
+                                        text: 'YandexMapSphericalMercatorProjection',
+                                        link: '/components/modules/projection/mercator',
+                                    },
                         ],
                     },
                     {
@@ -303,137 +367,71 @@ export default defineConfig({
                                 text: 'YandexMapScaleControl',
                                 link: '/components/control-scale',
                             },
+                            {
+                                text: 'YandexMapGeolocationControl',
+                                link: '/components/modules/controls/geolocation',
+                            },
+                            {
+                                text: 'YandexMapZoomControl',
+                                link: '/components/modules/controls/zoom',
+                            },
+                            {
+                                text: 'YandexMapOpenMapsButton',
+                                link: '/components/modules/controls/open-maps',
+                            },
+                            {
+                                text: 'YandexMapRotateControl',
+                                link: '/components/modules/controls/rotate-tilt',
+                            },
+                            {
+                                text: 'YandexMapTiltControl',
+                                link: '/components/modules/controls/rotate-tilt',
+                            },
+                            {
+                                text: 'YandexMapRotateTiltControl',
+                                link: '/components/modules/controls/rotate-tilt',
+                            },
+                            {
+                                text: 'YandexMapSearchControl',
+                                link: '/components/modules/controls/search',
+                            },
+                            {
+                                text: 'YandexMapRouteControl',
+                                link: '/components/modules/controls/route',
+                            }
                         ],
                     },
                     {
-                        text: 'Модули',
+                        text: 'Интерфейс',
                         collapsed: true,
                         items: [
                             {
-                                text: 'YandexMapClusterer',
-                                link: '/components/modules/clusterer',
+                                text: 'YandexMapContextMenu',
+                                link: '/components/modules/ui/context-menu',
                             },
                             {
-                                text: 'Управление картой',
-                                collapsed: true,
-                                items: [
-                                    {
-                                        text: 'YandexMapGeolocationControl',
-                                        link: '/components/modules/controls/geolocation',
-                                    },
-                                    {
-                                        text: 'YandexMapZoomControl',
-                                        link: '/components/modules/controls/zoom',
-                                    },
-                                    {
-                                        text: 'YandexMapOpenMapsButton',
-                                        link: '/components/modules/controls/open-maps',
-                                    },
-                                    {
-                                        text: 'YandexMapRotateControl',
-                                        link: '/components/modules/controls/rotate-tilt',
-                                    },
-                                    {
-                                        text: 'YandexMapTiltControl',
-                                        link: '/components/modules/controls/rotate-tilt',
-                                    },
-                                    {
-                                        text: 'YandexMapRotateTiltControl',
-                                        link: '/components/modules/controls/rotate-tilt',
-                                    },
-                                    {
-                                        text: 'YandexMapSearchControl',
-                                        link: '/components/modules/controls/search',
-                                    },
-                                    {
-                                        text: 'YandexMapRouteControl',
-                                        link: '/components/modules/controls/route',
-                                    }
-                                ],
+                                text: 'YandexMapDrawerControl',
+                                link: '/components/modules/ui/drawer',
                             },
                             {
-                                text: 'Дополнительные слои (layers-extra)',
-                                collapsed: true,
-                                items: [
-                                    {
-                                        text: 'YandexMapTrafficLayer',
-                                        link: '/components/modules/layers-extra/traffic',
-                                    },
-                                    {
-                                        text: 'YandexMapTrafficEventsLayer',
-                                        link: '/components/modules/layers-extra/events',
-                                    },
-                                ],
+                                text: 'YandexMapResizer',
+                                link: '/components/modules/ui/resizer',
                             },
                             {
-                                text: 'Интерфейс',
-                                collapsed: true,
-                                items: [
-                                    {
-                                        text: 'YandexMapContextMenu',
-                                        link: '/components/modules/ui/context-menu',
-                                    },
-                                    {
-                                        text: 'YandexMapDrawerControl',
-                                        link: '/components/modules/ui/drawer',
-                                    },
-                                    {
-                                        text: 'YandexMapResizer',
-                                        link: '/components/modules/ui/resizer',
-                                    },
-                                    {
-                                        text: 'YandexMapSignpost',
-                                        link: '/components/modules/ui/signpost',
-                                    },
-                                    {
-                                        text: 'YandexMapSpinner',
-                                        link: '/components/modules/ui/spinner',
-                                    },
-                                    {
-                                        text: 'YandexMapMiniMap',
-                                        link: '/components/modules/controls/mini-map',
-                                    },
-                                ],
+                                text: 'YandexMapSignpost',
+                                link: '/components/modules/ui/signpost',
                             },
                             {
-                                text: 'YandexMapHint',
-                                link: '/components/modules/hint',
+                                text: 'YandexMapSpinner',
+                                link: '/components/modules/ui/spinner',
                             },
                             {
-                                text: 'Маркеры',
-                                collapsed: true,
-                                items: [
-                                    {
-                                        text: 'YandexMapDefaultMarker',
-                                        link: '/components/modules/default-marker',
-                                    },
-                                    {
-                                        text: 'YandexMapUiMarker',
-                                        link: '/components/modules/ui-marker',
-                                    },
-                                    {
-                                        text: 'YandexMapPopupMarker',
-                                        link: '/components/modules/popup-marker',
-                                    },
-                                ],
+                                text: 'YandexMapMiniMap',
+                                link: '/components/modules/controls/mini-map',
                             },
                             {
                                 text: 'YandexMapRuler',
                                 link: '/components/modules/ruler',
-                            },
-                            {
-                                text: 'Projection',
-                                collapsed: true,
-                                items: [
-                                    {
-                                        text: 'YandexMapCartesianProjection',
-                                        link: '/components/modules/projection/cartesian',
-                                    },
-                                    {
-                                        text: 'YandexMapSphericalMercatorProjection',
-                                        link: '/components/modules/projection/mercator',
-                                    },
-                                ],
                             },
                         ],
                     },
@@ -484,16 +482,24 @@ export default defineConfig({
                         ],
                     },
                     {
-                        text: 'Внешние методы',
-                        collapsed: false,
+                        text: 'ymaps3',
+                        link: '/api/yandex',
+                    },
+                    {
+                        text: 'Методы из библиотек Яндекса',
+                        collapsed: true,
                         items: [
-                            {
-                                text: 'API ymaps3',
-                                link: '/api/yandex',
-                            },
                             {
                                 text: 'World Utils',
                                 link: '/api/world-utils',
+                            },
+                            {
+                                text: 'Web Mercator Projection',
+                                link: '/api/web-mercator',
+                            },
+                            {
+                                text: 'Cartesian Projection',
+                                link: '/api/cartesian-projection',
                             },
                             /*{
                                 text: 'Yandex Maps API',
@@ -667,6 +673,10 @@ export default defineConfig({
                             {
                                 text: 'Пробки',
                                 link: '/examples/layers/traffic',
+                            },
+                            {
+                                text: 'Оверлеи',
+                                link: '/examples/layers/overlay',
                             },
                         ],
                     },

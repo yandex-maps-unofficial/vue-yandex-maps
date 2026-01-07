@@ -1,6 +1,6 @@
 # YandexMapRouteControl
 
-Компонент подгружает [CDN](/guide/configuration#cdnlibraryloading)-модуль `@yandex/ymaps3-default-ui-theme`, принимает
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-default-ui-theme`, принимает
 в `settings` [YMapRouteControlProps](https://yandex.ru/maps-api/docs/js-api/object/router/YMapRouteControl.html#props) и
 добавляет нативную маршрутизацию Яндекса.
 

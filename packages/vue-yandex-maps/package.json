@@ -1,6 +1,6 @@
 {
   "name": "vue-yandex-maps",
-  "version": "2.2.5",
+  "version": "2.3.0",
   "description": "Yandex Maps 3.0 components library for VueJS.",
   "main": "./dist/vue-yandex-maps.js",
   "types": "./dist/index.d.ts",
@@ -75,6 +75,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@yandex/ymaps3-cartesian-projection": ">=0.0.6",
     "@yandex/ymaps3-context-menu": ">=0.0.2",
     "@yandex/ymaps3-default-ui-theme": ">=0.0.24",
     "@yandex/ymaps3-drawer-control": ">=0.0.2",
@@ -83,6 +84,7 @@
     "@yandex/ymaps3-signpost": ">=0.0.2",
     "@yandex/ymaps3-spinner": ">=0.0.2",
     "@yandex/ymaps3-types": ">=1.0.18413413",
+    "@yandex/ymaps3-web-mercator-projection": ">=0.0.5",
     "@yandex/ymaps3-world-utils": ">=0.0.18413413"
   },
   "devDependencies": {
@@ -102,6 +104,7 @@
   },
   "peerDependencies": {
     "@vue/composition-api": ">=1",
+    "@yandex/ymaps3-cartesian-projection": ">=0.0.6",
     "@yandex/ymaps3-context-menu": ">=0.0.2",
     "@yandex/ymaps3-default-ui-theme": ">=0.0.24",
     "@yandex/ymaps3-drawer-control": ">=0.0.2",
@@ -110,6 +113,7 @@
     "@yandex/ymaps3-signpost": ">=0.0.2",
     "@yandex/ymaps3-spinner": ">=0.0.2",
     "@yandex/ymaps3-types": ">=1.0.18413413",
+    "@yandex/ymaps3-web-mercator-projection": ">=0.0.5",
     "@yandex/ymaps3-world-utils": ">=0.0.18413413",
     "nuxt": ">=2.16 || >=3",
     "vue": ">=2.7 || >=3.3"

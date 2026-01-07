@@ -7,7 +7,7 @@
 
 Добавляют управление поворотом и наклоном карты (2D/3D).
 
-Компоненты подгружают [CDN](/guide/configuration#cdnlibraryloading)-модуль `@yandex/ymaps3-default-ui-theme`.
+Компоненты подгружают [CDN](/components/cdn)-модуль `@yandex/ymaps3-default-ui-theme`.
 
 ::: warning Внимание
 Компоненты должны использоваться строго внутри `<yandex-map-controls>`.

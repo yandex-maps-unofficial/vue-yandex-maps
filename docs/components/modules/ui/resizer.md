@@ -1,6 +1,6 @@
 # YandexMapResizer
 
-Компонент подгружает [CDN](/guide/configuration#cdnlibraryloading)-модуль `@yandex/ymaps3-resizer`, принимает
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-resizer`, принимает
 в `settings` [YMapResizerProps](https://yandex.ru/maps-api/docs/js-api/object/controls/zoom/YMapResizer.html#props) и
 позволяет ресайзить карту в том контейнере, куда вы её положили.
 

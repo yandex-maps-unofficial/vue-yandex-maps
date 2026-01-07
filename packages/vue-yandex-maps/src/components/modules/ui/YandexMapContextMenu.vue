@@ -3,7 +3,7 @@ import { h, shallowRef } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, onMounted } from 'vue';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { provideMapRoot, setupMapChildren } from '../../../utils/setupMapChildren.ts';
 import { hVue2 } from '../../../utils/system.ts';
 import type { YMapContextMenu } from '@yandex/ymaps3-context-menu';
 import { importYmapsCDNModule } from '../../../functions/init.ts';
@@ -40,13 +40,14 @@ export default defineComponent({
         emit,
     }) {
         const mapChildren = shallowRef<YMapContextMenu | undefined>(undefined);
+        const mapRoot = provideMapRoot();
 
         onMounted(async () => {
             mapChildren.value = await setupMapChildren({
                 createFunction: controls => new controls.YMapContextMenu(props.settings),
                 requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-context-menu'),
                 settings: computed(() => props.settings),
-                isMapRoot: true,
+                mapRoot,
             });
             emit('input', mapChildren.value);
             emit('update:modelValue', mapChildren.value);

@@ -220,7 +220,7 @@ export default defineComponent({
             deep: true,
         });
 
-        const { mapRootInitPromises } = provideMapRoot({ mapRootRef: entities });
+        const mapRoot = provideMapRoot({ mapRootRef: entities });
 
         const init = async () => {
             mapChildren.value = await setupMapChildren({
@@ -241,7 +241,7 @@ export default defineComponent({
                     return new Clusterer(settings);
                 },
                 requiredImport: () => ymaps3.import('@yandex/ymaps3-clusterer@0.0.1'),
-                mapRootInitPromises,
+                mapRoot,
             });
 
             emit('input', mapChildren.value as YMapClusterer);
