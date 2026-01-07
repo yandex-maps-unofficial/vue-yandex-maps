@@ -105,14 +105,10 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24.12.0
+          registry-url: 'https://registry.npmjs.org'
       - run: yarn
       - run: yarn lint && yarn build
-      - uses: JS-DevTools/npm-publish@v4
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./packages/vue-yandex-maps
-          provenance: true
-          #tag: next
+      - run: npm publish --provenance --workspace=packages/vue-yandex-maps
   github-release:
     name: Release tag to Github
     needs: npm-publish
