@@ -2,7 +2,7 @@ name: NPM Publish
 
 on:
   push:
-    branches: [ master ]
+    branches: [ v2 ]
 
 permissions:
   contents: write
@@ -67,30 +67,6 @@ jobs:
       - uses: ./.github/actions/test
         with:
           type: nuxt3
-  docs-build:
-    name: Docs build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24.12.0
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Build main package
-        run: |
-          yarn
-          yarn build
-      - name: Build with VitePress
-        run: |
-          yarn docs:build
-          touch docs/.vitepress/dist/.nojekyll
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: docs/.vitepress/dist
   npm-publish:
     name: NPM Publish
     needs:
@@ -127,21 +103,9 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          target_commitish: master
+          target_commitish: v2
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ steps.tagName.outputs.version }}
           name: ${{ steps.release.outputs.title }}
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
           #prerelease: true
-  docs-deploy:
-    name: Docs Deploy
-    continue-on-error: true
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: docs-build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
