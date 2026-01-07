@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 24.12.0
       - uses: ./.github/actions/codecheck
-  test-vue2:
+  test-vue:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -33,8 +33,8 @@ jobs:
           node-version: 24.12.0
       - uses: ./.github/actions/test
         with:
-          type: vue2
-  test-vue3:
+          type: vue
+  test-nuxt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -44,29 +44,7 @@ jobs:
           node-version: 24.12.0
       - uses: ./.github/actions/test
         with:
-          type: vue3
-  test-nuxt2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24.12.0
-      - uses: ./.github/actions/test
-        with:
-          type: nuxt2
-  test-nuxt3:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24.12.0
-      - uses: ./.github/actions/test
-        with:
-          type: nuxt3
+          type: nuxt
   docs-build:
     name: Docs build
     runs-on: ubuntu-latest
@@ -95,10 +73,8 @@ jobs:
     name: NPM Publish
     needs:
       - check
-      - test-vue2
-      - test-vue3
-      - test-nuxt2
-      - test-nuxt3
+      - test-vue
+      - test-nuxt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

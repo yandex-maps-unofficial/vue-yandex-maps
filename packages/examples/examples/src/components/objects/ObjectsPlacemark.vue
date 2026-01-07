@@ -75,7 +75,7 @@
                                 v-if="'title' in point"
                                 class="pie-marker-title"
                             >
-                                {{ point.title }}
+                                {{ point.title }} #{{ inc }}
                             </div>
                             <div
                                 class="pie-marker"
@@ -183,11 +183,12 @@ const positionY = ref<keyof typeof positionsY>('default');
 
 let timer: NodeJS.Timeout | undefined;
 
+const inc = ref(0);
+
 onMounted(() => {
-    let inc = 0;
     const updateTitle = () => {
-        inc++;
-        markerTitle.value = `Marker inc #${ inc }`;
+        inc.value++;
+        markerTitle.value = `Marker inc #${ inc.value }`;
     };
     updateTitle();
     timer = setInterval(updateTitle, 1000);

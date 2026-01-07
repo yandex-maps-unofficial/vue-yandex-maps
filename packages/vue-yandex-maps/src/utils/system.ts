@@ -1,14 +1,12 @@
-import type {
-    ComputedGetter,
-    ComputedRef,
-    DebuggerOptions,
-    Fragment, MaybeRefOrGetter,
-    Ref,
-    UnwrapRef,
-    VNodeArrayChildren,
-    VNodeProps,
+import {
+
+
+    Fragment,
+
+
 } from 'vue';
-import { computed, h, ref, toRaw, unref, version } from 'vue';
+import type { ComputedGetter, ComputedRef, DebuggerOptions, MaybeRefOrGetter, Ref, UnwrapRef, VNodeArrayChildren, VNodeProps } from 'vue';
+import { computed, h, ref, toRaw, unref } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
 
@@ -123,27 +121,11 @@ export function excludeKeys(item: Record<string, any>, ignoreKeys: string[]) {
 }
 
 export function isVue2() {
-    return version.startsWith('2');
-}
-
-let fragment: typeof Fragment | null | undefined;
-
-export async function setFragment() {
-    if (fragment !== undefined) return;
-
-    if (isVue2()) {
-        fragment = null;
-        return;
-    }
-
-    fragment = (await import('vue')).Fragment;
+    return false;
 }
 
 export function hF(children: VNodeArrayChildren, props?: (VNodeProps & Record<string, any>) | null) {
-    if (isVue2()) {
-        return h('div', props, children);
-    }
-    return h(fragment!, props, children);
+    return h(Fragment, props, children);
 }
 
 /**

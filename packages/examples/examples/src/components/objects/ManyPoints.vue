@@ -122,7 +122,7 @@ import {
 } from 'vue-yandex-maps';
 import { computed, onMounted, ref, shallowRef, version, watch } from 'vue';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
-import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
+import type { YMapClusterer } from '@yandex/ymaps3-clusterer';
 
 const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);

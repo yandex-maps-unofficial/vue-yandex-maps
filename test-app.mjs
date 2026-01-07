@@ -21,23 +21,13 @@ const { positionals: [, , type] } = parseArgs({
 });
 
 const envs = {
-    vue2: {
-        command: ['yarn', 'workspace', 'example-vue2', 'serve'],
-        url: 'http://localhost:8080',
-        htmlValidSelector: 'html',
-    },
-    vue3: {
-        command: ['yarn', 'workspace', 'example-vue3', 'dev'],
+    vue: {
+        command: ['yarn', 'workspace', 'example-vue', 'dev'],
         url: 'http://localhost:5173/#objects/ManyPoints',
         htmlValidSelector: 'html',
     },
-    nuxt2: {
-        command: ['yarn', 'workspace', 'example-nuxt2', 'dev'],
-        url: 'http://localhost:3000',
-        htmlValidSelector: '__nuxt',
-    },
     nuxt3: {
-        command: ['yarn', 'workspace', 'example-nuxt3', 'dev'],
+        command: ['yarn', 'workspace', 'example-nuxt', 'dev'],
         url: 'http://localhost:3000/#objects/ManyPoints',
         htmlValidSelector: '__nuxt',
     },

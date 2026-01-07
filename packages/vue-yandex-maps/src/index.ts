@@ -10,4 +10,4 @@ export type {
     IYandexMapTrafficLayer,
     IYandexMapTrafficEventsLayerProps,
 } from './namespace.ts';
-export type * from './plugins/nuxt3-module.ts';
+export type * from './plugins/nuxt-module.ts';

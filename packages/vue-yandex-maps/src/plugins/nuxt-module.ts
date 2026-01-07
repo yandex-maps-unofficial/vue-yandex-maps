@@ -40,7 +40,7 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
         name: 'vue-yandex-maps',
         configKey: 'yandexMaps',
         compatibility: {
-            bridge: true,
+            nuxt: '>=3.12.0',
         },
     },
     setup(options, nuxt) {
@@ -56,7 +56,10 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
         // @ts-expect-error Types error
         if (!nuxt.options.runtimeConfig.public) nuxt.options.runtimeConfig.public = {};
 
-        nuxt.options.runtimeConfig.public.yandexMaps = options;
+        nuxt.options.runtimeConfig.public.yandexMaps = {
+            ...options,
+            ...(nuxt.options.runtimeConfig.public.yandexMaps ?? {}),
+        };
 
         if (!nuxt.options.build.transpile) nuxt.options.build.transpile = [];
         nuxt.options.build.transpile.push('vue-yandex-maps');
@@ -84,7 +87,7 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
 
         addPlugin({
             src: createResolver(import.meta.url)
-                .resolve('./nuxt3-plugin'),
+                .resolve('./nuxt-plugin'),
         });
     },
 });
