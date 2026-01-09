@@ -1,29 +1,21 @@
 <script lang="ts" setup>
 import type { PropType, Ref } from 'vue';
 import { inject, onMounted } from 'vue';
-import type { Cartesian } from '@yandex/ymaps3-cartesian-projection';
+import type { WebMercator } from '@yandex/ymaps3-web-mercator-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 import { importYmapsCDNModule } from '../../../functions';
 
-defineOptions({ name: 'YandexMapCartesianProjection' });
+defineOptions({ name: 'YandexMapWebMercatorProjection' });
 
-const props = defineProps({
+defineProps({
     modelValue: {
-        type: Object as PropType<Cartesian | null>,
+        type: Object as PropType<WebMercator | null>,
         default: null,
-    },
-    bounds: {
-        type: Array as unknown as PropType<ConstructorParameters<typeof Cartesian>[0]>,
-        required: true,
-    },
-    cycled: {
-        type: Array as unknown as PropType<ConstructorParameters<typeof Cartesian>[1]>,
     },
 });
 
-const emit = defineEmits<{ (e: 'update:modelValue', value: Cartesian): void }>();
+const emit = defineEmits<{ (e: 'update:modelValue', value: WebMercator): void }>();
 
 const hold = inject<Ref<number>>('needsToHold')!;
 hold.value++;
@@ -34,8 +26,8 @@ onMounted(async () => {
 
     const cartesian = await setupMapChildren({
         isMercator: true,
-        createFunction: ({ Cartesian: CartesianClass }) => new CartesianClass(props.bounds, props.cycled),
-        requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-cartesian-projection'),
+        createFunction: ({ WebMercator: WebMercatorClass }) => new WebMercatorClass(),
+        requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-web-mercator-projection'),
     });
 
     projection.value = cartesian;

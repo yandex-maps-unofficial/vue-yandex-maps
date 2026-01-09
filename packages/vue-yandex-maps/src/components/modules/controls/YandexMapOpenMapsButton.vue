@@ -1,60 +1,37 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { toRef } from 'vue';
-import type { PropType, SlotsType } from 'vue';
-import { computed, defineComponent, onMounted } from 'vue';
+import type { PropType } from 'vue';
+import { computed, onMounted } from 'vue';
 import type { YMapOpenMapsButton } from '@yandex/ymaps3-types/modules/controls-extra';
-
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { hVue2 } from '../../../utils/system.ts';
 
-export default defineComponent({
-    name: 'YandexMapOpenMapsButton',
-    props: {
-        value: {
-            type: Object as PropType<YMapOpenMapsButton | null>,
-            default: null,
-        },
-        modelValue: {
-            type: Object as PropType<YMapOpenMapsButton | null>,
-            default: null,
-        },
-        settings: {
-            type: Object as PropType<ConstructorParameters<typeof YMapOpenMapsButton>[0]>,
-            default: () => ({}),
-        },
-        index: Number,
+defineOptions({ name: 'YandexMapOpenMapsButton' });
+
+const props = defineProps({
+    modelValue: {
+        type: Object as PropType<YMapOpenMapsButton | null>,
+        default: null,
     },
-    emits: {
-        'input'(item: YMapOpenMapsButton): boolean {
-            return true;
-        },
-        'update:modelValue'(item: YMapOpenMapsButton): boolean {
-            return true;
-        },
+    settings: {
+        type: Object as PropType<ConstructorParameters<typeof YMapOpenMapsButton>[0]>,
+        default: () => ({}),
     },
-    slots: Object as SlotsType<{
-        default: {};
-    }>,
-    setup(props, {
-        slots,
-        emit,
-    }) {
-        let mapChildren: YMapOpenMapsButton | undefined;
+    index: Number,
+});
 
-        onMounted(async () => {
-            mapChildren = await setupMapChildren({
-                createFunction: ({ YMapOpenMapsButton: OpenMapsButton }) => new OpenMapsButton(props.settings),
-                requiredImport: () => ymaps3.import('@yandex/ymaps3-controls-extra'),
-                settings: computed(() => props.settings),
-                strictMapRoot: true,
-                index: toRef(props, 'index'),
-            });
+const emit = defineEmits<{ (e: 'update:modelValue', value: YMapOpenMapsButton): void }>();
 
-            emit('input', mapChildren);
-            emit('update:modelValue', mapChildren);
-        });
+let mapChildren: YMapOpenMapsButton | undefined;
 
-        return () => hVue2(slots.default?.({}));
-    },
+onMounted(async () => {
+    mapChildren = await setupMapChildren({
+        createFunction: ({ YMapOpenMapsButton: OpenMapsButton }) => new OpenMapsButton(props.settings),
+        requiredImport: () => ymaps3.import('@yandex/ymaps3-controls-extra'),
+        settings: computed(() => props.settings),
+        strictMapRoot: true,
+        index: toRef(props, 'index'),
+    });
+
+    emit('update:modelValue', mapChildren);
 });
 </script>

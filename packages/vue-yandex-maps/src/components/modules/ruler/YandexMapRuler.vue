@@ -7,7 +7,7 @@ import type { YMapRuler } from '@yandex/ymaps3-types/modules/ruler';
 import type { RenderPointCommonArgs, UpdateCommonFn } from '@yandex/ymaps3-types/modules/ruler/YMapRulerCommon';
 import type { RenderPointArgs, YMapRulerProps } from '@yandex/ymaps3-types/modules/ruler/YMapRuler';
 import type { YMapMarker, YMapMarkerProps } from '@yandex/ymaps3-types';
-import { hF, hVue2 } from '../../../utils/system.ts';
+import { hF } from '../../../utils/system.ts';
 import { getMarkerContainerProps } from '../../../utils/marker.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 
@@ -163,6 +163,7 @@ export default defineComponent({
             });
         });
 
+        // This is MANDATORY for this component
         return () => {
             const list = Object.values(entities.value);
 
@@ -215,13 +216,13 @@ export default defineComponent({
                 });
             });
 
-            return hVue2([
+            return [
                 hF(entitiesSlots),
                 h('div', {
                     ...previewProps.value.root,
                     ref: previewPoint,
                 }, [h('div', previewProps.value.children, slots.previewPoint({}))]),
-            ]);
+            ];
         };
     },
 });

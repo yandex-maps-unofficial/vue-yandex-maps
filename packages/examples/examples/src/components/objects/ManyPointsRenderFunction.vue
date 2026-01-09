@@ -108,8 +108,7 @@ import {
 import { computed, onMounted, ref, shallowRef, useCssModule, watch } from 'vue';
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
-import type { Feature as ClustererFeature } from '@yandex/ymaps3-types/packages/clusterer';
-import type { YMapClusterer } from '@yandex/ymaps3-types/packages/clusterer';
+import type { YMapClusterer, Feature as ClustererFeature } from '@yandex/ymaps3-clusterer';
 
 const map = shallowRef<YMap | null>(null);
 const clusterer = shallowRef<YMapClusterer | null>(null);

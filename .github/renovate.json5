@@ -9,22 +9,6 @@
   rebaseWhen: "behind-base-branch",
   "packageRules": [
     {
-      "matchPackageNames": [
-        "vue",
-        "nuxt"
-      ],
-      matchCurrentVersion: "<=2",
-      "allowedVersions": "<=2"
-    },
-    {
-      "matchPackageNames": [
-        "nuxt",
-        "@nuxt/kit"
-      ],
-      matchCurrentVersion: "<=3",
-      "allowedVersions": "<=3"
-    },
-    {
       matchDepTypes: [
         "peerDependencies",
         "engines"
@@ -97,7 +81,7 @@
     }
   ],
   "labels": [
-    "2.x",
+    "3.x",
     "dependencies"
   ],
   "lockFileMaintenance": {
@@ -124,11 +108,10 @@
     "commitMessageTopic": "{{prettyDepType}} {{depName}}"
   },
   "vulnerabilityAlerts": {
-    //TODO: enable in v3
-    enabled: false,
+    enabled: true,
     "commitMessageSuffix": "chore(deps-security)",
   },
   "constraints": {
-    "node": "^20 || ^22"
+    "node": "^22 || ^24"
   }
 }

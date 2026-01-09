@@ -1,95 +1,76 @@
-<script lang="ts">
-import type { PropType, SlotsType } from 'vue';
-import { defineComponent, h, onMounted, shallowRef } from 'vue';
-import type { YMapHint } from '@yandex/ymaps3-types/packages/hint';
+<template>
+    <div
+        ref="element"
+        class="__ymap_hint"
+    >
+        <slot :content="hintContent"/>
+    </div>
+</template>
 
+<script lang="ts" setup>
+import type { PropType } from 'vue';
+import { onMounted, shallowRef } from 'vue';
+import type { YMapHint } from '@yandex/ymaps3-hint';
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { getAttrsForVueVersion, hF } from '../../../utils/system.ts';
+import { importYmapsCDNModule } from '../../../functions';
 
-export default defineComponent({
-    name: 'YandexMapHint',
-    props: {
-        value: {
-            type: Object as PropType<YMapHint | null>,
-            default: null,
-        },
-        modelValue: {
-            type: Object as PropType<YMapHint | null>,
-            default: null,
-        },
-        // Property that you will set on YandexMapMarker or YandexMapFeature to display hint content
-        hintProperty: {
-            type: String,
-            required: true,
-        },
+defineOptions({ name: 'YandexMapHint' });
+
+const props = defineProps({
+    modelValue: {
+        type: Object as PropType<YMapHint | null>,
+        default: null,
     },
-    emits: {
-        'input'(item: YMapHint): boolean {
-            return true;
-        },
-        'update:modelValue'(item: YMapHint): boolean {
-            return true;
-        },
+    // Property that you will set on YandexMapMarker or YandexMapFeature to display hint content
+    hintProperty: {
+        type: String,
+        required: true,
     },
-    slots: Object as SlotsType<{
-        default: {
-            content: string;
-        };
-    }>,
-    setup(props, {
-        slots,
-        emit,
-        attrs,
-    }) {
-        let mapChildren: YMapHint | undefined;
-        const element = shallowRef<null | HTMLDivElement>(null);
-        const hintContent = shallowRef('');
+});
 
-        onMounted(async () => {
-            await setupMapChildren({
-                createFunction: ({
-                    YMapHint: MapHint,
-                    YMapHintContext,
-                }) => {
-                    mapChildren = new MapHint({
-                        hint: object => object?.properties?.[props.hintProperty],
-                    });
+const emit = defineEmits<{ (e: 'update:modelValue', value: YMapHint): void }>();
 
-                    class Hint extends ymaps3.YMapEntity<{}> {
-                        _onAttach() {
-                            const e = this as any;
+defineSlots<{ default: (settings: { content: string }) => any }>();
 
-                            e._element = element.value;
+let mapChildren: YMapHint | undefined;
+const element = shallowRef<null | HTMLDivElement>(null);
+const hintContent = shallowRef('');
 
-                            e._detachDom = ymaps3.useDomContext(e, e._element, null);
-
-                            e._watchContext(YMapHintContext, () => {
-                                hintContent.value = e._consumeContext(YMapHintContext)?.[props.hintProperty];
-                            }, { immediate: true });
-                        }
-
-                        _onDetach() {
-                            // @ts-expect-error Restricted key
-                            this._detachDom();
-                        }
-                    }
-
-                    mapChildren.addChild(new Hint({}));
-                    return mapChildren;
-                },
-                requiredImport: () => ymaps3.import('@yandex/ymaps3-hint@0.0.1'),
+onMounted(async () => {
+    await setupMapChildren({
+        createFunction: ({
+            YMapHint: MapHint,
+            YMapHintContext,
+        }) => {
+            mapChildren = new MapHint({
+                hint: object => object?.properties?.[props.hintProperty],
             });
 
-            emit('input', mapChildren!);
-            emit('update:modelValue', mapChildren!);
-        });
+            class Hint extends ymaps3.YMapEntity<{}> {
+                _onAttach() {
+                    const e = this as any;
 
-        return () => hF([
-            h('div', {
-                ref: element,
-                ...getAttrsForVueVersion(attrs),
-            }, slots.default?.({ content: hintContent.value })),
-        ]);
-    },
+                    e._element = element.value;
+
+                    e._detachDom = ymaps3.useDomContext(e, e._element, null);
+
+                    e._watchContext(YMapHintContext, () => {
+                        hintContent.value = e._consumeContext(YMapHintContext)?.[props.hintProperty];
+                    }, { immediate: true });
+                }
+
+                _onDetach() {
+                    // @ts-expect-error Restricted key
+                    this._detachDom();
+                }
+            }
+
+            mapChildren.addChild(new Hint({}));
+            return mapChildren;
+        },
+        requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-hint'),
+    });
+
+    emit('update:modelValue', mapChildren!);
 });
 </script>

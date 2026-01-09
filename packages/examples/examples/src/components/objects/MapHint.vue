@@ -24,7 +24,7 @@
                 <yandex-map-default-marker
                     v-for="(marker, index) in MARKERS_PROPS"
                     :key="index"
-                    :settings="{ ...marker, color: '#006efc' }"
+                    :settings="{ ...marker, color: { day: '#006efc', night: '#006efc' } }"
                 />
 
                 <yandex-map-feature

@@ -18,17 +18,16 @@
                 <yandex-map-default-scheme-layer/>
                 <yandex-map-default-features-layer/>
                 <yandex-map-default-marker
-                    v-for="marker in markersGeoJsonSource.slice(0,2)"
+                    v-for="(marker, index) in markersGeoJsonSource.slice(2,8)"
                     :key="marker.title"
-                    :settings="marker"
-                />
-                <yandex-map-ui-marker
-                    v-for="marker in markersGeoJsonSource.slice(2,8)"
-                    :key="marker.title"
-                    :settings="{ ...marker, color: { day: marker.color, night: marker.color } }"
-                />
+                    :settings="{ ...marker, onClick: () => popupIndex = index, color: { day: marker.color, night: marker.color }, popup: { show: popupIndex === index } }"
+                >
+                    <template #popup>
+                        Popup!
+                    </template>
+                </yandex-map-default-marker>
                 <yandex-map-popup-marker
-                    v-for="marker in markersGeoJsonSource"
+                    v-for="marker in markersGeoJsonSource.slice(0,2)"
                     :key="marker.title"
                     :settings="{ coordinates: marker.coordinates, position: 'bottom', offset: 20 }"
                 >
@@ -48,16 +47,18 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
-    YandexMapUiMarker,
     YandexMapPopupMarker,
 } from 'vue-yandex-maps';
 import type { LngLat } from '@yandex/ymaps3-types';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
+import { ref } from 'vue';
 
 const LOCATION: YMapLocationRequest = {
     center: [18.54, 39.26], // starting position [lng, lat]
     zoom: 2, // starting zoom
 };
+
+const popupIndex = ref(-1);
 
 // Array containing GeoJSON data for markers
 const markersGeoJsonSource = [

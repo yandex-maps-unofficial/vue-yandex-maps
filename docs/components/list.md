@@ -59,9 +59,6 @@ outline: [2, 3]
 В большинстве случаев компонент является обязательным к наличию на карте.
 ::: 
 
-#### [YandexMapDefaultSatelliteLayer](layer-default-satellite)
-Компонент меняет слой Карты на Спутник.
-
 ### Источники данных
 
 #### [YandexMapFeatureDataSource](feature-data-source)

@@ -9,7 +9,6 @@ import YandexMapFeatureDataSource from './data-sources/YandexMapFeatureDataSourc
 import YandexMapLayer from './layers/YandexMapLayer.vue';
 import YandexMapMarker from './YandexMapMarker.vue';
 import type { YandexMapDefaultMarkerSettings } from './modules/markers/YandexMapDefaultMarker.vue';
-import YandexMapDefaultMarker from './modules/markers/YandexMapDefaultMarker.vue';
 import YandexMapFeature from './YandexMapFeature.vue';
 import YandexMapControls from './controls/YandexMapControls.vue';
 import YandexMapControl from './controls/YandexMapControl.vue';
@@ -19,7 +18,7 @@ import YandexMapGeolocationControl from './modules/controls/YandexMapGeolocation
 import YandexMapZoomControl from './modules/controls/YandexMapZoomControl.vue';
 import YandexMapScaleControl from './controls/YandexMapScaleControl.vue';
 import YandexMapCartesianProjection from './modules/projection/YandexMapCartesianProjection.vue';
-import YandexMapSphericalMercatorProjection from './modules/projection/YandexMapSphericalMercatorProjection.vue';
+import YandexMapWebMercatorProjection from './modules/projection/YandexMapWebMercatorProjection.vue';
 import YandexMapHint from './modules/hints/YandexMapHint.vue';
 import YandexMapOpenMapsButton from './modules/controls/YandexMapOpenMapsButton.vue';
 import type { YandexMapClustererOptions } from './modules/clusterer/YandexMapClusterer.vue';
@@ -41,10 +40,11 @@ import YandexMapContextMenuItem from './modules/ui/YandexMapContextMenuItem.vue'
 import YandexMapDrawerControl from './modules/ui/YandexMapDrawerControl.vue';
 import YandexMapSignpost from './modules/ui/YandexMapSignpost.vue';
 import YandexMapSpinner from './modules/ui/YandexMapSpinner.vue';
-import YandexMapUiMarker from './modules/markers/YandexMapUiMarker.vue';
+import YandexMapDefaultMarker from './modules/markers/YandexMapDefaultMarker.vue';
 import YandexMapSearchControl from './modules/controls/YandexMapSearchControl.vue';
 import YandexMapRouteControl from './modules/controls/YandexMapRouteControl.vue';
 import YandexMapPopupMarker from './modules/markers/YandexMapPopupMarker.vue';
+import type { YandexMapPopupMarkerSettings } from './modules/markers/YandexMapPopupMarker.vue';
 import YandexMapOverlay from './modules/overlay/YandexMapOverlay.vue';
 import YandexMapImageOverlay from './modules/overlay/YandexMapImageOverlay.vue';
 import YandexMapVideoOverlay from './modules/overlay/YandexMapVideoOverlay.vue';
@@ -86,7 +86,7 @@ export {
     YandexMapMiniMap,
     YandexMapContextMenu,
     YandexMapContextMenuItem,
-    YandexMapUiMarker,
+    YandexMapDefaultMarker,
     YandexMapPopupMarker,
 
     // Controls Module
@@ -96,13 +96,10 @@ export {
 
     // Projections Modules
     YandexMapCartesianProjection,
-    YandexMapSphericalMercatorProjection,
+    YandexMapWebMercatorProjection,
 
     // Clusterer Module
     YandexMapClusterer,
-
-    // Markers Module
-    YandexMapDefaultMarker,
 
     // Hint Module
     YandexMapHint,
@@ -130,4 +127,5 @@ export type {
     YandexMapListenerSettings,
     YandexMapRulerSettings,
     YandexMapOverlayCustomProps,
+    YandexMapPopupMarkerSettings,
 };

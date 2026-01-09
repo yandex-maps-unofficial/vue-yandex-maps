@@ -1,11 +1,7 @@
 import {
-
-
     Fragment,
-
-
 } from 'vue';
-import type { ComputedGetter, ComputedRef, DebuggerOptions, MaybeRefOrGetter, Ref, UnwrapRef, VNodeArrayChildren, VNodeProps } from 'vue';
+import type { ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef, VNodeArrayChildren, VNodeProps } from 'vue';
 import { computed, h, ref, toRaw, unref } from 'vue';
 import { VueYandexMaps } from '../namespace.ts';
 import YandexMapException = VueYandexMaps.YandexMapException;
@@ -120,34 +116,6 @@ export function excludeKeys(item: Record<string, any>, ignoreKeys: string[]) {
     }
 }
 
-export function isVue2() {
-    return false;
-}
-
 export function hF(children: VNodeArrayChildren, props?: (VNodeProps & Record<string, any>) | null) {
     return h(Fragment, props, children);
-}
-
-/**
- * @description You can't render multiple root nodes in vue2
- */
-export function hVue2(children: VNodeArrayChildren) {
-    if (isVue2() && children?.length > 1) {
-        return h('div', children);
-    }
-
-    return children;
-}
-
-export function getAttrsForVueVersion(attrs: Record<string, unknown>) {
-    if (isVue2()) {
-        return { attrs };
-    }
-    return attrs;
-}
-
-export function toValue<T>(r: MaybeRefOrGetter<T>): T {
-    return typeof r === 'function'
-        ? (r as Function)()
-        : unref(r);
 }

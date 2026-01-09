@@ -1,107 +1,82 @@
-<script lang="ts">
-import type { PropType, SlotsType } from 'vue';
-import { computed, defineComponent, h, onMounted, ref, watch } from 'vue';
-import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
-import { hF, throwException } from '../../../utils/system.ts';
+<template>
+    <div
+        v-if="!!slots.popup"
+        ref="popup"
+        class="__ymap_default-marker-popup"
+    >
+        <slot name="popup"/>
+    </div>
+</template>
+
+<script lang="ts" setup>
+import { useSlots } from 'vue';
+import type { PropType } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import type { YMapDefaultMarker, YMapDefaultMarkerProps } from '@yandex/ymaps3-default-ui-theme';
+import { throwException } from '../../../utils/system.ts';
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import type { DefaultMarkerCustomProps } from '@yandex/ymaps3-types/packages/markers/YMapDefaultMarker';
+import { importYmapsCDNModule } from '../../../functions';
+
+defineOptions({ name: 'YandexMapDefaultMarker' });
+
+const props = defineProps({
+    modelValue: {
+        type: Object as PropType<YMapDefaultMarker | null>,
+        default: null,
+    },
+    settings: {
+        type: Object as PropType<YandexMapDefaultMarkerSettings>,
+        required: true,
+    },
+});
+
+const emit = defineEmits<{ (e: 'update:modelValue', value: YMapDefaultMarker): void }>();
+defineSlots<{ popup: () => unknown }>();
+const slots = useSlots();
 
 type Settings = ConstructorParameters<typeof YMapDefaultMarker>[0];
 export type YandexMapDefaultMarkerSettings = Omit<Settings, 'popup'> & {
-    popup?: Omit<NonNullable<DefaultMarkerCustomProps['popup']>, 'content'> & {
-        content?: NonNullable<DefaultMarkerCustomProps['popup']>['content'];
+    popup?: Omit<NonNullable<YMapDefaultMarkerProps['popup']>, 'content'> & {
+        content?: NonNullable<YMapDefaultMarkerProps['popup']>['content'];
     };
 };
 
-export default defineComponent({
-    name: 'YandexMapDefaultMarker',
-    inheritAttrs: false,
-    props: {
-        value: {
-            type: Object as PropType<YMapDefaultMarker | null>,
-            default: null,
-        },
-        modelValue: {
-            type: Object as PropType<YMapDefaultMarker | null>,
-            default: null,
-        },
-        settings: {
-            type: Object as PropType<YandexMapDefaultMarkerSettings>,
-            required: true,
-        },
-    },
-    emits: {
-        'input'(item: YMapDefaultMarker): boolean {
-            return true;
-        },
-        'update:modelValue'(item: YMapDefaultMarker): boolean {
-            return true;
-        },
-    },
-    slots: Object as SlotsType<{
-        popup: {
-            close: () => void;
+let mapChildren: YMapDefaultMarker | undefined;
+const popup = ref<HTMLDivElement | null>(null);
+
+const contentFunc = () => {
+    return popup.value!;
+};
+
+const getSettings = computed<YandexMapDefaultMarkerSettings>(() => {
+    const settings = { ...props.settings };
+
+    if (settings.popup && (typeof settings.popup.content === 'undefined' || settings.popup.content === 'fromSlot') && popup.value) {
+        settings.popup = {
+            ...settings.popup,
+            content: contentFunc,
         };
-    }>,
-    setup(props, {
-        slots,
-        emit,
-        attrs,
-    }) {
-        let mapChildren: YMapDefaultMarker | undefined;
-        const popup = ref<HTMLDivElement | null>(null);
-        const closeFunc = ref<() => void>(() => {
+    }
+
+    return settings;
+});
+
+onMounted(async () => {
+    if (!props.settings.coordinates) {
+        throwException({
+            text: 'You must specify coordinates in YandexMapDefaultMarker settings',
         });
+    }
 
-        const contentFunc = (close: () => void) => {
-            closeFunc.value = close;
-            return popup.value!;
-        };
+    mapChildren = await setupMapChildren({
+        createFunction: ({ YMapDefaultMarker: Marker }) => new Marker(getSettings.value as Settings),
+        requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-default-ui-theme'),
+        settings: getSettings,
+    });
+    emit('update:modelValue', mapChildren);
+});
 
-        const getSettings = computed<YandexMapDefaultMarkerSettings>(() => {
-            const settings = { ...props.settings };
-
-            if (settings.popup && (typeof settings.popup.content === 'undefined' || settings.popup.content === 'fromSlot') && popup.value) {
-                settings.popup = {
-                    ...settings.popup,
-                    content: contentFunc,
-                };
-            }
-
-            return settings;
-        });
-
-        onMounted(async () => {
-            if (!props.settings.coordinates) {
-                throwException({
-                    text: 'You must specify coordinates in YandexMapDefaultMarker settings',
-                });
-            }
-
-            mapChildren = await setupMapChildren({
-                createFunction: ({ YMapDefaultMarker: Marker }) => new Marker(getSettings.value as Settings),
-                requiredImport: () => ymaps3.import('@yandex/ymaps3-markers@0.0.1'),
-                settings: getSettings,
-            });
-            emit('input', mapChildren);
-            emit('update:modelValue', mapChildren);
-        });
-
-        watch(popup, () => {
-            if (popup.value) popup.value.parentNode?.removeChild(popup.value);
-        });
-
-        return () => {
-            if (slots.popup) {
-                return hF([
-                    h('div', {
-                        ref: popup,
-                    }, slots.popup?.({ close: closeFunc.value })),
-                ]);
-            }
-
-            return undefined;
-        };
-    },
+watch(popup, () => {
+    if (popup.value) popup.value.parentNode?.removeChild(popup.value);
 });
 </script>

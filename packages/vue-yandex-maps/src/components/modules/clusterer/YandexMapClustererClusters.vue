@@ -26,7 +26,7 @@ import { inject } from 'vue';
 import type { IYMapClusterFeature, YandexMapClustererZoomOptionsObject } from './YandexMapClusterer.vue';
 import type { LngLatBounds, YMapMarker } from '@yandex/ymaps3-types';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
-import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
+import type { ClustererObject } from '@yandex/ymaps3-clusterer';
 import YandexMapClustererCluster from './YandexMapClustererCluster.vue';
 
 defineOptions({ name: 'YandexMapClustererClusters' });

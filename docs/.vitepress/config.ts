@@ -312,7 +312,7 @@ export default defineConfig({
                                 link: '/components/modules/default-marker',
                             },
                             {
-                                text: 'YandexMapUiMarker',
+                                text: 'YandexMapDefaultMarker',
                                 link: '/components/modules/ui-marker',
                             },
                             {
@@ -342,7 +342,7 @@ export default defineConfig({
                                         link: '/components/modules/projection/cartesian',
                                     },
                                     {
-                                        text: 'YandexMapSphericalMercatorProjection',
+                                        text: 'YandexMapWebMercatorProjection',
                                         link: '/components/modules/projection/mercator',
                                     },
                         ],
