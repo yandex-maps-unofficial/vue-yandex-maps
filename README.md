@@ -12,4 +12,5 @@
 
 Это - обертка над Яндекс Картами 3.0 под Vue и Nuxt с поддержкой TypeScript.
 
-[Документация](https://yandex-maps-unofficial.github.io/vue-yandex-maps/)
+[Документация 2.x stable](https://yandex-maps-unofficial.github.io/vue-yandex-maps/)
+[Документация 3.x rc](https://yandex-maps-v3.dk4000.pro/)
