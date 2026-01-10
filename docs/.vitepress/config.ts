@@ -5,7 +5,7 @@ export default defineConfig({
     base: '/',
     lang: 'ru-RU',
     title: 'Vue Yandex Maps v3.x',
-    description: 'Откройте для себя Яндекс карты для Vue',
+    description: 'Обертка Яндекс Карт 3.0 для Vue',
     lastUpdated: false,
     locales: {
         root: {
