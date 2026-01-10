@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Map from '../components/Map.vue'
+---
+
+<Layout>
+    <Map
+            client:only="vue"
+    />
+    <a href="/">Index</a>
+</Layout>

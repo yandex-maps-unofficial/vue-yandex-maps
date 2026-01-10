@@ -57,68 +57,65 @@
                     </yandex-map-control-button>
                 </yandex-map-controls>
 
-                <template
-                    v-for="(point, index) in POINTS"
+                <yandex-map-marker
+                    v-for="(point, index) in elements"
                     :key="index"
+                    :position="`${ positionX } ${ positionY }` as any"
+                    :settings="point"
+                    :style="{
+                        '--color': 'color' in point && point.color,
+                        '--image': 'colors' in point && diagramBackground(point.colors),
+                    }"
                 >
-                    <yandex-map-marker
-                        v-if="'element' in point"
-                        :position="`${ positionX } ${ positionY }` as any"
-                        :settings="point"
+                    <template v-if="point.element === 'diagram'">
+                        <div
+                            v-if="'title' in point"
+                            class="pie-marker-title"
+                        >
+                            {{ point.title }} #{{ inc }}
+                        </div>
+                        <div
+                            class="pie-marker"
+                        />
+                    </template>
+                    <div
+                        v-else-if="point.element === 'circle'"
+                        class="circle"
                         :style="{
-                            '--color': 'color' in point && point.color,
-                            '--image': 'colors' in point && diagramBackground(point.colors),
+                            '--radius': 'radius' in point ? point.radius : '20px',
+                            '--color': 'color' in point ? point.color : undefined,
+                            '--icon': 'icon' in point ? point.icon : '#fff',
+                            '--image': 'icon' in point ? point.icon : undefined,
+                        }"
+                        :title="'title' in point && point.title"
+                    >
+                        <div class="circle_element"/>
+                    </div>
+                    <div
+                        v-else-if="point.element === 'icon'"
+                        class="icon"
+                        :style="{
+                            '--size': 'size' in point ? point.size : '20px',
+                            '--color': 'color' in point ? point.color : undefined,
+                            '--icon': 'icon' in point ? `url(${ point.icon })` : undefined,
                         }"
                     >
-                        <template v-if="point.element === 'diagram'">
-                            <div
-                                v-if="'title' in point"
-                                class="pie-marker-title"
-                            >
-                                {{ point.title }}
-                            </div>
-                            <div
-                                class="pie-marker"
-                            />
-                        </template>
                         <div
-                            v-else-if="point.element === 'circle'"
-                            class="circle"
-                            :style="{
-                                '--radius': 'radius' in point ? point.radius : '20px',
-                                '--color': 'color' in point ? point.color : undefined,
-                                '--icon': 'icon' in point ? point.icon : '#fff',
-                                '--image': 'icon' in point ? point.icon : undefined,
-                            }"
-                            :title="'title' in point && point.title"
-                        >
-                            <div class="circle_element"/>
-                        </div>
-                        <div
-                            v-else-if="point.element === 'icon'"
-                            class="icon"
-                            :style="{
-                                '--size': 'size' in point ? point.size : '20px',
-                                '--color': 'color' in point ? point.color : undefined,
-                                '--icon': 'icon' in point ? `url(${ point.icon })` : undefined,
-                            }"
-                        >
-                            <div
-                                v-if="'title' in point"
-                                class="icon_title"
-                                v-html="point.title"
-                            />
-                        </div>
-                    </yandex-map-marker>
-                    <yandex-map-default-marker
-                        v-else
-                        :settings="point"
-                    />
-                    <yandex-map-ui-marker :settings="{ coordinates: center, title: 'UI-маркер!' }"/>
-                    <yandex-map-popup-marker :settings="{ coordinates: center }">
-                        Нативный попап!
-                    </yandex-map-popup-marker>
-                </template>
+                            v-if="'title' in point"
+                            class="icon_title"
+                            v-html="point.title"
+                        />
+                    </div>
+                </yandex-map-marker>
+
+                <yandex-map-default-marker
+                    v-for="(point, index) in POINTS"
+                    :key="index"
+                    :settings="point"
+                />
+                <yandex-map-popup-marker :settings="{ coordinates: center }">
+                    Нативный попап!
+                </yandex-map-popup-marker>
                 <yandex-map-default-marker :settings="{ coordinates: INC_POINT.coordinates, title: markerTitle }"/>
             </yandex-map>
             <!-- #endregion html -->
@@ -138,12 +135,12 @@ import {
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
     YandexMapMarker,
-    YandexMapUiMarker,
     YandexMapPopupMarker,
     YandexMapZoomControl,
 } from 'vue-yandex-maps';
 import { onMounted, onUnmounted, ref } from 'vue';
 import type { LngLat } from '@yandex/ymaps3-types';
+import type { YandexMapDefaultMarkerSettings } from 'vue-yandex-maps';
 
 type PartialRecord<K extends keyof any, T> = {
     [P in K]?: T;
@@ -183,11 +180,12 @@ const positionY = ref<keyof typeof positionsY>('default');
 
 let timer: NodeJS.Timeout | undefined;
 
+const inc = ref(0);
+
 onMounted(() => {
-    let inc = 0;
     const updateTitle = () => {
-        inc++;
-        markerTitle.value = `Marker inc #${ inc }`;
+        inc.value++;
+        markerTitle.value = `Marker inc #${ inc.value }`;
     };
     updateTitle();
     timer = setInterval(updateTitle, 1000);
@@ -210,8 +208,7 @@ const diagramBackground = (colors: { percentage: number; color: string }[]): str
     return `conic-gradient(${ gradient.join(', ') })`;
 };
 
-const POINTS: any[] = [
-    { coordinates: [37.8, 55.8] },
+const elements: any[] = [
     {
         coordinates: [37.6, 55.847],
         title: 'Diagram',
@@ -238,30 +235,11 @@ const POINTS: any[] = [
         element: 'diagram',
     },
     {
-        coordinates: [37.738521, 55.684758],
-        color: '#0095b6',
-        title: 'color <strong>bondi beach water<strong>',
-        draggable: true,
-    },
-    {
-        coordinates: [37.715175, 55.833436],
-        color: '#735184',
-        title: '<strong>Silver crimson<strong> color',
-        draggable: true,
-    },
-    {
         coordinates: [37.529789, 55.687086],
         color: '#3caa3c',
         title: 'love toad color',
         draggable: true,
         element: 'circle',
-    },
-    {
-        coordinates: [37.95, 55.782392],
-        color: 'yellow',
-        title: 'color <strong>sun<strong>',
-        draggable: true,
-        onClick: () => alert('click'),
     },
     {
         coordinates: [37.656123, 55.642063],
@@ -273,27 +251,6 @@ const POINTS: any[] = [
         onDoubleClick: () => alert('Double click'),
     },
     {
-        coordinates: [37.487208, 55.826479],
-        title: 'the color of <strong>Pacific Ocean<strong>',
-        color: '#3b5998',
-        draggable: true,
-        mapFollowsOnDrag: true,
-    },
-    {
-        coordinates: [37.435023, 55.694843],
-        color: '#477510',
-        title: 'nose color Donatello',
-        subtitle: 'Very long but incredibly interesting text',
-        draggable: true,
-    },
-    {
-        coordinates: [37.535023, 55.6],
-        color: '#343d44',
-        title: 'Hello!',
-        subtitle: 'Very long but <br>incredibly interesting text',
-        draggable: true,
-    },
-    {
         coordinates: [37.814052, 55.790139],
         title: 'blue color',
         icon: 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiI+PHBhdGggZmlsbD0iIzgwODI4NSIgZD0iTTEyLjc0IDUuNzlWMy40N2wtNS44IDEuMTZINS4yMnYxMy45aDEuNzR2LTYuOTVsMy40Ny0uNTh2Mi4zMmw3LjUzLS41OHYtNy42bC01LjIxLjY1eiIvPjwvc3ZnPg==)',
@@ -303,6 +260,69 @@ const POINTS: any[] = [
         element: 'circle',
         onFastClick: () => alert('Fast click'),
     },
+];
+
+const POINTS: YandexMapDefaultMarkerSettings[] = [
+    { coordinates: [37.8, 55.8] },
+
+    {
+        coordinates: [37.738521, 55.684758],
+        color: {
+            day: '#0095b6',
+            night: '#0095b6',
+        },
+        title: 'color <strong>bondi beach water<strong>',
+        draggable: true,
+    },
+    {
+        coordinates: [37.715175, 55.833436],
+        color: {
+            day: '#735184',
+            night: '#735184',
+        },
+        title: '<strong>Silver crimson<strong> color',
+        draggable: true,
+    },
+
+    {
+        coordinates: [37.95, 55.782392],
+        color: 'lavender',
+        title: 'color <strong>sun<strong>',
+        draggable: true,
+        onClick: () => alert('click'),
+    },
+
+    {
+        coordinates: [37.487208, 55.826479],
+        title: 'the color of <strong>Pacific Ocean<strong>',
+        color: {
+            day: '#3b5998',
+            night: '#3b5998',
+        },
+        draggable: true,
+        mapFollowsOnDrag: true,
+    },
+    {
+        coordinates: [37.435023, 55.694843],
+        color: {
+            day: '#477510',
+            night: '#477510',
+        },
+        title: 'nose color Donatello',
+        subtitle: 'Very long but incredibly interesting text',
+        draggable: true,
+    },
+    {
+        coordinates: [37.535023, 55.6],
+        color: {
+            day: '#343d44',
+            night: '#343d44',
+        },
+        title: 'Hello!',
+        subtitle: 'Very long but <br>incredibly interesting text',
+        draggable: true,
+    },
+
 ];
 
 // #endregion setup

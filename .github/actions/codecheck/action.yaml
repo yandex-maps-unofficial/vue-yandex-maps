@@ -19,21 +19,12 @@ runs:
     - name: Test examples types
       shell: bash
       run: yarn workspace examples type-check
-    - name: Build Nuxt 2
+    - name: Build Nuxt
       shell: bash
-      run: yarn workspace example-nuxt2 build
-    - name: Generate Nuxt 2
+      run: yarn workspace example-nuxt build
+    - name: Generate Nuxt
       shell: bash
-      run: yarn workspace example-nuxt2 generate
-    - name: Build Nuxt 3
+      run: yarn workspace example-nuxt generate
+    - name: Generate Vue
       shell: bash
-      run: yarn workspace example-nuxt3 build
-    - name: Generate Nuxt 3
-      shell: bash
-      run: yarn workspace example-nuxt3 generate
-    - name: Build Vue 2
-      shell: bash
-      run: yarn workspace example-vue2 build
-    - name: Generate Vue 3
-      shell: bash
-      run: yarn workspace example-vue3 build
+      run: yarn workspace example-vue build

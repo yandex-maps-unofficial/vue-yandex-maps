@@ -5,10 +5,6 @@ previewPointProps
 Компонент принимает в `settings` [YMapRulerProps](https://yandex.ru/maps-api/docs/js-api/object/controls/measurement-elements/YMapRuler.html#ruler-api) и позволяет
 измерять расстояния на карте почти как рулеткой.
 
-::: info Внимание!
-В Vue 2 компонент завезти не удалось =(
-:::
-
 ## Слоты
 
 ::: warning Внимание!

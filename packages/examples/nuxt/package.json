@@ -1,0 +1,21 @@
+{
+  "name": "example-nuxt",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^3.1.1",
+    "@types/node": "^25.0.5",
+    "nuxt": "^4.2.2",
+    "vue-tsc": "3.2.2"
+  },
+  "dependencies": {
+    "examples": "workspace:*",
+    "vue-yandex-maps": "workspace:*"
+  }
+}

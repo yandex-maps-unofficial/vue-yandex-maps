@@ -1,18 +1,12 @@
 # YandexMapDefaultMarker
 
-Компонент подгружает модуль `@yandex/ymaps3-markers@0.0.1`, принимает
-в `settings` [YMapDefaultMarkerProps](https://yandex.ru/maps-api/docs/js-api/object/markers/YMapDefaultMarker.html#props) и является
-маркером с предустановленными настройками стилей.
-
-::: info Важно
-Параметр в `settings` `coordinates` является обязательным к указанию.
-:::
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-default-ui-theme`, принимает
+в `settings` [YMapDefaultMarkerProps](https://yandex.ru/maps-api/docs/js-api/object/markers/YMapDefaultMarker.html#props) и
+и является маркером с предустановленными стилями.
 
 ## Слоты
 
-Принимает слот `popup` с входным параметром `close` для закрытия всплывающего окна.
-
-![img.png](./default-marker.png)
+Принимает слот `popup` - открывается и закрывается через settings.open
 
 ## Примеры использования
 

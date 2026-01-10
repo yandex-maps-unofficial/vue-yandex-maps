@@ -18,7 +18,7 @@
                 }"
                 :width="width"
             >
-                <yandex-map-spherical-mercator-projection/>
+                <yandex-map-web-mercator-projection/>
                 <yandex-map-tile-data-source :settings="dataSourceProps"/>
                 <yandex-map-layer :settings="layerProps"/>
             </yandex-map>
@@ -33,7 +33,7 @@ import CommonWrapper from '../CommonWrapper.vue';
 import {
     YandexMap,
     YandexMapLayer,
-    YandexMapSphericalMercatorProjection,
+    YandexMapWebMercatorProjection,
     YandexMapTileDataSource,
 } from 'vue-yandex-maps';
 import type { YMapLayerProps, YMapTileDataSourceProps } from '@yandex/ymaps3-types';

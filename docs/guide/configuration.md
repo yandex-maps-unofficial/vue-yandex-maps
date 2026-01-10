@@ -5,7 +5,7 @@ prev: false
 # Конфигурация
 
 Конфигурация пакета производится при его подключении, например, в `main.ts/app.ts` и пр. файлах для Vue в
-аргументах `createYmaps`/`createYmapsVue2`, или `nuxt.config.ts` по ключу `yandexMaps` для Nuxt.
+аргументах `createYmaps`, или `nuxt.config.ts` по ключу `yandexMaps` для Nuxt.
 
 ## Доступные настройки
 
@@ -70,7 +70,7 @@ Referer". [Подробнее об ограничениях](https://yandex.ru/m
 
 Позволяет вам задать, когда инициализировать скрипт Яндекса. Доступные опции:
 
-- `onPluginInit`: загрузит скрипт, как только Карты будут инициализированы (`createYmaps`/`createYmapsVue2` в Vue/Astro, или же автоматически в Nuxt)
+- `onPluginInit`: загрузит скрипт, как только Карты будут инициализированы (`createYmaps` в Vue/Astro, или же автоматически в Nuxt)
 - `onComponentMount` (значение по умолчанию): загрузит скрипт при загрузке первого компонента. Режим представляет собой
   автоматический lazy-load скрипта и является значением по умолчанию
 - `never`: загрузит скрипт только когда вы вызовете `initYmaps`. Учтите: в таком варианте, если вы не вызовете
@@ -141,12 +141,12 @@ app.use(createYmaps({
 Вы можете получить доступ к конфигурации следующим способом:
 
 ```typescript
-import { VueYandexMaps } from 'vue-yandex-maps';
+import { yandexMapSettings } from 'vue-yandex-maps';
 
-console.log(VueYandexMaps.settings.value) //ref
+console.log(yandexMapSettings.value) //ref
 ```
 
-Там же в `VueYandexMaps` есть доступ к информации о загрузке скрипта (`loadStatus`, `loadError`, `isLoaded`).
+Также есть доступ к информации о загрузке скрипта (`yandexMapLoadStatus`, `yandexMapLoadError`, `yandexMapIsLoaded`).
 
-При желании, `VueYandexMaps.settings` можно даже изменять, но это не проверялось - меняйте  `VueYandexMaps.settings.value` на
+При желании, `yandexMapSettings` можно даже изменять, но это не проверялось - меняйте  `yandexMapSettings.value` на
 свой страх и риск и только если уверены в том, что по другому никак.

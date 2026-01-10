@@ -27,7 +27,7 @@
                         //Здесь вам НУЖНО брать координаты либо из функции onDragMove, либо из маркера, стриггерив реактивность
                         //Яндекс при выполнении функции .update зачем-то подставляет оригинальные координаты, хотя они не менялись =(
                         coordinates: defaultMarker ? defaultMarker.coordinates : center,
-                        title: `Долгота: ${ defaultMarker?.coordinates[0].toFixed(2) }<br>Широта: ${ defaultMarker?.coordinates[1].toFixed(2) }`,
+                        title: `${ defaultMarker?.coordinates[0].toFixed(2) } ${ defaultMarker?.coordinates[1].toFixed(2) }`,
                         draggable: true,
                         onDragMove,
                     }"
@@ -48,7 +48,7 @@ import {
     YandexMapDefaultSchemeLayer,
 } from 'vue-yandex-maps';
 import { shallowRef, triggerRef } from 'vue';
-import type { YMapDefaultMarker } from '@yandex/ymaps3-types/packages/markers';
+import type { YMapDefaultMarker } from '@yandex/ymaps3-default-ui-theme';
 
 const defaultMarker = shallowRef<YMapDefaultMarker | null>(null);
 

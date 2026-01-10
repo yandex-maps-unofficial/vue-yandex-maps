@@ -2,11 +2,11 @@
 
 ## Инициализация карты
 
-### [namespace/инстанс VueYandexMaps](/api/namespace)
+### [Настройки карты](/api/namespace)
 
-Namespace с настройками Vue Yandex Maps.
+Различные настройки, методы и типы для помощи в инициализации карты.
 
-### createYmaps/createYmapsVue2
+### createYmaps
 
 Принимают на вход настройки и инициализируют `vue-yandex-maps`.
 

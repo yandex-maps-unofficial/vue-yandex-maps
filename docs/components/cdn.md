@@ -51,3 +51,5 @@ console.log(uiTheme.YMapDefaultMarker);
 - `@yandex/ymaps3-world-utils@latest`
 - `@yandex/ymaps3-web-mercator-projection@latest`
 - `@yandex/ymaps3-cartesian-projection@latest`
+- `@yandex/ymaps3-hint@latest`
+- `@yandex/ymaps3-clusterer@latest`

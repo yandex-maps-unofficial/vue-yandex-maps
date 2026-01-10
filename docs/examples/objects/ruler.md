@@ -1,9 +1,5 @@
 # Измерения линейкой
 
-::: info Внимание!
-В Vue 2 компонент завезти не удалось =(
-:::
-
 <script lang="ts" setup>
 import MapComponent from 'examples/src/components/objects/ObjectsRuler.vue';
 </script>

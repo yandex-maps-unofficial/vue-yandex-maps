@@ -1,6 +1,6 @@
 {
   "name": "vue-yandex-maps",
-  "version": "2.3.0",
+  "version": "3.0.0-rc.1",
   "description": "Yandex Maps 3.0 components library for VueJS.",
   "main": "./dist/vue-yandex-maps.js",
   "types": "./dist/index.d.ts",
@@ -10,12 +10,8 @@
       "default": "./dist/vue-yandex-maps.js"
     },
     "./nuxt": {
-      "types": "./dist/plugins/nuxt3-module.d.ts",
-      "default": "./dist/plugins/nuxt3-module.js"
-    },
-    "./nuxt2": {
-      "types": "./dist/plugins/nuxt2-module.d.ts",
-      "default": "./dist/plugins/nuxt2-module.js"
+      "types": "./dist/plugins/nuxt-module.d.ts",
+      "default": "./dist/plugins/nuxt-module.js"
     },
     "./css": "./dist/vue-yandex-maps.css",
     "./package.json": "./package.json"
@@ -23,10 +19,7 @@
   "typesVersions": {
     "*": {
       "nuxt": [
-        "./dist/plugins/nuxt3-module.d.ts"
-      ],
-      "nuxt2": [
-        "./dist/plugins/nuxt2-module.d.ts"
+        "./dist/plugins/nuxt-module.d.ts"
       ]
     }
   },
@@ -42,7 +35,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "type": "module",
   "homepage": "https://yandex-maps-unofficial.github.io/vue-yandex-maps/",
@@ -76,9 +69,11 @@
   "license": "MIT",
   "dependencies": {
     "@yandex/ymaps3-cartesian-projection": ">=0.0.6",
+    "@yandex/ymaps3-clusterer": ">=0.0.12",
     "@yandex/ymaps3-context-menu": ">=0.0.2",
     "@yandex/ymaps3-default-ui-theme": ">=0.0.24",
     "@yandex/ymaps3-drawer-control": ">=0.0.2",
+    "@yandex/ymaps3-hint": ">=0.1.2",
     "@yandex/ymaps3-minimap": ">=0.0.4",
     "@yandex/ymaps3-resizer": ">=0.0.2",
     "@yandex/ymaps3-signpost": ">=0.0.2",
@@ -88,26 +83,27 @@
     "@yandex/ymaps3-world-utils": ">=0.0.18413413"
   },
   "devDependencies": {
-    "@nuxt/kit": "^3.20.2",
-    "@nuxt/types": "^2.18.1",
+    "@nuxt/kit": "^4.2.2",
     "@vitejs/plugin-vue": "^6.0.3",
     "deep-object-diff": "^1.1.9",
-    "nuxt": "^3.20.2",
+    "nuxt": "^4.2.2",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-delete": "^3.0.2",
-    "typescript": "5.9.3",
+    "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-lib-inject-css": "^2.2.2",
     "vue": "^3.5.26",
-    "vue-tsc": "3.2.2"
+    "vue-tsc": "^3.2.2"
   },
   "peerDependencies": {
     "@vue/composition-api": ">=1",
     "@yandex/ymaps3-cartesian-projection": ">=0.0.6",
+    "@yandex/ymaps3-clusterer": ">=0.0.12",
     "@yandex/ymaps3-context-menu": ">=0.0.2",
     "@yandex/ymaps3-default-ui-theme": ">=0.0.24",
     "@yandex/ymaps3-drawer-control": ">=0.0.2",
+    "@yandex/ymaps3-hint": ">=0.1.2",
     "@yandex/ymaps3-minimap": ">=0.0.4",
     "@yandex/ymaps3-resizer": ">=0.0.2",
     "@yandex/ymaps3-signpost": ">=0.0.2",
@@ -115,19 +111,13 @@
     "@yandex/ymaps3-types": ">=1.0.18413413",
     "@yandex/ymaps3-web-mercator-projection": ">=0.0.5",
     "@yandex/ymaps3-world-utils": ">=0.0.18413413",
-    "nuxt": ">=2.16 || >=3",
-    "vue": ">=2.7 || >=3.3"
+    "nuxt": ">=3.12",
+    "vue": ">=3.3"
   },
   "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    },
     "nuxt": {
       "optional": true
     }
-  },
-  "installConfig": {
-    "hoistingLimits": "workspaces"
   },
   "web-types": "web-types.json"
 }

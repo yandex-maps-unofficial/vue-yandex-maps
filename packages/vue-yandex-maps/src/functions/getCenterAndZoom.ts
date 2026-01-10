@@ -222,8 +222,3 @@ export async function getLocationFromBounds({
         center,
     };
 }
-
-/**
- * @deprecated Use getLocationFromBounds instead
- */
-export const useYMapsLocationFromBounds = getLocationFromBounds;

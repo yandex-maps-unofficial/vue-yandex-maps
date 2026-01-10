@@ -22,9 +22,8 @@ export default defineConfig({
             external: ['vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit'],
             input: {
                 'vue-yandex-maps': resolve(__dirname, 'src/index.ts'),
-                'plugins/nuxt2-module': resolve(__dirname, 'src/plugins/nuxt2-module'),
-                'plugins/nuxt3-module': resolve(__dirname, 'src/plugins/nuxt3-module'),
-                'plugins/nuxt3-plugin': resolve(__dirname, 'src/plugins/nuxt3-plugin'),
+                'plugins/nuxt-module': resolve(__dirname, 'src/plugins/nuxt-module'),
+                'plugins/nuxt-plugin': resolve(__dirname, 'src/plugins/nuxt-plugin'),
             },
             output: {
                 format: 'es',
@@ -47,10 +46,6 @@ export default defineConfig({
                 {
                     src: ['../../README.md', '../../LICENSE'],
                     dest: './',
-                },
-                {
-                    src: ['./src/plugins/nuxt2-plugin.js'],
-                    dest: './dist/plugins',
                 },
             ],
             hook: 'writeBundle',

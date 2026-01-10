@@ -242,7 +242,7 @@ const baseRules = {
     'vue/define-emits-declaration': 'off',
     'vue/define-macros-order': [
         'error', {
-            order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
+            order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots', 'defineModel'],
             defineExposeLast: true,
         },
     ],

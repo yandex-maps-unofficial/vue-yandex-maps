@@ -39,12 +39,12 @@ await ymaps3.ready;
 Альтернативно, можно использовать:
 
 ```javascript
-import { VueYandexMaps } from 'vue-yandex-maps';
+import { yandexMapIsLoaded } from 'vue-yandex-maps';
 
-//VueYandexMaps.isLoaded - реактивный ref
-watch(VueYandexMaps.isLoaded, () => {
+//yandexMapIsLoaded - реактивный ref
+watch(yandexMapIsLoaded, () => {
 });
-const isLoaded = computed(() => VueYandexMaps.isLoaded.value);
+const isLoaded = computed(() => yandexMapIsLoaded.value);
 ```
 
 ## search

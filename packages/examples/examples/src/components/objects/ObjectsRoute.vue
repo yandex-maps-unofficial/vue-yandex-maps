@@ -73,7 +73,7 @@ import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
     getLocationFromBounds,
-    VueYandexMaps,
+    yandexMapLoadStatus,
     YandexMap,
     YandexMapControl,
     YandexMapControls,
@@ -192,7 +192,7 @@ const onRouteResult = (result: BaseRouteResponse, type: AvailableTypes) => {
     pointBCoordinates.value = endCoords;
 };
 
-watch(VueYandexMaps.loadStatus, async status => {
+watch(yandexMapLoadStatus, async status => {
     if (status !== 'loaded') return;
 
     const fetchedRoute = await fetchRoute(pointACoordinates.value, pointBCoordinates.value);

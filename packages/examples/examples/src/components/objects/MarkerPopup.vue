@@ -26,44 +26,6 @@
 
                 <yandex-map-default-marker
                     :settings="{
-                        coordinates: center,
-                        title: 'Marker with slot',
-                        subtitle: 'Marker with slot description',
-                        color: 'green',
-                        popup: { position: 'top' },
-                    }"
-                >
-                    <template #popup="{ close }">
-                        <div
-                            class="marker-popup"
-                            @click="close()"
-                        >
-                            Click me to close popup
-                        </div>
-                    </template>
-                </yandex-map-default-marker>
-
-                <yandex-map-default-marker
-                    :settings="{
-                        coordinates: [37.188144, 55.933842],
-                        title: 'Marker with static content',
-                        subtitle: 'Marker with static content description',
-                        color: 'green',
-                        popup: { position: 'top', content: 'Static content that hides marker', hidesMarker: true },
-                    }"
-                >
-                    <template #popup="{ close }">
-                        <div
-                            class="marker-popup"
-                            @click="close()"
-                        >
-                            Click me to close popup
-                        </div>
-                    </template>
-                </yandex-map-default-marker>
-
-                <yandex-map-ui-marker
-                    :settings="{
                         coordinates: [37.688144, 55.933842],
                         title: 'UI Marker',
                         subtitle: 'Click to open popup',
@@ -77,7 +39,7 @@
                             Click me to close popup {{ reactivityTestCounter }}
                         </div>
                     </template>
-                </yandex-map-ui-marker>
+                </yandex-map-default-marker>
 
                 <yandex-map-marker
                     v-for="(marker, index) in markers"
@@ -115,7 +77,6 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapMarker,
     YandexMapZoomControl,
-    YandexMapUiMarker,
 } from 'vue-yandex-maps';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import type { LngLat } from '@yandex/ymaps3-types';

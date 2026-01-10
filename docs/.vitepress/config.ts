@@ -2,9 +2,9 @@ import { defineConfig } from 'vitepress';
 import packageJson from '../../packages/vue-yandex-maps/package.json' with { type: 'json' };
 
 export default defineConfig({
-    base: '/vue-yandex-maps/',
+    base: '/',
     lang: 'ru-RU',
-    title: 'Vue Yandex Maps v2.x',
+    title: 'Vue Yandex Maps v3.x',
     description: 'Откройте для себя Яндекс карты для Vue',
     lastUpdated: false,
     locales: {
@@ -64,12 +64,8 @@ export default defineConfig({
                 text: 'Руководства',
                 items: [
                     {
-                        text: 'Установка (Vue 3)',
-                        link: '/guide/vue3',
-                    },
-                    {
-                        text: 'Установка (Vue 2)',
-                        link: '/guide/vue2',
+                        text: 'Установка через плагин',
+                        link: '/guide/install',
                     },
                     {
                         text: 'Установка вручную',
@@ -88,8 +84,12 @@ export default defineConfig({
                         link: '/components/',
                     },
                     {
+                        text: 'Переход с 2.x',
+                        link: '/guide/migration/v2',
+                    },
+                    {
                         text: 'Переход с 0.x/1.x',
-                        link: '/guide/migration',
+                        link: '/guide/migration/old',
                     },
                 ],
             },
@@ -109,10 +109,6 @@ export default defineConfig({
                         link: '/examples/playground',
                     },
                 ],
-            },
-            {
-                text: 'План на 3.0',
-                link: '/guide/v3',
             },
             {
                 text: packageJson.version,
@@ -151,16 +147,12 @@ export default defineConfig({
                     },
                     {
                         text: 'Установка',
-                        link: '/guide/vue3',
+                        link: '/guide/install',
                         collapsed: false,
                         items: [
                             {
-                                text: 'Vue 3 / Nuxt 3 / Astro',
-                                link: '/guide/vue3',
-                            },
-                            {
-                                text: 'Vue 2 / Nuxt 2 / Nuxt Bridge',
-                                link: '/guide/vue2',
+                                text: 'Установка через плагин',
+                                link: '/guide/install',
                             },
                             {
                                 text: 'Установка вручную',
@@ -181,13 +173,17 @@ export default defineConfig({
                         link: '/guide/issues',
                     },
                     {
+                        text: 'Переход с 2.х',
+                        link: '/guide/migration/v2',
+                    },
+                    {
                         text: 'Переход с 0.x/1.x',
-                        link: '/guide/migration',
+                        link: '/guide/migration/old',
                         collapsed: true,
                         items: [
                             {
                                 text: 'Общие принципы перехода',
-                                link: '/guide/migration',
+                                link: '/guide/migration/old',
                             },
                             {
                                 text: 'Переход с 0.x',
@@ -198,10 +194,6 @@ export default defineConfig({
                                 link: '/guide/migration/v1',
                             },
                         ],
-                    },
-                    {
-                        text: 'План на 3.0',
-                        link: '/guide/v3',
                     },
                 ],
             },
@@ -312,10 +304,6 @@ export default defineConfig({
                                 link: '/components/modules/default-marker',
                             },
                             {
-                                text: 'YandexMapUiMarker',
-                                link: '/components/modules/ui-marker',
-                            },
-                            {
                                 text: 'YandexMapPopupMarker',
                                 link: '/components/modules/popup-marker',
                             },
@@ -342,7 +330,7 @@ export default defineConfig({
                                         link: '/components/modules/projection/cartesian',
                                     },
                                     {
-                                        text: 'YandexMapSphericalMercatorProjection',
+                                        text: 'YandexMapWebMercatorProjection',
                                         link: '/components/modules/projection/mercator',
                                     },
                         ],
@@ -450,7 +438,7 @@ export default defineConfig({
                         collapsed: true,
                         items: [
                             {
-                                text: 'Инстанс VueYandexMaps',
+                                text: 'Настройки и типы карты',
                                 link: '/api/namespace',
                             },
                             {
@@ -479,6 +467,22 @@ export default defineConfig({
                                 text: 'getBoundsFromCoords',
                                 link: '/api/bounds-from-coords',
                             },
+                            {
+                                text: 'setupMapChildren',
+                                link: '/api/setup-map-children',
+                            },
+                            {
+                                text: 'provideMapRoot',
+                                link: '/api/setup-map-children',
+                            },
+                            {
+                                text: 'deleteMapChildren',
+                                link: '/api/setup-map-children',
+                            },
+                            {
+                                text: 'injectMap',
+                                link: '/api/inject-map'
+                            }
                         ],
                     },
                     {

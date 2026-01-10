@@ -149,6 +149,7 @@ export default defineComponent({
             emit('updatedCluster', props.feature.clusterer.clusterId);
         });
 
+        // This is MANDATORY for this component
         return () => {
             return hF([
                 h('div', {

@@ -59,9 +59,6 @@ outline: [2, 3]
 В большинстве случаев компонент является обязательным к наличию на карте.
 ::: 
 
-#### [YandexMapDefaultSatelliteLayer](layer-default-satellite)
-Компонент меняет слой Карты на Спутник.
-
 ### Источники данных
 
 #### [YandexMapFeatureDataSource](feature-data-source)
@@ -109,7 +106,7 @@ outline: [2, 3]
 #### [YandexMapCartesianProjection](modules/projection/cartesian)
 Декартовая проекция карты.
 
-#### [YandexMapSphericalMercatorProjection](modules/projection/mercator)
+#### [YandexMapWebMercatorProjection](modules/projection/mercator)
 Проекция Меркатора для карты.
 
 <style>
@@ -175,9 +172,9 @@ a {
 
 ### Маркеры
 
-#### [YandexMapUiMarker](modules/ui-marker)
+#### [YandexMapDefaultMarker](modules/default-marker)
 
-Альтернатива дефолтному маркеру
+Маркер с дизайном по умолчанию
 
 #### [YandexMapPopupMarker](modules/popup-marker)
 

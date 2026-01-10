@@ -1,7 +1,13 @@
 import type { Ref, WatchStopHandle } from 'vue';
 import { getCurrentScope, inject, isRef, watch } from 'vue';
 import { throwException } from './system.ts';
-import { VueYandexMaps } from '../namespace.ts';
+import {
+    YandexMapException,
+    yandexMapIsLoaded,
+    yandexMapLoadError,
+    yandexMapLoadStatus,
+    yandexMapSettings,
+} from './init.ts';
 import type { YMap, YMapEntity, YMapGroupEntity } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
@@ -63,26 +69,26 @@ export async function waitTillYmapInit({
         if (typeof ymaps3 === 'undefined') {
             let timeout: NodeJS.Timeout | undefined;
 
-            waitDuration = typeof waitDuration !== 'undefined' ? waitDuration : VueYandexMaps.settings.value.mapsScriptWaitDuration;
+            waitDuration = typeof waitDuration !== 'undefined' ? waitDuration : yandexMapSettings.value.mapsScriptWaitDuration;
 
             if (waitDuration !== false) {
                 timeout = setTimeout(() => {
                     timeoutCallback?.(timeout!, true);
-                    reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized. You can change this behavior by using mapsScriptWaitDuration.'));
+                    reject(new YandexMapException('Was not able to wait for map initialization in waitTillYmapInit. Ensure that map was initialized. You can change this behavior by using mapsScriptWaitDuration.'));
                 }, typeof waitDuration === 'number' ? waitDuration : 5000);
                 timeoutCallback?.(timeout, false);
             }
 
-            watch(VueYandexMaps.isLoaded, () => {
+            watch(yandexMapIsLoaded, () => {
                 if (timeout) {
                     clearTimeout(timeout);
                     timeoutCallback?.(timeout, true);
                 }
-                if (VueYandexMaps.loadStatus.value === 'loaded') {
+                if (yandexMapLoadStatus.value === 'loaded') {
                     resolve();
                 }
                 else {
-                    reject(VueYandexMaps.loadError);
+                    reject(yandexMapLoadError);
                 }
             }, {
                 immediate: true,
@@ -124,12 +130,12 @@ export async function waitTillMapInit({
     return new Promise<void>((resolve, reject) => {
         let timeout: NodeJS.Timeout | undefined;
 
-        waitDuration = typeof waitDuration !== 'undefined' ? waitDuration : VueYandexMaps.settings.value.mapsRenderWaitDuration;
+        waitDuration = typeof waitDuration !== 'undefined' ? waitDuration : yandexMapSettings.value.mapsRenderWaitDuration;
 
         if (waitDuration !== false) {
             timeout = setTimeout(() => {
                 timeoutCallback?.(timeout!, true);
-                reject(new VueYandexMaps.YandexMapException('Was not able to wait for map initialization in waitTillMapInit. You can change this behavior by using mapsRenderWaitDuration.'));
+                reject(new YandexMapException('Was not able to wait for map initialization in waitTillMapInit. You can change this behavior by using mapsRenderWaitDuration.'));
             }, typeof waitDuration === 'number' ? waitDuration : 5000);
             timeoutCallback?.(timeout, false);
         }
@@ -153,7 +159,7 @@ export async function waitTillMapInit({
     });
 }
 
-export function deleteMapChild({
+export function deleteMapChildren({
     children,
     isMercator,
     root,
