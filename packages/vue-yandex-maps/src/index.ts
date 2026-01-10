@@ -1,5 +1,5 @@
 export * from './functions';
-export { createYmaps, createYmapsVue2 } from './plugins/vue';
+export { createYmaps } from './plugins/vue';
 export * from './components';
 export {
     VueYandexMaps,

@@ -7,8 +7,11 @@ export default defineNuxtConfig({
     // You can use whatever syntax you like
     runtimeConfig: {
         public: {
-            scriptAttributes: {
-                referrerpolicy: false,
+            // @ts-expect-error didn't specify apikey
+            yandexMaps: {
+                scriptAttributes: {
+                    referrerpolicy: false,
+                },
             },
         },
     },

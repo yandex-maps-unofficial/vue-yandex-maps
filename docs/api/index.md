@@ -6,7 +6,7 @@
 
 Namespace с настройками Vue Yandex Maps.
 
-### createYmaps/createYmapsVue2
+### createYmaps
 
 Принимают на вход настройки и инициализируют `vue-yandex-maps`.
 
