@@ -318,6 +318,7 @@ const baseRules = {
         },
     }],
     'no-async-promise-executor': 'off',
+    'vue/multi-word-component-names': 'off',
 };
 const tsRules = {
     'no-unused-vars': 'off',
