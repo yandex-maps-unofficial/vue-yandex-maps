@@ -38,7 +38,12 @@ import { initYmaps } from '../functions';
 import { diff } from 'deep-object-diff';
 import { copy, throwException } from '../utils/system.ts';
 import { waitTillMapInit } from '../utils/map.ts';
-import { yandexMapIsLoaded, yandexMapLoadStatus, yandexMapSettings } from '../utils/init.ts';
+import {
+    yandexMapIsLoaded,
+    yandexMapLoadStatus,
+    yandexMapScript,
+    yandexMapSettings,
+} from '../utils/init.ts';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>;
 
@@ -218,6 +223,16 @@ watch(yandexMapLoadStatus, async val => {
 });
 
 onMounted(async () => {
+    if (yandexMapIsLoaded.value && !yandexMapScript?.value?.parentElement) {
+        yandexMapLoadStatus.value = 'pending';
+        yandexMapScript.value?.remove();
+        yandexMapScript.value = null;
+
+        for (const key in window) {
+            if (key.includes('ymaps3')) delete window[key];
+        }
+    }
+
     const setupWatcher = () => {
         watcher?.();
 
