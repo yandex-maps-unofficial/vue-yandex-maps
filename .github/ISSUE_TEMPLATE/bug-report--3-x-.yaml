@@ -1,6 +1,6 @@
-name: Bug report (2.x)
-description: Шаблон ошибок в Vue Yandex Maps 2.x
-labels: ["bug", "2.x", "pending triage"]
+name: Bug report (3.x)
+description: Шаблон ошибок в Vue Yandex Maps 3.x
+labels: ["bug", "3.x", "pending triage"]
 assignees:
   - daniluk4000
 body:
@@ -13,7 +13,7 @@ body:
     attributes:
       label: Версия библиотеки
       description: Пожалуйста, укажите версию библиотеки на момент написания этой формы
-      placeholder: Например, 2.0.0
+      placeholder: Например, 3.0.0
     validations:
       required: true
   - type: textarea
@@ -43,7 +43,7 @@ body:
       label: Ответы на вопросы
       description: Пожалуйста, сверьтесь с пунктами ниже
       options:
-        - label: Я использую версию 2.x
+        - label: Я использую версию 3.x
           required: true
         - label: Я поискал похожие ошибки и не нашел таковых
           required: true
