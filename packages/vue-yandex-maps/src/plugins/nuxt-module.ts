@@ -1,10 +1,10 @@
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import { join, relative } from 'path';
-import type { VueYandexMaps } from '../namespace.ts';
+import type { YandexMapPluginSettings } from '../utils/init.ts';
 import type { NuxtModule } from 'nuxt/schema';
 
 // Module options TypeScript interface definition
-interface ModuleOptions extends VueYandexMaps.PluginSettings {
+interface ModuleOptions extends YandexMapPluginSettings {
 }
 
 declare module '@nuxt/schema' {
@@ -17,7 +17,7 @@ declare module '@nuxt/schema' {
     }
 
     interface PublicRuntimeConfig {
-        yandexMaps: VueYandexMaps.PluginSettings;
+        yandexMaps: YandexMapPluginSettings;
     }
 }
 
@@ -31,7 +31,7 @@ declare module 'nuxt/schema' {
     }
 
     interface PublicRuntimeConfig {
-        yandexMaps: VueYandexMaps.PluginSettings;
+        yandexMaps: YandexMapPluginSettings;
     }
 }
 

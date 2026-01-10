@@ -3,8 +3,7 @@ import {
 } from 'vue';
 import type { ComputedGetter, ComputedRef, DebuggerOptions, Ref, UnwrapRef, VNodeArrayChildren, VNodeProps } from 'vue';
 import { computed, h, ref, toRaw, unref } from 'vue';
-import { VueYandexMaps } from '../namespace.ts';
-import YandexMapException = VueYandexMaps.YandexMapException;
+import { YandexMapException } from './init.ts';
 
 /**
  * @description Prevents memory leak on SSR when ref is called outside setup
@@ -90,7 +89,7 @@ export function getException({
         }
     }
 
-    return new VueYandexMaps.YandexMapException(text);
+    return new YandexMapException(text);
 }
 
 export function throwException(settings: Omit<ThrowExceptionSettings, 'warn'> & { warn: true }): void;

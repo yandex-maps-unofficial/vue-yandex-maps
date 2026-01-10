@@ -438,7 +438,7 @@ export default defineConfig({
                         collapsed: true,
                         items: [
                             {
-                                text: 'Инстанс VueYandexMaps',
+                                text: 'Настройки и типы карты',
                                 link: '/api/namespace',
                             },
                             {

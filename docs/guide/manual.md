@@ -20,7 +20,7 @@
 2. В нужном вам месте или компоненте вызовите функцию [createYmapsOptions](/api/create-options)
 3. В идеале, вы должны вызвать эту функцию до рендера карты (например, в created или корне setup).
 
-    В случае, если вы не хотите от этого зависеть, используйте computed [VueYandexMaps.isReadyToInit](/api/namespace.html#isreadytoinit).
+    В случае, если вы не хотите от этого зависеть, используйте computed [isYandexMapReadyToInit](/api/namespace.html#isreadytoinit).
 
 Готово! Все компоненты будут работать, как обычно.
 

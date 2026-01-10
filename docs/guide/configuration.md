@@ -141,12 +141,12 @@ app.use(createYmaps({
 Вы можете получить доступ к конфигурации следующим способом:
 
 ```typescript
-import { VueYandexMaps } from 'vue-yandex-maps';
+import { yandexMapSettings } from 'vue-yandex-maps';
 
-console.log(VueYandexMaps.settings.value) //ref
+console.log(yandexMapSettings.value) //ref
 ```
 
-Там же в `VueYandexMaps` есть доступ к информации о загрузке скрипта (`loadStatus`, `loadError`, `isLoaded`).
+Также есть доступ к информации о загрузке скрипта (`yandexMapLoadStatus`, `yandexMapLoadError`, `yandexMapIsLoaded`).
 
-При желании, `VueYandexMaps.settings` можно даже изменять, но это не проверялось - меняйте  `VueYandexMaps.settings.value` на
+При желании, `yandexMapSettings` можно даже изменять, но это не проверялось - меняйте  `yandexMapSettings.value` на
 свой страх и риск и только если уверены в том, что по другому никак.

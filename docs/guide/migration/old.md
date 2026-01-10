@@ -72,7 +72,7 @@ pnpm install vue-yandex-maps
 import { createApp } from 'vue';
 import YmapPlugin from 'vue-yandex-maps'; // [!code --]
 import { createYmaps } from 'vue-yandex-maps'; // [!code ++]
-import type { VueYandexMaps } from 'vue-yandex-maps'; // [!code ++]
+import type { YandexMapPluginSettings } from 'vue-yandex-maps'; // [!code ++]
 import App from './App.vue';
 
 const app = createApp(App);
@@ -86,7 +86,7 @@ const settings = { // [!code --]
 } // [!code --]
 
 //lang и version теперь задаются по умолчанию
-const settings: VueYandexMaps.PluginSettings = { // [!code ++]
+const settings: YandexMapPluginSettings = { // [!code ++]
   apikey: 'your-api-key', // [!code ++]
 }; // [!code ++]
 
@@ -149,14 +149,14 @@ export default defineNuxtConfig({
 
 ### ymaps.ready
 
-Теперь промис. При желании, вы можете реактивно отслеживать `VueYandexMaps.loadStatus`:
+Теперь промис. При желании, вы можете реактивно отслеживать `yandexMapLoadStatus`:
 
 ```typescript
-import { VueYandexMaps } from 'vue-yandex-maps';
+import { yandexMapLoadStatus, yandexMapLoadError } from 'vue-yandex-maps';
 
-watch(VueYandexMaps.loadStatus, (val) => {
+watch(yandexMapLoadStatus, (val) => {
   console.log(val); //pending | loading | loaded | error
-  console.log(VueYandexMaps.loadError); //null | Error | script onerror (Event | string)
+  console.log(yandexMapLoadError); //null | Error | script onerror (Event | string)
 });
 ```
 

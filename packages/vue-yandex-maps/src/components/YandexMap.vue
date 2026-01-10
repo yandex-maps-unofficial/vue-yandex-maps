@@ -35,10 +35,10 @@ import {
 import type { LngLat, YMap, YMapEntity, YMapListener, YMapProps } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { initYmaps } from '../functions';
-import { VueYandexMaps } from '../namespace.ts';
 import { diff } from 'deep-object-diff';
 import { copy, throwException } from '../utils/system.ts';
 import { waitTillMapInit } from '../utils/map.ts';
+import { yandexMapIsLoaded, yandexMapLoadStatus, yandexMapSettings } from '../utils/init.ts';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>;
 
@@ -195,7 +195,7 @@ async function setupCursorGrab() {
 
 let reInit = false;
 
-watch(VueYandexMaps.loadStatus, async val => {
+watch(yandexMapLoadStatus, async val => {
     if (val === 'pending') {
         reInit = true;
         mounted.value = false;
@@ -269,8 +269,8 @@ onMounted(async () => {
 
     watch(() => props.cursorGrab, setupCursorGrab, { immediate: true });
 
-    if (!VueYandexMaps.isLoaded.value) {
-        if (VueYandexMaps.settings.value.initializeOn === 'onComponentMount') {
+    if (!yandexMapIsLoaded.value) {
+        if (yandexMapSettings.value.initializeOn === 'onComponentMount') {
             try {
                 await initYmaps();
             }
@@ -280,12 +280,12 @@ onMounted(async () => {
                 return;
             }
         }
-        else if (VueYandexMaps.loadStatus.value === 'loading' || VueYandexMaps.settings.value.initializeOn === 'onPluginInit') {
-            if (VueYandexMaps.settings.value.initializeOn === 'onPluginInit' && VueYandexMaps.loadStatus.value !== 'loading') await nextTick();
+        else if (yandexMapLoadStatus.value === 'loading' || yandexMapSettings.value.initializeOn === 'onPluginInit') {
+            if (yandexMapSettings.value.initializeOn === 'onPluginInit' && yandexMapLoadStatus.value !== 'loading') await nextTick();
             await initYmaps();
         }
 
-        if (!VueYandexMaps.isLoaded.value) {
+        if (!yandexMapIsLoaded.value) {
             throwException({
                 text: 'You have set up <yandex-map> component without initializing Yandex maps. Please check initializeOn setting or call initYmaps manually before registering this component.',
             });

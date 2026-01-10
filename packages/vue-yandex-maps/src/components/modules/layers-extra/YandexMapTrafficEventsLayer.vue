@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
-import type { IYandexMapTrafficEventsLayer } from '../../../namespace.ts';
-import { VueYandexMaps } from '../../../namespace.ts';
+import { importLayersExtra } from '../../../utils/init.ts';
+import type { IYandexMapTrafficEventsLayer } from '../../../utils/init.ts';
 import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
 
 defineOptions({ name: 'YandexMapTrafficEventsLayer' });
@@ -25,7 +25,7 @@ let mapLayer: IYandexMapTrafficEventsLayer | undefined;
 onMounted(async () => {
     mapLayer = await setupMapChildren({
         createFunction: layers => new layers.YMapTrafficEventsLayer(props.settings || {}),
-        requiredImport: () => VueYandexMaps.importLayersExtra(),
+        requiredImport: () => importLayersExtra(),
         settings: computed(() => props.settings),
     });
     emit('update:modelValue', mapLayer);

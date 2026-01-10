@@ -1,7 +1,13 @@
 import { watch } from 'vue';
-import { VueYandexMaps } from '../namespace.ts';
+import {
+    isYandexMapReadyToInit,
+    YandexMapException,
+    yandexMapIsLoaded, yandexMapLoadError,
+    yandexMapLoadStatus, yandexMapScript,
+    yandexMapSettings, yandexMapYmaps3,
+} from '../utils/init.ts';
+import type { DefProductSettings, YandexMapPluginSettings } from '../utils/init.ts';
 import { throwException } from '../utils/system.ts';
-import YandexMapException = VueYandexMaps.YandexMapException;
 import type DefaultUiTheme from '@yandex/ymaps3-default-ui-theme';
 import type ContextMenu from '@yandex/ymaps3-context-menu';
 import type DrawerControl from '@yandex/ymaps3-drawer-control';
@@ -15,7 +21,7 @@ import type Cartesian from '@yandex/ymaps3-cartesian-projection';
 import type Hint from '@yandex/ymaps3-hint';
 import type Clusterer from '@yandex/ymaps3-clusterer';
 
-const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
+const allowedOptionsKeys: Record<keyof YandexMapPluginSettings, true> = {
     apikey: true,
     servicesApikeys: true,
     lang: true,
@@ -33,19 +39,19 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
 export function initYmaps() {
     return new Promise<void>((res, rej) => {
         if (typeof ymaps3 !== 'undefined') {
-            if (VueYandexMaps.loadStatus.value !== 'loaded') VueYandexMaps.loadStatus.value = 'loaded';
+            if (yandexMapLoadStatus.value !== 'loaded') yandexMapLoadStatus.value = 'loaded';
             return res();
         }
         if (typeof window === 'undefined') return rej(new YandexMapException('You must call initYmaps on Client Side only'));
 
-        if (VueYandexMaps.loadStatus.value === 'loading') {
-            const watcher = watch(VueYandexMaps.loadStatus, val => {
-                if (!VueYandexMaps.isLoaded.value) return;
+        if (yandexMapLoadStatus.value === 'loading') {
+            const watcher = watch(yandexMapLoadStatus, val => {
+                if (!yandexMapIsLoaded.value) return;
 
                 // Stopping watcher
                 watcher();
 
-                if (val === 'error') rej(VueYandexMaps.loadError);
+                if (val === 'error') rej(yandexMapLoadError);
                 if (val === 'loaded') res();
             }, {
                 immediate: true,
@@ -53,17 +59,17 @@ export function initYmaps() {
             return;
         }
 
-        VueYandexMaps.loadStatus.value = 'loading';
+        yandexMapLoadStatus.value = 'loading';
 
-        const settings = VueYandexMaps.settings.value;
+        const settings = yandexMapSettings.value;
         if (!settings.apikey) {
             throwException({
-                text: 'apikey was not set for Yandex Maps initialization. Ensure you have attached needed plugins or called createYmapsOptions with apikey. If you need delayed init, please use VueYandexMaps.isReadyToInit computed as v-if.',
+                text: 'apikey was not set for Yandex Maps initialization. Ensure you have attached needed plugins or called createYmapsOptions with apikey. If you need delayed init, please use isYandexMapReadyToInit computed as v-if.',
             });
         }
 
-        const yandexMapScript = document.createElement('SCRIPT');
-        VueYandexMaps.script.value = yandexMapScript;
+        const script = document.createElement('SCRIPT');
+        yandexMapScript.value = script;
         const url = new URL(`${ settings.domain }/${ settings.version }/`);
         url.searchParams.set('lang', settings.lang || 'ru_RU');
         url.searchParams.set('apikey', settings.apikey);
@@ -80,32 +86,32 @@ export function initYmaps() {
 
         for (const key in scriptAttributes) {
             if (scriptAttributes[key] === false) continue;
-            yandexMapScript.setAttribute(key, scriptAttributes[key]);
+            script.setAttribute(key, scriptAttributes[key]);
         }
 
-        document.head.appendChild(yandexMapScript);
-        yandexMapScript.onload = async () => {
+        document.head.appendChild(script);
+        script.onload = async () => {
             try {
-                await VueYandexMaps.ymaps().ready;
+                await yandexMapYmaps3().ready;
 
                 if (settings.servicesApikeys && Object.keys(settings.servicesApikeys).length > 0) {
-                    VueYandexMaps.ymaps()
+                    yandexMapYmaps3()
                         .getDefaultConfig()
                         .setApikeys(settings.servicesApikeys);
                 }
-                if (typeof settings.strictMode === 'boolean') VueYandexMaps.ymaps().strictMode = settings.strictMode;
+                if (typeof settings.strictMode === 'boolean') yandexMapYmaps3().strictMode = settings.strictMode;
 
                 if (settings.importModules) {
                     await Promise.all(
                         settings.importModules.map(
-                            module => VueYandexMaps.ymaps()
+                            module => yandexMapYmaps3()
                                 .import(module as any),
                         ),
                     );
                 }
 
                 if (settings.cdnLibraryLoading?.enabled !== false) {
-                    VueYandexMaps.ymaps().import.registerCdn(settings.cdnLibraryLoading?.url || 'https://cdn.jsdelivr.net/npm/{package}', [
+                    yandexMapYmaps3().import.registerCdn(settings.cdnLibraryLoading?.url || 'https://cdn.jsdelivr.net/npm/{package}', [
                         ...[
                             '@yandex/ymaps3-default-ui-theme@latest',
                             '@yandex/ymaps3-resizer@latest',
@@ -127,28 +133,28 @@ export function initYmaps() {
                     ]);
                 }
 
-                VueYandexMaps.loadStatus.value = 'loaded';
+                yandexMapLoadStatus.value = 'loaded';
                 res();
             }
             catch (e) {
-                VueYandexMaps.loadStatus.value = 'error';
-                VueYandexMaps.loadError.value = e as Error;
+                yandexMapLoadStatus.value = 'error';
+                yandexMapLoadError.value = e as Error;
                 rej(e);
             }
         };
-        yandexMapScript.onerror = e => {
-            VueYandexMaps.loadError.value = e;
+        script.onerror = e => {
+            yandexMapLoadError.value = e;
             rej(e);
         };
     });
 }
 
-export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignoreNoCurrentInstance = false): VueYandexMaps.PluginSettings {
+export function createYmapsOptions(options: YandexMapPluginSettings, ignoreNoCurrentInstance = false): YandexMapPluginSettings {
     // Only init once
-    if (VueYandexMaps.isReadyToInit.value) return VueYandexMaps.settings.value;
+    if (isYandexMapReadyToInit.value) return yandexMapSettings.value;
 
     // Using DefProductSettings to ensure all non-required fields will always have default value
-    const optionsShallowClone: VueYandexMaps.DefProductSettings = {
+    const optionsShallowClone: DefProductSettings = {
         lang: 'ru_RU',
         initializeOn: 'onComponentMount',
         importModules: [],
@@ -180,7 +186,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignore
     // Don't modify ref on SSR
     if (typeof window === 'undefined') return optionsShallowClone;
 
-    VueYandexMaps.settings.value = optionsShallowClone;
+    yandexMapSettings.value = optionsShallowClone;
 
     return optionsShallowClone;
 }
