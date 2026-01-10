@@ -1,5 +1,37 @@
 # Список изменений
 
+## [3.0.0-rc.1]
+
+Добро пожаловать в версию 3.0! Я бы очень попросил всех, кто это читает, попробовать перейти на версию и убедиться, что все ок. Если ошибок не будет найдено, версия будет опубликована через неделю после этого релиза.
+
+Гайд по миграции: http://docs.dk4000.pro/guide/migration/v2.html
+
+### Breaking Changes 
+
+- Минимальная версия Node была поднята до 20
+- Поддержка Vue 2, Nuxt 2 и Nuxt Bridge прекращена
+- Минимальная версия Nuxt была поднята до 3.12
+- Компонент `YandexMapDefaultSatelliteLayer` удалён
+- Компонент `YandexMapUiMarker` переименован в `YandexMapDefaultMarker`, старый компонент маркера по умолчанию удалён
+- Удалён неймспейс `VueYandexMaps`
+- Компонент `YandexMapSphericalMercatorProjection` переименован в `YandexMapWebMercatorProjection`
+- Метод `useYMapsLocationFromBounds` упразднен в пользу `getLocationFromBounds`
+- Удалены события `input` и props `value` в пользу `modelValue` и `update:modelValue`
+
+### Другие изменения
+
+- Большинство компонентов были переведены на `script setup`
+- Компоненты, которые были признаны Яндексом устаревшими, были переведены на CDN-модули вместо `ymaps3.import`
+- Добавлена поддержка указания `runtimeConfig.public.yandexMaps` в Nuxt
+- Добавлена поддержка `index` в `YandexMapMiniMap`,
+- Добавлен тип `YandexMapPopupMarkerSettings`
+- Сделаны публичными и документированы внутренние методы для написания своих компонентов:
+  - provideMapRoot
+  - setupMapChildren
+  - deleteMapChildren
+  - injectMap
+- Исправлена работа проекта в Astro clientRouter mode
+
 ## [2.3.0]
 
 В случае, если в этом релизе не найдется новых проблем, это последний релиз версии `2.x`. [Узнать про версию `3.0`](https://yandex-maps-unofficial.github.io/vue-yandex-maps/guide/v3.html)
