@@ -6,7 +6,7 @@ next: false
 # Общие принципы перехода с 0.х/1.х
 
 :::details Мем про переход
-![meme.png](./migration-meme.png)
+![meme.png](../migration-meme.png)
 
 Ну если коротко, то да, так и есть
 :::
