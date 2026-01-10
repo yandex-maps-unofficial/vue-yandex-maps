@@ -153,7 +153,7 @@ export async function waitTillMapInit({
     });
 }
 
-export function deleteMapChild({
+export function deleteMapChildren({
     children,
     isMercator,
     root,

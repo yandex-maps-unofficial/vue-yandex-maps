@@ -4,7 +4,7 @@ import { toValue, triggerRef } from 'vue';
 import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue';
 import { getCurrentScope, inject, isRef, nextTick, onBeforeUnmount, provide, shallowRef, watch } from 'vue';
 import { copy, excludeKeys, throwException } from './system.ts';
-import { deleteMapChild, injectLayers, injectMap, waitTillMapInit, waitTillYmapInit } from './map.ts';
+import { deleteMapChildren, injectLayers, injectMap, waitTillMapInit, waitTillYmapInit } from './map.ts';
 import { diff } from 'deep-object-diff';
 
 export function provideMapRoot<T extends YMapEntity<any> = YMapEntity<any>>({ mapRootRef }: {
@@ -35,7 +35,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     settingsUpdateIgnoreKeys,
     settingsUpdateFull,
     isLayer,
-    isMercator,
+    isProjection,
     mapRoot: _mapRoot,
     index,
 }: {
@@ -89,7 +89,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
     /**
      * @description Specifies that entity is a layer children. Will be injected to layer ref instead of root and will skip YandexMap initialization, and will be added in special way to YandexMap
      */
-    isMercator?: boolean;
+    isProjection?: boolean;
     /**
      * @description Index of the child for map collection. If not passed, will be added to the end
      */
@@ -121,9 +121,9 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         if (!returnOnly && !willDeleteByHand) {
             onBeforeUnmount(() => {
                 if (children.value) {
-                    deleteMapChild({
+                    deleteMapChildren({
                         children: children.value,
-                        isMercator,
+                        isMercator: isProjection,
                         root: mapRoot?.value ? mapRoot : map,
                     });
                 }
@@ -165,15 +165,15 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
             }, { deep: true });
         }
 
-        if (!returnOnly && !isMercator) {
+        if (!returnOnly && !isProjection) {
             watch(() => toValue(index), indexValue => {
                 if (!children.value || !map.value) {
                     return;
                 }
 
-                deleteMapChild({
+                deleteMapChildren({
                     children: children.value,
-                    isMercator,
+                    isMercator: isProjection,
                     root: mapRoot?.value ? mapRoot : map,
                 });
 
@@ -189,7 +189,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
             });
         }
 
-        if (!isLayer && !isMercator) {
+        if (!isLayer && !isProjection) {
             await waitTillMapInit({ timeoutCallback });
             if (!map.value) {
                 throwException({
@@ -226,7 +226,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         children.value = createFunction(importData as Awaited<ReturnType<R>>);
         if (mapRootRef && !mapRootRef.value) mapRootRef.value = children.value as any;
 
-        if (!returnOnly && map.value && !isMercator) {
+        if (!returnOnly && map.value && !isProjection) {
             if (initPromises?.value) {
                 await Promise.all(initPromises.value);
                 if (!requiredImport) await nextTick();
@@ -245,7 +245,7 @@ export async function setupMapChildren<T extends YMapEntity<unknown> | Projectio
         else if (isLayer) {
             layers.value.push(children.value);
         }
-        else if (isMercator && map.value) {
+        else if (isProjection && map.value) {
             map.value.update({
                 projection: children.value as unknown as Projection,
             });

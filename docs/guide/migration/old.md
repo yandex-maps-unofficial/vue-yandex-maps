@@ -45,17 +45,7 @@ pnpm install vue-yandex-maps
 
 ## Требования к установке
 
-### Vue 2
-
-Для использования пакета минимальная версия Vue должна быть 2.7.
-
-### Nuxt 2 (кроме Bridge)
-
-Минимальная версия Nuxt - 2.16 и выше.
-
-Также для работы потребуется [установить Nuxt Composition API](https://composition-api.nuxtjs.org/getting-started/setup).
-
-### Vue 3
+### Vue
 
 Минимальная версия `Vue` - 3.3, а при использовании TS `vue-tsc` должен быть 1.5 и выше.
 
@@ -78,37 +68,7 @@ pnpm install vue-yandex-maps
 1. Удалите текущие Vue.use/app.use
 2. Замените их на обновлённую установку
 
-::: code-group
-
-```typescript [Vue 2]
-import Vue from 'vue';
-import YmapPlugin from 'vue-yandex-maps'; // [!code --]
-import { createYmapsVue2 } from 'vue-yandex-maps'; // [!code ++]
-import type { VueYandexMaps } from 'vue-yandex-maps'; // [!code ++]
-import App from './App.vue';
-
-const settings = { // [!code --]
-  apiKey: 'your-api-key', // [!code --]
-  lang: 'ru_RU', // [!code --]
-  coordorder: 'latlong', // [!code --]
-  enterprise: false, // [!code --]
-  version: '2.1' // [!code --]
-} // [!code --]
-
-//lang и version теперь задаются по умолчанию
-const settings: VueYandexMaps.PluginSettings = { // [!code ++]
-  apikey: 'your-api-key', // [!code ++]
-}; // [!code ++]
-
-Vue.use(YmapPlugin, settings); // [!code --]
-Vue.use(createYmapsVue2(settings)); // [!code ++]
-
-new Vue({
-  render: (h) => h(App),
-}).$mount('#app');
-```
-
-```typescript [Vue 3]
+```typescript
 import { createApp } from 'vue';
 import YmapPlugin from 'vue-yandex-maps'; // [!code --]
 import { createYmaps } from 'vue-yandex-maps'; // [!code ++]
@@ -136,25 +96,12 @@ app.use(createYmaps(settings)); // [!code ++]
 app.mount('#app');
 ```
 
-:::
-
 ### Nuxt
 
 Если вы используете Nuxt, то выполните следующие шаги:
 
 1. Удалите `vue-yandex-maps` из плагинов. Вообще.
 2. Подключите встроенный модуль в вашем `nuxt.config.js(ts)`:
-
-::: code-group
-
-```typescript{2-5} [Nuxt 2, nuxt.config.js]
-export default {
-  modules: ['vue-yandex-maps/nuxt2'],
-  yandexMaps: {
-    apikey: 'your-api-key',
-  },
-};
-```
 
 ```typescript{2-5} [Nuxt 3/Bridge, nuxt.config.ts]
 export default defineNuxtConfig({
@@ -165,14 +112,8 @@ export default defineNuxtConfig({
 });
 ```
 
-:::
-
 ::: tip Совет
 Для полной конфигурации см. раздел [Конфигурация](/guide/configuration).
-
-Также, если вы **не используете Nuxt 3/Bridge**, просмотрите раздел [TypeScript](#typescript) для конфигурации `tsconfig.json`.
-
-В Nuxt 3/Bridge описанного выше подключения достаточно.
 :::
 
 ## loadYmap

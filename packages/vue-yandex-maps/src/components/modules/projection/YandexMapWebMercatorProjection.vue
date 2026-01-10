@@ -25,7 +25,7 @@ onMounted(async () => {
     if (!projection) return;
 
     const cartesian = await setupMapChildren({
-        isMercator: true,
+        isProjection: true,
         createFunction: ({ WebMercator: WebMercatorClass }) => new WebMercatorClass(),
         requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-web-mercator-projection'),
     });

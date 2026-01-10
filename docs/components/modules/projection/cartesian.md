@@ -1,6 +1,6 @@
 # YandexMapCartesianProjection
 
-Компонент подгружает модуль `@yandex/ymaps3-cartesian-projection@0.0.1` и является прямоугольной (декартовой)
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-cartesian-projection` и является прямоугольной (декартовой)
 картографической проекцией.
 
 Принимает параметры вместо `settings`:

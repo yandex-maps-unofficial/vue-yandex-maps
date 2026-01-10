@@ -33,7 +33,7 @@ onMounted(async () => {
     if (!projection) return;
 
     const cartesian = await setupMapChildren({
-        isMercator: true,
+        isProjection: true,
         createFunction: ({ Cartesian: CartesianClass }) => new CartesianClass(props.bounds, props.cycled),
         requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-cartesian-projection'),
     });

@@ -304,10 +304,6 @@ export default defineConfig({
                                 link: '/components/modules/default-marker',
                             },
                             {
-                                text: 'YandexMapDefaultMarker',
-                                link: '/components/modules/ui-marker',
-                            },
-                            {
                                 text: 'YandexMapPopupMarker',
                                 link: '/components/modules/popup-marker',
                             },
@@ -471,6 +467,22 @@ export default defineConfig({
                                 text: 'getBoundsFromCoords',
                                 link: '/api/bounds-from-coords',
                             },
+                            {
+                                text: 'setupMapChildren',
+                                link: '/api/setup-map-children',
+                            },
+                            {
+                                text: 'provideMapRoot',
+                                link: '/api/setup-map-children',
+                            },
+                            {
+                                text: 'deleteMapChildren',
+                                link: '/api/setup-map-children',
+                            },
+                            {
+                                text: 'injectMap',
+                                link: '/api/inject-map'
+                            }
                         ],
                     },
                     {

@@ -1,6 +1,6 @@
-# YandexMapSphericalMercatorProjection
+# YandexMapWebMercatorProjection
 
-Компонент подгружает модуль `@yandex/ymaps3-spherical-mercator-projection@0.0.1` и включает равноугольную цилиндрическую
+Компонент подгружает [CDN](/components/cdn)-модуль `@yandex/ymaps3-web-mercator-projection` и включает равноугольную цилиндрическую
 проекцию Меркатора.
 
 Параметров не принимает, кроме стандартного `v-model`.
