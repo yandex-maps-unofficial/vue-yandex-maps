@@ -134,10 +134,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.x
-      - name: Install deps
-        run: yarn
-      - name: Build VP
-        run: yarn docs:build
+      - name: Build main package
+        run: |
+          yarn
+          yarn build
+      - name: Build with VitePress
+        run: |
+          yarn docs:build
+          touch docs/.vitepress/dist/.nojekyll
       - name: Deploy to Cloudflare Pages
         run: |
           npx wrangler pages deploy ./docs/.vitepress/dist \
