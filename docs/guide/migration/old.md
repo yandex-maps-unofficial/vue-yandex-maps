@@ -103,7 +103,7 @@ app.mount('#app');
 1. Удалите `vue-yandex-maps` из плагинов. Вообще.
 2. Подключите встроенный модуль в вашем `nuxt.config.js(ts)`:
 
-```typescript{2-5} [Nuxt 3/Bridge, nuxt.config.ts]
+```typescript{2-5} [Nuxt, nuxt.config.ts]
 export default defineNuxtConfig({
   modules: ['vue-yandex-maps/nuxt'],
   yandexMaps: {
@@ -126,7 +126,7 @@ export default defineNuxtConfig({
 
 ## TypeScript
 
-Если вы используете `TypeScript` и не используете `Nuxt 3` / `Nuxt Bridge`, то для удобства работы добавьте следующую информацию в ваш `tsconfig.json`:
+Если вы используете `TypeScript` и не используете `Nuxt`, то для удобства работы добавьте следующую информацию в ваш `tsconfig.json`:
 
 ```json
 {
@@ -139,7 +139,7 @@ export default defineNuxtConfig({
 }
 ```
 
-В Nuxt (кроме Nuxt 2) эти строки добавляются автоматически в .nuxt/tsconfig.json.
+В Nuxt эти строки добавляются автоматически в .nuxt/tsconfig.json.
 
 ## Сервисы (ymaps.*)
 
