@@ -266,10 +266,6 @@ export default defineConfig({
                                 link: '/components/layer-default-features',
                             },
                             {
-                                text: 'YandexMapDefaultSatelliteLayer',
-                                link: '/components/layer-default-satellite',
-                            },
-                            {
                                 text: 'YandexMapTrafficLayer',
                                 link: '/components/modules/layers-extra/traffic',
                             },
