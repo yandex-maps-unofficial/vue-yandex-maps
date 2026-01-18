@@ -109,3 +109,32 @@ jobs:
           name: ${{ steps.release.outputs.title }}
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
           #prerelease: true
+  docs-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: docs
+      url: https://yandex-maps-v2.dk4000.pro
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - name: Build main package
+        run: |
+          yarn
+          yarn build
+      - name: Build with VitePress
+        run: |
+          yarn docs:build
+          touch docs/.vitepress/dist/.nojekyll
+      - name: Deploy to Cloudflare Pages
+        run: |
+          npx wrangler pages deploy ./docs/.vitepress/dist \
+            --project-name=$PROJECT_NAME
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT_NAME: vue-yandex-maps
+
