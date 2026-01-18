@@ -84,7 +84,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
       - run: yarn lint && yarn build
-      - run: npm publish --tag next --provenance --workspace=packages/vue-yandex-maps
+      - run: npm publish --provenance --workspace=packages/vue-yandex-maps
         continue-on-error: true
   github-release:
     name: Release tag to Github
@@ -108,7 +108,7 @@ jobs:
           tag_name: ${{ steps.tagName.outputs.version }}
           name: ${{ steps.release.outputs.title }}
           body: ${{ steps.extract-release-notes.outputs.release_notes }}
-          prerelease: true
+          prerelease: false
 #  docs-deploy:
 #    name: Docs Deploy
 #    continue-on-error: true

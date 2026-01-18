@@ -2,9 +2,9 @@ import { defineConfig } from 'vitepress';
 import packageJson from '../../packages/vue-yandex-maps/package.json' with { type: 'json' };
 
 export default defineConfig({
-    base: '/',
+    base: '/vue-yandex-maps/',
     lang: 'ru-RU',
-    title: 'Vue Yandex Maps v3.x',
+    title: 'Vue Yandex Maps',
     description: 'Обертка Яндекс Карт 3.0 для Vue',
     lastUpdated: false,
     locales: {
