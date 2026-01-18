@@ -46,7 +46,7 @@ pnpm install vue-yandex-maps
 из [раздела Конфигурация](/guide/configuration).
 :::
 
-### Vue 3
+### Vue
 
 В основном файле (например, main.ts) подключите Карты:
 
