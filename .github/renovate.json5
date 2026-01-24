@@ -1,117 +1,117 @@
 {
-  "assignees": [
-    "daniluk4000"
+  assignees: [
+    'daniluk4000',
   ],
-  "prConcurrentLimit": 0,
-  "semanticCommits": "disabled",
-  "dependencyDashboardOSVVulnerabilitySummary": "all",
-  "osvVulnerabilityAlerts": true,
-  rebaseWhen: "behind-base-branch",
-  "packageRules": [
+  prConcurrentLimit: 0,
+  semanticCommits: 'disabled',
+  dependencyDashboardOSVVulnerabilitySummary: 'all',
+  osvVulnerabilityAlerts: true,
+  rebaseWhen: 'behind-base-branch',
+  packageRules: [
     {
       matchDepTypes: [
-        "peerDependencies",
-        "engines"
+        'peerDependencies',
+        'engines',
       ],
-      enabled: false
+      enabled: false,
     },
     {
-      "matchPackagePatterns": [
-        "@yandex/*"
-      ],
       matchDepTypes: [
-        "peerDependencies",
-        "engines"
+        'peerDependencies',
+        'engines',
       ],
-      "enabled": true,
+      enabled: true,
+      matchPackageNames: [
+        '/@yandex/*/',
+      ],
     },
     {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchPackagePatterns": [
-        "*"
+      groupName: 'all non-major dependencies',
+      groupSlug: 'all-minor-patch',
+      matchUpdateTypes: [
+        'minor',
       ],
-      "matchUpdateTypes": [
-        "minor"
+      matchCurrentVersion: '!/^0/',
+      matchPackageNames: [
+        '*',
       ],
-      "matchCurrentVersion": "!/^0/"
     },
     {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchPackagePatterns": [
-        "*"
+      groupName: 'all non-major dependencies',
+      groupSlug: 'all-minor-patch',
+      matchUpdateTypes: [
+        'patch',
       ],
-      "matchUpdateTypes": [
-        "patch"
-      ]
+      matchPackageNames: [
+        '*',
+      ],
     },
     {
-      "matchPackageNames": [
-        "vue"
+      matchPackageNames: [
+        'vue',
       ],
-      "rangeStrategy": "bump",
-      "groupName": "Vue",
-      "separateMultipleMinor": true,
-      "separateMinorPatch": true
+      rangeStrategy: 'bump',
+      groupName: 'Vue',
+      separateMultipleMinor: true,
+      separateMinorPatch: true,
     },
     {
-      "matchPackageNames": [
-        "@vue/language-server",
-        "vue-tsc"
+      matchPackageNames: [
+        '@vue/language-server',
+        'vue-tsc',
       ],
-      "rangeStrategy": "pin",
-      "groupName": "Volar"
+      rangeStrategy: 'pin',
+      groupName: 'Volar',
     },
     {
-      "matchPackageNames": [
-        "nuxt",
-        "@nuxt/kit"
+      matchPackageNames: [
+        'nuxt',
+        '@nuxt/kit',
       ],
-      "rangeStrategy": "bump",
-      "groupName": "Nuxt",
-      "separateMultipleMinor": true,
-      "separateMinorPatch": true
+      rangeStrategy: 'bump',
+      groupName: 'Nuxt',
+      separateMultipleMinor: true,
+      separateMinorPatch: true,
     },
     {
-      "matchPackageNames": [
-        "@yandex/**"
+      matchPackageNames: [
+        '@yandex/**',
       ],
-      groupName: "Yandex",
-    }
+      groupName: 'Yandex',
+    },
   ],
-  "labels": [
-    "3.x",
-    "dependencies"
+  labels: [
+    '3.x',
+    'dependencies',
   ],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "commitMessageAction": "chore(deps): Lockfile Maintenance",
-    "schedule": [
-      "before 4am on friday"
-    ]
+  lockFileMaintenance: {
+    enabled: true,
+    commitMessageAction: 'chore(deps): Lockfile Maintenance',
+    schedule: [
+      'before 4am on friday',
+    ],
   },
-  "separateMultipleMajor": true,
-  "updateInternalDeps": true,
-  "baseBranches": [
-    "master"
+  separateMultipleMajor: true,
+  updateInternalDeps: true,
+  baseBranchPatterns: [
+    'master',
   ],
   extends: [
-    ":automergeDisabled",
-    ":dependencyDashboard",
-    "group:monorepos",
-    "group:recommended",
-    "replacements:all"
+    ':automergeDisabled',
+    ':dependencyDashboard',
+    'group:monorepos',
+    'group:recommended',
+    'replacements:all',
   ],
-  rangeStrategy: "bump",
-  "npm": {
-    "commitMessageTopic": "{{prettyDepType}} {{depName}}"
+  rangeStrategy: 'bump',
+  npm: {
+    commitMessageTopic: '{{prettyDepType}} {{depName}}',
   },
-  "vulnerabilityAlerts": {
+  vulnerabilityAlerts: {
     enabled: true,
-    "commitMessageSuffix": "chore(deps-security)",
+    commitMessageSuffix: 'chore(deps-security)',
   },
-  "constraints": {
-    "node": "^22 || ^24"
-  }
+  constraints: {
+    node: '^22 || ^24',
+  },
 }
