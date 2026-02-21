@@ -3991,6 +3991,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@volar/language-core@npm:2.4.28":
+  version: 2.4.28
+  resolution: "@volar/language-core@npm:2.4.28"
+  dependencies:
+    "@volar/source-map": "npm:2.4.28"
+  checksum: 10/6c735027df0dfee142654e0aa9265111a82c21134366c08f4764743f74875ba8314fdc98865d37bf83ac7409dfea90b8538181a966681f3d01f68bbd999fef3a
+  languageName: node
+  linkType: hard
+
 "@volar/source-map@npm:2.4.27":
   version: 2.4.27
   resolution: "@volar/source-map@npm:2.4.27"
@@ -3998,7 +4007,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@volar/typescript@npm:2.4.27, @volar/typescript@npm:^2.4.11":
+"@volar/source-map@npm:2.4.28":
+  version: 2.4.28
+  resolution: "@volar/source-map@npm:2.4.28"
+  checksum: 10/494b086be7ef6a46993941144a6961dcf9ecc4c830e2279031004496a7480727d6b0dc3f16776bf83aafe005084655c5664198f362a2c975d8267855de7b0a27
+  languageName: node
+  linkType: hard
+
+"@volar/typescript@npm:2.4.28":
+  version: 2.4.28
+  resolution: "@volar/typescript@npm:2.4.28"
+  dependencies:
+    "@volar/language-core": "npm:2.4.28"
+    path-browserify: "npm:^1.0.1"
+    vscode-uri: "npm:^3.0.8"
+  checksum: 10/6176e1fccc3c060a6393ab33b9befb828542a813a72201f0a83a8e6607055ac98a838db32ce9f54fe305df51cd1fa0eefc30d5e16dd2391af0563c76746f6679
+  languageName: node
+  linkType: hard
+
+"@volar/typescript@npm:^2.4.11":
   version: 2.4.27
   resolution: "@volar/typescript@npm:2.4.27"
   dependencies:
@@ -4342,7 +4369,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/language-core@npm:3.2.2, @vue/language-core@npm:^3.2.1":
+"@vue/language-core@npm:3.2.5":
+  version: 3.2.5
+  resolution: "@vue/language-core@npm:3.2.5"
+  dependencies:
+    "@volar/language-core": "npm:2.4.28"
+    "@vue/compiler-dom": "npm:^3.5.0"
+    "@vue/shared": "npm:^3.5.0"
+    alien-signals: "npm:^3.0.0"
+    muggle-string: "npm:^0.4.1"
+    path-browserify: "npm:^1.0.1"
+    picomatch: "npm:^4.0.2"
+  checksum: 10/ff12b29e3e018ea4b2cc265fb41c3b36ec1ca464ec009ea865d152ae82762782f393632a6a94c7c7488bd411066acdb337f5dffbc2c56ea53ba31dcb851a132c
+  languageName: node
+  linkType: hard
+
+"@vue/language-core@npm:^3.2.1":
   version: 3.2.2
   resolution: "@vue/language-core@npm:3.2.2"
   dependencies:
@@ -6984,7 +7026,7 @@ __metadata:
     "@types/node": "npm:^25.0.9"
     examples: "workspace:*"
     nuxt: "npm:^4.2.2"
-    vue-tsc: "npm:3.2.2"
+    vue-tsc: "npm:3.2.5"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -7001,7 +7043,7 @@ __metadata:
     typescript: "npm:5.9.3"
     vite: "npm:^7.3.1"
     vue: "npm:^3.5.27"
-    vue-tsc: "npm:3.2.2"
+    vue-tsc: "npm:3.2.5"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -7025,7 +7067,7 @@ __metadata:
     typescript: "npm:5.9.3"
     vite: "npm:^7.3.1"
     vue: "npm:^3.5.27"
-    vue-tsc: "npm:3.2.2"
+    vue-tsc: "npm:3.2.5"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -13538,17 +13580,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:3.2.2":
-  version: 3.2.2
-  resolution: "vue-tsc@npm:3.2.2"
+"vue-tsc@npm:3.2.5":
+  version: 3.2.5
+  resolution: "vue-tsc@npm:3.2.5"
   dependencies:
-    "@volar/typescript": "npm:2.4.27"
-    "@vue/language-core": "npm:3.2.2"
+    "@volar/typescript": "npm:2.4.28"
+    "@vue/language-core": "npm:3.2.5"
   peerDependencies:
     typescript: ">=5.0.0"
   bin:
     vue-tsc: bin/vue-tsc.js
-  checksum: 10/f470653d0fd67f346acf2de24045ebb93adbca3d9d9bb9a798d0ae406774c4fe9e5d96c0399054f31dcd5573e6fd386c184d2a65ab5d66ae2fa151cbb485d7bb
+  checksum: 10/956e121e324f790d4a26af7f3bada9d2feb66748489b56d5221ac2c23374ffdaec98f0df4039289dde5b7f7731ba350cbaca5f8a5b1f4db9107f4fbca125413e
   languageName: node
   linkType: hard
 
@@ -13601,7 +13643,7 @@ __metadata:
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-lib-inject-css: "npm:^2.2.2"
     vue: "npm:^3.5.27"
-    vue-tsc: "npm:3.2.2"
+    vue-tsc: "npm:3.2.5"
   peerDependencies:
     "@yandex/ymaps3-cartesian-projection": ">=0.0.6"
     "@yandex/ymaps3-clusterer": ">=0.0.12"
