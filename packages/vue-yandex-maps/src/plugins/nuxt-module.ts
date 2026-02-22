@@ -46,7 +46,6 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
     setup(options, nuxt) {
         if (!nuxt.options.runtimeConfig) {
             nuxt.options.runtimeConfig = {
-                // @ts-expect-error Types error
                 app: {},
                 // @ts-expect-error Types error
                 public: {},
