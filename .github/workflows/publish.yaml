@@ -84,7 +84,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
       - run: yarn lint && yarn build
-      - run: npm publish --provenance --workspace=packages/vue-yandex-maps
+      - run: npm publish --provenance --tag=v2 --workspace=packages/vue-yandex-maps
         continue-on-error: true
   github-release:
     name: Release tag to Github
