@@ -1,12 +1,13 @@
-import { shallowRef } from 'vue';
-import type { Ref } from 'vue';
-import type { OverloadParameters } from './types/overload-extract.ts';
-import { safeComputed, safeRef } from './utils/system.ts';
-import type { Apikeys } from '@yandex/ymaps3-types/imperative/config';
-import type { YMapEntity } from '@yandex/ymaps3-types';
+import type {Ref} from 'vue';
+import {shallowRef} from 'vue';
+import type {OverloadParameters} from './types/overload-extract.ts';
+import {safeComputed, safeRef} from './utils/system.ts';
+import type {Apikeys} from '@yandex/ymaps3-types/imperative/config';
+import type {YMapEntity} from '@yandex/ymaps3-types';
 
 export interface IYandexMapTrafficLayerProps {
     visible: boolean;
+
     [key: string]: any;
 }
 
@@ -14,7 +15,8 @@ export declare class IYandexMapTrafficLayer extends YMapEntity<IYandexMapTraffic
 
 }
 
-export interface IYandexMapTrafficEventsLayerProps extends IYandexMapTrafficLayerProps {}
+export interface IYandexMapTrafficEventsLayerProps extends IYandexMapTrafficLayerProps {
+}
 
 export declare class IYandexMapTrafficEventsLayer extends YMapEntity<IYandexMapTrafficEventsLayerProps> {
 
@@ -148,6 +150,14 @@ export namespace VueYandexMaps {
          */
         scriptAttributes?: Record<Lowercase<string>, string | false>;
     }
+
+    export type NuxtModuleSettings = VueYandexMaps.PluginSettings & {
+        /**
+         * @description if true, modifies .nuxt/tsconfig.json with @yandex/ymaps3 typeRoots
+         * @default true
+         */
+        typesInjection?: boolean;
+    };
 
     /**
      * @description Strict-typed version of PluginSettings with all keys required
