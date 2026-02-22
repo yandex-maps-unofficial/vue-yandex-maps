@@ -10,8 +10,8 @@
 
 Добро пожаловать в Vue Yandex Maps 2.x!
 
-Это - обертка над Яндекс Картами 3.0 под Vue 2/3 и Nuxt с поддержкой TypeScript.
+Это - обертка над Яндекс Картами 3.0 под Vue и Nuxt с поддержкой TypeScript.
 
-[Документация версии v3](https://yandex-maps-unofficial.github.io/vue-yandex-maps/)
+[Актуальная документация](https://yandex-maps-unofficial.github.io/vue-yandex-maps/)
 
-Документация этой версии доступна в папке docs.
+[Документация версии 2.x](https://yandex-maps-v2.dk4000.pro/)
