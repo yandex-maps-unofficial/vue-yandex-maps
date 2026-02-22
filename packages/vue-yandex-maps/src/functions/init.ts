@@ -176,7 +176,7 @@ export function createYmapsOptions(options: YandexMapPluginSettings, ignoreNoCur
 
     const notAllowedKeys = Object.keys(optionsShallowClone)
         .filter(key => !(key in allowedOptionsKeys));
-    if (notAllowedKeys.length) {
+    if (notAllowedKeys.length && !notAllowedKeys.every(x => x === 'typesInjection')) {
         throwException({
             text: `You have passed unknown keys to createYmapsOptions: ${ notAllowedKeys.join(', ') }. Only ${ Object.keys(allowedOptionsKeys)
                 .join(', ') } are allowed.`,

@@ -1,10 +1,10 @@
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import { join, relative } from 'path';
-import type { YandexMapPluginSettings } from '../utils/init.ts';
+import type { YandexMapNuxtModuleSettings } from '../utils/init.ts';
 import type { NuxtModule } from 'nuxt/schema';
 
 // Module options TypeScript interface definition
-interface ModuleOptions extends YandexMapPluginSettings {
+interface ModuleOptions extends YandexMapNuxtModuleSettings {
 }
 
 declare module '@nuxt/schema' {
@@ -17,7 +17,7 @@ declare module '@nuxt/schema' {
     }
 
     interface PublicRuntimeConfig {
-        yandexMaps: YandexMapPluginSettings;
+        yandexMaps: YandexMapNuxtModuleSettings;
     }
 }
 
@@ -31,7 +31,7 @@ declare module 'nuxt/schema' {
     }
 
     interface PublicRuntimeConfig {
-        yandexMaps: YandexMapPluginSettings;
+        yandexMaps: YandexMapNuxtModuleSettings;
     }
 }
 
@@ -69,21 +69,25 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
         if (!nuxt.options.vite.optimizeDeps.exclude) nuxt.options.vite.optimizeDeps.exclude = [];
         nuxt.options.vite.optimizeDeps.exclude.push('vue-yandex-maps');
 
-        nuxt.hook('prepare:types', ({ tsConfig }) => {
-            let typeRoots = tsConfig.compilerOptions!.typeRoots as string[] | undefined;
-            if (!typeRoots) {
-                tsConfig.compilerOptions!.typeRoots = [];
-                typeRoots = tsConfig.compilerOptions!.typeRoots;
-            }
+        if (nuxt.options.runtimeConfig.public.yandexMaps.typesInjection !== false) {
+            nuxt.hook('prepare:types', ({ tsConfig }) => {
+                let typeRoots = tsConfig.compilerOptions!.typeRoots as string[] | undefined;
+                if (!typeRoots) {
+                    tsConfig.compilerOptions!.typeRoots = [];
+                    typeRoots = tsConfig.compilerOptions!.typeRoots;
+                }
 
-            const path = relative(nuxt.options.buildDir, nuxt.options.rootDir);
+                const path = relative(nuxt.options.buildDir, nuxt.options.rootDir);
 
-            typeRoots!.push(join(path, 'node_modules/@types'));
-            typeRoots!.push(join(path, 'node_modules/@yandex/ymaps3-types'));
+                if (!typeRoots?.some(x => x.endsWith('@types'))) {
+                    typeRoots!.push(join(path, 'node_modules/@types'));
+                }
 
-            if (!tsConfig.compilerOptions!.types) tsConfig.compilerOptions!.types = [];
-            tsConfig.compilerOptions!.types.push('vue-yandex-maps');
-        });
+                if (!typeRoots?.some(x => x.endsWith('@yandex/ymaps3-types'))) {
+                    typeRoots!.push(join(path, 'node_modules/@yandex/ymaps3-types'));
+                }
+            });
+        }
 
         addPlugin({
             src: createResolver(import.meta.url)

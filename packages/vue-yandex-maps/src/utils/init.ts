@@ -148,6 +148,14 @@ export interface YandexMapPluginSettings {
     scriptAttributes?: Record<Lowercase<string>, string | false>;
 }
 
+export type YandexMapNuxtModuleSettings = YandexMapPluginSettings & {
+    /**
+     * @description if true, modifies .nuxt/tsconfig.json with @yandex/ymaps3 typeRoots
+     * @default true
+     */
+    typesInjection?: boolean;
+};
+
 /**
      * @description Strict-typed version of PluginSettings with all keys required
      */
