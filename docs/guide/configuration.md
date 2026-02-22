@@ -145,7 +145,7 @@ app.use(createYmaps({
 Возможные значения:
 
 - `false`. Отключает хук `prepare:types` и какую-либо модификацию `tsconfig.json` библиотекой
-- `true` (по умолчанию). Библиотека модифицирует `typeRoots` и добавляет туда `node_modules/@yandex/ymaps3-types` и `node_modules/@types` (если их не было)
+- `true` (по умолчанию). Библиотека модифицирует `typeRoots`, добавляет туда `node_modules/@yandex/ymaps3-types` и `node_modules/@types` (если их не было), а также `vue-yandex-maps` в `types`
 
 ## Доступ к конфигурации
 

@@ -83,6 +83,9 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
                 if (!typeRoots?.some(x => x.endsWith('@yandex/ymaps3-types'))) {
                     typeRoots!.push(join(path, 'node_modules/@yandex/ymaps3-types'));
                 }
+
+                if (!tsConfig.compilerOptions!.types) tsConfig.compilerOptions!.types = [];
+                tsConfig.compilerOptions!.types.push('vue-yandex-maps');
             });
         }
 
