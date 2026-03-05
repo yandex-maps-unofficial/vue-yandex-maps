@@ -146,6 +146,12 @@ export interface YandexMapPluginSettings {
          * @note src will be ignored
          */
     scriptAttributes?: Record<Lowercase<string>, string | false>;
+    /**
+     * @description Sets script tag attributes
+     * @default lang apikey
+     * @note lang and apikey are ignored
+     */
+    scriptURLParameters?: Record<string, string>;
 }
 
 export type YandexMapNuxtModuleSettings = YandexMapPluginSettings & {

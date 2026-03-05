@@ -12,6 +12,9 @@ export default defineNuxtConfig({
                 scriptAttributes: {
                     referrerpolicy: false,
                 },
+                scriptURLParameters: {
+                    test: 'test',
+                },
             },
         },
     },

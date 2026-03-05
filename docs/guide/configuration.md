@@ -136,6 +136,10 @@ app.use(createYmaps({
 
 Если передать false, наш параметр будет удален.
 
+### scriptURLParameters
+
+Атрибуты для подстановки в URL (searchParams) при подключении скрипта карты. По умолчанию, содержит `lang` и `apikey` из настроек
+
 ### typesInjection
 
 ::: info Информация
