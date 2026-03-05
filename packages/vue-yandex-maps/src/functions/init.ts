@@ -71,7 +71,6 @@ export function initYmaps() {
 
         url.searchParams.set('lang', settings.lang || 'ru_RU');
         url.searchParams.set('apikey', settings.apikey);
-        url.searchParams.set('csp', '202512');
 
         const scriptAttributes: Record<string, string | false> = {
             async: '',
