@@ -13,7 +13,7 @@ export default defineNuxtConfig({
                     referrerpolicy: false,
                 },
                 scriptURLParameters: {
-                    test: 'test',
+                    csp: '202512',
                 },
             },
         },
