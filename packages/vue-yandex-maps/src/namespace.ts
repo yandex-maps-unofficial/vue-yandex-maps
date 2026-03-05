@@ -1,9 +1,9 @@
-import type { Ref } from 'vue';
-import { shallowRef } from 'vue';
-import type { OverloadParameters } from './types/overload-extract.ts';
-import { safeComputed, safeRef } from './utils/system.ts';
-import type { Apikeys } from '@yandex/ymaps3-types/imperative/config';
-import type { YMapEntity } from '@yandex/ymaps3-types';
+import type {Ref} from 'vue';
+import {shallowRef} from 'vue';
+import type {OverloadParameters} from './types/overload-extract.ts';
+import {safeComputed, safeRef} from './utils/system.ts';
+import type {Apikeys} from '@yandex/ymaps3-types/imperative/config';
+import type {YMapEntity} from '@yandex/ymaps3-types';
 
 export interface IYandexMapTrafficLayerProps {
     visible: boolean;
@@ -149,6 +149,12 @@ export namespace VueYandexMaps {
          * @note src will be ignored
          */
         scriptAttributes?: Record<Lowercase<string>, string | false>;
+        /**
+         * @description Sets script tag attributes
+         * @default lang apikey
+         * @note lang and apikey are ignored
+         */
+        scriptURLParameters?: Record<string, string>;
     }
 
     export type NuxtModuleSettings = VueYandexMaps.PluginSettings & {

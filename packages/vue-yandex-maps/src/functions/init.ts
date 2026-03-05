@@ -25,6 +25,7 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
     mapsRenderWaitDuration: true,
     mapsScriptWaitDuration: true,
     scriptAttributes: true,
+    scriptURLParameters: true,
     cdnLibraryLoading: true,
 };
 
@@ -63,8 +64,14 @@ export function initYmaps() {
         const yandexMapScript = document.createElement('SCRIPT');
         VueYandexMaps.script.value = yandexMapScript;
         const url = new URL(`${ settings.domain }/${ settings.version }/`);
+
+        for (const key in settings.scriptURLParameters) {
+            url.searchParams.set(key, settings.scriptURLParameters[key]);
+        }
+
         url.searchParams.set('lang', settings.lang || 'ru_RU');
         url.searchParams.set('apikey', settings.apikey);
+        url.searchParams.set('csp', '202512');
 
         const scriptAttributes: Record<string, string | false> = {
             async: '',
@@ -155,6 +162,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignore
         mapsScriptWaitDuration: true,
         servicesApikeys: null,
         scriptAttributes: {},
+        scriptURLParameters: {},
         cdnLibraryLoading: {},
         ...options,
     };
