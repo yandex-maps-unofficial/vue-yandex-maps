@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+Настройка, указанная ниже, позволяет протестировать [новые правила CSP Яндекса](https://yandex.ru/maps-api/docs/js-api/common/connection/csp.html). 
+
+Пример конфигурации:
+
+```typescript
+apikey: '123456', 
+scriptURLParameters: {
+  csp: '202512',
+},
+```
+
 - Добавлена возможность конфигурировать GET-параметры скрипта Карт через `scriptURLParameters`
 
 ## [2.3.1]
