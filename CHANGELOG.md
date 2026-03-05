@@ -1,6 +1,6 @@
 # Список изменений
 
-## [Unreleased]
+## [2.3.2]
 
 Настройка, указанная ниже, позволяет протестировать [новые правила CSP Яндекса](https://yandex.ru/maps-api/docs/js-api/common/connection/csp.html). 
 
