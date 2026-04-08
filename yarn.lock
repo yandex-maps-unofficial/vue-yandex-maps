@@ -4329,7 +4329,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/language-core@npm:3.2.5, @vue/language-core@npm:^3.2.1":
+"@vue/language-core@npm:3.2.6":
+  version: 3.2.6
+  resolution: "@vue/language-core@npm:3.2.6"
+  dependencies:
+    "@volar/language-core": "npm:2.4.28"
+    "@vue/compiler-dom": "npm:^3.5.0"
+    "@vue/shared": "npm:^3.5.0"
+    alien-signals: "npm:^3.0.0"
+    muggle-string: "npm:^0.4.1"
+    path-browserify: "npm:^1.0.1"
+    picomatch: "npm:^4.0.2"
+  checksum: 10/f6820a1dbce79d4f17272ab8ebdb75de622fec0f926f457cc809c08f5bcf3b0663af02bb247446b81693aad953d4a5eb186bafe9084cf2803e9472c79ca3352b
+  languageName: node
+  linkType: hard
+
+"@vue/language-core@npm:^3.2.1":
   version: 3.2.5
   resolution: "@vue/language-core@npm:3.2.5"
   dependencies:
@@ -6900,7 +6915,7 @@ __metadata:
     "@types/node": "npm:^25.3.3"
     examples: "workspace:*"
     nuxt: "npm:^4.3.1"
-    vue-tsc: "npm:3.2.5"
+    vue-tsc: "npm:3.2.6"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -6917,7 +6932,7 @@ __metadata:
     typescript: "npm:5.9.3"
     vite: "npm:^7.3.1"
     vue: "npm:^3.5.29"
-    vue-tsc: "npm:3.2.5"
+    vue-tsc: "npm:3.2.6"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -6941,7 +6956,7 @@ __metadata:
     typescript: "npm:5.9.3"
     vite: "npm:^7.3.1"
     vue: "npm:^3.5.29"
-    vue-tsc: "npm:3.2.5"
+    vue-tsc: "npm:3.2.6"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -13480,17 +13495,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:3.2.5":
-  version: 3.2.5
-  resolution: "vue-tsc@npm:3.2.5"
+"vue-tsc@npm:3.2.6":
+  version: 3.2.6
+  resolution: "vue-tsc@npm:3.2.6"
   dependencies:
     "@volar/typescript": "npm:2.4.28"
-    "@vue/language-core": "npm:3.2.5"
+    "@vue/language-core": "npm:3.2.6"
   peerDependencies:
     typescript: ">=5.0.0"
   bin:
     vue-tsc: bin/vue-tsc.js
-  checksum: 10/956e121e324f790d4a26af7f3bada9d2feb66748489b56d5221ac2c23374ffdaec98f0df4039289dde5b7f7731ba350cbaca5f8a5b1f4db9107f4fbca125413e
+  checksum: 10/4772ad74b7aea2a82d74fdc61fe15d0e54213a4ebca108675e12869257f9a443381ab10401f3b446121970bc2514cf9f718445815dd4e61203791ff875397f1f
   languageName: node
   linkType: hard
 
@@ -13543,7 +13558,7 @@ __metadata:
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-lib-inject-css: "npm:^2.2.2"
     vue: "npm:^3.5.29"
-    vue-tsc: "npm:3.2.5"
+    vue-tsc: "npm:3.2.6"
   peerDependencies:
     "@yandex/ymaps3-cartesian-projection": ">=0.0.6"
     "@yandex/ymaps3-clusterer": ">=0.0.12"
