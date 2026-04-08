@@ -1,9 +1,9 @@
-import type { Ref } from 'vue';
-import { shallowRef } from 'vue';
-import type { OverloadParameters } from './types/overload-extract.ts';
-import { safeComputed, safeRef } from './utils/system.ts';
-import type { Apikeys } from '@yandex/ymaps3-types/imperative/config';
-import type { YMapEntity } from '@yandex/ymaps3-types';
+import type {Ref} from 'vue';
+import {shallowRef} from 'vue';
+import type {OverloadParameters} from './types/overload-extract.ts';
+import {safeComputed, safeRef} from './utils/system.ts';
+import type {Apikeys} from '@yandex/ymaps3-types/imperative/config';
+import type {YMapEntity} from '@yandex/ymaps3-types';
 
 export interface IYandexMapTrafficLayerProps {
     visible: boolean;
@@ -155,6 +155,11 @@ export namespace VueYandexMaps {
          * @note lang and apikey are ignored
          */
         scriptURLParameters?: Record<string, string>;
+        /**
+         * @description Sets a selector for map elements to identify components inside of them. Setting this to false will disable all those methods at a risk of duplicate components and more stuff breaking
+         * @default ymaps,ymaps3
+         */
+        mapInnerSelector?: string | boolean;
     }
 
     export type NuxtModuleSettings = VueYandexMaps.PluginSettings & {

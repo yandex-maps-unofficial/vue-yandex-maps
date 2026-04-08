@@ -27,6 +27,7 @@ const allowedOptionsKeys: Record<keyof VueYandexMaps.PluginSettings, true> = {
     scriptAttributes: true,
     scriptURLParameters: true,
     cdnLibraryLoading: true,
+    mapInnerSelector: true,
 };
 
 export function initYmaps() {
@@ -163,6 +164,7 @@ export function createYmapsOptions(options: VueYandexMaps.PluginSettings, ignore
         scriptAttributes: {},
         scriptURLParameters: {},
         cdnLibraryLoading: {},
+        mapInnerSelector: true,
         ...options,
     };
     if (!optionsShallowClone.apikey) {

@@ -7,6 +7,7 @@ import { setupMapChildren } from '../utils/setupMapChildren.ts';
 import { getMarkerContainerProps } from '../utils/marker.ts';
 
 import type { YandexMapMarkerPosition } from '../types/marker.ts';
+import { getMapsInnerSelector } from '../utils/map.ts';
 
 export default defineComponent({
     name: 'YandexMapMarker',
@@ -83,9 +84,12 @@ export default defineComponent({
 
         const element = ref<null | HTMLDivElement>(null);
 
-        function clearElement() {
-            if (!element.value?.parentElement?.closest('ymaps')) element.value?.remove();
-        }
+function clearElement() {
+    const selector = getMapsInnerSelector();
+    if (selector === false) return;
+
+    if (!element.value?.parentElement?.closest(selector)) element.value?.remove();
+}
 
         onMounted(async () => {
             if (!props.settings.coordinates) {
@@ -105,11 +109,14 @@ export default defineComponent({
 
         let mapParent: HTMLElement | undefined = undefined;
 
-        onUpdated(() => {
-            if (!mapParent && element.value?.parentElement?.closest('ymaps')) mapParent = element.value.parentElement;
-            else if (mapParent && element.value && !element.value?.parentElement?.closest('ymaps')) mapParent.appendChild(element.value);
-            clearElement();
-        });
+onUpdated(() => {
+    const selector = getMapsInnerSelector();
+    if (selector === false) return;
+
+    if (!mapParent && element.value?.parentElement?.closest(selector)) mapParent = element.value.parentElement;
+    else if (mapParent && element.value && !element.value?.parentElement?.closest(selector)) mapParent.appendChild(element.value);
+    clearElement();
+});
 
         const rootProps = computed(() => getMarkerContainerProps({
             position: props.position,
