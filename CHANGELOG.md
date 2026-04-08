@@ -1,6 +1,6 @@
 # Список изменений
 
-## [Unreleased]
+## [3.0.3]
 
 - Исправлена ошибка, при которой маркеры перестали отображаться 8 апреля. См. https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/589
 
