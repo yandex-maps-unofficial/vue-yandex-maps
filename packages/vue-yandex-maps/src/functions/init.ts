@@ -35,6 +35,7 @@ const allowedOptionsKeys: Record<keyof YandexMapPluginSettings, true> = {
     scriptAttributes: true,
     scriptURLParameters: true,
     cdnLibraryLoading: true,
+    mapInnerSelector: true,
 };
 
 export function initYmaps() {
@@ -173,6 +174,7 @@ export function createYmapsOptions(options: YandexMapPluginSettings, ignoreNoCur
         scriptAttributes: {},
         scriptURLParameters: {},
         cdnLibraryLoading: {},
+        mapInnerSelector: true,
         ...options,
     };
     if (!optionsShallowClone.apikey) {

@@ -152,6 +152,11 @@ export interface YandexMapPluginSettings {
      * @note lang and apikey are ignored
      */
     scriptURLParameters?: Record<string, string>;
+    /**
+     * @description Sets a selector for map elements to identify components inside of them. Setting this to false will disable all those methods at a risk of duplicate components and more stuff breaking
+     * @default ymaps,ymaps3
+     */
+    mapInnerSelector?: string | boolean;
 }
 
 export type YandexMapNuxtModuleSettings = YandexMapPluginSettings & {

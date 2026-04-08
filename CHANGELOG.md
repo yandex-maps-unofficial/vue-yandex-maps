@@ -1,5 +1,9 @@
 # Список изменений
 
+## [Unreleased]
+
+- Исправлена ошибка, при которой маркеры перестали отображаться 8 апреля. См. https://github.com/yandex-maps-unofficial/vue-yandex-maps/issues/589
+
 ## [3.0.2]
 
 Настройка, указанная ниже, позволяет протестировать [новые правила CSP Яндекса](https://yandex.ru/maps-api/docs/js-api/common/connection/csp.html). 

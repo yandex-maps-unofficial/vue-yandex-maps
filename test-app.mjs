@@ -68,11 +68,11 @@ spawnedProcess.once('spawn', async () => {
     });
 
     try {
-        await page.waitForSelector('ymaps .cluster', { timeout: 1000 * 10 });
+        await page.waitForSelector('ymaps3 .cluster', { timeout: 1000 * 10 });
     }
     catch (e) {
         spawnedProcess.kill();
-        throw new Error('Test failed: selector "ymaps .cluster" was not found.');
+        throw new Error('Test failed: selector "ymaps3 .cluster" was not found.');
     }
 
     spawnedProcess.kill();

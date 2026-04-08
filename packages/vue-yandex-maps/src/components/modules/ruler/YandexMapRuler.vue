@@ -10,6 +10,7 @@ import type { YMapMarker, YMapMarkerProps } from '@yandex/ymaps3-types';
 import { hF } from '../../../utils/system.ts';
 import { getMarkerContainerProps } from '../../../utils/marker.ts';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
+import { getMapsInnerSelector } from '../../../utils/map.ts';
 
 type YMapRulerSettings = ConstructorParameters<typeof YMapRuler>[0];
 export type YandexMapRulerSettings = Omit<YMapRulerSettings, 'point' | 'previewPoint'>;
@@ -166,6 +167,7 @@ export default defineComponent({
         // This is MANDATORY for this component
         return () => {
             const list = Object.values(entities.value);
+            const selector = getMapsInnerSelector();
 
             const entitiesSlots = list.map(({ entity, state }) => {
                 return hF([
@@ -194,7 +196,7 @@ export default defineComponent({
                             };
 
                             // @ts-expect-error Protected prop
-                            if (entity.children.length && (element as HTMLElement).closest('ymaps')) {
+                            if (selector !== false && entity.children.length && (element as HTMLElement).closest(selector)) {
                                 // @ts-expect-error Protected prop
                                 const marker = entity.children[0];
 
