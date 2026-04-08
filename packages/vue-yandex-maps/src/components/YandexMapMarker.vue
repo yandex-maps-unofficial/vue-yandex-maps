@@ -84,12 +84,12 @@ export default defineComponent({
 
         const element = ref<null | HTMLDivElement>(null);
 
-function clearElement() {
-    const selector = getMapsInnerSelector();
-    if (selector === false) return;
+        function clearElement() {
+            const selector = getMapsInnerSelector();
+            if (selector === false) return;
 
-    if (!element.value?.parentElement?.closest(selector)) element.value?.remove();
-}
+            if (!element.value?.parentElement?.closest(selector)) element.value?.remove();
+        }
 
         onMounted(async () => {
             if (!props.settings.coordinates) {
@@ -109,14 +109,14 @@ function clearElement() {
 
         let mapParent: HTMLElement | undefined = undefined;
 
-onUpdated(() => {
-    const selector = getMapsInnerSelector();
-    if (selector === false) return;
+        onUpdated(() => {
+            const selector = getMapsInnerSelector();
+            if (selector === false) return;
 
-    if (!mapParent && element.value?.parentElement?.closest(selector)) mapParent = element.value.parentElement;
-    else if (mapParent && element.value && !element.value?.parentElement?.closest(selector)) mapParent.appendChild(element.value);
-    clearElement();
-});
+            if (!mapParent && element.value?.parentElement?.closest(selector)) mapParent = element.value.parentElement;
+            else if (mapParent && element.value && !element.value?.parentElement?.closest(selector)) mapParent.appendChild(element.value);
+            clearElement();
+        });
 
         const rootProps = computed(() => getMarkerContainerProps({
             position: props.position,
