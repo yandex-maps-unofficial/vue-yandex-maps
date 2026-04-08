@@ -185,6 +185,6 @@ export function deleteMapChild({
 }
 
 export function getMapsInnerSelector() {
-    if (typeof yandexMapSettings.value.mapInnerSelector === 'string' || yandexMapSettings.value.mapInnerSelector === false) return yandexMapSettings.value.mapInnerSelector;
+    if (typeof VueYandexMaps.settings.value.mapInnerSelector === 'string' || VueYandexMaps.settings.value.mapInnerSelector === false) return VueYandexMaps.settings.value.mapInnerSelector;
     return 'ymaps,ymaps3';
 }
