@@ -108,7 +108,6 @@ const generatePoints = () => {
 
     const points: Point[] = [];
 
-    // @ts-expect-error lib err
     for (const i of Array(10).keys()) {
         const lng = (Math.random() * LNG_RANGE) + LNG_RIGHT;
         const lat = (Math.random() * LAT_RANGE) + LAT_TOP;
