@@ -37,7 +37,7 @@ if (!(type in envs)) throw new Error(`Incorrect ${ type } type`);
 
 const env = envs[type];
 
-const spawnedProcess = spawn(env.command[0], env.command.slice(1, env.command.length));
+const spawnedProcess = spawn(env.command[0], env.command.slice(1));
 
 spawnedProcess.once('spawn', async () => {
     let retries = 0;
@@ -76,6 +76,7 @@ spawnedProcess.once('spawn', async () => {
     }
 
     spawnedProcess.kill();
-    process.exit();
+    await browser.close();
+    process.exit(0);
 });
 

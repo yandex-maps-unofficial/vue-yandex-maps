@@ -99,7 +99,7 @@ export default defineComponent({
             emit('update:modelValue', mapChildren);
         });
 
-        let mapParent: HTMLElement | undefined = undefined;
+        let mapParent: HTMLElement | undefined;
 
         onUpdated(() => {
             const selector = getMapsInnerSelector();
