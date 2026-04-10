@@ -7,7 +7,7 @@
 В нём также доступны события типа `onClick` и пр., см. [FeatureClickEvents](https://yandex.ru/maps-api/docs/js-api/ref/index.html#interface-featureclickevents).
 
 ::: info Важно
-Параметр в `settings` `coordinates` является обязательным к указанию.
+Параметр в `settings` `coordinates` является обязательным к указанию. Кроме того, в маркер не прокидываются автоматически data-v-атрибуты из-за особенностей отрисовки.
 :::
 
 ## Дополнительные параметры
