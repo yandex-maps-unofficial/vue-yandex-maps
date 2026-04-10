@@ -67,7 +67,7 @@ import {
     YandexMapMarker,
 } from 'vue-yandex-maps';
 
-import { ref, shallowRef, computed, useTemplateRef } from 'vue';
+import { ref, shallowRef } from 'vue';
 import type { Ref } from 'vue';
 import type { LngLat, YMap } from '@yandex/ymaps3-types';
 
