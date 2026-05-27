@@ -40,7 +40,9 @@ export default defineConfig({
         del({ targets: 'dist/*' }),
         vue(),
         libInjectCss(),
-        dts(),
+        dts({
+            processor: 'vue',
+        }),
         copy({
             targets: [
                 {
