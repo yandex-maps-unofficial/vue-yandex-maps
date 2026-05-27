@@ -368,7 +368,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/vue@npm:^6.0.1":
+"@astrojs/vue@npm:6.0.1":
   version: 6.0.1
   resolution: "@astrojs/vue@npm:6.0.1"
   dependencies:
@@ -3987,7 +3987,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stylistic/eslint-plugin@npm:^5.10.0":
+"@stylistic/eslint-plugin@npm:5.10.0":
   version: 5.10.0
   resolution: "@stylistic/eslint-plugin@npm:5.10.0"
   dependencies:
@@ -4149,7 +4149,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^25.9.1":
+"@types/node@npm:25.9.1":
   version: 25.9.1
   resolution: "@types/node@npm:25.9.1"
   dependencies:
@@ -4179,7 +4179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^8.60.0":
+"@typescript-eslint/eslint-plugin@npm:8.60.0":
   version: 8.60.0
   resolution: "@typescript-eslint/eslint-plugin@npm:8.60.0"
   dependencies:
@@ -4199,7 +4199,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^8.60.0":
+"@typescript-eslint/parser@npm:8.60.0":
   version: 8.60.0
   resolution: "@typescript-eslint/parser@npm:8.60.0"
   dependencies:
@@ -4513,6 +4513,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vitejs/plugin-vue@npm:6.0.7, @vitejs/plugin-vue@npm:^6.0.7":
+  version: 6.0.7
+  resolution: "@vitejs/plugin-vue@npm:6.0.7"
+  dependencies:
+    "@rolldown/pluginutils": "npm:^1.0.1"
+  peerDependencies:
+    vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+    vue: ^3.2.25
+  checksum: 10/7084d5acda787dd8597ded0c7b313efa0804b4d6e9434d0406e35f31f331ccb5ab79088096cc6280e9fe6c119d97e66ebdf40491b559252fd2926a4ea3bccb26
+  languageName: node
+  linkType: hard
+
 "@vitejs/plugin-vue@npm:^5.2.1":
   version: 5.2.4
   resolution: "@vitejs/plugin-vue@npm:5.2.4"
@@ -4532,18 +4544,6 @@ __metadata:
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     vue: ^3.2.25
   checksum: 10/7c7816ecdaaf010e7913b6b39273263c747ce6834bfbb21530f438e9785f2df8a572527fee1bd538e605ee3b06df54d6e8db9a2bb549ad6292688a249775fef6
-  languageName: node
-  linkType: hard
-
-"@vitejs/plugin-vue@npm:^6.0.7":
-  version: 6.0.7
-  resolution: "@vitejs/plugin-vue@npm:6.0.7"
-  dependencies:
-    "@rolldown/pluginutils": "npm:^1.0.1"
-  peerDependencies:
-    vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
-    vue: ^3.2.25
-  checksum: 10/7084d5acda787dd8597ded0c7b313efa0804b4d6e9434d0406e35f31f331ccb5ab79088096cc6280e9fe6c119d97e66ebdf40491b559252fd2926a4ea3bccb26
   languageName: node
   linkType: hard
 
@@ -5018,7 +5018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/tsconfig@npm:^0.9.1":
+"@vue/tsconfig@npm:0.9.1":
   version: 0.9.1
   resolution: "@vue/tsconfig@npm:0.9.1"
   peerDependencies:
@@ -5491,7 +5491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:^6.3.8":
+"astro@npm:6.3.8":
   version: 6.3.8
   resolution: "astro@npm:6.3.8"
   dependencies:
@@ -6454,7 +6454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deep-object-diff@npm:^1.1.9":
+"deep-object-diff@npm:1.1.9":
   version: 1.1.9
   resolution: "deep-object-diff@npm:1.1.9"
   checksum: 10/b9771cc1ca08a34e408309eaab967bd2ab697684abdfa1262f4283ced8230a9ace966322f356364ff71a785c6e9cc356b7596582e900da5726e6b87d4b2a1463
@@ -7069,7 +7069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import-x@npm:^4.16.2":
+"eslint-plugin-import-x@npm:4.16.2":
   version: 4.16.2
   resolution: "eslint-plugin-import-x@npm:4.16.2"
   dependencies:
@@ -7096,7 +7096,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:^10.9.1":
+"eslint-plugin-vue@npm:10.9.1":
   version: 10.9.1
   resolution: "eslint-plugin-vue@npm:10.9.1"
   dependencies:
@@ -7153,7 +7153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^10.4.0":
+"eslint@npm:10.4.0":
   version: 10.4.0
   resolution: "eslint@npm:10.4.0"
   dependencies:
@@ -7309,8 +7309,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-astro@workspace:packages/examples/astro"
   dependencies:
-    "@astrojs/vue": "npm:^6.0.1"
-    astro: "npm:^6.3.8"
+    "@astrojs/vue": "npm:6.0.1"
+    astro: "npm:6.3.8"
     examples: "workspace:*"
     vue: "npm:3.5.35"
     vue-yandex-maps: "workspace:*"
@@ -7321,7 +7321,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-nuxt@workspace:packages/examples/nuxt"
   dependencies:
-    "@types/node": "npm:^25.9.1"
+    "@types/node": "npm:25.9.1"
     examples: "workspace:*"
     nuxt: "npm:4.4.6"
     vue-tsc: "npm:3.3.2"
@@ -7333,13 +7333,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-vue@workspace:packages/examples/vue"
   dependencies:
-    "@types/node": "npm:^25.9.1"
-    "@vitejs/plugin-vue": "npm:^6.0.7"
-    "@vue/tsconfig": "npm:^0.9.1"
+    "@types/node": "npm:25.9.1"
+    "@vitejs/plugin-vue": "npm:6.0.7"
+    "@vue/tsconfig": "npm:0.9.1"
     examples: "workspace:*"
-    npm-run-all2: "npm:^9.0.1"
+    npm-run-all2: "npm:9.0.1"
     typescript: "npm:6.0.3"
-    vite: "npm:^8.0.14"
+    vite: "npm:8.0.14"
     vue: "npm:3.5.35"
     vue-tsc: "npm:3.3.2"
     vue-yandex-maps: "workspace:*"
@@ -7350,9 +7350,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples@workspace:packages/examples/examples"
   dependencies:
-    "@types/node": "npm:^25.9.1"
-    "@vitejs/plugin-vue": "npm:^6.0.7"
-    "@vue/tsconfig": "npm:^0.9.1"
+    "@types/node": "npm:25.9.1"
+    "@vitejs/plugin-vue": "npm:6.0.7"
+    "@vue/tsconfig": "npm:0.9.1"
     "@yandex/ymaps3-context-menu": "npm:^0.0.2"
     "@yandex/ymaps3-default-ui-theme": "npm:^0.0.24"
     "@yandex/ymaps3-drawer-control": "npm:^0.0.2"
@@ -7361,9 +7361,9 @@ __metadata:
     "@yandex/ymaps3-signpost": "npm:^0.0.2"
     "@yandex/ymaps3-spinner": "npm:^0.0.2"
     "@yandex/ymaps3-types": "npm:^1.0.19724900"
-    npm-run-all2: "npm:^9.0.1"
+    npm-run-all2: "npm:9.0.1"
     typescript: "npm:6.0.3"
-    vite: "npm:^8.0.14"
+    vite: "npm:8.0.14"
     vue: "npm:3.5.35"
     vue-tsc: "npm:3.3.2"
     vue-yandex-maps: "workspace:*"
@@ -10099,7 +10099,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-run-all2@npm:^9.0.1":
+"npm-run-all2@npm:9.0.1":
   version: 9.0.1
   resolution: "npm-run-all2@npm:9.0.1"
   dependencies:
@@ -11777,7 +11777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-copy@npm:^3.5.0":
+"rollup-plugin-copy@npm:3.5.0":
   version: 3.5.0
   resolution: "rollup-plugin-copy@npm:3.5.0"
   dependencies:
@@ -11790,7 +11790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-delete@npm:^3.0.2":
+"rollup-plugin-delete@npm:3.0.2":
   version: 3.0.2
   resolution: "rollup-plugin-delete@npm:3.0.2"
   dependencies:
@@ -12918,7 +12918,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:6.0.3, typescript@npm:^6.0.3":
+"typescript@npm:6.0.3":
   version: 6.0.3
   resolution: "typescript@npm:6.0.3"
   bin:
@@ -12938,7 +12938,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^6.0.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>":
   version: 6.0.3
   resolution: "typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"
   bin:
@@ -13571,7 +13571,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-dts@npm:^4.5.4":
+"vite-plugin-dts@npm:4.5.4":
   version: 4.5.4
   resolution: "vite-plugin-dts@npm:4.5.4"
   dependencies:
@@ -13616,7 +13616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-lib-inject-css@npm:^2.2.2":
+"vite-plugin-lib-inject-css@npm:2.2.2":
   version: 2.2.2
   resolution: "vite-plugin-lib-inject-css@npm:2.2.2"
   dependencies:
@@ -13677,6 +13677,63 @@ __metadata:
     vite: ^6.0.0 || ^7.0.0
     vue: ^3.5.0
   checksum: 10/257c62e56e17a00d3395b9102f59dfa9b6f24ae0375b1c5d8b565ce2c105a22e7179b1b54991cc33171050da34d710d79c8b04498ba4fc015bf388c684f10237
+  languageName: node
+  linkType: hard
+
+"vite@npm:8.0.14":
+  version: 8.0.14
+  resolution: "vite@npm:8.0.14"
+  dependencies:
+    fsevents: "npm:~2.3.3"
+    lightningcss: "npm:^1.32.0"
+    picomatch: "npm:^4.0.4"
+    postcss: "npm:^8.5.15"
+    rolldown: "npm:1.0.2"
+    tinyglobby: "npm:^0.2.16"
+  peerDependencies:
+    "@types/node": ^20.19.0 || >=22.12.0
+    "@vitejs/devtools": ^0.1.18
+    esbuild: ^0.27.0 || ^0.28.0
+    jiti: ">=1.21.0"
+    less: ^4.0.0
+    sass: ^1.70.0
+    sass-embedded: ^1.70.0
+    stylus: ">=0.54.8"
+    sugarss: ^5.0.0
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    "@vitejs/devtools":
+      optional: true
+    esbuild:
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10/3747c9b9dabdfa5b840630c39b2c764afb3c3762816f3148afe7d516edc1889b60b666adeb4e98761c26fb8ed5ba3a9770df5c0450443daf4cdfac110bc6df1c
   languageName: node
   linkType: hard
 
@@ -13833,63 +13890,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^8.0.14":
-  version: 8.0.14
-  resolution: "vite@npm:8.0.14"
-  dependencies:
-    fsevents: "npm:~2.3.3"
-    lightningcss: "npm:^1.32.0"
-    picomatch: "npm:^4.0.4"
-    postcss: "npm:^8.5.15"
-    rolldown: "npm:1.0.2"
-    tinyglobby: "npm:^0.2.16"
-  peerDependencies:
-    "@types/node": ^20.19.0 || >=22.12.0
-    "@vitejs/devtools": ^0.1.18
-    esbuild: ^0.27.0 || ^0.28.0
-    jiti: ">=1.21.0"
-    less: ^4.0.0
-    sass: ^1.70.0
-    sass-embedded: ^1.70.0
-    stylus: ">=0.54.8"
-    sugarss: ^5.0.0
-    terser: ^5.16.0
-    tsx: ^4.8.1
-    yaml: ^2.4.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    "@vitejs/devtools":
-      optional: true
-    esbuild:
-      optional: true
-    jiti:
-      optional: true
-    less:
-      optional: true
-    sass:
-      optional: true
-    sass-embedded:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-    tsx:
-      optional: true
-    yaml:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: 10/3747c9b9dabdfa5b840630c39b2c764afb3c3762816f3148afe7d516edc1889b60b666adeb4e98761c26fb8ed5ba3a9770df5c0450443daf4cdfac110bc6df1c
-  languageName: node
-  linkType: hard
-
 "vitefu@npm:^1.1.2":
   version: 1.1.3
   resolution: "vitefu@npm:1.1.3"
@@ -13902,7 +13902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitepress@npm:^1.6.4":
+"vitepress@npm:1.6.4":
   version: 1.6.4
   resolution: "vitepress@npm:1.6.4"
   dependencies:
@@ -13961,7 +13961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-eslint-parser@npm:^10.4.0":
+"vue-eslint-parser@npm:10.4.0":
   version: 10.4.0
   resolution: "vue-eslint-parser@npm:10.4.0"
   dependencies:
@@ -14032,19 +14032,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vue-yandex-maps-monorepo@workspace:."
   dependencies:
-    "@stylistic/eslint-plugin": "npm:^5.10.0"
-    "@types/node": "npm:^25.9.1"
-    "@typescript-eslint/eslint-plugin": "npm:^8.60.0"
-    "@typescript-eslint/parser": "npm:^8.60.0"
-    eslint: "npm:^10.4.0"
-    eslint-plugin-import-x: "npm:^4.16.2"
-    eslint-plugin-vue: "npm:^10.9.1"
+    "@stylistic/eslint-plugin": "npm:5.10.0"
+    "@types/node": "npm:25.9.1"
+    "@typescript-eslint/eslint-plugin": "npm:8.60.0"
+    "@typescript-eslint/parser": "npm:8.60.0"
+    eslint: "npm:10.4.0"
+    eslint-plugin-import-x: "npm:4.16.2"
+    eslint-plugin-vue: "npm:10.9.1"
     examples: "workspace:^"
     puppeteer: "npm:25.1.0"
     typescript: "npm:6.0.3"
-    vite: "npm:^8.0.14"
-    vitepress: "npm:^1.6.4"
-    vue-eslint-parser: "npm:^10.4.0"
+    vite: "npm:8.0.14"
+    vitepress: "npm:1.6.4"
+    vue-eslint-parser: "npm:10.4.0"
     vue-yandex-maps: "workspace:^"
   languageName: unknown
   linkType: soft
@@ -14054,7 +14054,7 @@ __metadata:
   resolution: "vue-yandex-maps@workspace:packages/vue-yandex-maps"
   dependencies:
     "@nuxt/kit": "npm:4.4.6"
-    "@vitejs/plugin-vue": "npm:^6.0.7"
+    "@vitejs/plugin-vue": "npm:6.0.7"
     "@yandex/ymaps3-cartesian-projection": "npm:>=0.0.6"
     "@yandex/ymaps3-clusterer": "npm:>=0.0.12"
     "@yandex/ymaps3-context-menu": "npm:>=0.0.2"
@@ -14068,14 +14068,14 @@ __metadata:
     "@yandex/ymaps3-types": "npm:>=1.0.19724900"
     "@yandex/ymaps3-web-mercator-projection": "npm:>=0.0.5"
     "@yandex/ymaps3-world-utils": "npm:>=0.0.19230700"
-    deep-object-diff: "npm:^1.1.9"
+    deep-object-diff: "npm:1.1.9"
     nuxt: "npm:4.4.6"
-    rollup-plugin-copy: "npm:^3.5.0"
-    rollup-plugin-delete: "npm:^3.0.2"
-    typescript: "npm:^6.0.3"
-    vite: "npm:^8.0.14"
-    vite-plugin-dts: "npm:^4.5.4"
-    vite-plugin-lib-inject-css: "npm:^2.2.2"
+    rollup-plugin-copy: "npm:3.5.0"
+    rollup-plugin-delete: "npm:3.0.2"
+    typescript: "npm:6.0.3"
+    vite: "npm:8.0.14"
+    vite-plugin-dts: "npm:4.5.4"
+    vite-plugin-lib-inject-css: "npm:2.2.2"
     vue: "npm:3.5.35"
     vue-tsc: "npm:3.3.2"
   peerDependencies:
