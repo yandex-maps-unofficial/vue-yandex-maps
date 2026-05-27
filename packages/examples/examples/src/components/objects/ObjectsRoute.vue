@@ -13,6 +13,7 @@
                     location,
                     theme,
                     showScaleInCopyrights: true,
+                    distributionPosition: 'top right',
                 }"
                 :width="width"
             >
