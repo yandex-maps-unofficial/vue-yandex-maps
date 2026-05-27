@@ -44,11 +44,8 @@ import {
     yandexMapScript,
     yandexMapSettings,
 } from '../utils/init.ts';
-import type { YMapCopyrightsPosition } from '@yandex/ymaps3-types/imperative/YMapCopyrights';
 
-export type YandexMapSettings = Omit<YMapProps, 'projection'> & {
-    distributionPosition?: YMapCopyrightsPosition;
-};
+export type YandexMapSettings = Omit<YMapProps, 'projection'>;
 
 defineOptions({ name: 'YandexMap' });
 
