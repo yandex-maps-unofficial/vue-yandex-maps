@@ -50,7 +50,6 @@
       "matchPackageNames": [
         "vue"
       ],
-      "rangeStrategy": "bump",
       "groupName": "Vue",
       "separateMultipleMinor": true,
       "separateMinorPatch": true
@@ -60,7 +59,6 @@
         "@vue/language-server",
         "vue-tsc"
       ],
-      "rangeStrategy": "pin",
       "groupName": "Volar"
     },
     {
@@ -68,7 +66,6 @@
         "nuxt",
         "@nuxt/kit"
       ],
-      "rangeStrategy": "bump",
       "groupName": "Nuxt",
       "separateMultipleMinor": true,
       "separateMinorPatch": true
@@ -103,7 +100,7 @@
     "group:recommended",
     "replacements:all"
   ],
-  "rangeStrategy": "bump",
+  "rangeStrategy": "pin",
   "npm": {
     "commitMessageTopic": "{{prettyDepType}} {{depName}}"
   },
