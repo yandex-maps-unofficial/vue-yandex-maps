@@ -20,7 +20,6 @@
                     camera,
                     theme,
                     showScaleInCopyrights: true,
-                    distributionPosition: 'top left',
                 }"
                 :width="width"
             >
