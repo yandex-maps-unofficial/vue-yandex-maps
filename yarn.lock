@@ -7312,7 +7312,7 @@ __metadata:
     "@astrojs/vue": "npm:^6.0.1"
     astro: "npm:^6.3.8"
     examples: "workspace:*"
-    vue: "npm:^3.5.35"
+    vue: "npm:3.5.35"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -7340,7 +7340,7 @@ __metadata:
     npm-run-all2: "npm:^9.0.1"
     typescript: "npm:6.0.3"
     vite: "npm:^8.0.14"
-    vue: "npm:^3.5.35"
+    vue: "npm:3.5.35"
     vue-tsc: "npm:3.3.2"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
@@ -7364,7 +7364,7 @@ __metadata:
     npm-run-all2: "npm:^9.0.1"
     typescript: "npm:6.0.3"
     vite: "npm:^8.0.14"
-    vue: "npm:^3.5.35"
+    vue: "npm:3.5.35"
     vue-tsc: "npm:3.3.2"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
@@ -14076,7 +14076,7 @@ __metadata:
     vite: "npm:^8.0.14"
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-lib-inject-css: "npm:^2.2.2"
-    vue: "npm:^3.5.35"
+    vue: "npm:3.5.35"
     vue-tsc: "npm:3.3.2"
   peerDependencies:
     "@yandex/ymaps3-cartesian-projection": ">=0.0.6"
@@ -14100,6 +14100,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"vue@npm:3.5.35, vue@npm:^3.5.34":
+  version: 3.5.35
+  resolution: "vue@npm:3.5.35"
+  dependencies:
+    "@vue/compiler-dom": "npm:3.5.35"
+    "@vue/compiler-sfc": "npm:3.5.35"
+    "@vue/runtime-dom": "npm:3.5.35"
+    "@vue/server-renderer": "npm:3.5.35"
+    "@vue/shared": "npm:3.5.35"
+  peerDependencies:
+    typescript: "*"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/56b1157f82bf6a1f6d8051d7800904bc071bf0007ba81ef12df3446524f3f2d00408ab1b158f1cab0f7ea6fbbf88e503e6f482830a03ec0a7627a8c9cfcdae73
+  languageName: node
+  linkType: hard
+
 "vue@npm:^3.5.13":
   version: 3.5.32
   resolution: "vue@npm:3.5.32"
@@ -14115,24 +14133,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/00d7427efa08b7e30e03921b477ee26e646b7512d573cd069e46debc51727303244320a2bd642b7e1ef68502de6d95d47bb8391b9b2eac6b12b3f0b23ce25b82
-  languageName: node
-  linkType: hard
-
-"vue@npm:^3.5.34, vue@npm:^3.5.35":
-  version: 3.5.35
-  resolution: "vue@npm:3.5.35"
-  dependencies:
-    "@vue/compiler-dom": "npm:3.5.35"
-    "@vue/compiler-sfc": "npm:3.5.35"
-    "@vue/runtime-dom": "npm:3.5.35"
-    "@vue/server-renderer": "npm:3.5.35"
-    "@vue/shared": "npm:3.5.35"
-  peerDependencies:
-    typescript: "*"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10/56b1157f82bf6a1f6d8051d7800904bc071bf0007ba81ef12df3446524f3f2d00408ab1b158f1cab0f7ea6fbbf88e503e6f482830a03ec0a7627a8c9cfcdae73
   languageName: node
   linkType: hard
 
