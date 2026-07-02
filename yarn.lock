@@ -3685,12 +3685,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:25.9.1":
+"@types/node@npm:*":
   version: 25.9.1
   resolution: "@types/node@npm:25.9.1"
   dependencies:
     undici-types: "npm:>=7.24.0 <7.24.7"
   checksum: 10/8a1ccf60f0c0ca856d3324a690ee35776f26dfc1d51c3763aecdf246a3246a7971a0156bf6eb3239aa22dfa940eb361d048212f5c3204264d31ef4c41d17416a
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:26.1.0":
+  version: 26.1.0
+  resolution: "@types/node@npm:26.1.0"
+  dependencies:
+    undici-types: "npm:~8.3.0"
+  checksum: 10/fee720e8ddf8aa66a22bc5cf3209347f8dcc07cbf7475f966761684f04fb34b819739a311edbf87271d6c7f9f50b1f015d3ff9e36d67d04264aafe18ac9a3796
   languageName: node
   linkType: hard
 
@@ -6625,7 +6634,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-nuxt@workspace:packages/examples/nuxt"
   dependencies:
-    "@types/node": "npm:25.9.1"
+    "@types/node": "npm:26.1.0"
     examples: "workspace:*"
     nuxt: "npm:4.4.6"
     vue-tsc: "npm:3.3.2"
@@ -6637,7 +6646,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-vue@workspace:packages/examples/vue"
   dependencies:
-    "@types/node": "npm:25.9.1"
+    "@types/node": "npm:26.1.0"
     "@vitejs/plugin-vue": "npm:6.0.7"
     "@vue/tsconfig": "npm:0.9.1"
     examples: "workspace:*"
@@ -6654,7 +6663,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples@workspace:packages/examples/examples"
   dependencies:
-    "@types/node": "npm:25.9.1"
+    "@types/node": "npm:26.1.0"
     "@vitejs/plugin-vue": "npm:6.0.7"
     "@vue/tsconfig": "npm:0.9.1"
     "@yandex/ymaps3-context-menu": "npm:^0.0.2"
@@ -11731,6 +11740,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici-types@npm:~8.3.0":
+  version: 8.3.0
+  resolution: "undici-types@npm:8.3.0"
+  checksum: 10/6681d2837ac75a75ac1cc46090aa2b8ddc7c6b8ecc295a6cdb06838752a730da3d8afeecf05e5ab7903160eafad3a8b6ffa1927e5ded260590f4d4fef18646d5
+  languageName: node
+  linkType: hard
+
 "undici@npm:^6.25.0":
   version: 6.26.0
   resolution: "undici@npm:6.26.0"
@@ -12756,7 +12772,7 @@ __metadata:
   resolution: "vue-yandex-maps-monorepo@workspace:."
   dependencies:
     "@stylistic/eslint-plugin": "npm:5.10.0"
-    "@types/node": "npm:25.9.1"
+    "@types/node": "npm:26.1.0"
     "@typescript-eslint/eslint-plugin": "npm:8.60.0"
     "@typescript-eslint/parser": "npm:8.60.0"
     eslint: "npm:10.4.0"
