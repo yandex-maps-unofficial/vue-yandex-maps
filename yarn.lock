@@ -2115,6 +2115,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nuxt/kit@npm:4.5.0":
+  version: 4.5.0
+  resolution: "@nuxt/kit@npm:4.5.0"
+  dependencies:
+    c12: "npm:^3.3.4"
+    consola: "npm:^3.4.2"
+    defu: "npm:^6.1.7"
+    destr: "npm:^2.0.5"
+    errx: "npm:^0.1.0"
+    exsolve: "npm:^1.1.0"
+    ignore: "npm:^7.0.6"
+    jiti: "npm:^2.7.0"
+    klona: "npm:^2.0.6"
+    mlly: "npm:^1.8.2"
+    nostics: "npm:^1.1.4"
+    ohash: "npm:^2.0.11"
+    pathe: "npm:^2.0.3"
+    pkg-types: "npm:^2.3.1"
+    rc9: "npm:^3.0.1"
+    scule: "npm:^1.3.0"
+    semver: "npm:^7.8.5"
+    tinyglobby: "npm:^0.2.17"
+    ufo: "npm:^1.6.4"
+    unctx: "npm:^3.0.0"
+    untyped: "npm:^2.0.0"
+  checksum: 10/46b071777b40b9c5218c3895883502815f9157d9def561bb48cdda787595dc0ad5ca9b355462f4dae8805aecd9b792399430513db829192a55f8b88d87446f33
+  languageName: node
+  linkType: hard
+
 "@nuxt/nitro-server@npm:4.4.6":
   version: 4.4.6
   resolution: "@nuxt/nitro-server@npm:4.4.6"
@@ -6705,6 +6734,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"exsolve@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "exsolve@npm:1.1.0"
+  checksum: 10/ee1b1090cc0eb2e035f326855ad303e40c393e4577a5562e4b27a687a11dcaf2c7ef60b705367b48e38074188d50e0459300ae41f9104dbf034f21f6779591e0
+  languageName: node
+  linkType: hard
+
 "extend@npm:^3.0.0":
   version: 3.0.2
   resolution: "extend@npm:3.0.2"
@@ -7433,6 +7469,13 @@ __metadata:
   version: 7.0.5
   resolution: "ignore@npm:7.0.5"
   checksum: 10/f134b96a4de0af419196f52c529d5c6120c4456ff8a6b5a14ceaaa399f883e15d58d2ce651c9b69b9388491d4669dda47285d307e827de9304a53a1824801bc6
+  languageName: node
+  linkType: hard
+
+"ignore@npm:^7.0.6":
+  version: 7.0.6
+  resolution: "ignore@npm:7.0.6"
+  checksum: 10/8fdf3739b032de26f0a022471ec198be4529c605b7c2a551e6ece52d1be5eb22b920bff17d044d710512103f62bbf64ac4a53186b2323729e6e352b91df9c6ae
   languageName: node
   linkType: hard
 
@@ -9090,6 +9133,13 @@ __metadata:
   version: 3.0.0
   resolution: "normalize-path@npm:3.0.0"
   checksum: 10/88eeb4da891e10b1318c4b2476b6e2ecbeb5ff97d946815ffea7794c31a89017c70d7f34b3c2ebf23ef4e9fc9fb99f7dffe36da22011b5b5c6ffa34f4873ec20
+  languageName: node
+  linkType: hard
+
+"nostics@npm:^1.1.4":
+  version: 1.2.0
+  resolution: "nostics@npm:1.2.0"
+  checksum: 10/eddb85764b5862ae30fc3f442e1b54df907bbc6ec0c8bfc8f7a4dd4892afe241eadd0e68888f846e1cf6ab96f3e0f7ccb435ef87654604c1b4cc297fefc00556
   languageName: node
   linkType: hard
 
@@ -10943,6 +10993,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"semver@npm:^7.8.5":
+  version: 7.8.5
+  resolution: "semver@npm:7.8.5"
+  bin:
+    semver: bin/semver.js
+  checksum: 10/9b01d2ff11e6e4a4539b7ca3c5f280c8704cb397a28504469f2ed4f00ad2194748d756647362a9712fff30984d15772ab7f083108c2fb508e2096ae9e708f22c
+  languageName: node
+  linkType: hard
+
 "send@npm:^1.2.0":
   version: 1.2.1
   resolution: "send@npm:1.2.1"
@@ -11579,6 +11638,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinyglobby@npm:^0.2.17":
+  version: 0.2.17
+  resolution: "tinyglobby@npm:0.2.17"
+  dependencies:
+    fdir: "npm:^6.5.0"
+    picomatch: "npm:^4.0.4"
+  checksum: 10/f85e8a217d675c3f78d5f0ad25ea4557e7e023ed13ddc2b014da10bd0312eea53a34cd52356af07ccdff777f1243012547656282a4ca70936f68bf5065fbaa71
+  languageName: node
+  linkType: hard
+
 "to-regex-range@npm:^5.0.1":
   version: 5.0.1
   resolution: "to-regex-range@npm:5.0.1"
@@ -11721,6 +11790,27 @@ __metadata:
     magic-string: "npm:^0.30.21"
     unplugin: "npm:^2.3.11"
   checksum: 10/201ca8b01f4a4476105c8eff04687973c9a8bce8327cacb77dea766e1c01caa1a31493359d08aaeb69d12d99d465b8d2dd856332f6341bf119dbb3310475cd02
+  languageName: node
+  linkType: hard
+
+"unctx@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "unctx@npm:3.0.0"
+  peerDependencies:
+    magic-string: ">=0.30.21"
+    oxc-parser: ">=0.140.0"
+    rolldown: ^1.1.5
+    unplugin: ^3.3.0
+  peerDependenciesMeta:
+    magic-string:
+      optional: true
+    oxc-parser:
+      optional: true
+    rolldown:
+      optional: true
+    unplugin:
+      optional: true
+  checksum: 10/964597db8c58a2ca45cc2b1b16904955cfee91189aeb3c41f56d96026e3a2fac9b7f651eff6cb23d41279975e8a6e09d6ab01d68133fc14cbc07055658587799
   languageName: node
   linkType: hard
 
@@ -12776,7 +12866,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vue-yandex-maps@workspace:packages/vue-yandex-maps"
   dependencies:
-    "@nuxt/kit": "npm:4.4.6"
+    "@nuxt/kit": "npm:4.5.0"
     "@vitejs/plugin-vue": "npm:6.0.7"
     "@vue/language-core": "npm:3.3.2"
     "@yandex/ymaps3-cartesian-projection": "npm:>=0.0.6"
