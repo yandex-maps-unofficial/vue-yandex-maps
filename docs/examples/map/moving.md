@@ -1,7 +1,8 @@
 # Перемещение карты
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/MapParams.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/MapParams.vue'));
 </script>
 
 <map-component/>

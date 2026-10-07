@@ -17,7 +17,12 @@ export default defineConfig({
             cssFileName: 'vue-yandex-maps',
         },
         rolldownOptions: {
-            external: ['vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit', '#core'],
+            external: [
+                'vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit', '#core',
+                '@yandex/ymaps3-cartesian-projection',
+                '@yandex/ymaps3-web-mercator-projection',
+                '@yandex/ymaps3-world-utils',
+            ],
             input: {
                 index: resolve(import.meta.dirname, 'src/index.ts'),
                 'plugins/nuxt-module': resolve(import.meta.dirname, 'src/plugins/nuxt-module.ts'),

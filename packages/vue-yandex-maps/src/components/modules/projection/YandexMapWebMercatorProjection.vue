@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { PropType, Ref } from 'vue';
 import { inject, onMounted } from 'vue';
+import { WebMercator as WebMercatorClass } from '@yandex/ymaps3-web-mercator-projection';
 import type { WebMercator } from '@yandex/ymaps3-web-mercator-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 import { setupMapChildren } from '#core';
-import { importYmapsCDNModule } from '#core';
 
 defineOptions({ name: 'YandexMapWebMercatorProjection', render: () => null });
 
@@ -26,8 +26,7 @@ onMounted(async () => {
 
     const cartesian = await setupMapChildren({
         isProjection: true,
-        createFunction: ({ WebMercator: WebMercatorClass }) => new WebMercatorClass(),
-        requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-web-mercator-projection'),
+        createFunction: () => new WebMercatorClass(),
     });
 
     projection.value = cartesian;

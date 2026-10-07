@@ -571,6 +571,10 @@ export default defineConfig({
                                 link: '/examples/map/controls',
                             },
                             {
+                                text: 'Проекции карты',
+                                link: '/examples/map/projections',
+                            },
+                            {
                                 text: 'Мини карта',
                                 link: '/examples/map/mini-map',
                             },

@@ -1,7 +1,8 @@
 # Скрытие маркеров вне зоны видимости
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/HideMarkers.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/HideMarkers.vue'));
 </script>
 
 <map-component/>

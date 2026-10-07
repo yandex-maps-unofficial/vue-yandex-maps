@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { PropType, Ref } from 'vue';
 import { inject, onMounted } from 'vue';
+import { Cartesian as CartesianClass } from '@yandex/ymaps3-cartesian-projection';
 import type { Cartesian } from '@yandex/ymaps3-cartesian-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
 import { setupMapChildren } from '#core';
-import { importYmapsCDNModule } from '#core';
 
 defineOptions({ name: 'YandexMapCartesianProjection', render: () => null });
 
@@ -34,8 +34,7 @@ onMounted(async () => {
 
     const cartesian = await setupMapChildren({
         isProjection: true,
-        createFunction: ({ Cartesian: CartesianClass }) => new CartesianClass(props.bounds, props.cycled),
-        requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-cartesian-projection'),
+        createFunction: () => new CartesianClass(props.bounds, props.cycled),
     });
 
     projection.value = cartesian;

@@ -51,7 +51,9 @@ const map = shallowRef<null | YMap>(null);
 <example-quickstart :is-dark-theme="isDark()"/>
 
 <script lang="ts" setup>
-import ExampleQuickstart from 'examples/src/components/ExampleQuickstart.vue';
+import { defineClientComponent } from 'vitepress';
+
+const ExampleQuickstart = defineClientComponent(() => import('examples/src/components/ExampleQuickstart.vue'));
 
 const isDark = () => {
     if (typeof window === 'undefined') return false;

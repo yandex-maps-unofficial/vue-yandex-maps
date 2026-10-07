@@ -1,7 +1,8 @@
 # Ограничение области просмотра карты
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/RestrictArea.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/RestrictArea.vue'));
 </script>
 
 <map-component/>

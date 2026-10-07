@@ -12,7 +12,12 @@ export default defineConfig({
             formats: ['es'],
         },
         rolldownOptions: {
-            external: ['vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit'],
+            external: [
+                'vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit',
+                '@yandex/ymaps3-cartesian-projection',
+                '@yandex/ymaps3-web-mercator-projection',
+                '@yandex/ymaps3-world-utils',
+            ],
             input: {
                 core: resolve(import.meta.dirname, 'src/core.ts'),
             },
