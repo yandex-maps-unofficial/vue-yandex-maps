@@ -12,7 +12,7 @@ import { toRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted, ref } from 'vue';
 import type { YMapControl } from '@yandex/ymaps3-types';
-import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 
 defineOptions({ name: 'YandexMapControl' });
 

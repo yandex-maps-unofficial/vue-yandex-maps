@@ -80,6 +80,10 @@ export default defineConfig({
                         link: '/guide/configuration',
                     },
                     {
+                        text: 'Vapor Mode',
+                        link: '/guide/vapor',
+                    },
+                    {
                         text: 'Общие принципы компонентов',
                         link: '/components/',
                     },
@@ -163,6 +167,10 @@ export default defineConfig({
                     {
                         text: 'Конфигурация',
                         link: '/guide/configuration',
+                    },
+                    {
+                        text: 'Vapor Mode',
+                        link: '/guide/vapor',
                     },
                     {
                         text: 'Начало работы',

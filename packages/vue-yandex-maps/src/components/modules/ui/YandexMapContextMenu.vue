@@ -7,9 +7,9 @@ import { shallowRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 
-import { provideMapRoot, setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { provideMapRoot, setupMapChildren } from '#core';
 import type { YMapContextMenu } from '@yandex/ymaps3-context-menu';
-import { importYmapsCDNModule } from '../../../functions/init.ts';
+import { importYmapsCDNModule } from '#core';
 
 defineOptions({ name: 'YandexMapContextMenu' });
 

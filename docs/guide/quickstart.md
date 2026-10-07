@@ -41,7 +41,7 @@ import {
   YandexMapDefaultSchemeLayer,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultMarker,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps'; //или vue-yandex-maps/vapor
 
 //Можно использовать для различных преобразований
 const map = shallowRef<null | YMap>(null);

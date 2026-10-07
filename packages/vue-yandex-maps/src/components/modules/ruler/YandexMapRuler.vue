@@ -2,15 +2,15 @@
 import { h, ref, shallowRef, triggerRef, watch } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, onMounted } from 'vue';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 import type { YMapRuler } from '@yandex/ymaps3-types/modules/ruler';
 import type { RenderPointCommonArgs, UpdateCommonFn } from '@yandex/ymaps3-types/modules/ruler/YMapRulerCommon';
 import type { RenderPointArgs, YMapRulerProps } from '@yandex/ymaps3-types/modules/ruler/YMapRuler';
 import type { YMapMarker, YMapMarkerProps } from '@yandex/ymaps3-types';
-import { hF } from '../../../utils/system.ts';
-import { getMarkerContainerProps } from '../../../utils/marker.ts';
+import { hF } from '#core';
+import { getMarkerContainerProps } from '#core';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
-import { getMapsInnerSelector } from '../../../utils/map.ts';
+import { getMapsInnerSelector } from '#core';
 
 type YMapRulerSettings = ConstructorParameters<typeof YMapRuler>[0];
 export type YandexMapRulerSettings = Omit<YMapRulerSettings, 'point' | 'previewPoint'>;

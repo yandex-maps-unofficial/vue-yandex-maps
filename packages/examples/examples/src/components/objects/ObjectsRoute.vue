@@ -72,8 +72,6 @@
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-    getLocationFromBounds,
-    yandexMapLoadStatus,
     YandexMap,
     YandexMapControl,
     YandexMapControls,
@@ -82,6 +80,10 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapFeature,
     YandexMapRouteControl,
+} from 'vue-yandex-maps/vapor';
+import {
+    getLocationFromBounds,
+    yandexMapLoadStatus,
 } from 'vue-yandex-maps';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
 import type { AvailableTypes } from '@yandex/ymaps3-default-ui-theme';

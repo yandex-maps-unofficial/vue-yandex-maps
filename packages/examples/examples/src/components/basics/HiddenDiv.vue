@@ -51,7 +51,12 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapControls, YandexMapDefaultSchemeLayer, YandexMapZoomControl } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapControls,
+    YandexMapDefaultSchemeLayer,
+    YandexMapZoomControl,
+} from 'vue-yandex-maps/vapor';
 import { ref } from 'vue';
 
 const isShow = ref(false);

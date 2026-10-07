@@ -3,11 +3,11 @@ import { shallowRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 import type { YMapSpinner } from '@yandex/ymaps3-spinner';
-import { importYmapsCDNModule } from '../../../functions/init.ts';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapSpinner' });
+defineOptions({ name: 'YandexMapSpinner', render: () => null });
 
 const props = defineProps({
     modelValue: {

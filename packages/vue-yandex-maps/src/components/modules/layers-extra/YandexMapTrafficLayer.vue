@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
-import { importLayersExtra } from '../../../utils/init.ts';
-import type { IYandexMapTrafficLayer } from '../../../utils/init.ts';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { importLayersExtra } from '#core';
+import type { IYandexMapTrafficLayer } from '#core';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapTrafficLayer' });
+defineOptions({ name: 'YandexMapTrafficLayer', render: () => null });
 
 const props = defineProps({
     modelValue: {

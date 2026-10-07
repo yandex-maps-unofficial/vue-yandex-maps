@@ -56,7 +56,7 @@ import {
     YandexMapControls,
     YandexMapDefaultSchemeLayer,
     YandexMapListener,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { nextTick, onBeforeUnmount, ref, shallowRef, watch } from 'vue';
 import type { YMap } from '@yandex/ymaps3-types';
 

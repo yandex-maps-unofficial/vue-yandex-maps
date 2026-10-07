@@ -27,7 +27,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import { defineAsyncComponent, h, onMounted, ref, shallowRef, watch } from 'vue';
 
 const pages = {

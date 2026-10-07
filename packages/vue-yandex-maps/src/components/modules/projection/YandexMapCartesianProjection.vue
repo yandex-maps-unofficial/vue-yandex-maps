@@ -4,10 +4,10 @@ import { inject, onMounted } from 'vue';
 import type { Cartesian } from '@yandex/ymaps3-cartesian-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions';
+import { setupMapChildren } from '#core';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapCartesianProjection' });
+defineOptions({ name: 'YandexMapCartesianProjection', render: () => null });
 
 const props = defineProps({
     modelValue: {

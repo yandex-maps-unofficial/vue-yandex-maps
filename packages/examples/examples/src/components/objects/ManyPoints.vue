@@ -106,7 +106,7 @@
     </common-wrapper>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
@@ -117,8 +117,10 @@ import {
     YandexMapControls,
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
-    YandexMapMarker,
     YandexMapZoomControl,
+} from 'vue-yandex-maps/vapor';
+import {
+    YandexMapMarker,
 } from 'vue-yandex-maps';
 import { computed, onMounted, ref, shallowRef, version, watch } from 'vue';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';

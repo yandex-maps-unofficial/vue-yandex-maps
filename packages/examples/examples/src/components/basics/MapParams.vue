@@ -54,7 +54,12 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapControlButton, YandexMapControls, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapControlButton,
+    YandexMapControls,
+    YandexMapDefaultSchemeLayer,
+} from 'vue-yandex-maps/vapor';
 import { ref, shallowRef, watch } from 'vue';
 import type { YMap, YMapCameraRequest } from '@yandex/ymaps3-types';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';

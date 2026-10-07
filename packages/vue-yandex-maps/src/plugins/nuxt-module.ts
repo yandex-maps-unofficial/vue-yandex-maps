@@ -1,6 +1,6 @@
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import { join, relative } from 'path';
-import type { YandexMapNuxtModuleSettings } from '../utils/init.ts';
+import type { YandexMapNuxtModuleSettings } from '#core';
 import type { NuxtModule } from 'nuxt/schema';
 
 // Module options TypeScript interface definition

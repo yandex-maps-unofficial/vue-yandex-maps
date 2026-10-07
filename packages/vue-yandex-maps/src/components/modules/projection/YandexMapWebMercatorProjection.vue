@@ -3,10 +3,10 @@ import type { PropType, Ref } from 'vue';
 import { inject, onMounted } from 'vue';
 import type { WebMercator } from '@yandex/ymaps3-web-mercator-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions';
+import { setupMapChildren } from '#core';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapWebMercatorProjection' });
+defineOptions({ name: 'YandexMapWebMercatorProjection', render: () => null });
 
 defineProps({
     modelValue: {

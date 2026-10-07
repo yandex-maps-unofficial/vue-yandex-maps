@@ -35,7 +35,13 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapDefaultSchemeLayer, YandexMapDefaultFeaturesLayer, YandexMapSignpost, YandexMapDefaultMarker } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapDefaultSchemeLayer,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapSignpost,
+    YandexMapDefaultMarker,
+} from 'vue-yandex-maps/vapor';
 import type { LngLat } from '@yandex/ymaps3-types';
 
 const MARKERS_COORDINATES: Array<LngLat> = [
