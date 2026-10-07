@@ -1,4 +1,5 @@
-import { vaporInteropPlugin, type App } from 'vue';
+import { vaporInteropPlugin } from 'vue';
+import type { App } from 'vue';
 import { createYmaps } from 'vue-yandex-maps';
 
 export default (app: App) => {
