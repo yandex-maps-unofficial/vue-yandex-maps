@@ -28,7 +28,9 @@
                                         <div>Пиксели, zoom {{ ZOOM }}: {{ formatObject(mercatorResult.pixels, 0) }}</div>
                                         <div>Обратно: {{ formatPair(mercatorResult.restored) }}</div>
                                     </template>
-                                    <div v-else>Вычисляем координаты…</div>
+                                    <div v-else>
+                                        Вычисляем координаты…
+                                    </div>
                                 </div>
                             </yandex-map-control>
                         </yandex-map-controls>
@@ -65,7 +67,9 @@
                                         <div>Мир: {{ formatObject(cartesianResult.world) }}</div>
                                         <div>Обратно: {{ formatPair(cartesianResult.restored) }}</div>
                                     </template>
-                                    <div v-else>Вычисляем координаты…</div>
+                                    <div v-else>
+                                        Вычисляем координаты…
+                                    </div>
                                 </div>
                             </yandex-map-control>
                         </yandex-map-controls>
@@ -194,5 +198,4 @@ function formatObject({ x, y }: { x: number; y: number }, digits = 5) {
     display: block;
     margin-bottom: 4px;
 }
-
 </style>

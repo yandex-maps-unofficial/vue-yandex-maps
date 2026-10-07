@@ -18,7 +18,13 @@ export default defineConfig({
         },
         rolldownOptions: {
             external: [
-                'vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit', '#core',
+                'vue',
+                'path',
+                'nuxt',
+                'nuxt/app',
+                '#app',
+                '@nuxt/kit',
+                '#core',
                 '@yandex/ymaps3-cartesian-projection',
                 '@yandex/ymaps3-web-mercator-projection',
                 '@yandex/ymaps3-world-utils',
