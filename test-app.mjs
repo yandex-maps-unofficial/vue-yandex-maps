@@ -27,9 +27,9 @@ const envs = {
         htmlValidSelector: 'html',
     },
     nuxt: {
-        command: ['yarn', 'workspace', 'example-nuxt', 'dev'],
+        command: ['yarn', 'workspace', 'example-nuxt', 'dev', '--host', 'localhost', '--port', '3000'],
         url: 'http://localhost:3000/#objects/ManyPoints',
-        htmlValidSelector: '__nuxt',
+        htmlValidSelector: 'class="examples"',
     },
 };
 
@@ -37,7 +37,19 @@ if (!(type in envs)) throw new Error(`Incorrect ${ type } type`);
 
 const env = envs[type];
 
-const spawnedProcess = spawn(env.command[0], env.command.slice(1));
+page.on('console', message => console.log(`[browser:${ message.type() }] ${ message.text() }`));
+page.on('pageerror', error => console.error(`[browser:error] ${ error.stack || error.message }`));
+page.on('requestfailed', request => console.error(`[requestfailed] ${ request.url() }: ${ request.failure()?.errorText }`));
+
+const spawnedProcess = spawn(env.command[0], env.command.slice(1), {
+    stdio: 'inherit',
+});
+
+spawnedProcess.once('error', async error => {
+    console.error(`Failed to start ${ type } dev server:`, error);
+    await browser.close();
+    process.exit(1);
+});
 
 spawnedProcess.once('spawn', async () => {
     let retries = 0;

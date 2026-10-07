@@ -1,7 +1,8 @@
 # Добавление маркеров на карту
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ObjectsPlacemark.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ObjectsPlacemark.vue'));
 </script>
 
 <map-component/>

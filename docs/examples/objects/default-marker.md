@@ -1,7 +1,8 @@
 # Создание стандартного маркера
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/DefaultMarker.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/DefaultMarker.vue'));
 </script>
 
 <map-component/>

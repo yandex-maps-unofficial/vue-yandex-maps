@@ -1,7 +1,8 @@
 # Измерения линейкой
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ObjectsRuler.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ObjectsRuler.vue'));
 </script>
 
 <map-component/>

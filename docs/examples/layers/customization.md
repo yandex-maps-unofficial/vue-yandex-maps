@@ -1,7 +1,8 @@
 # Кастомизация карты
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/layers/LayersCustomization.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/layers/LayersCustomization.vue'));
 </script>
 
 <map-component/>

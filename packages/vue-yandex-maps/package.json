@@ -2,12 +2,16 @@
   "name": "vue-yandex-maps",
   "version": "3.0.4",
   "description": "Yandex Maps 3.0 components library for VueJS.",
-  "main": "./dist/vue-yandex-maps.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/vue-yandex-maps.js"
+      "default": "./dist/index.js"
+    },
+    "./vapor": {
+      "types": "./dist/vapor.d.ts",
+      "default": "./dist/vapor.js"
     },
     "./nuxt": {
       "types": "./dist/plugins/nuxt-module.d.ts",
@@ -16,8 +20,17 @@
     "./css": "./dist/vue-yandex-maps.css",
     "./package.json": "./package.json"
   },
+  "imports": {
+    "#core": {
+      "types": "./dist/core.d.ts",
+      "default": "./dist/core.js"
+    }
+  },
   "typesVersions": {
     "*": {
+      "vapor": [
+        "./dist/vapor.d.ts"
+      ],
       "nuxt": [
         "./dist/plugins/nuxt-module.d.ts"
       ]
@@ -25,7 +38,10 @@
   },
   "scripts": {
     "build": "yarn build:package-only",
-    "build:package-only": "vue-tsc --noEmit && vite build",
+    "build:package-only": "vue-tsc --noEmit && yarn build:core && yarn build:vapor && yarn build:vue",
+    "build:core": "vite build --config vite.core.config.ts",
+    "build:vue": "vite build --config vite.config.ts",
+    "build:vapor": "vite build --config vite.vapor.config.ts",
     "npm:publish": "npm publish"
   },
   "files": [
@@ -83,19 +99,19 @@
     "@yandex/ymaps3-world-utils": ">=0.0.19230700"
   },
   "devDependencies": {
-    "@nuxt/kit": "4.5.0",
-    "@vitejs/plugin-vue": "6.0.8",
-    "@vue/language-core": "3.3.7",
+    "@nuxt/kit": "4.6.0",
+    "@vitejs/plugin-vue": "6.0.9",
+    "@vue/language-core": "3.3.12",
     "deep-object-diff": "1.1.9",
-    "nuxt": "4.5.0",
+    "nuxt": "4.6.0",
     "rollup-plugin-copy": "3.5.0",
     "rollup-plugin-delete": "3.0.2",
     "typescript": "6.0.3",
-    "vite": "8.1.5",
-    "vite-plugin-dts": "5.0.3",
+    "vite": "8.3.3",
+    "vite-plugin-dts": "5.1.2",
     "vite-plugin-lib-inject-css": "2.2.2",
-    "vue": "3.5.40",
-    "vue-tsc": "3.3.7"
+    "vue": "3.6.0-rc.10",
+    "vue-tsc": "3.3.12"
   },
   "peerDependencies": {
     "@yandex/ymaps3-cartesian-projection": ">=0.0.6",

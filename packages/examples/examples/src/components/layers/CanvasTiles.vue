@@ -42,7 +42,7 @@ import {
     YandexMapLayer,
     YandexMapTileDataSource,
     YandexMapZoomControl,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { onMounted } from 'vue';
 import type { FetchedTile, YMapTileDataSourceProps } from '@yandex/ymaps3-types';
 

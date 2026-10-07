@@ -46,7 +46,7 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { shallowRef, triggerRef } from 'vue';
 import type { YMapDefaultMarker } from '@yandex/ymaps3-default-ui-theme';
 

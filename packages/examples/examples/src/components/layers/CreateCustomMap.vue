@@ -41,7 +41,7 @@ import {
     YandexMapDefaultMarker,
     YandexMapLayer,
     YandexMapTileDataSource,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import type { LngLatBounds, YMapLayerProps, YMapProps, YMapTileDataSourceProps } from '@yandex/ymaps3-types';
 
 const TILES_PATH = 'https://yastatic.net/s3/front-maps-static/maps-front-jsapi-3/examples/images/custom-map/tiles';

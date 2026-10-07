@@ -2,12 +2,12 @@
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, h, onMounted, ref, onUpdated } from 'vue';
-import { hF, throwException } from '../utils/system.ts';
-import { setupMapChildren } from '../utils/setupMapChildren.ts';
-import { getMarkerContainerProps } from '../utils/marker.ts';
+import { hF, throwException } from '#core';
+import { setupMapChildren } from '#core';
+import { getMarkerContainerProps } from '#core';
 
 import type { YandexMapMarkerPosition } from '../types/marker.ts';
-import { getMapsInnerSelector } from '../utils/map.ts';
+import { getMapsInnerSelector } from '#core';
 
 export default defineComponent({
     name: 'YandexMapMarker',

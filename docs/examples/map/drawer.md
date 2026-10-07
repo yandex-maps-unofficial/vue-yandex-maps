@@ -1,7 +1,8 @@
 # Боковая панель
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/DrawerExample.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/DrawerExample.vue'));
 </script>
 
 <map-component/>

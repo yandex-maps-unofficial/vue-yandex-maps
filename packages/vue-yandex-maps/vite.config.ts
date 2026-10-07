@@ -2,54 +2,55 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
-import del from 'rollup-plugin-delete';
 import copy from 'rollup-plugin-copy';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
-    optimizeDeps: {
-        exclude: ['vue'],
-    },
     build: {
         minify: false,
         sourcemap: false,
         outDir: 'dist',
+        emptyOutDir: false,
         lib: {
             entry: 'src/index.ts',
             formats: ['es'],
+            cssFileName: 'vue-yandex-maps',
         },
-        rollupOptions: {
-            external: ['vue', 'path', 'nuxt', 'nuxt/app', '#app', '@nuxt/kit'],
+        rolldownOptions: {
+            external: [
+                'vue',
+                'path',
+                'nuxt',
+                'nuxt/app',
+                '#app',
+                '@nuxt/kit',
+                '#core',
+                '@yandex/ymaps3-cartesian-projection',
+                '@yandex/ymaps3-web-mercator-projection',
+                '@yandex/ymaps3-world-utils',
+            ],
             input: {
-                'vue-yandex-maps': resolve(__dirname, 'src/index.ts'),
-                'plugins/nuxt-module': resolve(__dirname, 'src/plugins/nuxt-module'),
-                'plugins/nuxt-plugin': resolve(__dirname, 'src/plugins/nuxt-plugin'),
+                index: resolve(import.meta.dirname, 'src/index.ts'),
+                'plugins/nuxt-module': resolve(import.meta.dirname, 'src/plugins/nuxt-module.ts'),
+                'plugins/nuxt-plugin': resolve(import.meta.dirname, 'src/plugins/nuxt-plugin.ts'),
             },
             output: {
                 format: 'es',
                 esModule: true,
-                globals: {
-                    vue: 'Vue',
-                },
-                chunkFileNames: 'vue-yandex-maps-[hash].js',
                 entryFileNames: '[name].js',
+                chunkFileNames: 'vue-yandex-maps-[hash].js',
             },
         },
     },
     plugins: [
-        del({ targets: 'dist/*' }),
         vue(),
         libInjectCss(),
-        dts({
-            processor: 'vue',
-        }),
+        dts({ processor: 'vue' }),
         copy({
-            targets: [
-                {
-                    src: ['../../README.md', '../../LICENSE'],
-                    dest: './',
-                },
-            ],
+            targets: [{
+                src: ['../../README.md', '../../LICENSE'],
+                dest: './',
+            }],
             hook: 'writeBundle',
         }),
     ],

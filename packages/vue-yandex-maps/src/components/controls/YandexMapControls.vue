@@ -6,8 +6,8 @@
 import type { YMapControls } from '@yandex/ymaps3-types';
 import type { PropType, Ref } from 'vue';
 import { computed, onMounted, shallowRef } from 'vue';
-import { throwException } from '../../utils/system.ts';
-import { provideMapRoot, setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { throwException } from '#core';
+import { provideMapRoot, setupMapChildren } from '#core';
 
 defineOptions({ name: 'YandexMapControls' });
 

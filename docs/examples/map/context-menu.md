@@ -1,7 +1,8 @@
 # Контекстное меню
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/ContextMenu.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/ContextMenu.vue'));
 </script>
 
 <map-component/>

@@ -34,16 +34,17 @@ import {
 } from 'vue';
 import type { LngLat, YMap, YMapEntity, YMapListener, YMapProps } from '@yandex/ymaps3-types';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import { initYmaps } from '../functions';
-import { diff } from 'deep-object-diff';
-import { copy, throwException } from '../utils/system.ts';
-import { waitTillMapInit } from '../utils/map.ts';
 import {
+    copy,
+    diff,
+    initYmaps,
+    throwException,
+    waitTillMapInit,
     yandexMapIsLoaded,
     yandexMapLoadStatus,
     yandexMapScript,
     yandexMapSettings,
-} from '../utils/init.ts';
+} from '#core';
 
 export type YandexMapSettings = Omit<YMapProps, 'projection'>;
 

@@ -12,7 +12,7 @@ import { toRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted, ref } from 'vue';
 import type { YMapControlButton } from '@yandex/ymaps3-types';
-import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 
 export type YandexMapControlButtonSettings = Omit<ConstructorParameters<typeof YMapControlButton>[0], 'element' | 'text'>;
 

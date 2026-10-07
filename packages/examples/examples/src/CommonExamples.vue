@@ -27,7 +27,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import { defineAsyncComponent, h, onMounted, ref, shallowRef, watch } from 'vue';
 
 const pages = {
@@ -40,6 +40,7 @@ const pages = {
     'basics/MapEvents': 'Обработка событий карты',
     'basics/HiddenDiv': 'Создание и удаление карты',
     'basics/MapControls': 'Элементы управления',
+    'basics/MapProjections': 'Проекции карты',
 
     'objects/ObjectsPlacemark': 'Общие примеры маркеров',
     'objects/ObjectsCustomImage': 'Добавление метки с собственным изображением',

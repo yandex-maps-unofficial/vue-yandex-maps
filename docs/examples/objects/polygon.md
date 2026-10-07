@@ -1,7 +1,8 @@
 # Создание полигона
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ObjectsPolygon.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ObjectsPolygon.vue'));
 </script>
 
 <map-component/>
