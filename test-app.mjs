@@ -27,8 +27,8 @@ const envs = {
         htmlValidSelector: 'html',
     },
     nuxt: {
-        command: ['yarn', 'workspace', 'example-nuxt', 'dev'],
-        url: 'http://localhost:3000/#objects/ManyPoints',
+        command: ['yarn', 'workspace', 'example-nuxt', 'dev', '--host', '127.0.0.1', '--port', '3000'],
+        url: 'http://127.0.0.1:3000/#objects/ManyPoints',
         htmlValidSelector: '__nuxt',
     },
 };
