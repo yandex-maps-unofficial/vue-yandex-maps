@@ -19,18 +19,18 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: Install node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
       - uses: ./.github/actions/codecheck
   test-vue:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
       - name: install node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
       - uses: ./.github/actions/test
         with:
           type: vue
@@ -39,9 +39,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: install node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
       - uses: ./.github/actions/test
         with:
           type: nuxt
@@ -52,9 +52,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7.0.1
       - name: install node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
       - name: Setup Pages
         uses: actions/configure-pages@v6.0.0
       - name: Build main package
@@ -78,9 +78,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: actions/setup-node@v7.0.0
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
       - run: yarn lint && yarn build
@@ -101,7 +101,7 @@ jobs:
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@v3.1.0
       - name: Create Release
-        uses: softprops/action-gh-release@v3.0.2
+        uses: softprops/action-gh-release@v3.0.3
         with:
           target_commitish: master
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -120,4 +120,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5.0.0
+        uses: actions/deploy-pages@v5.0.1
