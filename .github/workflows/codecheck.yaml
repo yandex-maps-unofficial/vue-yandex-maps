@@ -10,18 +10,18 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: install node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
       - uses: ./.github/actions/codecheck
   test-vue:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
       - name: install node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
       - uses: ./.github/actions/test
         with:
           type: vue
@@ -30,9 +30,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: install node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24.18.0
+          node-version: 24.21.0
       - uses: ./.github/actions/test
         with:
           type: nuxt
