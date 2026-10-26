@@ -134,9 +134,11 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
-    YandexMapMarker,
     YandexMapPopupMarker,
     YandexMapZoomControl,
+} from 'vue-yandex-maps/vapor';
+import {
+    YandexMapMarker,
 } from 'vue-yandex-maps';
 import { onMounted, onUnmounted, ref } from 'vue';
 import type { LngLat } from '@yandex/ymaps3-types';

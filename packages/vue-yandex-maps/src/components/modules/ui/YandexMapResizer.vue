@@ -2,11 +2,11 @@
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 import type { YMapResizer } from '@yandex/ymaps3-resizer';
-import { importYmapsCDNModule } from '../../../functions/init.ts';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapResizer' });
+defineOptions({ name: 'YandexMapResizer', render: () => null });
 
 const props = defineProps({
     modelValue: {

@@ -2,9 +2,9 @@
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 import type { BehaviorEvents, DomEvents, MapEvents, YMapListener } from '@yandex/ymaps3-types';
-import { setupMapChildren } from '../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapListener' });
+defineOptions({ name: 'YandexMapListener', render: () => null });
 
 const props = defineProps({
     modelValue: {

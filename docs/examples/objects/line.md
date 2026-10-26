@@ -1,7 +1,8 @@
 # Создание линии
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ObjectsLine.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ObjectsLine.vue'));
 </script>
 
 <map-component/>

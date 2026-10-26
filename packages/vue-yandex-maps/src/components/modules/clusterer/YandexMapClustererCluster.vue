@@ -3,12 +3,12 @@ import { onUpdated, ref, watch } from 'vue';
 import type { PropType, SlotsType } from 'vue';
 import { computed, defineComponent, h } from 'vue';
 import type { IYMapClusterFeature, YandexMapClustererZoomOptionsObject } from './YandexMapClusterer.vue';
-import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../utils/marker.ts';
+import { excludeYandexMarkerProps, getMarkerContainerProps } from '#core';
 import type { LngLatBounds, YMapMarker } from '@yandex/ymaps3-types';
-import { hF, sleep } from '../../../utils/system.ts';
+import { hF, sleep } from '#core';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { injectMap } from '../../../utils/map.ts';
-import { getBoundsFromCoords, getLocationFromBounds } from '../../../functions';
+import { injectMap } from '#core';
+import { getBoundsFromCoords, getLocationFromBounds } from '#core';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 
 export default defineComponent({

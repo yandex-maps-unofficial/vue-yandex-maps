@@ -1,7 +1,8 @@
 # Создание программного кластеризатора маркеров
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ManyPointsRenderFunction.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ManyPointsRenderFunction.vue'));
 </script>
 
 <map-component/>

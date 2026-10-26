@@ -4,10 +4,10 @@ import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 import type { YMapZoomControl } from '@yandex/ymaps3-default-ui-theme';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions';
+import { setupMapChildren } from '#core';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapZoomControl' });
+defineOptions({ name: 'YandexMapZoomControl', render: () => null });
 
 const props = defineProps({
     modelValue: {

@@ -1,7 +1,8 @@
 # Изменение позиции камеры
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/MapCamera.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/MapCamera.vue'));
 </script>
 
 <map-component/>

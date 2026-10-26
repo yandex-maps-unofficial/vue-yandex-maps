@@ -2,9 +2,9 @@
 import type { YMapDefaultFeaturesLayer } from '@yandex/ymaps3-types';
 import type { PropType, Ref } from 'vue';
 import { computed, inject, onMounted } from 'vue';
-import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapDefaultFeaturesLayer' });
+defineOptions({ name: 'YandexMapDefaultFeaturesLayer', render: () => null });
 
 const props = defineProps({
     modelValue: {

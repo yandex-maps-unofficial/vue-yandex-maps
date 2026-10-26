@@ -84,6 +84,8 @@ import {
     YandexMapControls,
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
+} from 'vue-yandex-maps/vapor';
+import {
     YandexMapMarker,
 } from 'vue-yandex-maps';
 import { ref } from 'vue';

@@ -1,7 +1,8 @@
 # Мини-карта
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/MiniMap.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/MiniMap.vue'));
 </script>
 
 <map-component/>

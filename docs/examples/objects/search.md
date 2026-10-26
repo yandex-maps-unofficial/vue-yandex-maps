@@ -9,7 +9,8 @@
 :::
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ObjectsSearch.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ObjectsSearch.vue'));
 </script>
 
 <map-component/>

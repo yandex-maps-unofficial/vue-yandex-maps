@@ -1,7 +1,8 @@
 # Оверлеи
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/layers/BasicOverlay.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/layers/BasicOverlay.vue'));
 </script>
 
 <map-component/>

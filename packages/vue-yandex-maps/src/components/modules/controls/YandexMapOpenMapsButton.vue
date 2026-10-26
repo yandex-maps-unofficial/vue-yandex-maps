@@ -3,9 +3,9 @@ import { toRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 import type { YMapOpenMapsButton } from '@yandex/ymaps3-types/modules/controls-extra';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapOpenMapsButton' });
+defineOptions({ name: 'YandexMapOpenMapsButton', render: () => null });
 
 const props = defineProps({
     modelValue: {

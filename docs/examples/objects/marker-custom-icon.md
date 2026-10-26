@@ -1,7 +1,8 @@
 # Добавление маркера с пользовательским изображением на карту
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ObjectsCustomImage.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ObjectsCustomImage.vue'));
 </script>
 
 <map-component/>

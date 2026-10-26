@@ -74,7 +74,7 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapFeature,
     YandexMapListener,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { ref, shallowRef } from 'vue';
 import type { LngLat, YMap } from '@yandex/ymaps3-types';
 

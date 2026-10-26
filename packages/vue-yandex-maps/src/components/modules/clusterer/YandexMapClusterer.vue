@@ -31,12 +31,12 @@ import type { PropType } from 'vue';
 import { computed, nextTick, onMounted, provide, shallowRef, watch } from 'vue';
 import type { clusterByGrid, Feature, YMapClusterer, ClustererObject } from '@yandex/ymaps3-clusterer';
 import type { LngLatBounds, YMapCollection, YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
-import { throwException } from '../../../utils/system.ts';
-import { provideMapRoot, setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { throwException } from '#core';
+import { provideMapRoot, setupMapChildren } from '#core';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/types';
 import YandexMapClustererClusters from './YandexMapClustererClusters.vue';
-import { importYmapsCDNModule } from '../../../functions';
+import { importYmapsCDNModule } from '#core';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0];
 export type YandexMapClustererOptions = Partial<Omit<Settings, 'cluster'>>;

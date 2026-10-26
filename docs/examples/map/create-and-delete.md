@@ -1,7 +1,8 @@
 # Создание и удаление карты
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/HiddenDiv.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/HiddenDiv.vue'));
 </script>
 
 <map-component/>

@@ -108,7 +108,7 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapEntity,
     YandexMapListener,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { reactive, ref } from 'vue';
 import type { BehaviorMapEventHandler, BehaviorType, DomEvent } from '@yandex/ymaps3-types';
 

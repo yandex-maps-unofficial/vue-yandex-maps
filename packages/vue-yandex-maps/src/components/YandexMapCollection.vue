@@ -7,7 +7,7 @@ import type { YMapCollection } from '@yandex/ymaps3-types';
 import type { PropType } from 'vue';
 import { onMounted, shallowRef } from 'vue';
 
-import { provideMapRoot, setupMapChildren } from '../utils/setupMapChildren.ts';
+import { provideMapRoot, setupMapChildren } from '#core';
 
 defineOptions({ name: 'YandexMapCollection' });
 

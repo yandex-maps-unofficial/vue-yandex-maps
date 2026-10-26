@@ -2,10 +2,10 @@
 import type { YMapLayer } from '@yandex/ymaps3-types';
 import type { PropType, Ref } from 'vue';
 import { computed, inject, onMounted } from 'vue';
-import { throwException } from '../../utils/system.ts';
-import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { throwException } from '#core';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapLayer' });
+defineOptions({ name: 'YandexMapLayer', render: () => null });
 
 const props = defineProps({
     modelValue: {

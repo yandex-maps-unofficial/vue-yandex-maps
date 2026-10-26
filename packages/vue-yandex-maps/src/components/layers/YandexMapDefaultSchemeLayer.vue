@@ -3,9 +3,9 @@ import type { YMapDefaultSchemeLayer } from '@yandex/ymaps3-types';
 import type { PropType, Ref } from 'vue';
 import { computed, inject, onMounted } from 'vue';
 
-import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapDefaultSchemeLayer' });
+defineOptions({ name: 'YandexMapDefaultSchemeLayer', render: () => null });
 
 const props = defineProps({
     modelValue: {

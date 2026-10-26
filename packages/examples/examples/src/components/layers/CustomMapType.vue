@@ -35,7 +35,7 @@ import {
     YandexMapLayer,
     YandexMapWebMercatorProjection,
     YandexMapTileDataSource,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import type { YMapLayerProps, YMapTileDataSourceProps } from '@yandex/ymaps3-types';
 
 const dataSourceProps: YMapTileDataSourceProps = {

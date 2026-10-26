@@ -1,6 +1,6 @@
 import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import { join, relative } from 'path';
-import type { YandexMapNuxtModuleSettings } from '../utils/init.ts';
+import type { YandexMapNuxtModuleSettings } from '#core';
 import type { NuxtModule } from 'nuxt/schema';
 
 // Module options TypeScript interface definition
@@ -46,7 +46,6 @@ const _default: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
     setup(options, nuxt) {
         if (!nuxt.options.runtimeConfig) {
             nuxt.options.runtimeConfig = {
-                app: {},
                 // @ts-expect-error Types error
                 public: {},
             };

@@ -126,7 +126,7 @@ import {
     YandexMapTiltControl,
     YandexMapRotateControl,
     YandexMapResizer,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { computed, isRef, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue';
 import type { YMap } from '@yandex/ymaps3-types';
 

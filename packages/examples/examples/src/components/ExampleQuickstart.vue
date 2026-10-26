@@ -20,14 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import { shallowRef } from 'vue';
-import type { YMap } from '@yandex/ymaps3-types';
 import {
     YandexMap,
     YandexMapDefaultSchemeLayer,
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
+import { shallowRef } from 'vue';
+import type { YMap } from '@yandex/ymaps3-types';
 import CommonWrapper from './CommonWrapper.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

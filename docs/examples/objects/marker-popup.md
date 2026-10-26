@@ -1,7 +1,8 @@
 # Попап при клике на маркер
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/MarkerPopup.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/MarkerPopup.vue'));
 </script>
 
 <map-component/>

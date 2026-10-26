@@ -52,8 +52,13 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
+import {
+    YandexMap,
+    YandexMapControl,
+    YandexMapControls,
+    YandexMapDefaultSchemeLayer,
+} from 'vue-yandex-maps/vapor';
 import { ref } from 'vue';
-import { YandexMap, YandexMapControl, YandexMapControls, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
 import type { BehaviorType } from '@yandex/ymaps3-types';
 
 // Аналогично включены по умолчанию в самой Яндекс Карте

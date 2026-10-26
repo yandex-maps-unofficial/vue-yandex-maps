@@ -75,8 +75,10 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
-    YandexMapMarker,
     YandexMapZoomControl,
+} from 'vue-yandex-maps/vapor';
+import {
+    YandexMapMarker,
 } from 'vue-yandex-maps';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import type { LngLat } from '@yandex/ymaps3-types';
