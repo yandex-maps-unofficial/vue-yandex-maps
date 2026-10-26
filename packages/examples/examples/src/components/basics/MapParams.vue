@@ -25,7 +25,7 @@
             >
                 <yandex-map-default-scheme-layer/>
 
-                <yandex-map-controls :settings="{ position: 'bottom left' }">
+                <yandex-map-controls :settings="{ position: 'top left' }">
                     <template v-if="!locationChanged">
                         <yandex-map-control-button
                             :settings="{ onClick: () => [LOCATION = NEW_LOCATION_CENTER, camera.tilt = (45 * Math.PI) / 180, locationChanged = true]}"
