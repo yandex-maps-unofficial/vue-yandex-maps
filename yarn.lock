@@ -4169,6 +4169,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@volar/language-core@npm:2.4.30":
+  version: 2.4.30
+  resolution: "@volar/language-core@npm:2.4.30"
+  dependencies:
+    "@volar/source-map": "npm:2.4.30"
+  checksum: 10/4a615ed05730bd16e01396a1c15a1869db5cb6affa21070125e535b885fcf079aa41bebecdc3eeaa87b4bedfa555391565ded8db8be5325e82a6596b4d0c3337
+  languageName: node
+  linkType: hard
+
+"@volar/language-service@npm:2.4.30":
+  version: 2.4.30
+  resolution: "@volar/language-service@npm:2.4.30"
+  dependencies:
+    "@volar/language-core": "npm:2.4.30"
+    vscode-languageserver-protocol: "npm:^3.17.5"
+    vscode-languageserver-textdocument: "npm:^1.0.11"
+    vscode-uri: "npm:^3.0.8"
+  peerDependencies:
+    typescript: <7
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/8281086ca5a8bb7ffab2dcf77e3fb2a2f7de2c404849366fa3f93a47a163c070520962c69be0a24028ea82b1c5b127dc6bd421597fddafb7ea4331d1b1f5af45
+  languageName: node
+  linkType: hard
+
 "@volar/source-map@npm:2.4.28":
   version: 2.4.28
   resolution: "@volar/source-map@npm:2.4.28"
@@ -4176,7 +4202,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@volar/typescript@npm:2.4.28, @volar/typescript@npm:^2.4.26":
+"@volar/source-map@npm:2.4.30":
+  version: 2.4.30
+  resolution: "@volar/source-map@npm:2.4.30"
+  checksum: 10/e08d130d4a66e169cb9c6d52074e1071f2c234d8c681d7944718e63ebbe98246443e970669a48dc72989be2712890eaee5357722756417370ba0bdf93a766901
+  languageName: node
+  linkType: hard
+
+"@volar/typescript@npm:2.4.30":
+  version: 2.4.30
+  resolution: "@volar/typescript@npm:2.4.30"
+  dependencies:
+    "@volar/language-core": "npm:2.4.30"
+    "@volar/language-service": "npm:2.4.30"
+    path-browserify: "npm:^1.0.1"
+    vscode-uri: "npm:^3.0.8"
+  peerDependencies:
+    typescript: <7
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/8f8ca9d60157dfff85b57bdc7f9c1121759dd7b1ba0251fa13c5497964c0950f7a60e10d9cc0b3b486f9c7979cdfa2df2473133b21b74bf7df97f3ebfff7744f
+  languageName: node
+  linkType: hard
+
+"@volar/typescript@npm:^2.4.26":
   version: 2.4.28
   resolution: "@volar/typescript@npm:2.4.28"
   dependencies:
@@ -4494,6 +4544,21 @@ __metadata:
   version: 8.1.5
   resolution: "@vue/devtools-shared@npm:8.1.5"
   checksum: 10/64593fb6719e7ddd5d1926799502eb84adeece782e2cbdc284c4b345ac125f45f29d6f4da110cae4cf74dc0ea0df0c55d4cadd88f1159fea5e4c5041168c7b06
+  languageName: node
+  linkType: hard
+
+"@vue/language-core@npm:3.3.14":
+  version: 3.3.14
+  resolution: "@vue/language-core@npm:3.3.14"
+  dependencies:
+    "@volar/language-core": "npm:2.4.30"
+    "@vue/compiler-dom": "npm:^3.5.0"
+    "@vue/shared": "npm:^3.5.0"
+    alien-signals: "npm:^3.2.1"
+    muggle-string: "npm:^0.4.1"
+    path-browserify: "npm:^1.0.1"
+    picomatch: "npm:^4.0.4"
+  checksum: 10/753d68494edf4e2141338c923d8c4a1e35c889646e8206387068bc0c0b0d56efa379b0f81007190590d77ac17fda0c928e4cb0626362c51ec6173c9e32285c22
   languageName: node
   linkType: hard
 
@@ -6787,7 +6852,7 @@ __metadata:
     "@types/node": "npm:26.1.1"
     examples: "workspace:*"
     nuxt: "npm:4.5.0"
-    vue-tsc: "npm:3.3.7"
+    vue-tsc: "npm:3.3.14"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -6804,7 +6869,7 @@ __metadata:
     typescript: "npm:6.0.3"
     vite: "npm:8.1.5"
     vue: "npm:3.5.40"
-    vue-tsc: "npm:3.3.7"
+    vue-tsc: "npm:3.3.14"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -6828,7 +6893,7 @@ __metadata:
     typescript: "npm:6.0.3"
     vite: "npm:8.1.5"
     vue: "npm:3.5.40"
-    vue-tsc: "npm:3.3.7"
+    vue-tsc: "npm:3.3.14"
     vue-yandex-maps: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -12319,6 +12384,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vscode-jsonrpc@npm:10.0.0":
+  version: 10.0.0
+  resolution: "vscode-jsonrpc@npm:10.0.0"
+  checksum: 10/d5e3f13a6d3737aefa04d13e72c81d1bb5f7b3d4005a9363dde78106ad7e535daae44b43cb8b5220322155b86408eb98ce441eaa3382dcf6787598f5a2212b1c
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-protocol@npm:^3.17.5":
+  version: 3.18.5
+  resolution: "vscode-languageserver-protocol@npm:3.18.5"
+  dependencies:
+    vscode-jsonrpc: "npm:10.0.0"
+    vscode-languageserver-types: "npm:3.18.5"
+  checksum: 10/51e0736ef6d61b0a574c420152d79f48ac629d38cefad5b6e8d6a72adb522a2b8eb1f3ff9a5048578eb89061320656a56d7f1916b38a16cfe6d7b6896a474270
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-textdocument@npm:^1.0.11":
+  version: 1.0.16
+  resolution: "vscode-languageserver-textdocument@npm:1.0.16"
+  checksum: 10/779c424346b91a03ce9da05f5aaa2e3bbc0fc44808f4e176d12771a8018dd06bca68fa4bd914e916cd6895d922c6ff71d257ad86ed3e2f30f538feb4db26dbd0
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-types@npm:3.18.5":
+  version: 3.18.5
+  resolution: "vscode-languageserver-types@npm:3.18.5"
+  checksum: 10/d2ffa55219ee0b51545e204f7e6653d0d7c88cf6e429a805d199f859e833804750376dbd698fd6d5546d3008115ce358698e1282e6ccb51cf88e3c4f5f8bc852
+  languageName: node
+  linkType: hard
+
 "vscode-uri@npm:^3.0.8":
   version: 3.1.0
   resolution: "vscode-uri@npm:3.1.0"
@@ -12399,17 +12495,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:3.3.7":
-  version: 3.3.7
-  resolution: "vue-tsc@npm:3.3.7"
+"vue-tsc@npm:3.3.14":
+  version: 3.3.14
+  resolution: "vue-tsc@npm:3.3.14"
   dependencies:
-    "@volar/typescript": "npm:2.4.28"
-    "@vue/language-core": "npm:3.3.7"
+    "@volar/typescript": "npm:2.4.30"
+    "@vue/language-core": "npm:3.3.14"
   peerDependencies:
     typescript: ">=5.0.0"
   bin:
-    vue-tsc: bin/vue-tsc.js
-  checksum: 10/14cc1d03b848c88816805fe9f4e1cc1056f19bde0eb82510a1718dfbaf3b021ef8c2214a0141644221632302bd7d6ad44fd72c473c5d7210993fe9f02ca0af6b
+    vue-tsc: ./bin/vue-tsc.js
+  checksum: 10/f9541e08b9e03acf1334ba5b3e76f1699ae0b95831b4f8ee25fd682f0839916662aab3de310790fa54f41c3ab59e1f047ca1125bb778aea9a57335a362490ae2
   languageName: node
   linkType: hard
 
@@ -12463,7 +12559,7 @@ __metadata:
     vite-plugin-dts: "npm:5.0.3"
     vite-plugin-lib-inject-css: "npm:2.2.2"
     vue: "npm:3.5.40"
-    vue-tsc: "npm:3.3.7"
+    vue-tsc: "npm:3.3.14"
   peerDependencies:
     "@yandex/ymaps3-cartesian-projection": ">=0.0.6"
     "@yandex/ymaps3-clusterer": ">=0.0.12"
