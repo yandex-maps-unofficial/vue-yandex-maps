@@ -1,5 +1,5 @@
-export { setupMapChildren, provideMapRoot } from './setupMapChildren.ts';
-export { injectMap, deleteMapChildren } from './map.ts';
+export { setupMapChildren, provideMapRoot } from '#core';
+export { injectMap, deleteMapChildren } from '#core';
 export {
     yandexMapSettings,
     yandexMapIsLoaded,
@@ -9,7 +9,7 @@ export {
     isYandexMapReadyToInit,
     YandexMapException,
     importLayersExtra,
-} from './init.ts';
+} from '#core';
 export type {
     IYandexMapTrafficEventsLayer,
     IYandexMapTrafficLayerProps,
@@ -18,4 +18,4 @@ export type {
     YandexMapLayersExtra,
     YandexMapPluginSettings,
     YandexMapLoadStatus,
-} from './init.ts';
+} from '#core';

@@ -1,7 +1,8 @@
 # Кастомные тайлы на canvas
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/layers/CanvasTiles.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/layers/CanvasTiles.vue'));
 </script>
 
 <map-component/>

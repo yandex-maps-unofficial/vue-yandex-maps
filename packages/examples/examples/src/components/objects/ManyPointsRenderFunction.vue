@@ -104,7 +104,7 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
     YandexMapZoomControl,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { computed, onMounted, ref, shallowRef, useCssModule, watch } from 'vue';
 import type { YMapMarker } from '@yandex/ymaps3-types';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';

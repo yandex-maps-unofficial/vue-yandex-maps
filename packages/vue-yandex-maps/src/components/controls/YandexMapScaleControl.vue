@@ -2,10 +2,10 @@
 import { toRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
-import { setupMapChildren } from '../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 import type { YMapScaleControl } from '@yandex/ymaps3-types';
 
-defineOptions({ name: 'YandexMapScaleControl' });
+defineOptions({ name: 'YandexMapScaleControl', render: () => null });
 
 const props = defineProps({
     modelValue: {

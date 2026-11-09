@@ -48,7 +48,7 @@ import {
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
     YandexMapPopupMarker,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import type { LngLat } from '@yandex/ymaps3-types';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
 import { ref } from 'vue';

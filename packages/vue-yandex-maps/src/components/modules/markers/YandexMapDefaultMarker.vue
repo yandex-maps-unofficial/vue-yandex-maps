@@ -13,11 +13,11 @@ import { useSlots } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted, ref, watch } from 'vue';
 import type { YMapDefaultMarker, YMapDefaultMarkerProps } from '@yandex/ymaps3-default-ui-theme';
-import { throwException } from '../../../utils/system.ts';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions';
+import { throwException } from '#core';
+import { setupMapChildren } from '#core';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapDefaultMarker' });
+defineOptions({ name: 'YandexMapDefaultMarker', render: () => null });
 
 const props = defineProps({
     modelValue: {

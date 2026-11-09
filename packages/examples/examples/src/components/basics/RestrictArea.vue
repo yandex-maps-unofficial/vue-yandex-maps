@@ -62,7 +62,7 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
     YandexMapFeature,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import type { LngLat, LngLatBounds, YMap, ZoomRange } from '@yandex/ymaps3-types';
 import { computed, ref, shallowRef, watch } from 'vue';
 

@@ -43,7 +43,12 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapDefaultSchemeLayer,
+    YandexMapMarker,
+} from 'vue-yandex-maps/vapor';
 import type { LngLat } from '@yandex/ymaps3-types';
 import { ref } from 'vue';
 

@@ -41,7 +41,7 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapFeature,
     YandexMapZoomControl,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import type { YMapFeatureProps } from '@yandex/ymaps3-types';
 
 const FEATURE1: YMapFeatureProps = {

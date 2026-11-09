@@ -2,11 +2,11 @@
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 import type { YMapContextMenuItem } from '@yandex/ymaps3-context-menu';
-import { importYmapsCDNModule } from '../../../functions/init.ts';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapContextMenuItem' });
+defineOptions({ name: 'YandexMapContextMenuItem', render: () => null });
 
 const props = defineProps({
     modelValue: {

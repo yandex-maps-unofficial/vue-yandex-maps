@@ -65,7 +65,7 @@ import {
     YandexMapFeature,
     YandexMapHint,
     YandexMapZoomControl,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import type {
     LineStringGeometry,
     LngLat,

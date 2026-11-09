@@ -85,7 +85,7 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
     YandexMapMarker,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { ref } from 'vue';
 
 const tab = ref('description');

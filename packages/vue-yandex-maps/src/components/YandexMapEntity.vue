@@ -12,9 +12,9 @@ import { toRef } from 'vue';
 import type { PropType } from 'vue';
 import { onMounted, ref } from 'vue';
 import type { YMapEntity } from '@yandex/ymaps3-types';
-import { setupMapChildren } from '../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapEntity' });
+defineOptions({ name: 'YandexMapEntity', render: () => null });
 
 const props = defineProps({
     modelValue: {

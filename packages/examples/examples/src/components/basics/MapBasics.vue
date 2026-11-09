@@ -28,6 +28,9 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapDefaultSchemeLayer,
+} from 'vue-yandex-maps/vapor';
 // #endregion setup
 </script>

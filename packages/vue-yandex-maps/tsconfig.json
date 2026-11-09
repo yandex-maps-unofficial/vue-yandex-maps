@@ -6,6 +6,9 @@
   "compilerOptions": {
     "rootDir": "./src",
     "paths": {
+      "#core": [
+        "./src/core.ts"
+      ],
       "#app": [
         "./node_modules/nuxt/app",
         "../../node_modules/nuxt/app"

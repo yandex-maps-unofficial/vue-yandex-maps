@@ -40,14 +40,14 @@ import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
     YandexMap,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import {
     YandexMapControlButton,
     YandexMapControls,
     YandexMapDefaultSchemeLayer,
     YandexMapTrafficEventsLayer,
     YandexMapTrafficLayer,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { ref } from 'vue';
 
 const traffic = ref(true);

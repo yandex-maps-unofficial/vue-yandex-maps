@@ -11,9 +11,9 @@
 import type { PropType } from 'vue';
 import { computed, onMounted, ref } from 'vue';
 import type { YMapPopupMarker } from '@yandex/ymaps3-default-ui-theme';
-import { throwException } from '../../../utils/system.ts';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions/init.ts';
+import { throwException } from '#core';
+import { setupMapChildren } from '#core';
+import { importYmapsCDNModule } from '#core';
 
 defineOptions({ name: 'YandexMapPopupMarker' });
 

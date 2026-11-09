@@ -5,7 +5,8 @@
 :::
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/basics/MapEvents.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/basics/MapEvents.vue'));
 </script>
 
 <map-component/>

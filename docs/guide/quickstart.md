@@ -41,7 +41,7 @@ import {
   YandexMapDefaultSchemeLayer,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultMarker,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps'; //или vue-yandex-maps/vapor
 
 //Можно использовать для различных преобразований
 const map = shallowRef<null | YMap>(null);
@@ -51,7 +51,9 @@ const map = shallowRef<null | YMap>(null);
 <example-quickstart :is-dark-theme="isDark()"/>
 
 <script lang="ts" setup>
-import ExampleQuickstart from 'examples/src/components/ExampleQuickstart.vue';
+import { defineClientComponent } from 'vitepress';
+
+const ExampleQuickstart = defineClientComponent(() => import('examples/src/components/ExampleQuickstart.vue'));
 
 const isDark = () => {
     if (typeof window === 'undefined') return false;

@@ -3,10 +3,10 @@ import { toRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 import type { YMapGeolocationControl } from '@yandex/ymaps3-default-ui-theme';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions';
+import { setupMapChildren } from '#core';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapGeolocationControl' });
+defineOptions({ name: 'YandexMapGeolocationControl', render: () => null });
 
 const props = defineProps({
     modelValue: {

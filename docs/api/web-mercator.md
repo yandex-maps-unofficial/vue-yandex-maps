@@ -1,55 +1,18 @@
-# World Utils
+# Web Mercator Projection
 
 См. Документацию: https://www.npmjs.com/package/@yandex/ymaps3-web-mercator-projection
 
-Библиотека экспортирует класс `WebMercator`.
-
-## Способы использования
-
-### Из библиотеки
-
-Под капотом используется `importYmapsCDNModule`.
-
-```typescript
-import { WebMercator } from 'vue-yandex-maps';
-
-const projection = new (await WebMercator())();
-```
-
-### Импорт из CDN
-
-```typescript
-import { importYmapsCDNModule } from 'vue-yandex-maps';
-
-const { WebMercator } = await importYmapsCDNModule('@yandex/ymaps3-web-mercator-projection');
-
-const projection = new WebMercator();
-```
-
-### Установить библиотеку
-
-Этот метод может быть опасен. На момент написания доки в библиотеке не было top-level await - но он может появиться.
-
-::: code-group
-
-```shell [npm]
-npm install @yandex/ymaps3-web-mercator-projection
-```
-
-```shell [yarn]
-yarn add @yandex/ymaps3-web-mercator-projection
-```
-
-```shell [pnpm]
-pnpm install @yandex/ymaps3-web-mercator-projection
-```
-:::
+## Использование
 
 ```typescript
 import { WebMercator } from '@yandex/ymaps3-web-mercator-projection';
 
 const projection = new WebMercator();
 ```
+
+::: warning Устаревший метод
+Функция `WebMercator`, экспортируемая из `vue-yandex-maps`, deprecated. Используйте прямой импорт класса из `@yandex/ymaps3-web-mercator-projection`.
+:::
 
 ## Примеры использования
 

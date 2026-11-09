@@ -6,61 +6,18 @@
 - `worldToPixels`
 - `pixelsToWorld`
 
-## Способы использования
-
-### Из библиотеки
-
-Под капотом используется `importYmapsCDNModule`.
-
-```typescript
-import { worldToPixels, pixelsToWorld } from 'vue-yandex-maps';
-
-const pixels = worldToPixels({ x: 0, y: 0 }, 10);
-// Returns: Promise<{ x: 131072, y: 131072 }>
-
-const world = pixelsToWorld({ x: 131072, y: 131072 }, 10);
-// Returns: Promise<{ x: 0, y: 0 }>
-```
-
-### Импорт из CDN
-
-```typescript
-import { importYmapsCDNModule } from 'vue-yandex-maps';
-
-const { worldToPixels, pixelsToWorld } = await importYmapsCDNModule('@yandex/ymaps3-world-utils');
-
-const pixels = worldToPixels({ x: 0, y: 0 }, 10);
-// Returns: Promise<{ x: 131072, y: 131072 }>
-
-const world = pixelsToWorld({ x: 131072, y: 131072 }, 10);
-// Returns: Promise<{ x: 0, y: 0 }>
-```
-
-### Установить библиотеку
-
-Этот метод может быть опасен. На момент написания доки в библиотеке не было top-level await - но он может появиться.
-
-::: code-group
-
-```shell [npm]
-npm install @yandex/ymaps3-world-utils
-```
-
-```shell [yarn]
-yarn add @yandex/ymaps3-world-utils
-```
-
-```shell [pnpm]
-pnpm install @yandex/ymaps3-world-utils
-```
-:::
+## Использование
 
 ```typescript
 import { worldToPixels, pixelsToWorld } from '@yandex/ymaps3-world-utils';
 
 const pixels = worldToPixels({ x: 0, y: 0 }, 10);
-// Returns: Promise<{ x: 131072, y: 131072 }>
+// Returns: { x: 131072, y: 131072 }
 
 const world = pixelsToWorld({ x: 131072, y: 131072 }, 10);
-// Returns: Promise<{ x: 0, y: 0 }>
+// Returns: { x: 0, y: 0 }
 ```
+
+::: warning Устаревшие методы
+Функции `worldToPixels` и `pixelsToWorld`, экспортируемые из `vue-yandex-maps`, deprecated. Они сохраняют прежний контракт и возвращают `Promise`. Используйте прямой импорт из `@yandex/ymaps3-world-utils`.
+:::

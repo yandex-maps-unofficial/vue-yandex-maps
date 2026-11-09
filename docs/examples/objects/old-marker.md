@@ -1,7 +1,8 @@
 # Создание старого маркера
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/OldMarker.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/OldMarker.vue'));
 </script>
 
 <map-component/>

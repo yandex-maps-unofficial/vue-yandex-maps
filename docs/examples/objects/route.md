@@ -7,7 +7,8 @@
 :::
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/ObjectsRoute.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/ObjectsRoute.vue'));
 </script>
 
 <map-component/>

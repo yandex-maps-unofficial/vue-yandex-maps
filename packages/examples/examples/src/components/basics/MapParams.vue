@@ -25,7 +25,7 @@
             >
                 <yandex-map-default-scheme-layer/>
 
-                <yandex-map-controls :settings="{ position: 'bottom left' }">
+                <yandex-map-controls :settings="{ position: 'top left' }">
                     <template v-if="!locationChanged">
                         <yandex-map-control-button
                             :settings="{ onClick: () => [LOCATION = NEW_LOCATION_CENTER, camera.tilt = (45 * Math.PI) / 180, locationChanged = true]}"
@@ -54,7 +54,12 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapControlButton, YandexMapControls, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapControlButton,
+    YandexMapControls,
+    YandexMapDefaultSchemeLayer,
+} from 'vue-yandex-maps/vapor';
 import { ref, shallowRef, watch } from 'vue';
 import type { YMap, YMapCameraRequest } from '@yandex/ymaps3-types';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
