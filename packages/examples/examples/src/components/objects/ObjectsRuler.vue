@@ -103,10 +103,8 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
     YandexMapControl,
-} from 'vue-yandex-maps/vapor';
-import {
     YandexMapRuler,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { ref, shallowRef } from 'vue';
 import type { YandexMapRulerSettings } from 'vue-yandex-maps';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';

@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts" vapor>
-import { defineAsyncComponent, h, onMounted, ref, shallowRef, watch } from 'vue';
+import { defineVaporAsyncComponent, h, onMounted, ref, shallowRef, watch } from 'vue';
 
 const pages = {
     'basics/MapBasics': 'Создание карты',
@@ -73,7 +73,7 @@ const createComponent = () => {
     return Promise.resolve(h('div'));
 };
 
-const asyncComponent = shallowRef(defineAsyncComponent(createComponent));
+const asyncComponent = shallowRef(defineVaporAsyncComponent(createComponent));
 
 onMounted(() => {
     const hash = location.hash.substring(1) as keyof typeof pages;
@@ -86,7 +86,7 @@ onMounted(() => {
         if (pages[val as keyof typeof pages]) {
             location.hash = `#${ val }`;
 
-            asyncComponent.value = defineAsyncComponent(createComponent);
+            asyncComponent.value = defineVaporAsyncComponent(createComponent);
         }
     }, {
         immediate: true,

@@ -12,6 +12,7 @@
         "run:astro": "yarn workspace vue-yandex-maps build && yarn workspace example-astro dev",
         "lint": "eslint . --max-warnings 0",
         "lint:fix": "yarn lint --fix",
+        "test:dom": "node --test tests/marker-dom.test.mjs",
         "check": "yarn lint && yarn build && yarn docs:build",
         "publish": "yarn lint && yarn build && yarn workspace vue-yandex-maps npm:publish"
     },
@@ -22,17 +23,17 @@
     },
     "devDependencies": {
         "@stylistic/eslint-plugin": "5.10.0",
-        "@types/node": "26.6.5",
-        "@typescript-eslint/eslint-plugin": "8.72.0",
-        "@typescript-eslint/parser": "8.72.0",
-        "eslint": "10.13.0",
-        "eslint-plugin-import-x": "4.17.1",
-        "eslint-plugin-vue": "10.11.1",
+        "@types/node": "26.6.6",
+        "@typescript-eslint/eslint-plugin": "8.72.1",
+        "@typescript-eslint/parser": "8.72.1",
+        "eslint": "10.14.0",
+        "eslint-plugin-import-x": "4.18.0",
+        "eslint-plugin-vue": "10.12.0",
         "typescript": "6.0.3",
-        "vite": "8.3.5",
-        "vitepress": "2.0.0-alpha.20",
-        "vue": "^3.6.0-rc.13",
-        "vue-eslint-parser": "10.4.1"
+        "vite": "8.3.6",
+        "vitepress": "2.0.0-alpha.21",
+        "vue": "^3.6.0-rc.14",
+        "vue-eslint-parser": "10.4.2"
     },
     "resolutions": {
         "vue": "3.6.0-rc.10",

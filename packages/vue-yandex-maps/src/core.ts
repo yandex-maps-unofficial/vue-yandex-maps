@@ -6,5 +6,6 @@ export * from './utils/setupMapChildren.ts';
 export * from './utils/map.ts';
 export * from './utils/init.ts';
 export * from './utils/marker.ts';
+export * from './utils/markerContainer.ts';
 export * from './utils/system.ts';
 export { diff } from 'deep-object-diff';

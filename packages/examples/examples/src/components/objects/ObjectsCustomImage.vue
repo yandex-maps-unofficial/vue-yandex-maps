@@ -47,10 +47,8 @@ import {
     YandexMap,
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
-} from 'vue-yandex-maps/vapor';
-import {
     YandexMapMarker,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import type { LngLat } from '@yandex/ymaps3-types';
 import { ref } from 'vue';
 

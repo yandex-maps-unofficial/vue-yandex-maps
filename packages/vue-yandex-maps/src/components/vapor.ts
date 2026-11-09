@@ -1,5 +1,6 @@
 import YandexMap from './YandexMap.vue';
 import YandexMapListener from './YandexMapListener.vue';
+import YandexMapMarker from './YandexMapMarker.vue';
 import YandexMapDefaultFeaturesLayer from './layers/YandexMapDefaultFeaturesLayer.vue';
 import YandexMapDefaultSchemeLayer from './layers/YandexMapDefaultSchemeLayer.vue';
 import YandexMapTileDataSource from './data-sources/YandexMapTileDataSource.vue';
@@ -38,10 +39,12 @@ import YandexMapPopupMarker from './modules/markers/YandexMapPopupMarker.vue';
 import YandexMapOverlay from './modules/overlay/YandexMapOverlay.vue';
 import YandexMapImageOverlay from './modules/overlay/YandexMapImageOverlay.vue';
 import YandexMapVideoOverlay from './modules/overlay/YandexMapVideoOverlay.vue';
+import YandexMapRuler from './modules/ruler/YandexMapRuler.vue';
 
 export {
     YandexMap,
     YandexMapListener,
+    YandexMapMarker,
     YandexMapFeature,
     YandexMapCollection,
     YandexMapEntity,
@@ -91,6 +94,9 @@ export {
 
     // Hint Module
     YandexMapHint,
+
+    // Ruler Module
+    YandexMapRuler,
 
     // Layers Extra Module
     YandexMapTrafficLayer,

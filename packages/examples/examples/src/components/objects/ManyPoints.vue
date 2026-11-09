@@ -118,10 +118,8 @@ import {
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultSchemeLayer,
     YandexMapZoomControl,
-} from 'vue-yandex-maps/vapor';
-import {
     YandexMapMarker,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { computed, onMounted, ref, shallowRef, version, watch } from 'vue';
 import type { LngLat, LngLatBounds, YMap } from '@yandex/ymaps3-types';
 import type { YMapClusterer } from '@yandex/ymaps3-clusterer';
