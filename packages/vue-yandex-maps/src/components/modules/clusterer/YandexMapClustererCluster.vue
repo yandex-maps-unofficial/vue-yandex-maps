@@ -1,169 +1,154 @@
-<script lang="ts">
-import { onUpdated, ref, watch } from 'vue';
-import type { PropType, SlotsType } from 'vue';
-import { computed, defineComponent, h } from 'vue';
+<template>
+    <teleport
+        v-if="markerHost"
+        :to="markerHost.element"
+    >
+        <div v-bind="containerProps.children">
+            <slot
+                :clusterer="feature.clusterer"
+                :coordinates="feature.clusterer.lnglat"
+                :length="feature.clusterer.features.length"
+            />
+        </div>
+    </teleport>
+</template>
+
+<script lang="ts" setup>
+import { computed, onBeforeUnmount, onMounted, onUnmounted, onUpdated, watch, watchEffect } from 'vue';
+import type { PropType } from 'vue';
 import type { IYMapClusterFeature, YandexMapClustererZoomOptionsObject } from './YandexMapClusterer.vue';
-import { excludeYandexMarkerProps, getMarkerContainerProps } from '../../../utils/marker.ts';
-import type { LngLatBounds, YMapMarker } from '@yandex/ymaps3-types';
-import { hF, sleep } from '../../../utils/system.ts';
+import { createMarkerContainer, excludeYandexMarkerProps, getMarkerContainerProps, getBoundsFromCoords, getLocationFromBounds, injectMap, sleep } from '#core';
+import type { LngLatBounds, YMapMarker, YMapMarkerProps } from '@yandex/ymaps3-types';
 import type { ClustererObject } from '@yandex/ymaps3-types/packages/clusterer/YMapClusterer/interface';
-import { injectMap } from '../../../utils/map.ts';
-import { getBoundsFromCoords, getLocationFromBounds } from '../../../functions';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 
-export default defineComponent({
-    name: 'YandexMapClustererCluster',
-    props: {
-        clusterMarkerProps: {
-            type: Object as PropType<Omit<ConstructorParameters<typeof YMapMarker>[0], 'coordinates'> & YandexMapMarkerCustomProps>,
-            default: () => ({}),
-        },
-        zoomOnClusterClick: {
-            type: [Boolean, Object] as PropType<boolean | YandexMapClustererZoomOptionsObject>,
-            default: false,
-        },
-        feature: {
-            type: Object as PropType<IYMapClusterFeature>,
-            required: true,
-        },
+defineOptions({ name: 'YandexMapClustererCluster' });
+
+const props = defineProps({
+    clusterMarkerProps: {
+        type: Object as PropType<Omit<ConstructorParameters<typeof YMapMarker>[0], 'coordinates'> & YandexMapMarkerCustomProps>,
+        default: () => ({}),
     },
-    emits: {
-        // Exact features bounds returned on cluster click
-        trueBounds(bounds: LngLatBounds): boolean {
-            return bounds.length === 2;
-        },
-        // Auto-corrected features bounds returned on cluster click
-        updatedBounds(bounds: LngLatBounds): boolean {
-            return bounds.length === 2;
-        },
-        updatedCluster(clusterId: string) {
-            return true;
-        },
+    zoomOnClusterClick: {
+        type: [Boolean, Object] as PropType<boolean | YandexMapClustererZoomOptionsObject>,
+        default: false,
     },
-    slots: Object as SlotsType<{
-        default: {
-            clusterer: ClustererObject;
-            coordinates: ClustererObject['lnglat'];
-            length: number;
-        };
-    }>,
-    setup(props, { slots, emit }) {
-        const map = injectMap();
-        const element = ref<null | HTMLDivElement>(null);
+    feature: {
+        type: Object as PropType<IYMapClusterFeature>,
+        required: true,
+    },
+});
 
-        const containerProps = computed(() => getMarkerContainerProps({
-            position: props.clusterMarkerProps?.position ?? 'top-center left-center',
-            containerAttrs: props.clusterMarkerProps?.containerAttrs,
-            wrapperAttrs: props.clusterMarkerProps?.wrapperAttrs,
-            zeroSizes: props.clusterMarkerProps?.zeroSizes,
-        }));
+const emit = defineEmits<{
+    (e: 'trueBounds', value: LngLatBounds): void;
+    (e: 'updatedBounds', value: LngLatBounds): void;
+    (e: 'updatedCluster', clusterId: string): void;
+}>();
 
-        function updateElement() {
-            const _element = element.value;
-            if (!_element) return;
+defineSlots<{
+    default: (options: {
+        clusterer: ClustererObject;
+        coordinates: ClustererObject['lnglat'];
+        length: number;
+    }) => any;
+}>();
 
-            const clusterElement = props.feature.element;
-            const clusterer = props.feature.clusterer;
+const map = injectMap();
+const markerHost = createMarkerContainer();
+let marker: YMapMarker | undefined;
+let markerParent: IYMapClusterFeature['element'] | undefined;
 
-            if (clusterElement.children.length) {
-                clusterElement.children.forEach(x => {
-                    try {
-                        clusterElement.removeChild(x);
-                    }
-                    catch (e) {
-                        console.warn('Non-fatal error occurred when updating Map clusterer', e);
-                    }
-                });
-            }
+const containerProps = computed(() => getMarkerContainerProps({
+    position: props.clusterMarkerProps.position ?? 'top-center left-center',
+    containerAttrs: props.clusterMarkerProps.containerAttrs,
+    wrapperAttrs: props.clusterMarkerProps.wrapperAttrs,
+    zeroSizes: props.clusterMarkerProps.zeroSizes,
+}));
 
-            try {
-                clusterElement.addChild(new ymaps3.YMapMarker({
-                    ...excludeYandexMarkerProps(props.clusterMarkerProps),
-                    coordinates: clusterer.lnglat,
-                    onClick: async (event, mapEvent) => {
-                        props.clusterMarkerProps.onClick?.(event, mapEvent);
+watchEffect(() => markerHost?.update(containerProps.value.root));
+onUnmounted(() => markerHost?.destroy());
 
-                        if (clusterer.features.length >= 2) {
-                            const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
+async function onClick(event: Parameters<NonNullable<YMapMarkerProps['onClick']>>[0], mapEvent: Parameters<NonNullable<YMapMarkerProps['onClick']>>[1]) {
+    props.clusterMarkerProps.onClick?.(event, mapEvent);
 
-                            const featuresCoords = clusterer.features.map(x => x.geometry.coordinates);
-                            const bounds: LngLatBounds = getBoundsFromCoords(featuresCoords);
-                            emit('trueBounds', bounds);
+    if (props.feature.clusterer.features.length >= 2) {
+        const settings: YandexMapClustererZoomOptionsObject = typeof props.zoomOnClusterClick === 'object' ? props.zoomOnClusterClick : {};
 
-                            if (!props.zoomOnClusterClick) return;
+        const featuresCoords = props.feature.clusterer.features.map(x => x.geometry.coordinates);
+        const bounds: LngLatBounds = getBoundsFromCoords(featuresCoords);
+        emit('trueBounds', bounds);
 
-                            const defaultDuration = settings.duration ?? 500;
+        if (!props.zoomOnClusterClick) return;
 
-                            if (settings.strategy === 'boundsCorrect') {
-                                const [[minLongitude, maxLatitude], [maxLongitude, minLatitude]] = bounds;
+        const defaultDuration = settings.duration ?? 500;
 
-                                const latDiff = maxLatitude - minLatitude;
-                                const longDiff = maxLongitude - minLongitude;
+        if (settings.strategy === 'boundsCorrect') {
+            const [[minLongitude, maxLatitude], [maxLongitude, minLatitude]] = bounds;
 
-                                const updatedBounds: LngLatBounds = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
-                                emit('updatedBounds', updatedBounds);
+            const latDiff = maxLatitude - minLatitude;
+            const longDiff = maxLongitude - minLongitude;
 
-                                map.value?.setLocation({
-                                    bounds: updatedBounds,
-                                    duration: defaultDuration,
-                                    easing: settings.easing,
-                                });
-                            }
-                            else {
-                                const { center, zoom } = await getLocationFromBounds({
-                                    bounds,
-                                    map: map.value!,
-                                    roundZoom: true,
-                                    comfortZoomLevel: true,
-                                });
+            const updatedBounds: LngLatBounds = [[minLongitude - longDiff, maxLatitude - latDiff], [maxLongitude + longDiff, minLatitude + latDiff]];
+            emit('updatedBounds', updatedBounds);
 
-                                map.value?.setLocation({
-                                    center,
-                                    zoom,
-                                    duration: defaultDuration,
-                                    easing: settings.easing,
-                                });
-
-                                await sleep(defaultDuration + 50);
-                                if (map.value) emit('updatedBounds', map.value.bounds);
-                            }
-                        }
-                    },
-                }, _element));
-            }
-            catch (e) {
-                console.error(e);
-            }
+            map.value?.setLocation({
+                bounds: updatedBounds,
+                duration: defaultDuration,
+                easing: settings.easing,
+            });
         }
+        else {
+            const { center, zoom } = await getLocationFromBounds({
+                bounds,
+                map: map.value!,
+                roundZoom: true,
+                comfortZoomLevel: true,
+            });
 
-        watch(element, updateElement);
+            map.value?.setLocation({
+                center,
+                zoom,
+                duration: defaultDuration,
+                easing: settings.easing,
+            });
 
-        const firstUpdate = ref(false);
+            await sleep(defaultDuration + 50);
+            if (map.value) emit('updatedBounds', map.value.bounds);
+        }
+    }
+}
 
-        onUpdated(() => {
-            if (!firstUpdate.value) {
-                firstUpdate.value = true;
+const markerSettings = computed<YMapMarkerProps>(() => ({
+    ...excludeYandexMarkerProps(props.clusterMarkerProps),
+    coordinates: props.feature.clusterer.lnglat,
+    onClick,
+}));
 
-                return;
-            }
-            emit('updatedCluster', props.feature.clusterer.clusterId);
-        });
+function updateMarker() {
+    if (!marker) marker = new ymaps3.YMapMarker(markerSettings.value, markerHost!.element);
+    else marker.update(markerSettings.value);
 
-        // This is MANDATORY for this component
-        return () => {
-            return hF([
-                h('div', {
-                    ...containerProps.value.root,
-                    ref: element,
-                }, [
-                    h('div', containerProps.value.children, slots.default?.({
-                        clusterer: props.feature.clusterer,
-                        coordinates: props.feature.clusterer.lnglat,
-                        length: props.feature.clusterer.features.length,
-                    })),
-                ]),
-            ]);
-        };
-    },
+    if (markerParent !== props.feature.element) {
+        if (markerParent && marker.parent === markerParent) markerParent.removeChild(marker);
+        markerParent = props.feature.element;
+        markerParent.addChild(marker);
+    }
+}
+
+onMounted(updateMarker);
+// Traverse marker settings only. A collection links back to the entire SDK tree.
+watch(() => props.feature.element, updateMarker);
+watch(markerSettings, updateMarker, { deep: true });
+onBeforeUnmount(() => {
+    if (marker && markerParent && marker.parent === markerParent) markerParent.removeChild(marker);
+});
+
+let firstUpdate = false;
+onUpdated(() => {
+    if (!firstUpdate) {
+        firstUpdate = true;
+        return;
+    }
+    emit('updatedCluster', props.feature.clusterer.clusterId);
 });
 </script>

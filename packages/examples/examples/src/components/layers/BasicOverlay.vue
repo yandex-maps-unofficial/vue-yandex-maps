@@ -119,7 +119,7 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapControls,
     YandexMapControlButton,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { onMounted, ref, watch } from 'vue';
 import type { LngLat } from '@yandex/ymaps3-types';
 

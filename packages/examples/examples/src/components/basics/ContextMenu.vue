@@ -40,8 +40,16 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
+import {
+    YandexMap,
+    YandexMapDefaultSchemeLayer,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapContextMenu,
+    YandexMapListener,
+    YandexMapContextMenuItem,
+    YandexMapDefaultMarker,
+} from 'vue-yandex-maps/vapor';
 import { ref, shallowRef } from 'vue';
-import { YandexMap, YandexMapDefaultSchemeLayer, YandexMapDefaultFeaturesLayer, YandexMapContextMenu, YandexMapListener, YandexMapContextMenuItem, YandexMapDefaultMarker } from 'vue-yandex-maps';
 import type { BehaviorMapEventHandler, DomEventHandler, LngLat, YMap } from '@yandex/ymaps3-types';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';
 

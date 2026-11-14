@@ -43,7 +43,7 @@ import {
     YandexMapDefaultSchemeLayer,
     YandexMapFeature,
     YandexMapZoomControl,
-} from 'vue-yandex-maps';
+} from 'vue-yandex-maps/vapor';
 import { shallowRef } from 'vue';
 import type { LngLat, YMap, YMapFeatureProps } from '@yandex/ymaps3-types';
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap';

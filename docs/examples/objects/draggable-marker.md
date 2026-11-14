@@ -1,7 +1,8 @@
 # Перетаскивание объектов
 
 <script lang="ts" setup>
-import MapComponent from 'examples/src/components/objects/DraggableMarker.vue';
+import { defineClientComponent } from 'vitepress';
+const MapComponent = defineClientComponent(() => import('examples/src/components/objects/DraggableMarker.vue'));
 </script>
 
 <map-component/>

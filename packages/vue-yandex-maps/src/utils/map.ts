@@ -189,8 +189,3 @@ export function deleteMapChildren({
         });
     }
 }
-
-export function getMapsInnerSelector() {
-    if (typeof yandexMapSettings.value.mapInnerSelector === 'string' || yandexMapSettings.value.mapInnerSelector === false) return yandexMapSettings.value.mapInnerSelector;
-    return 'ymaps,ymaps3';
-}

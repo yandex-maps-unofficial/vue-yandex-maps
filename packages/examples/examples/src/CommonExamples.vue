@@ -27,8 +27,8 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { defineAsyncComponent, h, onMounted, ref, shallowRef, watch } from 'vue';
+<script setup lang="ts" vapor>
+import { defineVaporAsyncComponent, h, onMounted, ref, shallowRef, watch } from 'vue';
 
 const pages = {
     'basics/MapBasics': 'Создание карты',
@@ -40,6 +40,7 @@ const pages = {
     'basics/MapEvents': 'Обработка событий карты',
     'basics/HiddenDiv': 'Создание и удаление карты',
     'basics/MapControls': 'Элементы управления',
+    'basics/MapProjections': 'Проекции карты',
 
     'objects/ObjectsPlacemark': 'Общие примеры маркеров',
     'objects/ObjectsCustomImage': 'Добавление метки с собственным изображением',
@@ -72,7 +73,7 @@ const createComponent = () => {
     return Promise.resolve(h('div'));
 };
 
-const asyncComponent = shallowRef(defineAsyncComponent(createComponent));
+const asyncComponent = shallowRef(defineVaporAsyncComponent(createComponent));
 
 onMounted(() => {
     const hash = location.hash.substring(1) as keyof typeof pages;
@@ -85,7 +86,7 @@ onMounted(() => {
         if (pages[val as keyof typeof pages]) {
             location.hash = `#${ val }`;
 
-            asyncComponent.value = defineAsyncComponent(createComponent);
+            asyncComponent.value = defineVaporAsyncComponent(createComponent);
         }
     }, {
         immediate: true,

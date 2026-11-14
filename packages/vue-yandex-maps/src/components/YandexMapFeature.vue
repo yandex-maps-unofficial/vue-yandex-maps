@@ -2,10 +2,10 @@
 import type { YMapFeature } from '@yandex/ymaps3-types';
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
-import { throwException } from '../utils/system.ts';
-import { setupMapChildren } from '../utils/setupMapChildren.ts';
+import { throwException } from '#core';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapFeature' });
+defineOptions({ name: 'YandexMapFeature', render: () => null });
 
 const props = defineProps({
     modelValue: {

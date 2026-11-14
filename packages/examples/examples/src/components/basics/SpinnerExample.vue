@@ -155,7 +155,14 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapDefaultSchemeLayer, YandexMapDefaultFeaturesLayer, YandexMapSpinner, YandexMapControls, YandexMapControl } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapDefaultSchemeLayer,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapSpinner,
+    YandexMapControls,
+    YandexMapControl,
+} from 'vue-yandex-maps/vapor';
 import type { YMapSpinnerProps } from '@yandex/ymaps3-spinner';
 import { reactive, shallowRef, watch } from 'vue';
 

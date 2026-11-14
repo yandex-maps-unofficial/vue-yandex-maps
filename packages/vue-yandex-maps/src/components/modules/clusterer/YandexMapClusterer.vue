@@ -31,12 +31,12 @@ import type { PropType } from 'vue';
 import { computed, nextTick, onMounted, provide, shallowRef, watch } from 'vue';
 import type { clusterByGrid, Feature, YMapClusterer, ClustererObject } from '@yandex/ymaps3-clusterer';
 import type { LngLatBounds, YMapCollection, YMapEntity, YMapMarker } from '@yandex/ymaps3-types';
-import { throwException } from '../../../utils/system.ts';
-import { provideMapRoot, setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { throwException } from '#core';
+import { provideMapRoot, setupMapChildren } from '#core';
 import type { YandexMapMarkerCustomProps } from '../../../types/marker.ts';
 import type { EasingFunctionDescription } from '@yandex/ymaps3-types/common/types';
 import YandexMapClustererClusters from './YandexMapClustererClusters.vue';
-import { importYmapsCDNModule } from '../../../functions';
+import { importYmapsCDNModule } from '#core';
 
 type Settings = ConstructorParameters<typeof YMapClusterer>[0];
 export type YandexMapClustererOptions = Partial<Omit<Settings, 'cluster'>>;
@@ -122,6 +122,9 @@ defineSlots<{
 const mapChildren = shallowRef<(Pick<YMapClusterer, 'update'> & Record<string, any>) | null>(null);
 const entities = shallowRef<(YMapEntity<Pick<YMapMarker, 'coordinates'>>)[]>([]);
 const clusterFeatures = shallowRef<IYMapClusterFeature[]>([]);
+// The SDK caches collections across viewport changes. Vue must use the same
+// collection when a previously hidden cluster becomes visible again.
+const clusterElements = new Map<string, YMapCollection>();
 const revision = ref(0);
 
 const filteredFeatures = computed(() => clusterFeatures.value.filter(x => x.clusterer.features.length > 1));
@@ -201,9 +204,15 @@ const getSettings = () => {
         clusterFeatures.value = clustersList.map(clusterer => {
             clusterer.clusterId = `cluster-${ revision.value }-${ clusterer.features.map(x => x.id).join(',') }`;
 
+            let element = clusterElements.get(clusterer.clusterId);
+            if (!element) {
+                element = new ymaps3.YMapCollection({});
+                clusterElements.set(clusterer.clusterId, element);
+            }
+
             return {
                 clusterer,
-                element: clusterFeatures.value.find(x => x.clusterer.clusterId === clusterer.clusterId)?.element || new ymaps3.YMapCollection({}),
+                element,
             };
         });
 
@@ -233,7 +242,7 @@ watch(() => [props.settings, props.gridSize], () => {
 
 const mapRoot = provideMapRoot({ mapRootRef: entities });
 
-const init = async () => {
+onMounted(async () => {
     mapChildren.value = await setupMapChildren({
         createFunction: ({
             YMapClusterer: Clusterer,
@@ -256,14 +265,10 @@ const init = async () => {
     });
 
     emit('update:modelValue', mapChildren.value as YMapClusterer);
-};
+});
 
 watch(entities, async () => {
     await nextTick();
     update();
-});
-
-onMounted(async () => {
-    await init();
 });
 </script>

@@ -11,9 +11,9 @@
 import type { PropType } from 'vue';
 import { computed, onMounted, ref, shallowRef } from 'vue';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 import type { YMapDrawerControl } from '@yandex/ymaps3-drawer-control';
-import { importYmapsCDNModule } from '../../../functions/init.ts';
+import { importYmapsCDNModule } from '#core';
 
 defineOptions({ name: 'YandexMapDrawerControl' });
 

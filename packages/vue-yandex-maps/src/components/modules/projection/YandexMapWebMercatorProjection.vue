@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import type { PropType, Ref } from 'vue';
 import { inject, onMounted } from 'vue';
+import { WebMercator as WebMercatorClass } from '@yandex/ymaps3-web-mercator-projection';
 import type { WebMercator } from '@yandex/ymaps3-web-mercator-projection';
 import type { Projection } from '@yandex/ymaps3-types/common/types';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions';
+import { setupMapChildren } from '#core';
 
-defineOptions({ name: 'YandexMapWebMercatorProjection' });
+defineOptions({ name: 'YandexMapWebMercatorProjection', render: () => null });
 
 defineProps({
     modelValue: {
@@ -26,8 +26,7 @@ onMounted(async () => {
 
     const cartesian = await setupMapChildren({
         isProjection: true,
-        createFunction: ({ WebMercator: WebMercatorClass }) => new WebMercatorClass(),
-        requiredImport: () => importYmapsCDNModule('@yandex/ymaps3-web-mercator-projection'),
+        createFunction: () => new WebMercatorClass(),
     });
 
     projection.value = cartesian;

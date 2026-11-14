@@ -1,5 +1,5 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
-import { createYmapsOptions, initYmaps } from '../functions';
+import { createYmapsOptions, initYmaps } from '#core';
 
 export default defineNuxtPlugin({
     async setup() {

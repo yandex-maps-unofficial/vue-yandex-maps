@@ -3,11 +3,11 @@ import { toRef } from 'vue';
 import type { PropType } from 'vue';
 import { computed, onMounted } from 'vue';
 
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
+import { setupMapChildren } from '#core';
 import type { YMapTiltControl } from '@yandex/ymaps3-default-ui-theme';
-import { importYmapsCDNModule } from '../../../functions/init.ts';
+import { importYmapsCDNModule } from '#core';
 
-defineOptions({ name: 'YandexMapTiltControl' });
+defineOptions({ name: 'YandexMapTiltControl', render: () => null });
 
 const props = defineProps({
     modelValue: {

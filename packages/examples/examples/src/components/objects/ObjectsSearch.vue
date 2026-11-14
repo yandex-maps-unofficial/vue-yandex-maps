@@ -86,14 +86,16 @@
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
 import {
-    getBoundsFromCoords,
-    getLocationFromBounds,
     YandexMap,
     YandexMapDefaultFeaturesLayer,
     YandexMapDefaultMarker,
     YandexMapDefaultSchemeLayer,
     YandexMapSearchControl,
     YandexMapControls,
+} from 'vue-yandex-maps/vapor';
+import {
+    getBoundsFromCoords,
+    getLocationFromBounds,
 } from 'vue-yandex-maps';
 import { ref, shallowRef, watch } from 'vue';
 import type { SearchResponse } from '@yandex/ymaps3-types/imperative/search';

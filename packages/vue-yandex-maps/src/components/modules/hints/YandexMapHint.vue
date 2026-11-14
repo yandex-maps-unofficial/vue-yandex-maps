@@ -11,8 +11,8 @@
 import type { PropType } from 'vue';
 import { onMounted, shallowRef } from 'vue';
 import type { YMapHint } from '@yandex/ymaps3-hint';
-import { setupMapChildren } from '../../../utils/setupMapChildren.ts';
-import { importYmapsCDNModule } from '../../../functions';
+import { setupMapChildren } from '#core';
+import { importYmapsCDNModule } from '#core';
 
 defineOptions({ name: 'YandexMapHint' });
 

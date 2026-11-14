@@ -41,7 +41,13 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapDefaultSchemeLayer, YandexMapDefaultFeaturesLayer, YandexMapControls, YandexMapMiniMap } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapDefaultSchemeLayer,
+    YandexMapDefaultFeaturesLayer,
+    YandexMapControls,
+    YandexMapMiniMap,
+} from 'vue-yandex-maps/vapor';
 import type { YMapMiniMap } from '@yandex/ymaps3-minimap';
 import { shallowRef } from 'vue';
 import type { DrawingStyle } from '@yandex/ymaps3-types';

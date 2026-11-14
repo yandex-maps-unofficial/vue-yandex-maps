@@ -63,7 +63,12 @@
 <script setup lang="ts">
 import CommonWrapper from '../CommonWrapper.vue';
 // #region setup
-import { YandexMap, YandexMapControl, YandexMapControls, YandexMapDefaultSchemeLayer } from 'vue-yandex-maps';
+import {
+    YandexMap,
+    YandexMapControl,
+    YandexMapControls,
+    YandexMapDefaultSchemeLayer,
+} from 'vue-yandex-maps/vapor';
 import type { CustomizationControls } from './LayersCustomizationControl.vue';
 import LayersCustomizationControl from './LayersCustomizationControl.vue';
 import type { VectorCustomization, VectorCustomizationItem } from '@yandex/ymaps3-types';
