@@ -1,12 +1,12 @@
 # Список изменений
 
-## [Unreleased]
+## [3.1.0-beta.2]
 
 Изменение в `3.1.0`:
 - (Breaking) Удалена настройка `mapInnerSelector`, удалены связанные с ней closest-костыли. `YandexMapMarker` и `YandexMapRuler` переписаны на `Teleport`
 - (Breaking) Минимальная версия Vue поднята до 3.5.25
 
-Исправления `3.1.0-beta.1`:
+Исправления с `3.1.0-beta.1`:
 - Добавлена поддержка Vapor для `YandexMapMarker`, `YandexMapRuler`
 - Добавлена поддержка Vapor для внутреннего компонента `YandexMapClustererCluster`
 - Добавлена поддержка сборки библиотеки под Vapor без `vaporInteropPlugin`

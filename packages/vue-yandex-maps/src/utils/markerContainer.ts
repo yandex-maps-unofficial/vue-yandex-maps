@@ -36,6 +36,7 @@ export function createMarkerContainer(): MarkerContainer | null {
             nextProps.style = { ...nextProps.style };
         }
 
+        // Unsetting previous props if next don't have them
         for (const key in previousProps) {
             if (!(key in nextProps)) {
                 patchProp(element, key, previousProps[key], null, undefined, instance);

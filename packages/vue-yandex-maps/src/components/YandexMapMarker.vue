@@ -71,7 +71,6 @@ const emit = defineEmits<{ (e: 'update:modelValue', value: YMapMarker): void }>(
 defineSlots<{ default: (props: {}) => any }>();
 
 const attrs = useAttrs();
-// Yandex owns this container's position; Vue owns only the teleported content.
 const markerHost = createMarkerContainer();
 
 const rootProps = computed(() => getMarkerContainerProps({
