@@ -2,7 +2,6 @@ import { createVaporApp } from 'vue';
 import { createYmaps } from 'vue-yandex-maps';
 import App from './App.vue';
 
-// @ts-expect-error No idea why this fails
 const app = createVaporApp(App);
 
 const ymaps = createYmaps({
